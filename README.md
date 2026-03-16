@@ -1,2 +1,14 @@
-# solar-battery-economy-flow-card
-A Home Assistant custom card built to be used with the solar battery economy integration
+# Solar Battery Economy Flow Card
+
+A Lovelace power flow visualization card for the Solar Battery Economy integration.
+
+Features
+
+• Animated energy flows
+• Solar / Battery / Grid / House nodes
+• Automatic sensor detection
+• Works with Solar Battery Economy integration
+
+Installation
+
+Install via HACS → Custom repositories.
