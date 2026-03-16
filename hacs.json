@@ -1,6 +1,5 @@
 {
 "name": "Solar Battery Economy Flow Card",
-"filename": "solar-battery-economy-flow-card.js",
 "type": "lovelace",
-"content_in_root": false
+"filename": "solar-battery-economy-flow-card.js"
 }
