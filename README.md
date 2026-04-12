@@ -35,6 +35,12 @@ Visualize your entire energy system in real-time:
 * ⚡ **Real-time updates**
 * 🎨 Clean, modern UI with glow effects
 
+## 📸 Screenshots
+
+### 🖥️ Desktop
+
+![Desktop](images/desktop.png)
+
 ---
 
 ## 📦 Installation
