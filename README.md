@@ -1,5 +1,10 @@
 # ⚡ Solar Battery Economy Flow Card
 
+![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg)
+![Version](https://img.shields.io/github/v/release/Tobbe7612/solar-battery-economy-flow-card)
+![Downloads](https://img.shields.io/github/downloads/Tobbe7612/solar-battery-economy-flow-card/total)
+![License](https://img.shields.io/github/license/Tobbe7612/solar-battery-economy-flow-card)
+
 A modern, animated energy flow card for Home Assistant — designed to work seamlessly with the **Solar Battery Economy** integration.
 
 Visualize your entire energy system in real-time:
