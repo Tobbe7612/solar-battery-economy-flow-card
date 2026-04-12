@@ -43,7 +43,7 @@ Visualize your entire energy system in real-time:
 3. Add:
 
    * **Repository:**
-     `https://github.com/YOURNAME/solar-battery-economy-flow-card`
+     `https://github.com/Tobbe7612/solar-battery-economy-flow-card`
    * **Category:** Dashboard
 
 4. Install **Solar Battery Economy Flow Card**
