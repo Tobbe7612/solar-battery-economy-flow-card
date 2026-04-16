@@ -1,4 +1,5 @@
-import { LitElement, html, css } from "lit";
+console.log("🔥 VERSION FIX LIT IMPORT 🔥");
+import { LitElement, html, css } from "https://unpkg.com/lit@3/index.js?module";
 
 export class SolarBatteryEconomyFlowCard extends LitElement {
   private flowStates: Record<string, { t: number; p: number }> = {};
@@ -243,16 +244,16 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
 
   getFlows() {
     return {
-      solarHouse: this.get("sensor.power_solar_house"),
-      solarBattery: this.get("sensor.power_solar_battery"),
-      solarExport: this.get("sensor.power_solar_export"),
-      batteryHouse: this.get("sensor.power_battery_house"),
-      batteryGrid: this.get("sensor.power_battery_grid"),
-      gridHouse: this.get("sensor.power_grid_house"),
-      gridBattery: this.get("sensor.power_grid_battery"),
-      houseGrid: this.get("sensor.power_house_grid"),
-      importPrice: this.get("sensor.07_import_electricity_price"),
-      exportPrice: this.get("sensor.08_export_electricity_price"),
+      solarHouse: this.get("sensor.solar_battery_economy_energy_system_power_solar_house"),
+      solarBattery: this.get("sensor.solar_battery_economy_energy_system_power_solar_battery"),
+      solarExport: this.get("sensor.solar_battery_economy_energy_system_power_solar_export"),
+      batteryHouse: this.get("sensor.solar_battery_economy_energy_system_power_battery_house"),
+      batteryGrid: this.get("sensor.solar_battery_economy_energy_system_power_battery_grid"),
+      gridHouse: this.get("sensor.solar_battery_economy_energy_system_power_grid_house"),
+      gridBattery: this.get("sensor.solar_battery_economy_energy_system_power_grid_battery"),
+      houseGrid: this.get("sensor.solar_battery_economy_energy_system_power_house_grid"),
+      importPrice: this.get("sensor.solar_battery_economy_financial_07_import_electricity_price"),
+      exportPrice: this.get("sensor.solar_battery_economy_financial_08_export_electricity_price"),
       batterySoc: this.config?.battery_soc_entity
         ? this.get(this.config.battery_soc_entity)
         : NaN,
