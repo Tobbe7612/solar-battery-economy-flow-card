@@ -1,12 +1,1 @@
-{
-"name": "solar-battery-economy-flow-card",
-"version": "1.0.0",
-"description": "Power flow visualization for Solar Battery Economy integration",
-"scripts": {
-"build": "esbuild src/card.ts --bundle --outfile=dist/solar-battery-economy-flow-card.js --minify"
-},
-"devDependencies": {
-"esbuild": "^0.20.0",
-"typescript": "^5.0.0"
-}
-}
+{"name":"solar-battery-economy-flow-card","version":"1.1.0","description":"Power flow visualization for Solar Battery Economy integration","scripts":{"build":"esbuild src/card.ts --bundle --format=esm --outfile=dist/solar-battery-economy-flow-card.js --minify --external:lit"},"devDependencies":{"esbuild":"^0.20.0","typescript":"^5.0.0"},"dependencies":{"lit":"^3.3.2"}}
