@@ -1,415 +1,184 @@
-import{LitElement as W,html as p,css as I}from"https://unpkg.com/lit@3/index.js?module";console.log("\u{1F525} VERSION FIX LIT IMPORT \u{1F525}");var N=class extends W{constructor(){super(...arguments);this.flowStates={};this.appliances=[]}static{this.properties={hass:{}}}static getConfigElement(){return document.createElement("solar-battery-economy-flow-card-editor")}static getStubConfig(){return{type:"custom:solar-battery-economy-flow-card",title:"Solar Battery Economy"}}set hass(t){this._hass=t,this.requestUpdate()}static{this.styles=I`
+function t(t,e,s,i){var r,o=arguments.length,n=o<3?e:null===i?i=Object.getOwnPropertyDescriptor(e,s):i;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)n=Reflect.decorate(t,e,s,i);else for(var a=t.length-1;a>=0;a--)(r=t[a])&&(n=(o<3?r(n):o>3?r(e,s,n):r(e,s))||n);return o>3&&n&&Object.defineProperty(e,s,n),n}"function"==typeof SuppressedError&&SuppressedError;
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const e=globalThis,s=e.ShadowRoot&&(void 0===e.ShadyCSS||e.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,i=Symbol(),r=new WeakMap;class o{constructor(t,e,s){if(this._$cssResult$=!0,s!==i)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const e=this.t;if(s&&void 0===t){const s=void 0!==e&&1===e.length;s&&(t=r.get(e)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),s&&r.set(e,t))}return t}toString(){return this.cssText}}const n=(t,...e)=>{const s=1===t.length?t[0]:e.reduce((e,s,i)=>e+(t=>{if(!0===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[i+1],t[0]);return new o(s,t,i)},a=s?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return(t=>new o("string"==typeof t?t:t+"",void 0,i))(e)})(t):t,{is:h,defineProperty:l,getOwnPropertyDescriptor:c,getOwnPropertyNames:d,getOwnPropertySymbols:p,getPrototypeOf:u}=Object,$=globalThis,f=$.trustedTypes,_=f?f.emptyScript:"",g=$.reactiveElementPolyfillSupport,m=(t,e)=>t,v={toAttribute(t,e){switch(e){case Boolean:t=t?_:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t)}return t},fromAttribute(t,e){let s=t;switch(e){case Boolean:s=null!==t;break;case Number:s=null===t?null:Number(t);break;case Object:case Array:try{s=JSON.parse(t)}catch(t){s=null}}return s}},y=(t,e)=>!h(t,e),A={attribute:!0,type:String,converter:v,reflect:!1,useDefault:!1,hasChanged:y};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */Symbol.metadata??=Symbol("metadata"),$.litPropertyMetadata??=new WeakMap;class b extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,e=A){if(e.state&&(e.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((e=Object.create(e)).wrapped=!0),this.elementProperties.set(t,e),!e.noAccessor){const s=Symbol(),i=this.getPropertyDescriptor(t,s,e);void 0!==i&&l(this.prototype,t,i)}}static getPropertyDescriptor(t,e,s){const{get:i,set:r}=c(this.prototype,t)??{get(){return this[e]},set(t){this[e]=t}};return{get:i,set(e){const o=i?.call(this);r?.call(this,e),this.requestUpdate(t,o,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??A}static _$Ei(){if(this.hasOwnProperty(m("elementProperties")))return;const t=u(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(m("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(m("properties"))){const t=this.properties,e=[...d(t),...p(t)];for(const s of e)this.createProperty(s,t[s])}const t=this[Symbol.metadata];if(null!==t){const e=litPropertyMetadata.get(t);if(void 0!==e)for(const[t,s]of e)this.elementProperties.set(t,s)}this._$Eh=new Map;for(const[t,e]of this.elementProperties){const s=this._$Eu(t,e);void 0!==s&&this._$Eh.set(s,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const s=new Set(t.flat(1/0).reverse());for(const t of s)e.unshift(a(t))}else void 0!==t&&e.push(a(t));return e}static _$Eu(t,e){const s=e.attribute;return!1===s?void 0:"string"==typeof s?s:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,e=this.constructor.elementProperties;for(const s of e.keys())this.hasOwnProperty(s)&&(t.set(s,this[s]),delete this[s]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((t,i)=>{if(s)t.adoptedStyleSheets=i.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const s of i){const i=document.createElement("style"),r=e.litNonce;void 0!==r&&i.setAttribute("nonce",r),i.textContent=s.cssText,t.appendChild(i)}})(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,e,s){this._$AK(t,s)}_$ET(t,e){const s=this.constructor.elementProperties.get(t),i=this.constructor._$Eu(t,s);if(void 0!==i&&!0===s.reflect){const r=(void 0!==s.converter?.toAttribute?s.converter:v).toAttribute(e,s.type);this._$Em=t,null==r?this.removeAttribute(i):this.setAttribute(i,r),this._$Em=null}}_$AK(t,e){const s=this.constructor,i=s._$Eh.get(t);if(void 0!==i&&this._$Em!==i){const t=s.getPropertyOptions(i),r="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:v;this._$Em=i;const o=r.fromAttribute(e,t.type);this[i]=o??this._$Ej?.get(i)??o,this._$Em=null}}requestUpdate(t,e,s,i=!1,r){if(void 0!==t){const o=this.constructor;if(!1===i&&(r=this[t]),s??=o.getPropertyOptions(t),!((s.hasChanged??y)(r,e)||s.useDefault&&s.reflect&&r===this._$Ej?.get(t)&&!this.hasAttribute(o._$Eu(t,s))))return;this.C(t,e,s)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(t,e,{useDefault:s,reflect:i,wrapped:r},o){s&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,o??e??this[t]),!0!==r||void 0!==o)||(this._$AL.has(t)||(this.hasUpdated||s||(e=void 0),this._$AL.set(t,e)),!0===i&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,e]of this._$Ep)this[t]=e;this._$Ep=void 0}const t=this.constructor.elementProperties;if(t.size>0)for(const[e,s]of t){const{wrapped:t}=s,i=this[e];!0!==t||this._$AL.has(e)||void 0===i||this.C(e,void 0,s,i)}}let t=!1;const e=this._$AL;try{t=this.shouldUpdate(e),t?(this.willUpdate(e),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(e)):this._$EM()}catch(e){throw t=!1,this._$EM(),e}t&&this._$AE(e)}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(t){}firstUpdated(t){}}b.elementStyles=[],b.shadowRootOptions={mode:"open"},b[m("elementProperties")]=new Map,b[m("finalized")]=new Map,g?.({ReactiveElement:b}),($.reactiveElementVersions??=[]).push("2.1.2");
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const E=globalThis,S=t=>t,w=E.trustedTypes,x=w?w.createPolicy("lit-html",{createHTML:t=>t}):void 0,C="$lit$",P=`lit$${Math.random().toFixed(9).slice(2)}$`,U="?"+P,O=`<${U}>`,M=document,T=()=>M.createComment(""),H=t=>null===t||"object"!=typeof t&&"function"!=typeof t,R=Array.isArray,N="[ \t\n\f\r]",k=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,j=/-->/g,z=/>/g,D=RegExp(`>|${N}(?:([^\\s"'>=/]+)(${N}*=${N}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),L=/'/g,B=/"/g,I=/^(?:script|style|textarea|title)$/i,W=(t=>(e,...s)=>({_$litType$:t,strings:e,values:s}))(1),q=Symbol.for("lit-noChange"),V=Symbol.for("lit-nothing"),J=new WeakMap,K=M.createTreeWalker(M,129);function Z(t,e){if(!R(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==x?x.createHTML(e):e}const F=(t,e)=>{const s=t.length-1,i=[];let r,o=2===e?"<svg>":3===e?"<math>":"",n=k;for(let e=0;e<s;e++){const s=t[e];let a,h,l=-1,c=0;for(;c<s.length&&(n.lastIndex=c,h=n.exec(s),null!==h);)c=n.lastIndex,n===k?"!--"===h[1]?n=j:void 0!==h[1]?n=z:void 0!==h[2]?(I.test(h[2])&&(r=RegExp("</"+h[2],"g")),n=D):void 0!==h[3]&&(n=D):n===D?">"===h[0]?(n=r??k,l=-1):void 0===h[1]?l=-2:(l=n.lastIndex-h[2].length,a=h[1],n=void 0===h[3]?D:'"'===h[3]?B:L):n===B||n===L?n=D:n===j||n===z?n=k:(n=D,r=void 0);const d=n===D&&t[e+1].startsWith("/>")?" ":"";o+=n===k?s+O:l>=0?(i.push(a),s.slice(0,l)+C+s.slice(l)+P+d):s+P+(-2===l?e:d)}return[Z(t,o+(t[s]||"<?>")+(2===e?"</svg>":3===e?"</math>":"")),i]};class G{constructor({strings:t,_$litType$:e},s){let i;this.parts=[];let r=0,o=0;const n=t.length-1,a=this.parts,[h,l]=F(t,e);if(this.el=G.createElement(h,s),K.currentNode=this.el.content,2===e||3===e){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes)}for(;null!==(i=K.nextNode())&&a.length<n;){if(1===i.nodeType){if(i.hasAttributes())for(const t of i.getAttributeNames())if(t.endsWith(C)){const e=l[o++],s=i.getAttribute(t).split(P),n=/([.?@])?(.*)/.exec(e);a.push({type:1,index:r,name:n[2],strings:s,ctor:"."===n[1]?et:"?"===n[1]?st:"@"===n[1]?it:tt}),i.removeAttribute(t)}else t.startsWith(P)&&(a.push({type:6,index:r}),i.removeAttribute(t));if(I.test(i.tagName)){const t=i.textContent.split(P),e=t.length-1;if(e>0){i.textContent=w?w.emptyScript:"";for(let s=0;s<e;s++)i.append(t[s],T()),K.nextNode(),a.push({type:2,index:++r});i.append(t[e],T())}}}else if(8===i.nodeType)if(i.data===U)a.push({type:2,index:r});else{let t=-1;for(;-1!==(t=i.data.indexOf(P,t+1));)a.push({type:7,index:r}),t+=P.length-1}r++}}static createElement(t,e){const s=M.createElement("template");return s.innerHTML=t,s}}function Q(t,e,s=t,i){if(e===q)return e;let r=void 0!==i?s._$Co?.[i]:s._$Cl;const o=H(e)?void 0:e._$litDirective$;return r?.constructor!==o&&(r?._$AO?.(!1),void 0===o?r=void 0:(r=new o(t),r._$AT(t,s,i)),void 0!==i?(s._$Co??=[])[i]=r:s._$Cl=r),void 0!==r&&(e=Q(t,r._$AS(t,e.values),r,i)),e}class X{constructor(t,e){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:e},parts:s}=this._$AD,i=(t?.creationScope??M).importNode(e,!0);K.currentNode=i;let r=K.nextNode(),o=0,n=0,a=s[0];for(;void 0!==a;){if(o===a.index){let e;2===a.type?e=new Y(r,r.nextSibling,this,t):1===a.type?e=new a.ctor(r,a.name,a.strings,this,t):6===a.type&&(e=new rt(r,this,t)),this._$AV.push(e),a=s[++n]}o!==a?.index&&(r=K.nextNode(),o++)}return K.currentNode=M,i}p(t){let e=0;for(const s of this._$AV)void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,e),e+=s.strings.length-2):s._$AI(t[e])),e++}}class Y{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,e,s,i){this.type=2,this._$AH=V,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=s,this.options=i,this._$Cv=i?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return void 0!==e&&11===t?.nodeType&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=Q(this,t,e),H(t)?t===V||null==t||""===t?(this._$AH!==V&&this._$AR(),this._$AH=V):t!==this._$AH&&t!==q&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):(t=>R(t)||"function"==typeof t?.[Symbol.iterator])(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==V&&H(this._$AH)?this._$AA.nextSibling.data=t:this.T(M.createTextNode(t)),this._$AH=t}$(t){const{values:e,_$litType$:s}=t,i="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=G.createElement(Z(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===i)this._$AH.p(e);else{const t=new X(i,this),s=t.u(this.options);t.p(e),this.T(s),this._$AH=t}}_$AC(t){let e=J.get(t.strings);return void 0===e&&J.set(t.strings,e=new G(t)),e}k(t){R(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let s,i=0;for(const r of t)i===e.length?e.push(s=new Y(this.O(T()),this.O(T()),this,this.options)):s=e[i],s._$AI(r),i++;i<e.length&&(this._$AR(s&&s._$AB.nextSibling,i),e.length=i)}_$AR(t=this._$AA.nextSibling,e){for(this._$AP?.(!1,!0,e);t!==this._$AB;){const e=S(t).nextSibling;S(t).remove(),t=e}}setConnected(t){void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t))}}class tt{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,e,s,i,r){this.type=1,this._$AH=V,this._$AN=void 0,this.element=t,this.name=e,this._$AM=i,this.options=r,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=V}_$AI(t,e=this,s,i){const r=this.strings;let o=!1;if(void 0===r)t=Q(this,t,e,0),o=!H(t)||t!==this._$AH&&t!==q,o&&(this._$AH=t);else{const i=t;let n,a;for(t=r[0],n=0;n<r.length-1;n++)a=Q(this,i[s+n],e,n),a===q&&(a=this._$AH[n]),o||=!H(a)||a!==this._$AH[n],a===V?t=V:t!==V&&(t+=(a??"")+r[n+1]),this._$AH[n]=a}o&&!i&&this.j(t)}j(t){t===V?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class et extends tt{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===V?void 0:t}}class st extends tt{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==V)}}class it extends tt{constructor(t,e,s,i,r){super(t,e,s,i,r),this.type=5}_$AI(t,e=this){if((t=Q(this,t,e,0)??V)===q)return;const s=this._$AH,i=t===V&&s!==V||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,r=t!==V&&(s===V||i);i&&this.element.removeEventListener(this.name,this,s),r&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class rt{constructor(t,e,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(t){Q(this,t)}}const ot=E.litHtmlPolyfillSupport;ot?.(G,Y),(E.litHtmlVersions??=[]).push("3.3.3");const nt=globalThis;
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */class at extends b{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=((t,e,s)=>{const i=s?.renderBefore??e;let r=i._$litPart$;if(void 0===r){const t=s?.renderBefore??null;i._$litPart$=r=new Y(e.insertBefore(T(),t),t,void 0,s??{})}return r._$AI(t),r})(e,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return q}}at._$litElement$=!0,at.finalized=!0,nt.litElementHydrateSupport?.({LitElement:at});const ht=nt.litElementPolyfillSupport;ht?.({LitElement:at}),(nt.litElementVersions??=[]).push("4.2.2");
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const lt={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:y},ct=(t=lt,e,s)=>{const{kind:i,metadata:r}=s;let o=globalThis.litPropertyMetadata.get(r);if(void 0===o&&globalThis.litPropertyMetadata.set(r,o=new Map),"setter"===i&&((t=Object.create(t)).wrapped=!0),o.set(s.name,t),"accessor"===i){const{name:i}=s;return{set(s){const r=e.get.call(this);e.set.call(this,s),this.requestUpdate(i,r,t,!0,s)},init(e){return void 0!==e&&this.C(i,void 0,t,e),e}}}if("setter"===i){const{name:i}=s;return function(s){const r=this[i];e.call(this,s),this.requestUpdate(i,r,t,!0,s)}}throw Error("Unsupported decorator location: "+i)};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function dt(t){return(e,s)=>"object"==typeof s?ct(t,e,s):((t,e,s)=>{const i=e.hasOwnProperty(s);return e.constructor.createProperty(s,t),i?Object.getOwnPropertyDescriptor(e,s):void 0})(t,e,s)}let pt=class extends at{static{this.styles=n`
     :host {
-      --y-offset: 5px;
+      display: block;
+      width: 100%;
     }
 
-    ha-card {
+    .card {
+      position: relative;
+
+      width: 100%;
+      aspect-ratio: 16 / 9;
+
       overflow: hidden;
-    }
-    
-    @keyframes glow {
-      0%   { opacity: 0.85; }
-      50%  { opacity: 1; }
-      100% { opacity: 0.85; }
-    }
 
-    @keyframes pulse {
-      0%   { transform: scale(0.9); opacity: 0.7; }
-      50%  { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.7; }
-    }
+      border-radius: 28px;
 
-    .container {
-      position: relative;
-      width: 100%;
-      max-width: 500px;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.06), transparent 40%),
+        linear-gradient(
+          180deg,
+          #182230 0%,
+          #101820 100%
+        );
 
-      aspect-ratio: 5 / 5.5; /* keeps proportions */
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.05);
 
-      padding: 0px 0 10px 0;
-      margin: 0 auto;
+      backdrop-filter: blur(20px);
     }
 
-    .node {
+    .background-glow {
       position: absolute;
-      width: 70px;
-      height: 70px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(6px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      border: 1px solid rgba(0,0,0,0.20);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-    }
 
-    .appliance {
-      position: absolute;
-      width: 55px;
-      height: 55px;
-
-      border-radius: 10px;
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(6px);
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 10px;
-      z-index: 2;
-
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .appliance .name {
-      font-size: 9px;
-      opacity: 0.8;
-    }
-
-    .appliance .icon {
-      width: 18px;
-      height: 18px;
-      transform: translateX(-2px);
-    }
-
-    .appliance .value {
-      font-size: 10px;
-      font-weight: 400;
-    }
-
-    .solar { top: calc(6% + var(--y-offset)); left: 50%; transform: translateX(-50%); }
-    .battery { top: calc(32% + var(--y-offset)); left: 8%; }
-    .grid    { top: calc(32% + var(--y-offset)); right: 8%; }
-    .home    { top: calc(58% + var(--y-offset)); left: 50%; transform: translateX(-50%); }
-
-    canvas {
-      position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
+
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255,200,50,0.15), transparent 30%),
+        radial-gradient(circle at 80% 50%, rgba(80,255,180,0.10), transparent 30%),
+        radial-gradient(circle at 20% 50%, rgba(80,160,255,0.10), transparent 30%);
     }
 
-    .price-box {
+    .title {
       position: absolute;
-      top: calc(14% + var(--y-offset));
-      transform: translateY(-50%);
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      top: 32px;
+      left: 40px;
 
-      padding: 4px 10px;
-      border-radius: 10px;
+      color: white;
+
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      position: absolute;
+
+      top: 74px;
+      left: 40px;
+
+      color: rgba(255,255,255,0.65);
+
+      font-size: 14px;
+      letter-spacing: 0.04em;
+
+      text-transform: uppercase;
+    }
+
+    .footer {
+      position: absolute;
+
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+
+      height: 88px;
+
+      border-radius: 22px;
 
       background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(6px);
+
       border: 1px solid rgba(255,255,255,0.08);
 
-      font-size: 12px;
-      font-weight: 600;
+      backdrop-filter: blur(24px);
 
-      color: black;
-
-      box-shadow: 0 0 8px currentColor;
-    }
-
-    .price-left {
-      left: 8%;
-    }
-
-    .price-right {
-      right: 8%;
-    }
-
-    .icon {
-      width: 26px;
-      height: 26px;
-      margin-bottom: 4px;
-    }
-
-    .inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      padding: 0 12px;
-      box-sizing: border-box;
-    }
-
-    .value {
-      font-size: clamp(10px, 2.2vw, 13px);
-      text-align: center;
-      font-weight: 700;
-    }
-
-    .labels {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .label {
-      position: absolute;
       display: flex;
       align-items: center;
+      justify-content: space-around;
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
       gap: 6px;
+    }
 
-      padding: 4px 8px;
-      border-radius: 10px;
-
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.08);
-
+    .metric-label {
+      color: rgba(255,255,255,0.55);
       font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .metric-value {
+      color: white;
+      font-size: 22px;
       font-weight: 600;
-
-      color: black;
-      text-shadow: none;
-
-      box-shadow: 0 0 8px currentColor;
-      white-space: nowrap;
     }
+  `}setConfig(t){this.config=t}render(){return W`
+      <ha-card>
+        <div class="card">
 
-    .arrow-svg {
-      width: 14px;
-      height: 14px;
-      display: inline-block;
-    }
-  `}setConfig(t){this.config=t,this.appliances=t.appliances||[]}get(t){return Number(this._hass?.states[t]?.state||0)}getSocColor(t){return t<=20?"#ef4444":t<=70?"#eab308":"#22c55e"}getCarColor(t){return t>0?"#22c55e":"#9ca3af"}firstUpdated(){this.canvas=this.renderRoot.querySelector("canvas"),this.ctx=this.canvas.getContext("2d"),setTimeout(()=>this.animate(),100)}getFlows(){return{solarHouse:this.get("sensor.solar_battery_economy_energy_system_power_solar_house"),solarBattery:this.get("sensor.solar_battery_economy_energy_system_power_solar_battery"),solarExport:this.get("sensor.solar_battery_economy_energy_system_power_solar_export"),batteryHouse:this.get("sensor.solar_battery_economy_energy_system_power_battery_house"),batteryGrid:this.get("sensor.solar_battery_economy_energy_system_power_battery_grid"),gridHouse:this.get("sensor.solar_battery_economy_energy_system_power_grid_house"),gridBattery:this.get("sensor.solar_battery_economy_energy_system_power_grid_battery"),houseGrid:this.get("sensor.solar_battery_economy_energy_system_power_house_grid"),importPrice:this.get("sensor.solar_battery_economy_financial_07_import_electricity_price"),exportPrice:this.get("sensor.solar_battery_economy_financial_08_export_electricity_price"),batterySoc:this.config?.battery_soc_entity?this.get(this.config.battery_soc_entity):NaN,carPower:this.config?.car_power_entity?this.get(this.config.car_power_entity):NaN,carSoc:this.config?.car_soc_entity?this.get(this.config.car_soc_entity):NaN}}getEdgePoint(t,n){let l=this.renderRoot.querySelector(".inner");if(!l)return{start:{x:0,y:0},end:{x:0,y:0}};let r=l.getBoundingClientRect(),o=t.getBoundingClientRect(),e=n.getBoundingClientRect(),a=o.left-r.left+o.width/2,s=o.top-r.top+o.height/2,i=e.left-r.left+e.width/2,c=e.top-r.top+e.height/2,d=i-a,y=c-s,b=Math.hypot(d,y)||1,f=d/b,x=y/b;return{start:{x:a+f*(o.width/2),y:s+x*(o.height/2)},end:{x:i-f*(e.width/2),y:c-x*(e.height/2)}}}getAppliancePosition(t,n){let l=this.renderRoot.querySelector(".inner"),r=l?.clientWidth||400,o=l?.clientHeight||400,e=55,a=10,s=o*.58,i=Math.min(s+o*.36,o-e),c=r/2;return t<2?{top:`${i}px`,left:`${c-70-(1-t)*(e+a)}px`}:{top:`${i}px`,left:`${c+70+(t-2)*(e+a)}px`}}getLabelPosition(t,n){let l=this.renderRoot.querySelector(".inner");if(!l||!t)return{top:"0px",left:"0px",transform:"translate(0,0)"};let r=l.getBoundingClientRect(),o=t.getBoundingClientRect(),e=o.left-r.left+o.width/2,a=o.top-r.top+o.height/2,s=10;switch(n){case"left":return{top:`${a}px`,left:`${e-o.width/2-s}px`,transform:"translate(-100%, -50%)"};case"right":return{top:`${a}px`,left:`${e+o.width/2+s}px`,transform:"translate(0%, -50%)"};case"top":return{top:`${a-o.height/2-s}px`,left:`${e}px`,transform:"translate(-50%, -100%)"};case"bottom":return{top:`${a+o.height/2+s}px`,left:`${e}px`,transform:"translate(-50%, 0%)"}}}renderArrow(t,n,l){return p`
-      <svg
-        class="arrow-svg"
-        viewBox="0 0 24 24"
-        style="
-          animation: pulse ${l}s infinite;
-          color: ${n};
-        "
-      >
-        <!-- ROTATION MOVED HERE (SAFE) -->
-        <g transform="rotate(${t} 12 12)">
-          <path
-            d="M4 12H18M18 12L13 7M18 12L13 17"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            fill="none"
-          />
-        </g>
-      </svg>
-    `}animate(){let t=this.ctx,n=this.renderRoot.querySelector(".solar"),l=this.renderRoot.querySelector(".battery"),r=this.renderRoot.querySelector(".grid"),o=this.renderRoot.querySelector(".home");if(!n||!l||!r||!o)return;let e=this.getFlows(),a=this.renderRoot.querySelector(".inner");this.canvas.width=a.clientWidth,this.canvas.height=a.clientHeight,t.clearRect(0,0,this.canvas.width,this.canvas.height);let s=(h,g)=>{let m=Math.min(h/12e3,1),_=Math.pow(m,.7),u=g/(6*60),w=g/(1.2*60);return u+(w-u)*_},i=(h,g,$,m,_,u,w)=>{if(u<=0)return;this.flowStates[h]||(this.flowStates[h]={t:0,p:0});let E=this.flowStates[h];E.p+=(u-E.p)*.05;let P=m-g,R=_-$,M=Math.hypot(P,R),q=s(E.p,M);E.t+=q/M;let z=E.t%1,A=Math.atan2(R,P),L=6+Math.floor(E.p/1500);for(let B=0;B<L;B++){let k=(z+B/L)%1,F=g+P*k,G=$+R*k;t.save(),t.translate(F,G),t.rotate(A),t.beginPath(),t.moveTo(-5,-3),t.lineTo(5,0),t.lineTo(-5,3),t.closePath(),t.fillStyle=w,t.globalAlpha=.4+B/L*.6,t.shadowColor=w,t.shadowBlur=8,t.fill(),t.restore()}},d=e.batteryHouse+e.batteryGrid-(e.solarBattery+e.gridBattery)<0?"#3b82f6":"#22c55e",y=this.getEdgePoint(n,l);i("s_b",y.start.x,y.start.y,y.end.x,y.end.y,e.solarBattery,"#f59e0b");let b=this.getEdgePoint(n,r);i("s_g",b.start.x,b.start.y,b.end.x,b.end.y,e.solarExport,"#f59e0b");let f=this.getEdgePoint(n,o);i("s_h",f.start.x,f.start.y,f.end.x,f.end.y,e.solarHouse,"#f59e0b");let x=this.getEdgePoint(l,o);i("b_h",x.start.x,x.start.y,x.end.x,x.end.y,e.batteryHouse,d);let H=this.getEdgePoint(l,r);i("b_g",H.start.x,H.start.y,H.end.x,H.end.y,e.batteryGrid,d);let v=this.getEdgePoint(r,o);i("g_h",v.start.x,v.start.y,v.end.x,v.end.y,e.gridHouse,"#ef4444");let S=this.getEdgePoint(r,l);i("g_b",S.start.x,S.start.y,S.end.x,S.end.y,e.gridBattery,"#a855f7");let T=this.renderRoot.querySelectorAll(".appliance"),C=0;if(this.appliances.filter(h=>this.get(h.entity)>0).slice(0,6).forEach((h,g)=>{let $=this.get(h.entity);if($<=0)return;let m=T[C];if(C++,!m)return;let _=o.getBoundingClientRect(),u=m.getBoundingClientRect(),w=this.renderRoot.querySelector(".inner").getBoundingClientRect(),E=_.left-w.left+_.width/2,P=_.top-w.top+_.height*.6,R=u.left-w.left+u.width/2,M=u.top-w.top;i(`app_${g}`,E,P,R,M,$,"#3b82f6")}),!isNaN(e.carPower)&&e.carPower>0){let h=this.renderRoot.querySelector(".car");if(h){let g=o.getBoundingClientRect(),$=h.getBoundingClientRect(),m=this.renderRoot.querySelector(".inner").getBoundingClientRect(),_=g.left-m.left+g.width/2,u=g.top-m.top+g.height*.6,w=$.left-m.left+$.width/2,E=$.top-m.top;i("car",_,u,w,E,e.carPower,"#3b82f6")}}requestAnimationFrame(()=>this.animate())}renderLabels(t){let n=v=>v>=1e3?(v/1e3).toFixed(1)+" kW":v.toFixed(0)+" W",r=t.batteryHouse+t.batteryGrid-(t.solarBattery+t.gridBattery)<0?"#3b82f6":"#22c55e",o=v=>{let C=Math.min(v/5e3,1);return .6+(1.6-.6)*C},e=this.renderRoot.querySelector(".solar"),a=this.renderRoot.querySelector(".battery"),s=this.renderRoot.querySelector(".grid"),i=this.renderRoot.querySelector(".home");if(!e||!a||!s||!i)return"";let c=this.getLabelPosition(a,"top"),d=this.getLabelPosition(s,"top"),y=this.getLabelPosition(e,"bottom"),b=this.getLabelPosition(a,"right"),f=this.getLabelPosition(s,"left"),x=this.getLabelPosition(i,"left"),H=this.getLabelPosition(i,"right");return p`
-      ${t.solarBattery>0?p`
-        <div class="label"
-          style="top:${c.top}; left:${c.left}; transform:${c.transform}; box-shadow: 0 0 8px #f59e0b;">
-          ${n(t.solarBattery)}
-          ${this.renderArrow(135,"#f59e0b",o(t.solarBattery))}
-        </div>`:""}
+          <div class="background-glow"></div>
 
-      ${t.solarExport>0?p`
-        <div class="label"
-          style="top:${d.top}; left:${d.left}; transform:${d.transform}; box-shadow: 0 0 8px #f59e0b;">
-          ${this.renderArrow(45,"#f59e0b",o(t.solarExport))}
-          ${n(t.solarExport)}
-        </div>`:""}
+          <div class="title">
+            Solar Battery Economy
+          </div>
 
-      ${t.solarHouse>0?p`
-        <div class="label"
-          style="top:${y.top}; left:${y.left}; transform:${y.transform}; box-shadow: 0 0 8px #f59e0b;">
-          ${this.renderArrow(90,"#f59e0b",o(t.solarHouse))}
-          ${n(t.solarHouse)}
-        </div>`:""}
+          <div class="subtitle">
+            Premium Energy Dashboard v2
+          </div>
 
-      ${t.batteryGrid>0?p`
-        <div class="label"
-          style="top:${b.top}; left:${b.left}; transform:${b.transform}; box-shadow: 0 0 8px ${r};">
-          ${n(t.batteryGrid)}
-          ${this.renderArrow(0,r,o(t.batteryGrid))}
-        </div>`:""}
+          <div class="footer">
 
-      ${t.gridBattery>0?p`
-        <div class="label"
-          style="top:${f.top}; left:${f.left}; transform:${f.transform}; box-shadow: 0 0 8px #a855f7;">
-          ${this.renderArrow(180,"#a855f7",o(t.gridBattery))}
-          ${n(t.gridBattery)}
-        </div>`:""}
-
-      ${t.batteryHouse>0?p`
-        <div class="label"
-          style="top:${x.top}; left:${x.left}; transform:${x.transform}; box-shadow: 0 0 8px ${r};">
-          ${n(t.batteryHouse)}
-          ${this.renderArrow(45,r,o(t.batteryHouse))}
-        </div>`:""}
-
-      ${t.gridHouse>0?p`
-        <div class="label"
-          style="top:${H.top}; left:${H.left}; transform:${H.transform}; box-shadow: 0 0 8px #ef4444;">
-          ${this.renderArrow(135,"#ef4444",o(t.gridHouse))}
-          ${n(t.gridHouse)}
-        </div>`:""}
-    `}render(){let t=this.getFlows(),n=this.appliances.filter(s=>this.get(s.entity)>0).slice(0,4),l=s=>s.toFixed(2)+" kr/kWh",r=s=>s>=1e3?(s/1e3).toFixed(1)+" kW":s.toFixed(0)+" W",o=(s,i,c=0)=>r(s+i+c),e=t.batteryHouse+t.batteryGrid-(t.solarBattery+t.gridBattery),a=t.gridHouse+t.gridBattery-(t.solarExport+t.batteryGrid+t.houseGrid);return p`
-      <ha-card .header=${this.config?.title||""}>
-        <div class="container">
-          <div class="inner">
-            
-            <div class="price-box price-left" style="box-shadow: 0 0 8px #22c55e;">
-              <div style="font-size:10px; opacity:0.7;">Export</div>
-              <div>${l(t.exportPrice)}</div>
+            <div class="metric">
+              <div class="metric-label">Solar</div>
+              <div class="metric-value">5.2 kW</div>
             </div>
 
-            <div class="price-box price-right" style="box-shadow: 0 0 8px #ef4444;">
-              <div style="font-size:10px; opacity:0.7;">Import</div>
-              <div>${l(t.importPrice)}</div>
+            <div class="metric">
+              <div class="metric-label">Battery</div>
+              <div class="metric-value">82%</div>
             </div>
 
-            <div class="node solar"
-              style="${t.solarHouse+t.solarBattery+t.solarExport>0?"animation: glow 2s infinite; box-shadow: 0 0 6px orange, 0 2px 10px rgba(0,0,0,0.3);":""}">
-              <span class="icon" style="animation: glow 2s infinite; color: orange;">
-                <ha-icon icon="mdi:solar-power"></ha-icon>
-              </span>
-              <span class="value">${o(t.solarHouse,t.solarBattery,t.solarExport)}</span>
+            <div class="metric">
+              <div class="metric-label">Saved Today</div>
+              <div class="metric-value">43 kr</div>
             </div>
 
-            <div class="node home"
-              style="${t.solarHouse+t.batteryHouse+t.gridHouse>0?"animation: glow 2s infinite; box-shadow: 0 0 6px #3b82f6, 0 2px 10px rgba(0,0,0,0.3);":""}">
-              <span class="icon" style="animation: glow 2s infinite; color:#3b82f6;">
-                <ha-icon icon="mdi:home"></ha-icon>
-              </span>
-              <span class="value">${o(t.solarHouse,t.batteryHouse,t.gridHouse)}</span>
+            <div class="metric">
+              <div class="metric-label">Self Consumption</div>
+              <div class="metric-value">91%</div>
             </div>
 
-            <div class="node battery"
-              style="${Math.abs(e)>0?`animation: glow 2s infinite; box-shadow: 0 0 6px ${e<0?"#3b82f6":"#22c55e"}, 0 2px 10px rgba(0,0,0,0.3);`:""}">
-              <span class="icon" style="animation: glow 2s infinite; color:${e<0?"#3b82f6":"#22c55e"};">
-                <ha-icon icon="mdi:home-battery"></ha-icon>
-              </span>
-              <span class="value">
-                ${r(Math.abs(e))}
-                ${isNaN(t.batterySoc)?"":p`
-                  <div style="font-size:10px; opacity:0.7;">
-                    ${t.batterySoc}%
-                  </div>
-                `}
-              </span>
+          </div>
 
-              ${isNaN(t.batterySoc)?"":p`
-                <div style="
-                  position:absolute;
-                  left:4px; /* 🔥 LEFT side */
-                  top:4px;
-                  bottom:4px;
-                  width:6px;
-                  background: rgba(255,255,255,0.1);
-                  border-radius:3px;
-                  overflow:hidden;
-                ">
-                  <div style="
-                    position:absolute;
-                    bottom:0;
-                    width:100%;
-                    height:${Math.min(t.batterySoc,100)}%;
-                    background:${this.getSocColor(t.batterySoc)};
-                    transition: height 0.4s ease;
-                    animation:${e<0?"pulse 1.5s infinite":"none"};
-                  "></div>
-                </div>
-              `}
-            </div>
-
-            <div class="node grid"
-              style="${Math.abs(a)>0?`animation: glow 2s infinite; box-shadow: 0 0 6px ${a>0?"#ef4444":"#22c55e"}, 0 2px 10px rgba(0,0,0,0.3);`:""}">
-              <span class="icon" style="animation: glow 2s infinite; color:${a>0?"#ef4444":"#22c55e"};">
-                <ha-icon icon="mdi:transmission-tower"></ha-icon>
-              </span>
-              <span class="value">${r(Math.abs(a))}</span>
-            </div>
-
-            ${n.map((s,i)=>{let c=this.getAppliancePosition(i,n.length);if(!c)return"";let d=this.get(s.entity);return!d||d<=0?"":p`
-                <div class="appliance"
-                  style="
-                    top:${c.top};
-                    left:${c.left};
-                    transform: translate(-50%, -50%);
-                    ${d>0?"animation: glow 2s infinite; box-shadow: 0 0 6px #3b82f6, 0 2px 10px rgba(0,0,0,0.2);":""}
-                  ">
-
-                  <div class="name">${s.name}</div>
-
-                  <ha-icon class="icon" style="color:#3b82f6;" icon="${s.icon}"></ha-icon>
-
-                  <div class="value">
-                    ${d>=1e3?(d/1e3).toFixed(1)+" kW":d+" W"}
-                  </div>
-
-                </div>
-              `})}
-
-            ${!isNaN(t.carPower)||!isNaN(t.carSoc)?p`
-              <div class="appliance car"
-                style="
-                  top:${this.getAppliancePosition(2,4).top};
-                  left:50%;
-                  transform: translate(-50%, -50%);
-                  width:65px;
-                  height:65px;
-                  animation: glow 2s infinite;
-                  box-shadow: 0 0 6px #3b82f6;
-                ">
-
-                <div class="name">Car</div>
-
-                <ha-icon
-                  class="icon"
-                  style="color:${this.getCarColor(t.carPower)};"
-                  icon="mdi:car-electric">
-                </ha-icon>
-
-                <div class="value" style="color:${this.getCarColor(t.carPower)};">
-                  ${t.carPower>=1e3?(t.carPower/1e3).toFixed(1)+" kW":t.carPower+" W"}
-                </div>
-
-                ${isNaN(t.carSoc)?"":p`
-                  <div style="font-size:10px; opacity:0.7;">
-                    ${t.carSoc.toFixed(0)}%
-                  </div>
-                `}
-                ${isNaN(t.carSoc)?"":p`
-                  <div style="
-                    position:absolute;
-                    left:4px;
-                    top:4px;
-                    bottom:4px;
-                    width:6px;
-                    background: rgba(255,255,255,0.1);
-                    border-radius:3px;
-                    overflow:hidden;
-                  ">
-                    <div style="
-                      position:absolute;
-                      bottom:0;
-                      width:100%;
-                      height:${Math.min(t.carSoc,100)}%;
-                      background:${this.getSocColor(t.carSoc)};
-                      transition: height 0.4s ease;
-                      animation:${t.carPower>0?"pulse 1.5s infinite":"none"};
-                    "></div>
-                  </div>
-                `}
-              </div>
-            `:""}
-
-            <canvas></canvas>
-
-            <div class="labels">
-              ${this.renderLabels(t)}
-            </div>
-
-          </div> <!-- inner -->
-        </div> <!-- container -->
+        </div>
       </ha-card>
-    `}};customElements.get("solar-battery-economy-flow-card")||customElements.define("solar-battery-economy-flow-card",N);window.customCards=window.customCards||[];window.customCards.push({type:"solar-battery-economy-flow-card",name:"Solar Battery Economy Flow Card",description:"Visual energy flow for Solar Battery Economy integration"});export{N as SolarBatteryEconomyFlowCard};
+    `}};t([dt({attribute:!1})],pt.prototype,"hass",void 0),t([dt({attribute:!1})],pt.prototype,"config",void 0),pt=t([(t=>(e,s)=>{void 0!==s?s.addInitializer(()=>{customElements.define(t,e)}):customElements.define(t,e)})("solar-battery-economy-flow-card")],pt);export{pt as SolarBatteryEconomyFlowCard};
+//# sourceMappingURL=solar-battery-economy-flow-card.js.map
