@@ -5,6 +5,7 @@ import terser from '@rollup/plugin-terser';
 import copy from 'rollup-plugin-copy';
 
 export default {
+
   input: 'src-v2/card.ts',
 
   output: {
@@ -14,7 +15,9 @@ export default {
   },
 
   plugins: [
+
     resolve(),
+
     commonjs(),
 
     typescript({
@@ -24,13 +27,19 @@ export default {
     terser(),
 
     copy({
+
       targets: [
+
         {
-          src: 'dist/*',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card'
+          src: 'src-v2/assets/**/*',
+          dest: 'dist'
         }
+
       ],
-      hook: 'writeBundle'
+
+      hook: 'writeBundle',
+
+      verbose: true
     })
   ]
 };
