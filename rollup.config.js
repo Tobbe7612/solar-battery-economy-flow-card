@@ -30,9 +30,51 @@ export default {
 
       targets: [
 
+        // Kopiera assets till dist
+
         {
           src: 'src-v2/assets/**/*',
           dest: 'dist'
+        },
+
+        // Deploy JS till Home Assistant
+
+        {
+          src: 'dist/solar-battery-economy-flow-card.js',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card'
+        },
+
+        {
+          src: 'dist/solar-battery-economy-flow-card.js.map',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card'
+        },
+
+        // Deploy bakgrunder
+
+        {
+          src: 'dist/backgrounds/**/*',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card/backgrounds'
+        },
+
+        // Deploy ikoner
+
+        {
+          src: 'dist/icons/**/*',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card/icons'
+        },
+
+        // Deploy overlays
+
+        {
+          src: 'dist/overlays/**/*',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card/overlays'
+        },
+
+        // Deploy fordon
+
+        {
+          src: 'dist/vehicles/**/*',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card/vehicles'
         }
 
       ],
@@ -40,6 +82,9 @@ export default {
       hook: 'writeBundle',
 
       verbose: true
+
     })
+
   ]
+
 };

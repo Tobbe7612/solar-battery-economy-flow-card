@@ -11,10 +11,24 @@ export interface SceneNode {
   label?: string;
 }
 
+export interface PanelPosition {
+
+  x: number;
+  y: number;
+}
+
+export interface ScenePanels {
+
+  left: PanelPosition;
+  right: PanelPosition;
+}
+
 export interface SceneLayout {
 
   sceneWidth: number;
   sceneHeight: number;
+
+  panels: ScenePanels;
 
   nodes: Record<string, SceneNode>;
 }

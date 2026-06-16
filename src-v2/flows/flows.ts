@@ -81,5 +81,23 @@ export const energyFlows: EnergyFlow[] = [
     color: '#59D8FF',
     width: 8,
     animated: true
+  },
+
+  {
+    id: 'house-heatpump',
+    from: 'house',
+    to: 'heatpump',
+    color: '#7ACBFF',
+    width: 8,
+    animated: true
+  },
+
+  {
+    id: 'house-appliance',
+    from: 'house',
+    to: 'appliance',
+    color: '#FFD580',
+    width: 8,
+    animated: true
   }
 ];

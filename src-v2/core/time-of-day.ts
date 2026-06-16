@@ -4,9 +4,12 @@ export type TimeOfDay =
   | 'sunset'
   | 'night';
 
-export function getTimeOfDay(hass: any): TimeOfDay {
+export function getTimeOfDay(
+  hass: any
+): TimeOfDay {
 
-  const sun = hass?.states?.['sun.sun'];
+  const sun =
+    hass?.states?.['sun.sun'];
 
   if (!sun) {
     return 'day';
@@ -17,7 +20,10 @@ export function getTimeOfDay(hass: any): TimeOfDay {
       sun.attributes?.elevation ?? 0
     );
 
-  if (elevation < -6) {
+  const aboveHorizon =
+    sun.state === 'above_horizon';
+
+  if (!aboveHorizon) {
     return 'night';
   }
 

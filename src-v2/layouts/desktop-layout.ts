@@ -5,60 +5,107 @@ export const desktopLayout: SceneLayout = {
   sceneWidth: 1920,
   sceneHeight: 1080,
 
+  panels: {
+
+    left: {
+      x: 40,
+      y: 40
+    },
+
+    right: {
+      x: 1620,
+      y: 40
+    }
+  },
+
   nodes: {
 
     solar: {
       id: 'solar',
       label: 'SOL',
-      x: 865,
-      y: 120,
-      width: 140,
-      height: 120
+
+      x: 820,
+      y: 140,
+
+      width: 300,
+      height: 140
     },
 
     house: {
       id: 'house',
-      label: 'HOUSE',
-      x: 700,
-      y: 470,
-      width: 380,
-      height: 210
+      label: 'HUSET',
+
+      x: 930,
+      y: 590,
+
+      width: 220,
+      height: 125
     },
 
     battery: {
       id: 'battery',
-      label: 'BATTERY',
-      x: 1410,
-      y: 320,
-      width: 250,
-      height: 260
+      label: 'BATTERI',
+
+      x: 1240,
+      y: 420,
+
+      width: 180,
+      height: 130
     },
 
-    car: {
-      id: 'car',
-      label: 'EV',
-      x: 1360,
-      y: 760,
-      width: 240,
-      height: 170
+    grid: {
+      id: 'grid',
+      label: 'ELNÄT',
+
+      x: 450,
+      y: 420,
+
+      width: 180,
+      height: 130
     },
 
     spa: {
       id: 'spa',
       label: 'SPA',
-      x: 260,
-      y: 790,
-      width: 190,
-      height: 150
+
+      x: 540,
+      y: 810,
+
+      width: 170,
+      height: 100
     },
 
-    grid: {
-      id: 'grid',
-      label: 'GRID',
-      x: 80,
-      y: 340,
-      width: 190,
-      height: 190
+    heatpump: {
+      id: 'heatpump',
+      label: 'VP',
+
+      x: 760,
+      y: 810,
+
+      width: 140,
+      height: 70
+    },
+
+    appliance: {
+      id: 'appliance',
+      label: 'APP',
+
+      x: 980,
+      y: 810,
+
+      width: 140,
+      height: 70
+    },
+
+    car: {
+      id: 'car',
+      label: 'BIL',
+
+      x: 1200,
+      y: 810,
+
+      width: 170,
+      height: 100
     }
   }
 };

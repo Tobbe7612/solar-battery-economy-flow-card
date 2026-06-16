@@ -3,62 +3,109 @@ import { SceneLayout } from '../types/layout';
 export const mobileLayout: SceneLayout = {
 
   sceneWidth: 430,
-  sceneHeight: 1200,
+  sceneHeight: 1180,
+
+  panels: {
+
+    left: {
+      x: 0,
+      y: 0
+    },
+
+    right: {
+      x: 0,
+      y: 0
+    }
+  },
 
   nodes: {
 
     solar: {
       id: 'solar',
-      x: 140,
+      label: 'SOL',
+
+      x: 150,
       y: 40,
-      width: 140,
-      height: 140,
-      label: 'Solar'
-    },
 
-    house: {
-      id: 'house',
-      x: 80,
-      y: 300,
-      width: 260,
-      height: 180,
-      label: 'House'
-    },
-
-    battery: {
-      id: 'battery',
-      x: 260,
-      y: 540,
-      width: 120,
-      height: 220,
-      label: 'Battery'
-    },
-
-    car: {
-      id: 'car',
-      x: 80,
-      y: 760,
-      width: 220,
-      height: 120,
-      label: 'Car'
-    },
-
-    spa: {
-      id: 'spa',
-      x: 40,
-      y: 560,
       width: 160,
-      height: 100,
-      label: 'Spa'
+      height: 135
     },
 
     grid: {
       id: 'grid',
-      x: 20,
-      y: 180,
-      width: 120,
-      height: 120,
-      label: 'Grid'
+      label: 'ELNÄT',
+
+      x: 25,
+      y: 240,
+
+      width: 110,
+      height: 110
+    },
+
+    battery: {
+      id: 'battery',
+      label: 'BATTERI',
+
+      x: 285,
+      y: 240,
+
+      width: 110,
+      height: 110
+    },
+
+    house: {
+      id: 'house',
+      label: 'HUSET',
+
+      x: 150,
+      y: 410,
+
+      width: 130,
+      height: 130
+    },
+
+    spa: {
+      id: 'spa',
+      label: 'SPA',
+
+      x: 15,
+      y: 490,
+
+      width: 80,
+      height: 80
+    },
+
+    heatpump: {
+      id: 'heatpump',
+      label: 'VP',
+
+      x: 125,
+      y: 585,
+
+      width: 80,
+      height: 80
+    },
+
+    appliance: {
+      id: 'appliance',
+      label: 'APP',
+
+      x: 210,
+      y: 585,
+
+      width: 80,
+      height: 80
+    },
+
+    car: {
+      id: 'car',
+      label: 'BIL',
+
+      x: 325,
+      y: 490,
+
+      width: 80,
+      height: 80
     }
   }
 };

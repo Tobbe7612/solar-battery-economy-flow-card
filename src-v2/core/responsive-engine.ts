@@ -1,11 +1,18 @@
 import { desktopLayout } from '../layouts/desktop-layout';
 import { mobileLayout } from '../layouts/mobile-layout';
+import { tabletLayout } from '../layouts/tablet-layout';
 
-export function getActiveLayout() {
+export function getActiveLayout(
+  containerWidth: number
+) {
 
-  const mobileBreakpoint = 900;
+  if (containerWidth <= 900) {
+    return mobileLayout;
+  }
 
-  return window.innerWidth <= mobileBreakpoint
-    ? mobileLayout
-    : desktopLayout;
+  if (containerWidth <= 1400) {
+    return tabletLayout;
+  }
+
+  return desktopLayout;
 }

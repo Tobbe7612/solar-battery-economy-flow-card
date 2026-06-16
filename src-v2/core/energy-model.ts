@@ -71,6 +71,32 @@ export function getLiveFlows(hass: any) {
       getPower(
         'sensor.solar_battery_economy_energy_system_power_grid_battery'
       )
+    ),
+
+    'house-spa': createFlow(
+      'house-spa',
+      getPower(
+        'sensor.plugg_spabad_power'
+      )
+    ),
+
+    'house-car': createFlow(
+      'house-car',
+      getPower(
+        'sensor.charger_lindv_26_2006011626m_1_power'
+      )
+    ),
+
+    'house-heatpump': createFlow(
+      'house-heatpump',
+      getPower(
+        'sensor.thermia_power_estimator_total_effekt'
+      )
+    ),
+
+    'house-appliance': createFlow(
+      'house-appliance',
+      0
     )
   };
 
@@ -82,7 +108,7 @@ function createFlow(
   power: number
 ): LiveFlow {
 
-  const active = power > 10;
+  const active = power > 1;
 
   const intensity = Math.min(
     1,
