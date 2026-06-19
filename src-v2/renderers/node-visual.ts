@@ -12,9 +12,9 @@ type VisualType =
 
 const VISUAL_TYPES: Record<string, VisualType> = {
 
-  house: 'icon',
+  house: 'object',
   battery: 'object',
-  grid: 'icon',
+  grid: 'object',
 
   solar: 'icon',
   car: 'icon',
