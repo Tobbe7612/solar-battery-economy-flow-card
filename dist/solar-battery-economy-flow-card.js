@@ -1,48 +1,48 @@
-function e(e,t,r,s){var o,i=arguments.length,a=i<3?t:null===s?s=Object.getOwnPropertyDescriptor(t,r):s;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(e,t,r,s);else for(var n=e.length-1;n>=0;n--)(o=e[n])&&(a=(i<3?o(a):i>3?o(t,r,a):o(t,r))||a);return i>3&&a&&Object.defineProperty(t,r,a),a}"function"==typeof SuppressedError&&SuppressedError;
+function e(e,t,r,o){var s,i=arguments.length,a=i<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,r):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(e,t,r,o);else for(var n=e.length-1;n>=0;n--)(s=e[n])&&(a=(i<3?s(a):i>3?s(t,r,a):s(t,r))||a);return i>3&&a&&Object.defineProperty(t,r,a),a}"function"==typeof SuppressedError&&SuppressedError;
 /**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const t=globalThis,r=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s=Symbol(),o=new WeakMap;class i{constructor(e,t,r){if(this._$cssResult$=!0,r!==s)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(r&&void 0===e){const r=void 0!==t&&1===t.length;r&&(e=o.get(t)),void 0===e&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),r&&o.set(t,e))}return e}toString(){return this.cssText}}const a=r?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t="";for(const r of e.cssRules)t+=r.cssText;return(e=>new i("string"==typeof e?e:e+"",void 0,s))(t)})(e):e,{is:n,defineProperty:d,getOwnPropertyDescriptor:l,getOwnPropertyNames:c,getOwnPropertySymbols:h,getPrototypeOf:p}=Object,u=globalThis,g=u.trustedTypes,y=g?g.emptyScript:"",x=u.reactiveElementPolyfillSupport,b=(e,t)=>e,v={toAttribute(e,t){switch(t){case Boolean:e=e?y:null;break;case Object:case Array:e=null==e?e:JSON.stringify(e)}return e},fromAttribute(e,t){let r=e;switch(t){case Boolean:r=null!==e;break;case Number:r=null===e?null:Number(e);break;case Object:case Array:try{r=JSON.parse(e)}catch(e){r=null}}return r}},f=(e,t)=>!n(e,t),_={attribute:!0,type:String,converter:v,reflect:!1,useDefault:!1,hasChanged:f};
+const t=globalThis,r=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,o=Symbol(),s=new WeakMap;class i{constructor(e,t,r){if(this._$cssResult$=!0,r!==o)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(r&&void 0===e){const r=void 0!==t&&1===t.length;r&&(e=s.get(t)),void 0===e&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),r&&s.set(t,e))}return e}toString(){return this.cssText}}const a=r?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t="";for(const r of e.cssRules)t+=r.cssText;return(e=>new i("string"==typeof e?e:e+"",void 0,o))(t)})(e):e,{is:n,defineProperty:d,getOwnPropertyDescriptor:l,getOwnPropertyNames:c,getOwnPropertySymbols:h,getPrototypeOf:p}=Object,u=globalThis,g=u.trustedTypes,y=g?g.emptyScript:"",x=u.reactiveElementPolyfillSupport,b=(e,t)=>e,v={toAttribute(e,t){switch(t){case Boolean:e=e?y:null;break;case Object:case Array:e=null==e?e:JSON.stringify(e)}return e},fromAttribute(e,t){let r=e;switch(t){case Boolean:r=null!==e;break;case Number:r=null===e?null:Number(e);break;case Object:case Array:try{r=JSON.parse(e)}catch(e){r=null}}return r}},f=(e,t)=>!n(e,t),_={attribute:!0,type:String,converter:v,reflect:!1,useDefault:!1,hasChanged:f};
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */Symbol.metadata??=Symbol("metadata"),u.litPropertyMetadata??=new WeakMap;class m extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=_){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const r=Symbol(),s=this.getPropertyDescriptor(e,r,t);void 0!==s&&d(this.prototype,e,s)}}static getPropertyDescriptor(e,t,r){const{get:s,set:o}=l(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:s,set(t){const i=s?.call(this);o?.call(this,t),this.requestUpdate(e,i,r)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??_}static _$Ei(){if(this.hasOwnProperty(b("elementProperties")))return;const e=p(this);e.finalize(),void 0!==e.l&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(b("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(b("properties"))){const e=this.properties,t=[...c(e),...h(e)];for(const r of t)this.createProperty(r,e[r])}const e=this[Symbol.metadata];if(null!==e){const t=litPropertyMetadata.get(e);if(void 0!==t)for(const[e,r]of t)this.elementProperties.set(e,r)}this._$Eh=new Map;for(const[e,t]of this.elementProperties){const r=this._$Eu(e,t);void 0!==r&&this._$Eh.set(r,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const r=new Set(e.flat(1/0).reverse());for(const e of r)t.unshift(a(e))}else void 0!==e&&t.push(a(e));return t}static _$Eu(e,t){const r=t.attribute;return!1===r?void 0:"string"==typeof r?r:"string"==typeof e?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),void 0!==this.renderRoot&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const r of t.keys())this.hasOwnProperty(r)&&(e.set(r,this[r]),delete this[r]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((e,s)=>{if(r)e.adoptedStyleSheets=s.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(const r of s){const s=document.createElement("style"),o=t.litNonce;void 0!==o&&s.setAttribute("nonce",o),s.textContent=r.cssText,e.appendChild(s)}})(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,r){this._$AK(e,r)}_$ET(e,t){const r=this.constructor.elementProperties.get(e),s=this.constructor._$Eu(e,r);if(void 0!==s&&!0===r.reflect){const o=(void 0!==r.converter?.toAttribute?r.converter:v).toAttribute(t,r.type);this._$Em=e,null==o?this.removeAttribute(s):this.setAttribute(s,o),this._$Em=null}}_$AK(e,t){const r=this.constructor,s=r._$Eh.get(e);if(void 0!==s&&this._$Em!==s){const e=r.getPropertyOptions(s),o="function"==typeof e.converter?{fromAttribute:e.converter}:void 0!==e.converter?.fromAttribute?e.converter:v;this._$Em=s;const i=o.fromAttribute(t,e.type);this[s]=i??this._$Ej?.get(s)??i,this._$Em=null}}requestUpdate(e,t,r,s=!1,o){if(void 0!==e){const i=this.constructor;if(!1===s&&(o=this[e]),r??=i.getPropertyOptions(e),!((r.hasChanged??f)(o,t)||r.useDefault&&r.reflect&&o===this._$Ej?.get(e)&&!this.hasAttribute(i._$Eu(e,r))))return;this.C(e,t,r)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:r,reflect:s,wrapped:o},i){r&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,i??t??this[e]),!0!==o||void 0!==i)||(this._$AL.has(e)||(this.hasUpdated||r||(t=void 0),this._$AL.set(e,t)),!0===s&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}const e=this.scheduleUpdate();return null!=e&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}const e=this.constructor.elementProperties;if(e.size>0)for(const[t,r]of e){const{wrapped:e}=r,s=this[t];!0!==e||this._$AL.has(t)||void 0===s||this.C(t,void 0,r,s)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}}m.elementStyles=[],m.shadowRootOptions={mode:"open"},m[b("elementProperties")]=new Map,m[b("finalized")]=new Map,x?.({ReactiveElement:m}),(u.reactiveElementVersions??=[]).push("2.1.2");
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-const w=globalThis,$=e=>e,A=w.trustedTypes,E=A?A.createPolicy("lit-html",{createHTML:e=>e}):void 0,k="$lit$",S=`lit$${Math.random().toFixed(9).slice(2)}$`,T="?"+S,C=`<${T}>`,F=document,R=()=>F.createComment(""),P=e=>null===e||"object"!=typeof e&&"function"!=typeof e,M=Array.isArray,O="[ \t\n\f\r]",H=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,z=/-->/g,N=/>/g,U=RegExp(`>|${O}(?:([^\\s"'>=/]+)(${O}*=${O}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),L=/'/g,B=/"/g,D=/^(?:script|style|textarea|title)$/i,I=e=>(t,...r)=>({_$litType$:e,strings:t,values:r}),j=I(1),W=I(2),V=Symbol.for("lit-noChange"),G=Symbol.for("lit-nothing"),Y=new WeakMap,X=F.createTreeWalker(F,129);function q(e,t){if(!M(e)||!e.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==E?E.createHTML(t):t}const J=(e,t)=>{const r=e.length-1,s=[];let o,i=2===t?"<svg>":3===t?"<math>":"",a=H;for(let t=0;t<r;t++){const r=e[t];let n,d,l=-1,c=0;for(;c<r.length&&(a.lastIndex=c,d=a.exec(r),null!==d);)c=a.lastIndex,a===H?"!--"===d[1]?a=z:void 0!==d[1]?a=N:void 0!==d[2]?(D.test(d[2])&&(o=RegExp("</"+d[2],"g")),a=U):void 0!==d[3]&&(a=U):a===U?">"===d[0]?(a=o??H,l=-1):void 0===d[1]?l=-2:(l=a.lastIndex-d[2].length,n=d[1],a=void 0===d[3]?U:'"'===d[3]?B:L):a===B||a===L?a=U:a===z||a===N?a=H:(a=U,o=void 0);const h=a===U&&e[t+1].startsWith("/>")?" ":"";i+=a===H?r+C:l>=0?(s.push(n),r.slice(0,l)+k+r.slice(l)+S+h):r+S+(-2===l?t:h)}return[q(e,i+(e[r]||"<?>")+(2===t?"</svg>":3===t?"</math>":"")),s]};class K{constructor({strings:e,_$litType$:t},r){let s;this.parts=[];let o=0,i=0;const a=e.length-1,n=this.parts,[d,l]=J(e,t);if(this.el=K.createElement(d,r),X.currentNode=this.el.content,2===t||3===t){const e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;null!==(s=X.nextNode())&&n.length<a;){if(1===s.nodeType){if(s.hasAttributes())for(const e of s.getAttributeNames())if(e.endsWith(k)){const t=l[i++],r=s.getAttribute(e).split(S),a=/([.?@])?(.*)/.exec(t);n.push({type:1,index:o,name:a[2],strings:r,ctor:"."===a[1]?re:"?"===a[1]?se:"@"===a[1]?oe:te}),s.removeAttribute(e)}else e.startsWith(S)&&(n.push({type:6,index:o}),s.removeAttribute(e));if(D.test(s.tagName)){const e=s.textContent.split(S),t=e.length-1;if(t>0){s.textContent=A?A.emptyScript:"";for(let r=0;r<t;r++)s.append(e[r],R()),X.nextNode(),n.push({type:2,index:++o});s.append(e[t],R())}}}else if(8===s.nodeType)if(s.data===T)n.push({type:2,index:o});else{let e=-1;for(;-1!==(e=s.data.indexOf(S,e+1));)n.push({type:7,index:o}),e+=S.length-1}o++}}static createElement(e,t){const r=F.createElement("template");return r.innerHTML=e,r}}function Z(e,t,r=e,s){if(t===V)return t;let o=void 0!==s?r._$Co?.[s]:r._$Cl;const i=P(t)?void 0:t._$litDirective$;return o?.constructor!==i&&(o?._$AO?.(!1),void 0===i?o=void 0:(o=new i(e),o._$AT(e,r,s)),void 0!==s?(r._$Co??=[])[s]=o:r._$Cl=o),void 0!==o&&(t=Z(e,o._$AS(e,t.values),o,s)),t}class Q{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:r}=this._$AD,s=(e?.creationScope??F).importNode(t,!0);X.currentNode=s;let o=X.nextNode(),i=0,a=0,n=r[0];for(;void 0!==n;){if(i===n.index){let t;2===n.type?t=new ee(o,o.nextSibling,this,e):1===n.type?t=new n.ctor(o,n.name,n.strings,this,e):6===n.type&&(t=new ie(o,this,e)),this._$AV.push(t),n=r[++a]}i!==n?.index&&(o=X.nextNode(),i++)}return X.currentNode=F,s}p(e){let t=0;for(const r of this._$AV)void 0!==r&&(void 0!==r.strings?(r._$AI(e,r,t),t+=r.strings.length-2):r._$AI(e[t])),t++}}class ee{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,r,s){this.type=2,this._$AH=G,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=r,this.options=s,this._$Cv=s?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return void 0!==t&&11===e?.nodeType&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=Z(this,e,t),P(e)?e===G||null==e||""===e?(this._$AH!==G&&this._$AR(),this._$AH=G):e!==this._$AH&&e!==V&&this._(e):void 0!==e._$litType$?this.$(e):void 0!==e.nodeType?this.T(e):(e=>M(e)||"function"==typeof e?.[Symbol.iterator])(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==G&&P(this._$AH)?this._$AA.nextSibling.data=e:this.T(F.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:r}=e,s="number"==typeof r?this._$AC(e):(void 0===r.el&&(r.el=K.createElement(q(r.h,r.h[0]),this.options)),r);if(this._$AH?._$AD===s)this._$AH.p(t);else{const e=new Q(s,this),r=e.u(this.options);e.p(t),this.T(r),this._$AH=e}}_$AC(e){let t=Y.get(e.strings);return void 0===t&&Y.set(e.strings,t=new K(e)),t}k(e){M(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let r,s=0;for(const o of e)s===t.length?t.push(r=new ee(this.O(R()),this.O(R()),this,this.options)):r=t[s],r._$AI(o),s++;s<t.length&&(this._$AR(r&&r._$AB.nextSibling,s),t.length=s)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const t=$(e).nextSibling;$(e).remove(),e=t}}setConnected(e){void 0===this._$AM&&(this._$Cv=e,this._$AP?.(e))}}class te{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,r,s,o){this.type=1,this._$AH=G,this._$AN=void 0,this.element=e,this.name=t,this._$AM=s,this.options=o,r.length>2||""!==r[0]||""!==r[1]?(this._$AH=Array(r.length-1).fill(new String),this.strings=r):this._$AH=G}_$AI(e,t=this,r,s){const o=this.strings;let i=!1;if(void 0===o)e=Z(this,e,t,0),i=!P(e)||e!==this._$AH&&e!==V,i&&(this._$AH=e);else{const s=e;let a,n;for(e=o[0],a=0;a<o.length-1;a++)n=Z(this,s[r+a],t,a),n===V&&(n=this._$AH[a]),i||=!P(n)||n!==this._$AH[a],n===G?e=G:e!==G&&(e+=(n??"")+o[a+1]),this._$AH[a]=n}i&&!s&&this.j(e)}j(e){e===G?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class re extends te{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===G?void 0:e}}class se extends te{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==G)}}class oe extends te{constructor(e,t,r,s,o){super(e,t,r,s,o),this.type=5}_$AI(e,t=this){if((e=Z(this,e,t,0)??G)===V)return;const r=this._$AH,s=e===G&&r!==G||e.capture!==r.capture||e.once!==r.once||e.passive!==r.passive,o=e!==G&&(r===G||s);s&&this.element.removeEventListener(this.name,this,r),o&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class ie{constructor(e,t,r){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=r}get _$AU(){return this._$AM._$AU}_$AI(e){Z(this,e)}}const ae=w.litHtmlPolyfillSupport;ae?.(K,ee),(w.litHtmlVersions??=[]).push("3.3.3");const ne=globalThis;
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */class de extends m{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=((e,t,r)=>{const s=r?.renderBefore??t;let o=s._$litPart$;if(void 0===o){const e=r?.renderBefore??null;s._$litPart$=o=new ee(t.insertBefore(R(),e),e,void 0,r??{})}return o._$AI(e),o})(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return V}}de._$litElement$=!0,de.finalized=!0,ne.litElementHydrateSupport?.({LitElement:de});const le=ne.litElementPolyfillSupport;le?.({LitElement:de}),(ne.litElementVersions??=[]).push("4.2.2");
+ */Symbol.metadata??=Symbol("metadata"),u.litPropertyMetadata??=new WeakMap;class m extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=_){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const r=Symbol(),o=this.getPropertyDescriptor(e,r,t);void 0!==o&&d(this.prototype,e,o)}}static getPropertyDescriptor(e,t,r){const{get:o,set:s}=l(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:o,set(t){const i=o?.call(this);s?.call(this,t),this.requestUpdate(e,i,r)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??_}static _$Ei(){if(this.hasOwnProperty(b("elementProperties")))return;const e=p(this);e.finalize(),void 0!==e.l&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(b("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(b("properties"))){const e=this.properties,t=[...c(e),...h(e)];for(const r of t)this.createProperty(r,e[r])}const e=this[Symbol.metadata];if(null!==e){const t=litPropertyMetadata.get(e);if(void 0!==t)for(const[e,r]of t)this.elementProperties.set(e,r)}this._$Eh=new Map;for(const[e,t]of this.elementProperties){const r=this._$Eu(e,t);void 0!==r&&this._$Eh.set(r,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const r=new Set(e.flat(1/0).reverse());for(const e of r)t.unshift(a(e))}else void 0!==e&&t.push(a(e));return t}static _$Eu(e,t){const r=t.attribute;return!1===r?void 0:"string"==typeof r?r:"string"==typeof e?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),void 0!==this.renderRoot&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const r of t.keys())this.hasOwnProperty(r)&&(e.set(r,this[r]),delete this[r]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((e,o)=>{if(r)e.adoptedStyleSheets=o.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(const r of o){const o=document.createElement("style"),s=t.litNonce;void 0!==s&&o.setAttribute("nonce",s),o.textContent=r.cssText,e.appendChild(o)}})(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,r){this._$AK(e,r)}_$ET(e,t){const r=this.constructor.elementProperties.get(e),o=this.constructor._$Eu(e,r);if(void 0!==o&&!0===r.reflect){const s=(void 0!==r.converter?.toAttribute?r.converter:v).toAttribute(t,r.type);this._$Em=e,null==s?this.removeAttribute(o):this.setAttribute(o,s),this._$Em=null}}_$AK(e,t){const r=this.constructor,o=r._$Eh.get(e);if(void 0!==o&&this._$Em!==o){const e=r.getPropertyOptions(o),s="function"==typeof e.converter?{fromAttribute:e.converter}:void 0!==e.converter?.fromAttribute?e.converter:v;this._$Em=o;const i=s.fromAttribute(t,e.type);this[o]=i??this._$Ej?.get(o)??i,this._$Em=null}}requestUpdate(e,t,r,o=!1,s){if(void 0!==e){const i=this.constructor;if(!1===o&&(s=this[e]),r??=i.getPropertyOptions(e),!((r.hasChanged??f)(s,t)||r.useDefault&&r.reflect&&s===this._$Ej?.get(e)&&!this.hasAttribute(i._$Eu(e,r))))return;this.C(e,t,r)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:r,reflect:o,wrapped:s},i){r&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,i??t??this[e]),!0!==s||void 0!==i)||(this._$AL.has(e)||(this.hasUpdated||r||(t=void 0),this._$AL.set(e,t)),!0===o&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}const e=this.scheduleUpdate();return null!=e&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}const e=this.constructor.elementProperties;if(e.size>0)for(const[t,r]of e){const{wrapped:e}=r,o=this[t];!0!==e||this._$AL.has(t)||void 0===o||this.C(t,void 0,r,o)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}}m.elementStyles=[],m.shadowRootOptions={mode:"open"},m[b("elementProperties")]=new Map,m[b("finalized")]=new Map,x?.({ReactiveElement:m}),(u.reactiveElementVersions??=[]).push("2.1.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce,t,r)=>{const{kind:s,metadata:o}=r;let i=globalThis.litPropertyMetadata.get(o);if(void 0===i&&globalThis.litPropertyMetadata.set(o,i=new Map),"setter"===s&&((e=Object.create(e)).wrapped=!0),i.set(r.name,e),"accessor"===s){const{name:s}=r;return{set(r){const o=t.get.call(this);t.set.call(this,r),this.requestUpdate(s,o,e,!0,r)},init(t){return void 0!==t&&this.C(s,void 0,e,t),t}}}if("setter"===s){const{name:s}=r;return function(r){const o=this[s];t.call(this,r),this.requestUpdate(s,o,e,!0,r)}}throw Error("Unsupported decorator location: "+s)};
+const w=globalThis,$=e=>e,A=w.trustedTypes,k=A?A.createPolicy("lit-html",{createHTML:e=>e}):void 0,E="$lit$",S=`lit$${Math.random().toFixed(9).slice(2)}$`,C="?"+S,T=`<${C}>`,F=document,M=()=>F.createComment(""),P=e=>null===e||"object"!=typeof e&&"function"!=typeof e,R=Array.isArray,O="[ \t\n\f\r]",H=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,z=/-->/g,N=/>/g,L=RegExp(`>|${O}(?:([^\\s"'>=/]+)(${O}*=${O}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),U=/'/g,B=/"/g,D=/^(?:script|style|textarea|title)$/i,I=e=>(t,...r)=>({_$litType$:e,strings:t,values:r}),j=I(1),W=I(2),V=Symbol.for("lit-noChange"),G=Symbol.for("lit-nothing"),Y=new WeakMap,X=F.createTreeWalker(F,129);function q(e,t){if(!R(e)||!e.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==k?k.createHTML(t):t}const J=(e,t)=>{const r=e.length-1,o=[];let s,i=2===t?"<svg>":3===t?"<math>":"",a=H;for(let t=0;t<r;t++){const r=e[t];let n,d,l=-1,c=0;for(;c<r.length&&(a.lastIndex=c,d=a.exec(r),null!==d);)c=a.lastIndex,a===H?"!--"===d[1]?a=z:void 0!==d[1]?a=N:void 0!==d[2]?(D.test(d[2])&&(s=RegExp("</"+d[2],"g")),a=L):void 0!==d[3]&&(a=L):a===L?">"===d[0]?(a=s??H,l=-1):void 0===d[1]?l=-2:(l=a.lastIndex-d[2].length,n=d[1],a=void 0===d[3]?L:'"'===d[3]?B:U):a===B||a===U?a=L:a===z||a===N?a=H:(a=L,s=void 0);const h=a===L&&e[t+1].startsWith("/>")?" ":"";i+=a===H?r+T:l>=0?(o.push(n),r.slice(0,l)+E+r.slice(l)+S+h):r+S+(-2===l?t:h)}return[q(e,i+(e[r]||"<?>")+(2===t?"</svg>":3===t?"</math>":"")),o]};class K{constructor({strings:e,_$litType$:t},r){let o;this.parts=[];let s=0,i=0;const a=e.length-1,n=this.parts,[d,l]=J(e,t);if(this.el=K.createElement(d,r),X.currentNode=this.el.content,2===t||3===t){const e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;null!==(o=X.nextNode())&&n.length<a;){if(1===o.nodeType){if(o.hasAttributes())for(const e of o.getAttributeNames())if(e.endsWith(E)){const t=l[i++],r=o.getAttribute(e).split(S),a=/([.?@])?(.*)/.exec(t);n.push({type:1,index:s,name:a[2],strings:r,ctor:"."===a[1]?re:"?"===a[1]?oe:"@"===a[1]?se:te}),o.removeAttribute(e)}else e.startsWith(S)&&(n.push({type:6,index:s}),o.removeAttribute(e));if(D.test(o.tagName)){const e=o.textContent.split(S),t=e.length-1;if(t>0){o.textContent=A?A.emptyScript:"";for(let r=0;r<t;r++)o.append(e[r],M()),X.nextNode(),n.push({type:2,index:++s});o.append(e[t],M())}}}else if(8===o.nodeType)if(o.data===C)n.push({type:2,index:s});else{let e=-1;for(;-1!==(e=o.data.indexOf(S,e+1));)n.push({type:7,index:s}),e+=S.length-1}s++}}static createElement(e,t){const r=F.createElement("template");return r.innerHTML=e,r}}function Z(e,t,r=e,o){if(t===V)return t;let s=void 0!==o?r._$Co?.[o]:r._$Cl;const i=P(t)?void 0:t._$litDirective$;return s?.constructor!==i&&(s?._$AO?.(!1),void 0===i?s=void 0:(s=new i(e),s._$AT(e,r,o)),void 0!==o?(r._$Co??=[])[o]=s:r._$Cl=s),void 0!==s&&(t=Z(e,s._$AS(e,t.values),s,o)),t}class Q{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:r}=this._$AD,o=(e?.creationScope??F).importNode(t,!0);X.currentNode=o;let s=X.nextNode(),i=0,a=0,n=r[0];for(;void 0!==n;){if(i===n.index){let t;2===n.type?t=new ee(s,s.nextSibling,this,e):1===n.type?t=new n.ctor(s,n.name,n.strings,this,e):6===n.type&&(t=new ie(s,this,e)),this._$AV.push(t),n=r[++a]}i!==n?.index&&(s=X.nextNode(),i++)}return X.currentNode=F,o}p(e){let t=0;for(const r of this._$AV)void 0!==r&&(void 0!==r.strings?(r._$AI(e,r,t),t+=r.strings.length-2):r._$AI(e[t])),t++}}class ee{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,r,o){this.type=2,this._$AH=G,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=r,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return void 0!==t&&11===e?.nodeType&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=Z(this,e,t),P(e)?e===G||null==e||""===e?(this._$AH!==G&&this._$AR(),this._$AH=G):e!==this._$AH&&e!==V&&this._(e):void 0!==e._$litType$?this.$(e):void 0!==e.nodeType?this.T(e):(e=>R(e)||"function"==typeof e?.[Symbol.iterator])(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==G&&P(this._$AH)?this._$AA.nextSibling.data=e:this.T(F.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:r}=e,o="number"==typeof r?this._$AC(e):(void 0===r.el&&(r.el=K.createElement(q(r.h,r.h[0]),this.options)),r);if(this._$AH?._$AD===o)this._$AH.p(t);else{const e=new Q(o,this),r=e.u(this.options);e.p(t),this.T(r),this._$AH=e}}_$AC(e){let t=Y.get(e.strings);return void 0===t&&Y.set(e.strings,t=new K(e)),t}k(e){R(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let r,o=0;for(const s of e)o===t.length?t.push(r=new ee(this.O(M()),this.O(M()),this,this.options)):r=t[o],r._$AI(s),o++;o<t.length&&(this._$AR(r&&r._$AB.nextSibling,o),t.length=o)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const t=$(e).nextSibling;$(e).remove(),e=t}}setConnected(e){void 0===this._$AM&&(this._$Cv=e,this._$AP?.(e))}}class te{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,r,o,s){this.type=1,this._$AH=G,this._$AN=void 0,this.element=e,this.name=t,this._$AM=o,this.options=s,r.length>2||""!==r[0]||""!==r[1]?(this._$AH=Array(r.length-1).fill(new String),this.strings=r):this._$AH=G}_$AI(e,t=this,r,o){const s=this.strings;let i=!1;if(void 0===s)e=Z(this,e,t,0),i=!P(e)||e!==this._$AH&&e!==V,i&&(this._$AH=e);else{const o=e;let a,n;for(e=s[0],a=0;a<s.length-1;a++)n=Z(this,o[r+a],t,a),n===V&&(n=this._$AH[a]),i||=!P(n)||n!==this._$AH[a],n===G?e=G:e!==G&&(e+=(n??"")+s[a+1]),this._$AH[a]=n}i&&!o&&this.j(e)}j(e){e===G?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class re extends te{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===G?void 0:e}}class oe extends te{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==G)}}class se extends te{constructor(e,t,r,o,s){super(e,t,r,o,s),this.type=5}_$AI(e,t=this){if((e=Z(this,e,t,0)??G)===V)return;const r=this._$AH,o=e===G&&r!==G||e.capture!==r.capture||e.once!==r.once||e.passive!==r.passive,s=e!==G&&(r===G||o);o&&this.element.removeEventListener(this.name,this,r),s&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class ie{constructor(e,t,r){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=r}get _$AU(){return this._$AM._$AU}_$AI(e){Z(this,e)}}const ae=w.litHtmlPolyfillSupport;ae?.(K,ee),(w.litHtmlVersions??=[]).push("3.3.3");const ne=globalThis;
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function pe(e){return(t,r)=>"object"==typeof r?he(e,t,r):((e,t,r)=>{const s=t.hasOwnProperty(r);return t.constructor.createProperty(r,e),s?Object.getOwnPropertyDescriptor(t,r):void 0})(e,t,r)}
+ */class de extends m{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=((e,t,r)=>{const o=r?.renderBefore??t;let s=o._$litPart$;if(void 0===s){const e=r?.renderBefore??null;o._$litPart$=s=new ee(t.insertBefore(M(),e),e,void 0,r??{})}return s._$AI(e),s})(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return V}}de._$litElement$=!0,de.finalized=!0,ne.litElementHydrateSupport?.({LitElement:de});const le=ne.litElementPolyfillSupport;le?.({LitElement:de}),(ne.litElementVersions??=[]).push("4.2.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function ue(e){return pe({...e,state:!0,attribute:!1})}const ge={sceneWidth:1920,sceneHeight:1080,panels:{left:{x:40,y:40},right:{x:1620,y:40}},nodes:{solar:{id:"solar",label:"SOL",x:820,y:140,width:300,height:140},house:{id:"house",label:"HUSET",x:930,y:590,width:220,height:125},battery:{id:"battery",label:"BATTERI",x:1240,y:420,width:180,height:130},grid:{id:"grid",label:"ELNÄT",x:450,y:420,width:180,height:130},spa:{id:"spa",label:"SPA",x:540,y:810,width:170,height:100},heatpump:{id:"heatpump",label:"VP",x:760,y:810,width:140,height:70},appliance:{id:"appliance",label:"APP",x:980,y:810,width:140,height:70},car:{id:"car",label:"BIL",x:1200,y:810,width:170,height:100}}},ye={sceneWidth:430,sceneHeight:1180,panels:{left:{x:0,y:0},right:{x:0,y:0}},nodes:{solar:{id:"solar",label:"SOL",x:150,y:40,width:160,height:135},grid:{id:"grid",label:"ELNÄT",x:25,y:240,width:110,height:110},battery:{id:"battery",label:"BATTERI",x:285,y:240,width:110,height:110},house:{id:"house",label:"HUSET",x:150,y:410,width:130,height:130},spa:{id:"spa",label:"SPA",x:15,y:490,width:80,height:80},heatpump:{id:"heatpump",label:"VP",x:125,y:585,width:80,height:80},appliance:{id:"appliance",label:"APP",x:210,y:585,width:80,height:80},car:{id:"car",label:"BIL",x:325,y:490,width:80,height:80}}},xe={sceneWidth:1400,sceneHeight:1050,panels:{left:{x:40,y:20},right:{x:1100,y:20}},nodes:{solar:{id:"solar",label:"SOL",x:640,y:60,width:220,height:100},house:{id:"house",label:"HUSET",x:560,y:360,width:280,height:170},grid:{id:"grid",label:"ELNÄT",x:80,y:330,width:220,height:170},battery:{id:"battery",label:"BATTERI",x:1100,y:320,width:240,height:170},spa:{id:"spa",label:"SPA",x:180,y:760,width:180,height:120},heatpump:{id:"heatpump",label:"VP",x:460,y:760,width:180,height:120},appliance:{id:"appliance",label:"APP",x:740,y:760,width:180,height:120},car:{id:"car",label:"BIL",x:1020,y:760,width:220,height:140}}};function be(e,t){return{id:e,power:t,active:t>1,intensity:Math.min(1,t/5e3)}}function ve(e,t=40){if(e.length<2)return"";let r=`M ${e[0].x} ${e[0].y}`;for(let s=1;s<e.length-1;s++){const o=e[s-1],i=e[s],a=e[s+1],n=i.x-o.x,d=i.y-o.y,l=a.x-i.x,c=a.y-i.y,h=i.x-Math.sign(n)*t,p=i.y-Math.sign(d)*t,u=i.x+Math.sign(l)*t,g=i.y+Math.sign(c)*t;r+=`\n      L ${h} ${p}\n      Q ${i.x} ${i.y}\n        ${u} ${g}\n    `}const s=e[e.length-1];return r+=`\n    L ${s.x} ${s.y}\n  `,r}function fe(e,t,r,s,o=6,i=0,a,n,d=18){if(!e)return G;const l=Math.abs(i),c=Math.max(100,.9*t.length),h=l<50?2:l<300?4:l<1e3?6:l<3e3?8:12,p=Math.max(2,Math.floor(c/80)),u=Math.min(h,p),g=l<50?6:l<300?5:l<1e3?4:l<3e3?3.2:2.4,y=Array.from({length:u},(e,t)=>-t*(g/u));return W`
+ */
+const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce,t,r)=>{const{kind:o,metadata:s}=r;let i=globalThis.litPropertyMetadata.get(s);if(void 0===i&&globalThis.litPropertyMetadata.set(s,i=new Map),"setter"===o&&((e=Object.create(e)).wrapped=!0),i.set(r.name,e),"accessor"===o){const{name:o}=r;return{set(r){const s=t.get.call(this);t.set.call(this,r),this.requestUpdate(o,s,e,!0,r)},init(t){return void 0!==t&&this.C(o,void 0,e,t),t}}}if("setter"===o){const{name:o}=r;return function(r){const s=this[o];t.call(this,r),this.requestUpdate(o,s,e,!0,r)}}throw Error("Unsupported decorator location: "+o)};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function pe(e){return(t,r)=>"object"==typeof r?he(e,t,r):((e,t,r)=>{const o=t.hasOwnProperty(r);return t.constructor.createProperty(r,e),o?Object.getOwnPropertyDescriptor(t,r):void 0})(e,t,r)}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function ue(e){return pe({...e,state:!0,attribute:!1})}const ge={sceneWidth:1920,sceneHeight:1080,panels:{left:{x:40,y:40},right:{x:1620,y:40}},nodes:{solar:{id:"solar",label:"SOL",x:820,y:140,width:300,height:140},house:{id:"house",label:"HUSET",x:930,y:590,width:220,height:125},battery:{id:"battery",label:"BATTERI",x:1240,y:420,width:180,height:130},grid:{id:"grid",label:"ELNÄT",x:450,y:420,width:180,height:130},spa:{id:"spa",label:"SPA",x:540,y:810,width:170,height:100},heatpump:{id:"heatpump",label:"VP",x:760,y:810,width:140,height:70},appliance:{id:"appliance",label:"APP",x:980,y:810,width:140,height:70},car:{id:"car",label:"BIL",x:1200,y:810,width:170,height:100}}},ye={sceneWidth:430,sceneHeight:1180,panels:{left:{x:0,y:0},right:{x:0,y:0}},nodes:{solar:{id:"solar",label:"SOL",x:150,y:40,width:160,height:135},grid:{id:"grid",label:"ELNÄT",x:25,y:240,width:110,height:110},battery:{id:"battery",label:"BATTERI",x:285,y:240,width:110,height:110},house:{id:"house",label:"HUSET",x:150,y:410,width:130,height:130},spa:{id:"spa",label:"SPA",x:15,y:490,width:80,height:80},heatpump:{id:"heatpump",label:"VP",x:125,y:585,width:80,height:80},appliance:{id:"appliance",label:"APP",x:210,y:585,width:80,height:80},car:{id:"car",label:"BIL",x:325,y:490,width:80,height:80}}},xe={sceneWidth:1400,sceneHeight:1050,panels:{left:{x:40,y:20},right:{x:1100,y:20}},nodes:{solar:{id:"solar",label:"SOL",x:640,y:60,width:220,height:100},house:{id:"house",label:"HUSET",x:560,y:360,width:280,height:170},grid:{id:"grid",label:"ELNÄT",x:80,y:330,width:220,height:170},battery:{id:"battery",label:"BATTERI",x:1100,y:320,width:240,height:170},spa:{id:"spa",label:"SPA",x:180,y:760,width:180,height:120},heatpump:{id:"heatpump",label:"VP",x:460,y:760,width:180,height:120},appliance:{id:"appliance",label:"APP",x:740,y:760,width:180,height:120},car:{id:"car",label:"BIL",x:1020,y:760,width:220,height:140}}};function be(e,t){return{id:e,power:t,active:t>1,intensity:Math.min(1,t/5e3)}}function ve(e,t=40){if(e.length<2)return"";let r=`M ${e[0].x} ${e[0].y}`;for(let o=1;o<e.length-1;o++){const s=e[o-1],i=e[o],a=e[o+1],n=i.x-s.x,d=i.y-s.y,l=a.x-i.x,c=a.y-i.y,h=i.x-Math.sign(n)*t,p=i.y-Math.sign(d)*t,u=i.x+Math.sign(l)*t,g=i.y+Math.sign(c)*t;r+=`\n      L ${h} ${p}\n      Q ${i.x} ${i.y}\n        ${u} ${g}\n    `}const o=e[e.length-1];return r+=`\n    L ${o.x} ${o.y}\n  `,r}function fe(e,t,r,o,s=6,i=0,a,n,d=18){if(!e)return G;const l=Math.abs(i),c=Math.max(100,.9*t.length),h=l<50?2:l<300?4:l<1e3?6:l<3e3?8:12,p=Math.max(2,Math.floor(c/80)),u=Math.min(h,p),g=l<50?6:l<300?5:l<1e3?4:l<3e3?3.2:2.4,y=Array.from({length:u},(e,t)=>-t*(g/u));return W`
     <g class="flow-group">
 
       <path
         d="${t}"
         stroke="${r}"
-        stroke-width="${2.2*o}"
+        stroke-width="${2.2*s}"
         fill="none"
         stroke-linecap="round"
         opacity="0.03"
@@ -51,7 +51,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
       <path
         d="${t}"
         stroke="${r}"
-        stroke-width="${1.3*o}"
+        stroke-width="${1.3*s}"
         fill="none"
         stroke-linecap="round"
         opacity="0.05"
@@ -60,7 +60,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
       <path
         d="${t}"
         stroke="${r}"
-        stroke-width="${.25*o}"
+        stroke-width="${.25*s}"
         fill="none"
         stroke-linecap="round"
         opacity="0.10"
@@ -70,7 +70,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
       <path
         d="${t}"
         stroke="#FFFFFF"
-        stroke-width="${.14*o}"
+        stroke-width="${.14*s}"
         fill="none"
         stroke-linecap="round"
         opacity="0.32"
@@ -79,7 +79,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
       ${y.map(e=>W`
 
         <circle
-          r="${.6*o}"
+          r="${.6*s}"
           fill="${r}"
           opacity="0.20"
         >
@@ -92,7 +92,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
         </circle>
 
         <circle
-          r="${.16*o}"
+          r="${.16*s}"
           fill="#FFFFFF"
           opacity="1"
         >
@@ -126,7 +126,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
           `:G}
 
     </g>
-  `;var x}function _e(e,t,r,s){return`\n    M ${e} ${t}\n    L ${r} ${s}\n  `}function me(e,t){const r=function(e){const t=e.nodes.house,r=e.nodes.battery,s=e.nodes.grid,o=e.nodes.solar,i=e.nodes.spa,a=e.nodes.heatpump,n=e.nodes.appliance,d=e.nodes.car,l=t.x,c=t.x+t.width,h=t.y+t.height/2,p=r.x,u=r.x+r.width,g=r.y+r.height/2,y=s.x,x=s.x+s.width,b=s.y+s.height/2;return{houseAnchorLeft:{x:l+12,y:h},houseAnchorRight:{x:c-12,y:h},houseAnchorTop:{x:t.x+t.width/2,y:t.y},houseAnchorBottom:{x:t.x+t.width/2,y:t.y+t.height},batteryAnchorLeft:{x:p+12,y:g},batteryAnchorRight:{x:u-12,y:g},batteryAnchorTop:{x:r.x+r.width/2,y:r.y},batteryAnchorBottom:{x:r.x+r.width/2,y:r.y+r.height},gridAnchorLeft:{x:y+12,y:b},gridAnchorRight:{x:x-12,y:b},gridAnchorTop:{x:s.x+s.width/2,y:s.y},gridAnchorBottom:{x:s.x+s.width/2,y:s.y+s.height},solarAnchorLeft:{x:o.x,y:o.y+o.height/2},solarAnchorRight:{x:o.x+o.width,y:o.y+o.height/2},solarAnchorBottom:{x:o.x+o.width/2,y:o.y+o.height},houseCenter:{x:t.x+t.width/2,y:t.y+t.height/2},batteryCenter:{x:r.x+r.width/2,y:r.y+r.height/2},gridCenter:{x:s.x+s.width/2,y:s.y+s.height/2},solarCenter:{x:o.x+o.width/2,y:o.y+o.height/2},spaAnchorTop:{x:i.x+i.width/2,y:i.y},heatpumpAnchorTop:{x:a.x+a.width/2,y:a.y},applianceAnchorTop:{x:n.x+n.width/2,y:n.y},carAnchorTop:{x:d.x+d.width/2,y:d.y}}}(e),s=function(e){return{x:e.houseAnchorTop.x,y:e.houseAnchorTop.y-70}}(r),o={...r,desktopHub:s},i=function(e){return{active:e["solar-house"]?.active||e["grid-house"]?.active||e["battery-house"]?.active,power:(e["solar-house"]?.power??0)+(e["grid-house"]?.power??0)+(e["battery-house"]?.power??0),colors:e["solar-house"]?.active?["#FFD54A","#FFF4B0"]:e["grid-house"]?.active?["#FF7A7A","#FFDCDC"]:["#63FFA2","#D8FFEC"]}}(t),a=e.sceneWidth<=500;return W`
+  `;var x}function _e(e,t,r,o){return`\n    M ${e} ${t}\n    L ${r} ${o}\n  `}function me(e,t){const r=function(e){const t=e.nodes.house,r=e.nodes.battery,o=e.nodes.grid,s=e.nodes.solar,i=e.nodes.spa,a=e.nodes.heatpump,n=e.nodes.appliance,d=e.nodes.car,l=t.x,c=t.x+t.width,h=t.y+t.height/2,p=r.x,u=r.x+r.width,g=r.y+r.height/2,y=o.x,x=o.x+o.width,b=o.y+o.height/2;return{houseAnchorLeft:{x:l+12,y:h},houseAnchorRight:{x:c-12,y:h},houseAnchorTop:{x:t.x+t.width/2,y:t.y},houseAnchorBottom:{x:t.x+t.width/2,y:t.y+t.height},batteryAnchorLeft:{x:p+12,y:g},batteryAnchorRight:{x:u-12,y:g},batteryAnchorTop:{x:r.x+r.width/2,y:r.y},batteryAnchorBottom:{x:r.x+r.width/2,y:r.y+r.height},gridAnchorLeft:{x:y+12,y:b},gridAnchorRight:{x:x-12,y:b},gridAnchorTop:{x:o.x+o.width/2,y:o.y},gridAnchorBottom:{x:o.x+o.width/2,y:o.y+o.height},solarAnchorLeft:{x:s.x,y:s.y+s.height/2},solarAnchorRight:{x:s.x+s.width,y:s.y+s.height/2},solarAnchorBottom:{x:s.x+s.width/2,y:s.y+s.height},houseCenter:{x:t.x+t.width/2,y:t.y+t.height/2},batteryCenter:{x:r.x+r.width/2,y:r.y+r.height/2},gridCenter:{x:o.x+o.width/2,y:o.y+o.height/2},solarCenter:{x:s.x+s.width/2,y:s.y+s.height/2},spaAnchorTop:{x:i.x+i.width/2,y:i.y},heatpumpAnchorTop:{x:a.x+a.width/2,y:a.y},applianceAnchorTop:{x:n.x+n.width/2,y:n.y},carAnchorTop:{x:d.x+d.width/2,y:d.y}}}(e),o=function(e){return{x:e.houseAnchorTop.x,y:e.houseAnchorTop.y-70}}(r),s={...r,desktopHub:o},i=function(e){return{active:e["solar-house"]?.active||e["grid-house"]?.active||e["battery-house"]?.active,power:(e["solar-house"]?.power??0)+(e["grid-house"]?.power??0)+(e["battery-house"]?.power??0),colors:e["solar-house"]?.active?["#FFD54A","#FFF4B0"]:e["grid-house"]?.active?["#FF7A7A","#FFDCDC"]:["#63FFA2","#D8FFEC"]}}(t),a=e.sceneWidth<=500;return W`
 
   <svg
     class="flow-svg"
@@ -134,7 +134,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
     xmlns="http://www.w3.org/2000/svg"
   >
 
-    ${a?function(e,t){const{solarAnchorBottom:r,solarAnchorLeft:s,solarAnchorRight:o,gridAnchorLeft:i,gridAnchorRight:a,batteryAnchorLeft:n,batteryAnchorRight:d,houseAnchorTop:l,houseAnchorLeft:c,houseAnchorRight:h,houseAnchorBottom:p,gridCenter:u,batteryCenter:g,houseCenter:y,spaAnchorTop:x,heatpumpAnchorTop:b,applianceAnchorTop:v,carAnchorTop:f}=t,_={x:y.x,y:g.y+.4*(y.y-g.y)};return W`
+    ${a?function(e,t){const{solarAnchorBottom:r,solarAnchorLeft:o,solarAnchorRight:s,gridAnchorLeft:i,gridAnchorRight:a,batteryAnchorLeft:n,batteryAnchorRight:d,houseAnchorTop:l,houseAnchorLeft:c,houseAnchorRight:h,houseAnchorBottom:p,gridCenter:u,batteryCenter:g,houseCenter:y,spaAnchorTop:x,heatpumpAnchorTop:b,applianceAnchorTop:v,carAnchorTop:f}=t,_={x:y.x,y:g.y+.4*(y.y-g.y)};return W`
 
     <!-- SOLAR -> HOUSE -->
 
@@ -156,11 +156,11 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
 
     <!-- SOLAR -> BATTERY -->
 
-    ${fe(e["solar-battery"]?.active,_e(r.x,r.y,n.x,n.y),"#7ED7FF",0,6,e["solar-battery"]?.power??0,(o.x+n.x)/2-20,(o.y+n.y)/2,14)}
+    ${fe(e["solar-battery"]?.active,_e(r.x,r.y,n.x,n.y),"#7ED7FF",0,6,e["solar-battery"]?.power??0,(s.x+n.x)/2-20,(s.y+n.y)/2,14)}
 
     <!-- SOLAR -> EXPORT -->
 
-    ${fe(e["solar-export"]?.active,_e(r.x,r.y,a.x,a.y),"#FFB84A",0,6,e["solar-export"]?.power??0,(s.x+a.x)/2+20,(s.y+a.y)/2,14)}
+    ${fe(e["solar-export"]?.active,_e(r.x,r.y,a.x,a.y),"#FFB84A",0,6,e["solar-export"]?.power??0,(o.x+a.x)/2+20,(o.y+a.y)/2,14)}
 
     <!-- BATTERY -> GRID -->
 
@@ -188,7 +188,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
 
   `}(t,r):W`
 
-          ${function(e,t){const{solarAnchorLeft:r,solarAnchorRight:s,solarAnchorBottom:o,gridAnchorTop:i,batteryAnchorTop:a,houseAnchorTop:n,desktopHub:d}=t;return W`
+          ${function(e,t){const{solarAnchorLeft:r,solarAnchorRight:o,solarAnchorBottom:s,gridAnchorTop:i,batteryAnchorTop:a,houseAnchorTop:n,desktopHub:d}=t;return W`
 
     <!-- SOLAR -> EXPORT -->
 
@@ -196,15 +196,15 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
 
     <!-- SOLAR -> BATTERY -->
 
-    ${fe(e["solar-battery"]?.active,ve([s,{x:a.x,y:s.y},a],40),"#7ED7FF",0,10,e["solar-battery"]?.power??0,(s.x+a.x)/2,s.y-20)}
+    ${fe(e["solar-battery"]?.active,ve([o,{x:a.x,y:o.y},a],40),"#7ED7FF",0,10,e["solar-battery"]?.power??0,(o.x+a.x)/2,o.y-20)}
 
     <!-- SOLAR -> HOUSE -->
 
-    ${fe(e["solar-house"]?.active,_e(o.x,o.y,d.x,d.y),"#FFD54A",0,11,e["solar-house"]?.power??0,d.x+30,d.y-20)}
+    ${fe(e["solar-house"]?.active,_e(s.x,s.y,d.x,d.y),"#FFD54A",0,11,e["solar-house"]?.power??0,d.x+30,d.y-20)}
 
-  `}(t,o)}
+  `}(t,s)}
 
-          ${function(e,t){const{gridAnchorRight:r,gridAnchorBottom:s,houseAnchorTop:o,batteryAnchorTop:i,batteryAnchorLeft:a,desktopHub:n}=t;return W`
+          ${function(e,t){const{gridAnchorRight:r,gridAnchorBottom:o,houseAnchorTop:s,batteryAnchorTop:i,batteryAnchorLeft:a,desktopHub:n}=t;return W`
 
     <!-- GRID -> HOUSE -->
 
@@ -214,9 +214,9 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
 
     ${fe(e["grid-battery"]?.active,_e(r.x,r.y,a.x,a.y),"#63FFA2",0,8,e["grid-battery"]?.power??0,r.x+80,r.y-20)}
 
-  `}(t,o)}
+  `}(t,s)}
 
-          ${function(e,t){const{batteryAnchorLeft:r,batteryAnchorBottom:s,houseAnchorTop:o,gridAnchorTop:i,gridAnchorRight:a,desktopHub:n}=t;return W`
+          ${function(e,t){const{batteryAnchorLeft:r,batteryAnchorBottom:o,houseAnchorTop:s,gridAnchorTop:i,gridAnchorRight:a,desktopHub:n}=t;return W`
 
     <!-- BATTERY -> HOUSE -->
 
@@ -226,27 +226,27 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
 
     ${fe(e["battery-grid"]?.active,_e(r.x,r.y,a.x,a.y),"#63FFA2",0,8,e["battery-grid"]?.power??0,r.x-80,r.y-20)}
 
-  `}(t,o)}
+  `}(t,s)}
 
-          ${fe(i.active,_e(s.x,s.y,r.houseAnchorTop.x,r.houseAnchorTop.y),i.colors[0],i.colors[1],8,i.power)}
+          ${fe(i.active,_e(o.x,o.y,r.houseAnchorTop.x,r.houseAnchorTop.y),i.colors[0],i.colors[1],8,i.power)}
 
-          ${function(e,t){const{houseAnchorBottom:r,houseCenter:s,spaAnchorTop:o,heatpumpAnchorTop:i,applianceAnchorTop:a,carAnchorTop:n}=t;return W`
+          ${function(e,t){const{houseAnchorBottom:r,houseCenter:o,spaAnchorTop:s,heatpumpAnchorTop:i,applianceAnchorTop:a,carAnchorTop:n}=t;return W`
 
     <!-- HOUSE -> SPA -->
 
-    ${fe(e["house-spa"]?.active,_e(r.x,r.y,o.x,o.y),"#59D8FF",0,6,e["house-spa"]?.power??0,(s.x+o.x)/2,(s.y+o.y)/2,16)}
+    ${fe(e["house-spa"]?.active,_e(r.x,r.y,s.x,s.y),"#59D8FF",0,6,e["house-spa"]?.power??0,(o.x+s.x)/2,(o.y+s.y)/2,16)}
 
     <!-- HOUSE -> HEATPUMP -->
 
-    ${fe(e["house-heatpump"]?.active,_e(r.x,r.y,i.x,i.y),"#7ACBFF",0,6,e["house-heatpump"]?.power??0,(s.x+i.x)/2,(s.y+i.y)/2,16)}
+    ${fe(e["house-heatpump"]?.active,_e(r.x,r.y,i.x,i.y),"#7ACBFF",0,6,e["house-heatpump"]?.power??0,(o.x+i.x)/2,(o.y+i.y)/2,16)}
 
     <!-- HOUSE -> APPLIANCE -->
 
-    ${fe(e["house-appliance"]?.active,_e(r.x,r.y,a.x,a.y),"#FFD580",0,6,e["house-appliance"]?.power??0,(s.x+a.x)/2,(s.y+a.y)/2,16)}
+    ${fe(e["house-appliance"]?.active,_e(r.x,r.y,a.x,a.y),"#FFD580",0,6,e["house-appliance"]?.power??0,(o.x+a.x)/2,(o.y+a.y)/2,16)}
 
     <!-- HOUSE -> CAR -->
 
-    ${fe(e["house-car"]?.active,_e(r.x,r.y,n.x,n.y),"#C084FF",0,6,e["house-car"]?.power??0,(s.x+n.x)/2,(s.y+n.y)/2,16)}
+    ${fe(e["house-car"]?.active,_e(r.x,r.y,n.x,n.y),"#C084FF",0,6,e["house-car"]?.power??0,(o.x+n.x)/2,(o.y+n.y)/2,16)}
 
   `}(t,r)}
         `}
@@ -303,10 +303,47 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
     </svg>
   `,grid:j`
     <svg viewBox="0 0 24 24" fill="none">
+
       <path
-        d="M12 2L18 8H14V22H10V8H6L12 2Z"
+        d="M12 2L8.5 7H15.5L12 2Z"
         fill="currentColor"
       />
+
+      <path
+        d="M12 7V22"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M6 8H18"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M7.5 8L10.5 13"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M16.5 8L13.5 13"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M8.5 13H15.5"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
     </svg>
   `,car:j`
     <svg viewBox="0 0 24 24" fill="none">
@@ -350,7 +387,85 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
         stroke-linecap="round"
       />
     </svg>
-  `};function $e(e,t){const r=e?.states?.[t]?.state,s=Number(r);return Number.isFinite(s)?s:0}function Ae(e){return Math.abs(e)<1e3?`${Math.round(e)} W`:`${(e/1e3).toFixed(2)} kW`}function Ee(e){return`${Math.round(e)}%`}function ke(e,t){const r=e?.states?.[t]?.state,s=Number(r);return Number.isFinite(s)?s:0}function Se(e){if(!e)return"--:--";return new Date(e).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}function Te(e,t){const r=ke(t,"sensor.solar_battery_economy_energy_system_power_solar_house")+ke(t,"sensor.solar_battery_economy_energy_system_power_solar_battery")+ke(t,"sensor.solar_battery_economy_energy_system_power_solar_export"),s=t?.states?.["sun.sun"]?.attributes?.next_rising,o=t?.states?.["sun.sun"]?.attributes?.next_setting,i="above_horizon"===t?.states?.["sun.sun"]?.state,a=e.nodes.solar,n=a.width;return a.height,j`
+  `};const $e={house:"icon",battery:"object",grid:"icon",solar:"icon",car:"icon",spa:"icon",heatpump:"icon",appliance:"icon"};function Ae(e){if("object"===($e[e]??"icon"))switch(e){case"house":return j`
+    <div>
+      House Object Placeholder
+    </div>
+  `;case"battery":return j`
+
+    <svg
+      viewBox="0 0 100 140"
+      width="100%"
+      height="100%"
+    >
+
+      <!-- Batteritopp -->
+
+      <rect
+        x="40"
+        y="4"
+        width="20"
+        height="8"
+        rx="3"
+        fill="currentColor"
+        opacity="0.9"
+      />
+
+      <!-- Ytterhölje -->
+
+      <rect
+        x="18"
+        y="12"
+        width="64"
+        height="116"
+        rx="10"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+      />
+
+      <!-- Övre sektion -->
+
+      <rect
+        x="26"
+        y="22"
+        width="48"
+        height="34"
+        rx="4"
+        fill="currentColor"
+        opacity="0.12"
+      />
+
+      <!-- Mittsektion -->
+
+      <rect
+        x="26"
+        y="62"
+        width="48"
+        height="24"
+        rx="4"
+        fill="currentColor"
+        opacity="0.18"
+      />
+
+      <!-- Nedre sektion -->
+
+      <rect
+        x="26"
+        y="92"
+        width="48"
+        height="24"
+        rx="4"
+        fill="currentColor"
+        opacity="0.12"
+      />
+
+    </svg>
+  `;case"grid":return j`
+    <div>
+      Grid Object Placeholder
+    </div>
+  `}switch(e){case"house":default:return we.house;case"battery":return we.battery;case"grid":return we.grid;case"solar":return we.solar;case"car":return we.car;case"spa":return we.spa}}function ke(e,t){const r=e?.states?.[t]?.state,o=Number(r);return Number.isFinite(o)?o:0}function Ee(e){return Math.abs(e)<1e3?`${Math.round(e)} W`:`${(e/1e3).toFixed(2)} kW`}function Se(e){return`${Math.round(e)}%`}function Ce(e,t){const r=e?.states?.[t]?.state,o=Number(r);return Number.isFinite(o)?o:0}function Te(e){if(!e)return"--:--";return new Date(e).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}function Fe(e,t){const r=Ce(t,"sensor.solar_battery_economy_energy_system_power_solar_house")+Ce(t,"sensor.solar_battery_economy_energy_system_power_solar_battery")+Ce(t,"sensor.solar_battery_economy_energy_system_power_solar_export"),o=t?.states?.["sun.sun"]?.attributes?.next_rising,s=t?.states?.["sun.sun"]?.attributes?.next_setting,i="above_horizon"===t?.states?.["sun.sun"]?.state,a=e.nodes.solar,n=a.width;return a.height,j`
 
     <div
       class="solar-hub"
@@ -394,7 +509,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
             </span>
 
             <span>
-              ${Se(s)}
+              ${Te(o)}
             </span>
 
           </div>
@@ -406,7 +521,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
             </span>
 
             <span>
-              ${Se(o)}
+              ${Te(s)}
             </span>
 
           </div>
@@ -417,7 +532,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
 
     </div>
 
-  `;var d}const Ce=((e,...t)=>{const r=1===e.length?e[0]:t.reduce((t,r,s)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if("number"==typeof e)return e;throw Error("Value passed to 'css' function must be a 'css' function result: "+e+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(r)+e[s+1],e[0]);return new i(r,e,s)})`
+  `;var d}const Me=((e,...t)=>{const r=1===e.length?e[0]:t.reduce((t,r,o)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if("number"==typeof e)return e;throw Error("Value passed to 'css' function must be a 'css' function result: "+e+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(r)+e[o+1],e[0]);return new i(r,e,o)})`
 :host {
     display: block;
 
@@ -674,34 +789,38 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
 .energy-node {
 
     opacity: 0.96;
+
     isolation: isolate;
+
     position: absolute;
 
-    border-radius: 34px;
+    border-radius: 999px;
 
-    overflow: hidden;
+    overflow: visible;
 
-    backdrop-filter: blur(30px);
+    backdrop-filter:
+    blur(36px);
 
     background:
     linear-gradient(
         180deg,
-        rgba(255,255,255,0.10),
-        rgba(255,255,255,0.04)
+        rgba(255,255,255,0.07),
+        rgba(255,255,255,0.025)
     );
 
     border:
-    1px solid rgba(255,255,255,0.10);
+    1px solid rgba(255,255,255,0.05);
 
     box-shadow:
-    0 20px 80px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+    0 12px 40px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.03);
 
     z-index: 50;
 
     transition:
     transform 0.25s ease,
-    box-shadow 0.25s ease;
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .energy-node.house {
@@ -771,31 +890,89 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
     0 20px 60px rgba(0,0,0,0.30);
 }
 
+.energy-node.secondary {
+
+    opacity: 0.84;
+
+    backdrop-filter:
+    blur(22px);
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,0.035),
+        rgba(255,255,255,0.015)
+    );
+
+    border:
+    1px solid rgba(255,255,255,0.035);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.18);
+
+    transform:
+    scale(0.96);
+}
+
+.energy-node.secondary .node-title {
+
+    font-size: 15px;
+
+    opacity: 0.88;
+}
+
+.energy-node.secondary .node-value {
+
+    font-size: 18px;
+
+    margin-left: 58px;
+
+    opacity: 0.92;
+}
+
+.energy-node.secondary .node-status {
+
+    font-size: 9px;
+
+    opacity: 0.70;
+}
+
+.energy-node.secondary .node-icon {
+
+    width: 42px;
+    height: 42px;
+
+    opacity: 0.75;
+
+    filter:
+    drop-shadow(0 0 6px currentColor);
+}
+
 .energy-node:hover {
 
     transform:
-    translateY(-2px)
-    scale(1.015);
+    translateY(-1px)
+    scale(1.01);
 
     box-shadow:
-    0 30px 90px rgba(0,0,0,0.45),
-    0 0 40px rgba(255,255,255,0.06);
+    0 16px 50px rgba(0,0,0,0.30),
+    0 0 18px rgba(255,255,255,0.04);
 }
 
 .node-glow {
 
     position: absolute;
 
-    inset: -20%;
+    inset: -35%;
 
     background:
     radial-gradient(
         circle at center,
-        rgba(255,255,255,0.12),
-        transparent 70%
+        rgba(255,255,255,0.08),
+        transparent 72%
     );
 
-    opacity: 0.5;
+    opacity: 0.35;
 
     z-index: 0;
 }
@@ -809,11 +986,11 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
     background:
     linear-gradient(
         135deg,
-        rgba(255,255,255,0.10),
-        transparent 40%
+        rgba(255,255,255,0.06),
+        transparent 35%
     );
 
-    opacity: 0.35;
+    opacity: 0.22;
 
     pointer-events: none;
 
@@ -878,14 +1055,31 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
     flex: 1;
 }
 
-.node-icon {
+.node-visual {
 
-    width: 54px;
-    height: 54px;
+    width: 72px;
+
+    height: 72px;
 
     display: flex;
 
     align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.node-icon {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
     justify-content: center;
 
     color: rgba(255,255,255,0.96);
@@ -1679,10 +1873,10 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
     font-size: 10px;
     }
 }
-`;let Fe=class extends de{constructor(){super(...arguments),this.activeLayout=ge,this.cardWidth=1920,this.sceneScale=1}static{this.styles=Ce}connectedCallback(){super.connectedCallback(),this.resizeObserver=new ResizeObserver(e=>{const t=e[0].contentRect.width;var r;console.log("CARD WIDTH:",t),console.log("ACTIVE LAYOUT:",t<=900?"mobile":t<=1400?"tablet":"desktop"),this.cardWidth=t,this.sceneScale=1,this.activeLayout=(r=t)<=900?ye:r<=1400?xe:ge})}disconnectedCallback(){this.resizeObserver?.disconnect(),super.disconnectedCallback()}firstUpdated(){this.resizeObserver?.observe(this.renderRoot.querySelector(".card"))}setConfig(e){this.config=e}render(){const e=function(e){const t=t=>{const r=e?.states?.[t]?.state,s=Number(r);return isNaN(s)?0:s};return{"solar-house":be("solar-house",t("sensor.solar_battery_economy_energy_system_power_solar_house")),"solar-battery":be("solar-battery",t("sensor.solar_battery_economy_energy_system_power_solar_battery")),"solar-export":be("solar-export",t("sensor.solar_battery_economy_energy_system_power_solar_export")),"battery-house":be("battery-house",t("sensor.solar_battery_economy_energy_system_power_battery_house")),"battery-grid":be("battery-grid",t("sensor.solar_battery_economy_energy_system_power_battery_grid")),"grid-house":be("grid-house",t("sensor.solar_battery_economy_energy_system_power_grid_house")),"grid-battery":be("grid-battery",t("sensor.solar_battery_economy_energy_system_power_grid_battery")),"house-spa":be("house-spa",t("sensor.plugg_spabad_power")),"house-car":be("house-car",t("sensor.charger_lindv_26_2006011626m_1_power")),"house-heatpump":be("house-heatpump",t("sensor.thermia_power_estimator_total_effekt")),"house-appliance":be("house-appliance",0)}}(this.hass),t=this.activeLayout,r=function(e,t){const r=e?.layout_mode;return"hero"===r||"standard"===r||"compact"===r?r:t<=900?"compact":t<=1600?"standard":"hero"}(this.config,this.cardWidth),s=function(e){const t=e?.states?.["sun.sun"];if(!t)return"day";const r=Number(t.attributes?.elevation??0);return"above_horizon"===t.state?r<8?"morning":r<20?"sunset":"day":"night"}(this.hass),o=function(e){const t=e?.states?.["sun.sun"],r=Number(t?.attributes?.elevation??0),s=Number(t?.attributes?.azimuth??180);return{left:Math.max(8,Math.min(92,s/360*100)),top:Math.max(40,280-6*r)}}(this.hass),i=function(e,t){const r=e?.states?.["weather.smhi_weather"],s=Number(r?.attributes?.cloud_coverage??0)>40;switch(t){case"night":return s?"/local/dev/solar-battery-economy-flow-card/backgrounds/night/villa_night_cloudy.webp":"/local/dev/solar-battery-economy-flow-card/backgrounds/night/villa_night_clear.webp";case"sunset":return"/local/dev/solar-battery-economy-flow-card/backgrounds/evening/villa_evening.webp";default:return s?"/local/dev/solar-battery-economy-flow-card/backgrounds/day/villa_day_cloudy.webp":"/local/dev/solar-battery-economy-flow-card/backgrounds/day/villa_day_clear.webp"}}(this.hass,s),a=function(e){const t=Number(e.states["sensor.solar_battery_economy_energy_system_energy_solar_house"]?.state??0)+Number(e.states["sensor.solar_battery_economy_energy_system_energy_solar_battery"]?.state??0)+Number(e.states["sensor.solar_battery_economy_energy_system_energy_solar_export"]?.state??0),r=Number(e.states["sensor.solar_battery_economy_financial_31_battery_utilization"]?.state??0),s=Number(e.states["sensor.solar_battery_economy_financial_03_savings_today"]?.state??0),o=Number(e.states["sensor.solar_battery_economy_financial_33_co2_saved"]?.state??0),i=Number(e.states["sensor.solar_battery_economy_financial_32_solar_self_consumption_rate"]?.state??0);return{solarEnergy:t,batteryToHouse:Number(e.states["sensor.solar_battery_economy_energy_system_energy_battery_house"]?.state??0),solarExportEnergy:Number(e.states["sensor.solar_battery_economy_energy_system_energy_solar_export"]?.state??0),gridToHouseEnergy:Number(e.states["sensor.solar_battery_economy_energy_system_energy_grid_house"]?.state??0),systemEfficiency:r,savingsToday:s,totalSavings:Number(e.states["sensor.solar_battery_economy_financial_01_total_savings"]?.state??0),gridIndependence:Number(e.states["sensor.solar_battery_economy_financial_30_grid_independence"]?.state??0),co2Saved:o,selfSufficiency:i}}(this.hass),n={solarEnergy:a.solarEnergy,batteryToHouse:a.batteryToHouse,solarExportEnergy:a.solarExportEnergy,gridToHouseEnergy:a.gridToHouseEnergy,systemEfficiency:a.systemEfficiency,savingsToday:a.savingsToday,totalSavings:a.totalSavings,gridIndependence:a.gridIndependence,co2Saved:a.co2Saved,selfSufficiency:a.selfSufficiency};return j`
+`;let Pe=class extends de{constructor(){super(...arguments),this.activeLayout=ge,this.cardWidth=1920,this.sceneScale=1}static{this.styles=Me}connectedCallback(){super.connectedCallback(),this.resizeObserver=new ResizeObserver(e=>{const t=e[0].contentRect.width;var r;console.log("CARD WIDTH:",t),console.log("ACTIVE LAYOUT:",t<=900?"mobile":t<=1400?"tablet":"desktop"),this.cardWidth=t,this.sceneScale=1,this.activeLayout=(r=t)<=900?ye:r<=1400?xe:ge})}disconnectedCallback(){this.resizeObserver?.disconnect(),super.disconnectedCallback()}firstUpdated(){this.resizeObserver?.observe(this.renderRoot.querySelector(".card"))}setConfig(e){this.config=e}render(){const e=function(e){const t=t=>{const r=e?.states?.[t]?.state,o=Number(r);return isNaN(o)?0:o};return{"solar-house":be("solar-house",t("sensor.solar_battery_economy_energy_system_power_solar_house")),"solar-battery":be("solar-battery",t("sensor.solar_battery_economy_energy_system_power_solar_battery")),"solar-export":be("solar-export",t("sensor.solar_battery_economy_energy_system_power_solar_export")),"battery-house":be("battery-house",t("sensor.solar_battery_economy_energy_system_power_battery_house")),"battery-grid":be("battery-grid",t("sensor.solar_battery_economy_energy_system_power_battery_grid")),"grid-house":be("grid-house",t("sensor.solar_battery_economy_energy_system_power_grid_house")),"grid-battery":be("grid-battery",t("sensor.solar_battery_economy_energy_system_power_grid_battery")),"house-spa":be("house-spa",t("sensor.plugg_spabad_power")),"house-car":be("house-car",t("sensor.charger_lindv_26_2006011626m_1_power")),"house-heatpump":be("house-heatpump",t("sensor.thermia_power_estimator_total_effekt")),"house-appliance":be("house-appliance",0)}}(this.hass),t=this.activeLayout,r=function(e,t){const r=e?.layout_mode;return"hero"===r||"standard"===r||"compact"===r?r:t<=900?"compact":t<=1600?"standard":"hero"}(this.config,this.cardWidth),o=function(e){const t=e?.states?.["sun.sun"];if(!t)return"day";const r=Number(t.attributes?.elevation??0);return"above_horizon"===t.state?r<8?"morning":r<20?"sunset":"day":"night"}(this.hass),s=function(e){const t=e?.states?.["sun.sun"],r=Number(t?.attributes?.elevation??0),o=Number(t?.attributes?.azimuth??180);return{left:Math.max(8,Math.min(92,o/360*100)),top:Math.max(40,280-6*r)}}(this.hass),i=function(e,t){const r=e?.states?.["weather.smhi_weather"],o=Number(r?.attributes?.cloud_coverage??0)>40;switch(t){case"night":return o?"/local/dev/solar-battery-economy-flow-card/backgrounds/night/villa_night_cloudy.webp":"/local/dev/solar-battery-economy-flow-card/backgrounds/night/villa_night_clear.webp";case"sunset":return"/local/dev/solar-battery-economy-flow-card/backgrounds/evening/villa_evening.webp";default:return o?"/local/dev/solar-battery-economy-flow-card/backgrounds/day/villa_day_cloudy.webp":"/local/dev/solar-battery-economy-flow-card/backgrounds/day/villa_day_clear.webp"}}(this.hass,o),a=function(e){const t=Number(e.states["sensor.solar_battery_economy_energy_system_energy_solar_house"]?.state??0)+Number(e.states["sensor.solar_battery_economy_energy_system_energy_solar_battery"]?.state??0)+Number(e.states["sensor.solar_battery_economy_energy_system_energy_solar_export"]?.state??0),r=Number(e.states["sensor.solar_battery_economy_financial_31_battery_utilization"]?.state??0),o=Number(e.states["sensor.solar_battery_economy_financial_03_savings_today"]?.state??0),s=Number(e.states["sensor.solar_battery_economy_financial_33_co2_saved"]?.state??0),i=Number(e.states["sensor.solar_battery_economy_financial_32_solar_self_consumption_rate"]?.state??0);return{solarEnergy:t,batteryToHouse:Number(e.states["sensor.solar_battery_economy_energy_system_energy_battery_house"]?.state??0),solarExportEnergy:Number(e.states["sensor.solar_battery_economy_energy_system_energy_solar_export"]?.state??0),gridToHouseEnergy:Number(e.states["sensor.solar_battery_economy_energy_system_energy_grid_house"]?.state??0),systemEfficiency:r,savingsToday:o,totalSavings:Number(e.states["sensor.solar_battery_economy_financial_01_total_savings"]?.state??0),gridIndependence:Number(e.states["sensor.solar_battery_economy_financial_30_grid_independence"]?.state??0),co2Saved:s,selfSufficiency:i}}(this.hass),n={solarEnergy:a.solarEnergy,batteryToHouse:a.batteryToHouse,solarExportEnergy:a.solarExportEnergy,gridToHouseEnergy:a.gridToHouseEnergy,systemEfficiency:a.systemEfficiency,savingsToday:a.savingsToday,totalSavings:a.totalSavings,gridIndependence:a.gridIndependence,co2Saved:a.co2Saved,selfSufficiency:a.selfSufficiency};return j`
       <ha-card class="ha-wrapper">
 
-        <div class="card ${s}">
+        <div class="card ${o}">
 
           <div class="scene">
 
@@ -1865,13 +2059,13 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
                 class="scene-sun-glow"
                 style="
                   left:50%;
-                  top:${o.top}px;
+                  top:${s.top}px;
                 "
               ></div>
 
               <div class="scene-vignette"></div>
 
-              ${function(e){const t=1300,r=220,s=960,o=1610-t*e.left/100,i=(o-310)/1300,a=200-Math.sin(i*Math.PI)*r+60;return W`
+              ${function(e){const t=1300,r=220,o=960,s=1610-t*e.left/100,i=(s-310)/1300,a=200-Math.sin(i*Math.PI)*r+60;return W`
 
     <svg
       class="solar-arc-svg"
@@ -1883,7 +2077,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
           M ${310}
             ${200}
 
-          Q ${s}
+          Q ${o}
             ${-40}
 
             ${1610}
@@ -1893,7 +2087,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
       />
 
       <circle
-        cx="${o}"
+        cx="${s}"
         cy="${a}"
         r="16"
         class="solar-arc-sun"
@@ -1914,9 +2108,9 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
 
     </svg>
 
-  `}(o)}
+  `}(s)}
 
-              ${Te(this.activeLayout,this.hass)}
+              ${Fe(this.activeLayout,this.hass)}
 
               <div
                 class="flow-layer"
@@ -1928,7 +2122,7 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
                 ${me(this.activeLayout,e)}
               </div>
 
-              ${function(e,t){return Object.values(e.nodes).map(e=>{if("solar"===e.id)return G;let r="",s="",o="",i="";if("house"===e.id)r="Förbrukning",s=Ae($e(t,"sensor.solar_battery_economy_energy_system_power_solar_house")+$e(t,"sensor.solar_battery_economy_energy_system_power_battery_house")+$e(t,"sensor.solar_battery_economy_energy_system_power_grid_house"));else if("battery"===e.id){const e=$e(t,"sensor.saj_battery_energy_percent"),i=$e(t,"sensor.solar_battery_economy_energy_system_power_solar_battery")+$e(t,"sensor.solar_battery_economy_energy_system_power_grid_battery"),a=$e(t,"sensor.solar_battery_economy_energy_system_power_battery_house")+$e(t,"sensor.solar_battery_economy_energy_system_power_battery_grid");i>1?(r="Laddar",s=Ae(i),o=Ee(e)):a>1?(r="Urladdar",s=Ae(a),o=Ee(e)):(r="Viloläge",s="0 W",o=Ee(e))}else if("grid"===e.id){const e=$e(t,"sensor.solar_battery_economy_energy_system_power_grid_house")+$e(t,"sensor.solar_battery_economy_energy_system_power_grid_battery"),i=$e(t,"sensor.solar_battery_economy_energy_system_power_solar_export")+$e(t,"sensor.solar_battery_economy_energy_system_power_battery_grid");e>1?(r="→ Import",s=Ae(e),o=""):i>1?(r="← Export",s=Ae(i),o=""):(r="Balans",s="0 W",o="")}else if("car"===e.id){i="secondary";const e=$e(t,"sensor.volvo_ec40_batteri"),a=$e(t,"sensor.charger_lindv_26_2006011626m_1_power");s=Ae(a),o=Ee(e),r=a>1?"Laddar":"Ansluten"}else if("spa"===e.id){i="secondary";const e=$e(t,"sensor.plugg_spabad_power");e>1?(r="Aktiv",s=Ae(e)):(r="Ej aktiv",s="--")}else if("heatpump"===e.id){i="secondary";const e=$e(t,"sensor.thermia_power_estimator_total_effekt");s=Ae(e),r=e>1?"Aktiv":"Vilande"}else if("appliance"===e.id){i="secondary";const e=$e(t,"sensor.plugg_spabad_power");e>1?(r="Aktiv",s=Ae(e)):(r="Ej aktiv",s="--")}return j`
+              ${function(e,t){return Object.values(e.nodes).map(e=>{if("solar"===e.id)return G;let r="",o="",s="",i="";if("house"===e.id)r="Förbrukning",o=Ee(ke(t,"sensor.solar_battery_economy_energy_system_power_solar_house")+ke(t,"sensor.solar_battery_economy_energy_system_power_battery_house")+ke(t,"sensor.solar_battery_economy_energy_system_power_grid_house"));else if("battery"===e.id){const e=ke(t,"sensor.saj_battery_energy_percent"),i=ke(t,"sensor.solar_battery_economy_energy_system_power_solar_battery")+ke(t,"sensor.solar_battery_economy_energy_system_power_grid_battery"),a=ke(t,"sensor.solar_battery_economy_energy_system_power_battery_house")+ke(t,"sensor.solar_battery_economy_energy_system_power_battery_grid");i>1?(r="Laddar",o=Ee(i),s=Se(e)):a>1?(r="Urladdar",o=Ee(a),s=Se(e)):(r="Viloläge",o="0 W",s=Se(e))}else if("grid"===e.id){const e=ke(t,"sensor.solar_battery_economy_energy_system_power_grid_house")+ke(t,"sensor.solar_battery_economy_energy_system_power_grid_battery"),i=ke(t,"sensor.solar_battery_economy_energy_system_power_solar_export")+ke(t,"sensor.solar_battery_economy_energy_system_power_battery_grid");e>1?(r="→ Import",o=Ee(e),s=""):i>1?(r="← Export",o=Ee(i),s=""):(r="Balans",o="0 W",s="")}else if("car"===e.id){i="secondary";const e=ke(t,"sensor.volvo_ec40_batteri"),a=ke(t,"sensor.charger_lindv_26_2006011626m_1_power");o=Ee(a),s=Se(e),r=a>1?"Laddar":"Ansluten"}else if("spa"===e.id){i="secondary";const e=ke(t,"sensor.plugg_spabad_power");e>1?(r="Aktiv",o=Ee(e)):(r="Ej aktiv",o="--")}else if("heatpump"===e.id){i="secondary";const e=ke(t,"sensor.thermia_power_estimator_total_effekt");o=Ee(e),r=e>1?"Aktiv":"Vilande"}else if("appliance"===e.id){i="secondary";const e=ke(t,"sensor.plugg_spabad_power");e>1?(r="Aktiv",o=Ee(e)):(r="Ej aktiv",o="--")}return j`
 
         <div
           class="energy-node ${e.id} ${i}"
@@ -1949,8 +2143,12 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
 
             <div class="node-header">
 
-              <div class="node-icon">
-                ${we[e.id]}
+              <div class="node-visual">
+
+                <div class="node-icon">
+                  ${Ae(e.id)}
+                </div>
+
               </div>
 
               <div class="node-text">
@@ -1968,12 +2166,12 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
             </div>
 
             <div class="node-value">
-              ${s}
+              ${o}
             </div>
 
-            ${o?j`
+            ${s?j`
                   <div class="node-secondary">
-                    ${o}
+                    ${s}
                   </div>
                 `:G}
 
@@ -1989,5 +2187,5 @@ const ce={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:f},he=(e=ce
         </div>
 
       </ha-card>
-    `;var d}};e([pe({attribute:!1})],Fe.prototype,"hass",void 0),e([pe({attribute:!1})],Fe.prototype,"config",void 0),e([ue()],Fe.prototype,"activeLayout",void 0),e([ue()],Fe.prototype,"cardWidth",void 0),e([ue()],Fe.prototype,"sceneScale",void 0),Fe=e([(e=>(t,r)=>{void 0!==r?r.addInitializer(()=>{customElements.define(e,t)}):customElements.define(e,t)})("solar-battery-economy-flow-card")],Fe);export{Fe as SolarBatteryEconomyFlowCard};
+    `;var d}};e([pe({attribute:!1})],Pe.prototype,"hass",void 0),e([pe({attribute:!1})],Pe.prototype,"config",void 0),e([ue()],Pe.prototype,"activeLayout",void 0),e([ue()],Pe.prototype,"cardWidth",void 0),e([ue()],Pe.prototype,"sceneScale",void 0),Pe=e([(e=>(t,r)=>{void 0!==r?r.addInitializer(()=>{customElements.define(e,t)}):customElements.define(e,t)})("solar-battery-economy-flow-card")],Pe);export{Pe as SolarBatteryEconomyFlowCard};
 //# sourceMappingURL=solar-battery-economy-flow-card.js.map

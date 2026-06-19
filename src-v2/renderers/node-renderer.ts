@@ -1,5 +1,5 @@
 import { html, nothing } from 'lit';
-import { icons } from './icons';
+import { renderNodeVisual } from './node-visual';
 
 function getNumber(
   hass: any,
@@ -352,8 +352,12 @@ export function renderNodes(
 
             <div class="node-header">
 
-              <div class="node-icon">
-                ${icons[node.id as keyof typeof icons]}
+              <div class="node-visual">
+
+                <div class="node-icon">
+                  ${renderNodeVisual(node.id)}
+                </div>
+
               </div>
 
               <div class="node-text">

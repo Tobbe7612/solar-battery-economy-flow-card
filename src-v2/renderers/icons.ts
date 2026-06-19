@@ -59,10 +59,47 @@ export const icons = {
 
   grid: html`
     <svg viewBox="0 0 24 24" fill="none">
+
       <path
-        d="M12 2L18 8H14V22H10V8H6L12 2Z"
+        d="M12 2L8.5 7H15.5L12 2Z"
         fill="currentColor"
       />
+
+      <path
+        d="M12 7V22"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M6 8H18"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M7.5 8L10.5 13"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M16.5 8L13.5 13"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M8.5 13H15.5"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+
     </svg>
   `,
 

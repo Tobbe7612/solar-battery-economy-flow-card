@@ -257,34 +257,38 @@ export const cardStyles = css`
 .energy-node {
 
     opacity: 0.96;
+
     isolation: isolate;
+
     position: absolute;
 
-    border-radius: 34px;
+    border-radius: 999px;
 
-    overflow: hidden;
+    overflow: visible;
 
-    backdrop-filter: blur(30px);
+    backdrop-filter:
+    blur(36px);
 
     background:
     linear-gradient(
         180deg,
-        rgba(255,255,255,0.10),
-        rgba(255,255,255,0.04)
+        rgba(255,255,255,0.07),
+        rgba(255,255,255,0.025)
     );
 
     border:
-    1px solid rgba(255,255,255,0.10);
+    1px solid rgba(255,255,255,0.05);
 
     box-shadow:
-    0 20px 80px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+    0 12px 40px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.03);
 
     z-index: 50;
 
     transition:
     transform 0.25s ease,
-    box-shadow 0.25s ease;
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .energy-node.house {
@@ -354,31 +358,89 @@ export const cardStyles = css`
     0 20px 60px rgba(0,0,0,0.30);
 }
 
+.energy-node.secondary {
+
+    opacity: 0.84;
+
+    backdrop-filter:
+    blur(22px);
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,0.035),
+        rgba(255,255,255,0.015)
+    );
+
+    border:
+    1px solid rgba(255,255,255,0.035);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.18);
+
+    transform:
+    scale(0.96);
+}
+
+.energy-node.secondary .node-title {
+
+    font-size: 15px;
+
+    opacity: 0.88;
+}
+
+.energy-node.secondary .node-value {
+
+    font-size: 18px;
+
+    margin-left: 58px;
+
+    opacity: 0.92;
+}
+
+.energy-node.secondary .node-status {
+
+    font-size: 9px;
+
+    opacity: 0.70;
+}
+
+.energy-node.secondary .node-icon {
+
+    width: 42px;
+    height: 42px;
+
+    opacity: 0.75;
+
+    filter:
+    drop-shadow(0 0 6px currentColor);
+}
+
 .energy-node:hover {
 
     transform:
-    translateY(-2px)
-    scale(1.015);
+    translateY(-1px)
+    scale(1.01);
 
     box-shadow:
-    0 30px 90px rgba(0,0,0,0.45),
-    0 0 40px rgba(255,255,255,0.06);
+    0 16px 50px rgba(0,0,0,0.30),
+    0 0 18px rgba(255,255,255,0.04);
 }
 
 .node-glow {
 
     position: absolute;
 
-    inset: -20%;
+    inset: -35%;
 
     background:
     radial-gradient(
         circle at center,
-        rgba(255,255,255,0.12),
-        transparent 70%
+        rgba(255,255,255,0.08),
+        transparent 72%
     );
 
-    opacity: 0.5;
+    opacity: 0.35;
 
     z-index: 0;
 }
@@ -392,11 +454,11 @@ export const cardStyles = css`
     background:
     linear-gradient(
         135deg,
-        rgba(255,255,255,0.10),
-        transparent 40%
+        rgba(255,255,255,0.06),
+        transparent 35%
     );
 
-    opacity: 0.35;
+    opacity: 0.22;
 
     pointer-events: none;
 
@@ -461,14 +523,31 @@ export const cardStyles = css`
     flex: 1;
 }
 
-.node-icon {
+.node-visual {
 
-    width: 54px;
-    height: 54px;
+    width: 72px;
+
+    height: 72px;
 
     display: flex;
 
     align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.node-icon {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
     justify-content: center;
 
     color: rgba(255,255,255,0.96);
