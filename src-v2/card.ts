@@ -10,21 +10,17 @@ import { desktopLayout }
   from './layouts/desktop-layout';
 
 import { renderFlows } from './renderers/flow-renderer';
-import { renderNodes } from './renderers/node-renderer';
-import { renderSolarHub }
-  from './renderers/solar-hub';
+
 import { renderSolarArc }
   from './renderers/solar-arc';
-import { renderSidePanels }
-  from './renderers/side-panels';
-import { getCardData }
-  from './core/card-data';
 import { cardStyles }
   from './styles/card-styles';
-import {
-  getLayoutMode,
-  shouldRenderPanels
-} from './core/layout-mode';
+import { renderScene }
+  from "./renderers/scene/scene-renderer";
+import { getCardData }
+  from "./core/card-data";
+import { renderDebugPanel }
+from "./renderers/debug/debug-panel";
 
 @customElement('solar-battery-economy-flow-card')
 export class SolarBatteryEconomyFlowCard extends LitElement {
@@ -40,10 +36,16 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
   private activeLayout = desktopLayout;
 
   @state()
+  private forcedLayoutMode: 'auto' | 'panel' | 'sidebar' | 'masonry' | 'sections' = 'auto';
+
+  @state()
   private cardWidth = 1920;
 
   @state()
   private sceneScale = 1;
+
+  @state()
+  private layoutReady = false;
 
   private resizeObserver?: ResizeObserver;
 
@@ -57,6 +59,11 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
 
           const width =
             entries[0].contentRect.width;
+          const height =
+            entries[0].contentRect.height;
+
+          const aspectRatio =
+            width / Math.max(height, 1);
           console.log(
             'CARD WIDTH:',
             width
@@ -76,7 +83,13 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
           this.sceneScale = 1;
 
           this.activeLayout =
-            getActiveLayout(width);
+            getActiveLayout({
+              width,
+              height,
+              aspectRatio,
+              layoutMode: this.forcedLayoutMode,
+            });
+          this.layoutReady = true;
         }
       );
   }
@@ -100,18 +113,25 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
   }
 
   public setConfig(config: any): void {
+
     this.config = config;
+
+    this.forcedLayoutMode =
+      config?.layout_mode ?? 'auto';
   }
 
   render() {
-
+    if (!this.layoutReady) {
+      return html`
+        <ha-card class="ha-wrapper">
+          <div class="card"></div>
+        </ha-card>
+      `;
+    }
     const liveFlows = getLiveFlows(this.hass);
+    const cardData =
+      getCardData(this.hass);
     const layout = this.activeLayout;
-    const layoutMode =
-      getLayoutMode(
-        this.config,
-        this.cardWidth
-      );
     const timeOfDay =
       getTimeOfDay(this.hass);
     const sunPosition =
@@ -122,42 +142,6 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
         timeOfDay
       );
     
-    const cardData =
-      getCardData(this.hass);
-
-    const sidePanelData = {
-
-      solarEnergy:
-        cardData.solarEnergy,
-
-      batteryToHouse:
-        cardData.batteryToHouse,
-
-      solarExportEnergy:
-        cardData.solarExportEnergy,
-
-      gridToHouseEnergy:
-        cardData.gridToHouseEnergy,
-
-      systemEfficiency:
-        cardData.systemEfficiency,
-
-      savingsToday:
-        cardData.savingsToday,
-
-      totalSavings:
-        cardData.totalSavings,
-
-      gridIndependence:
-        cardData.gridIndependence,
-
-      co2Saved:
-        cardData.co2Saved,
-
-      selfSufficiency:
-        cardData.selfSufficiency
-    };
-
     return html`
       <ha-card class="ha-wrapper">
 
@@ -176,7 +160,7 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
                   scale(${this.sceneScale});
               "
             >
-
+              ${false && renderDebugPanel(liveFlows)}
               <div
                 class="hero-background"
                 style="
@@ -190,15 +174,9 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
                 "
               ></div>
 
-              <div class="background-glow"></div>
+              ${renderScene(cardData)}
 
-              ${shouldRenderPanels(layoutMode)
-                ? renderSidePanels(
-                    sidePanelData,
-                    layout
-                  )
-                : ''
-              }
+              <div class="background-glow"></div>
 
               <div
                 class="scene-sun-glow"
@@ -211,12 +189,8 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
               <div class="scene-vignette"></div>
 
               ${renderSolarArc(
-                sunPosition
-              )}
-
-              ${renderSolarHub(
-                this.activeLayout,
-                this.hass
+                sunPosition,
+                layout,
               )}
 
               <div
@@ -227,15 +201,11 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
                 "
               >
                 ${renderFlows(
-                  this.activeLayout,
-                  liveFlows
+                    this.activeLayout,
+                    liveFlows,
+                    cardData
                 )}
               </div>
-
-              ${renderNodes(
-                this.activeLayout,
-                this.hass
-              )}
 
             </div>
 

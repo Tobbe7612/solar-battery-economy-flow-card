@@ -30,51 +30,55 @@ export default {
 
       targets: [
 
-        // Kopiera assets till dist
-
-        {
-          src: 'src-v2/assets/**/*',
-          dest: 'dist'
-        },
-
-        // Deploy JS till Home Assistant
-
         {
           src: 'dist/solar-battery-economy-flow-card.js',
           dest: 'Z:/www/dev/solar-battery-economy-flow-card'
         },
-
         {
           src: 'dist/solar-battery-economy-flow-card.js.map',
           dest: 'Z:/www/dev/solar-battery-economy-flow-card'
         },
 
-        // Deploy bakgrunder
-
         {
-          src: 'dist/backgrounds/**/*',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card/backgrounds'
+          src: 'src-v2/assets/backgrounds/**/*',
+          dest: 'dist/assets/backgrounds'
+        },
+        {
+          src: 'src-v2/assets/batteries/**/*',
+          dest: 'dist/assets/batteries'
+        },
+        {
+          src: 'src-v2/assets/icons/**/*',
+          dest: 'dist/assets/icons'
+        },
+        {
+          src: 'src-v2/assets/overlays/**/*',
+          dest: 'dist/assets/overlays'
+        },
+        {
+          src: 'src-v2/assets/vehicles/**/*',
+          dest: 'dist/assets/vehicles'
         },
 
-        // Deploy ikoner
-
         {
-          src: 'dist/icons/**/*',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card/icons'
+          src: 'dist/assets/backgrounds/**/*',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets/backgrounds'
         },
-
-        // Deploy overlays
-
         {
-          src: 'dist/overlays/**/*',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card/overlays'
+          src: 'dist/assets/batteries/**/*',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets/batteries'
         },
-
-        // Deploy fordon
-
         {
-          src: 'dist/vehicles/**/*',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card/vehicles'
+          src: 'dist/assets/icons/**/*',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets/icons'
+        },
+        {
+          src: 'dist/assets/overlays/**/*',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets/overlays'
+        },
+        {
+          src: 'dist/assets/vehicles/**/*',
+          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets/vehicles'
         }
 
       ],

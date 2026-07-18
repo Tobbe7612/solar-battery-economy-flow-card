@@ -1,5 +1,8 @@
 import { TimeOfDay } from './time-of-day';
 
+const BASE =
+  '/local/dev/solar-battery-economy-flow-card/assets/backgrounds';
+
 export function getBackgroundImage(
   hass: any,
   timeOfDay: TimeOfDay
@@ -19,18 +22,21 @@ export function getBackgroundImage(
   switch (timeOfDay) {
 
     case 'night':
+
       return cloudy
-        ? '/local/dev/solar-battery-economy-flow-card/backgrounds/night/villa_night_cloudy.webp'
-        : '/local/dev/solar-battery-economy-flow-card/backgrounds/night/villa_night_clear.webp';
+        ? `${BASE}/night/villa_night_cloudy.webp`
+        : `${BASE}/night/villa_night_clear.webp`;
 
     case 'sunset':
-      return '/local/dev/solar-battery-economy-flow-card/backgrounds/evening/villa_evening.webp';
+
+      return `${BASE}/evening/villa_evening.webp`;
 
     case 'morning':
     case 'day':
     default:
+
       return cloudy
-        ? '/local/dev/solar-battery-economy-flow-card/backgrounds/day/villa_day_cloudy.webp'
-        : '/local/dev/solar-battery-economy-flow-card/backgrounds/day/villa_day_clear.webp';
+        ? `${BASE}/day/villa_day_cloudy.webp`
+        : `${BASE}/day/villa_day_clear.webp`;
   }
 }

@@ -5,6 +5,18 @@ export const mobileLayout: SceneLayout = {
   sceneWidth: 430,
   sceneHeight: 1180,
 
+  solarArc: {
+
+    centerX: 215,
+    centerY: 40,
+
+    width: 340,
+    height: 50,
+
+    sunRadius: 10,
+
+  },
+
   panels: {
 
     left: {
@@ -57,8 +69,8 @@ export const mobileLayout: SceneLayout = {
       id: 'house',
       label: 'HUSET',
 
-      x: 150,
-      y: 410,
+      x: 125,
+      y: 440,
 
       width: 130,
       height: 130
@@ -68,8 +80,8 @@ export const mobileLayout: SceneLayout = {
       id: 'spa',
       label: 'SPA',
 
-      x: 15,
-      y: 490,
+      x: 125,
+      y: 650,
 
       width: 80,
       height: 80
@@ -77,10 +89,10 @@ export const mobileLayout: SceneLayout = {
 
     heatpump: {
       id: 'heatpump',
-      label: 'VP',
+      label: 'VÄRMEPUMP',
 
       x: 125,
-      y: 585,
+      y: 790,
 
       width: 80,
       height: 80
@@ -88,10 +100,10 @@ export const mobileLayout: SceneLayout = {
 
     appliance: {
       id: 'appliance',
-      label: 'APP',
+      label: 'VITVAROR',
 
-      x: 210,
-      y: 585,
+      x: 125,
+      y: 930,
 
       width: 80,
       height: 80
@@ -101,8 +113,8 @@ export const mobileLayout: SceneLayout = {
       id: 'car',
       label: 'BIL',
 
-      x: 325,
-      y: 490,
+      x: 125,
+      y: 1070,
 
       width: 80,
       height: 80

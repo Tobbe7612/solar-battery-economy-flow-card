@@ -1,35 +1,79 @@
 export function getSunPosition(hass: any) {
+    const sun =
+        hass?.states?.["sun.sun"];
+    if (!sun) {
+        return {
+            progress: 0,
+            aboveHorizon: false,
+            left: 0,
+            top: 0,
+            sunrise: "--:--",
+            sunset: "--:--",
+        };
+    }
+    const elevation =
+        Number(
+            sun.attributes?.elevation ?? 0
+        );
+    const azimuth =
+        Number(
+            sun.attributes?.azimuth ?? 180
+        );
+    const aboveHorizon =
+        sun.state === "above_horizon";
 
-  const sun =
-    hass?.states?.['sun.sun'];
+    // Progress längs bågen.
+    // 90° = Soluppgång
+    // 270° = Solnedgång
+    const progress =
+        Math.max(
+            0,
+            Math.min(
+                1,
+                (azimuth - 90) / 180
+            )
+        );
 
-  const elevation =
-    Number(
-      sun?.attributes?.elevation ?? 0
-    );
+    // Behåll gamla värden tills vi byggt om
+    // renderSolarArc().
+    const left =
+        progress * 100;
+    const top =
+        Math.max(
+            40,
+            280 - elevation * 6
+        );
 
-  const azimuth =
-    Number(
-      sun?.attributes?.azimuth ?? 180
-    );
-
-  const left =
-    Math.max(
-      8,
-      Math.min(
-        92,
-        (azimuth / 360) * 100
-      )
-    );
-
-  const top =
-    Math.max(
-      40,
-      280 - elevation * 6
-    );
-
-  return {
-    left,
-    top
-  };
+    // Sunrise / Sunset
+    const sunrise =
+        new Date(
+            sun.attributes.next_rising
+        )
+        .toLocaleTimeString(
+            [],
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+            }
+        );
+    const sunset =
+        new Date(
+            sun.attributes.next_setting
+        )
+        .toLocaleTimeString(
+            [],
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+            }
+        );
+        
+    return {
+        progress,
+        aboveHorizon,
+        left,
+        top,
+        sunrise,
+        sunset,
+    };
 }

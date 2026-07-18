@@ -5,6 +5,18 @@ export const tabletLayout: SceneLayout = {
   sceneWidth: 1400,
   sceneHeight: 1050,
 
+  solarArc: {
+
+    centerX: 960,
+    centerY: -20,
+
+    width: 1300,
+    height: 220,
+
+    sunRadius: 16,
+
+  },
+
   panels: {
 
     left: {

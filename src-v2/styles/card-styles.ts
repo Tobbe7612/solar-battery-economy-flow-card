@@ -1,6 +1,10 @@
-import { css } from 'lit';
+import { css } from "lit";
+
+import { flowStyles } from "./flow-styles";
+import { solarArcStyles } from "./solar-arc-styles";
 
 export const cardStyles = css`
+
 :host {
     display: block;
 
@@ -10,14 +14,6 @@ export const cardStyles = css`
     --ha-card-border-width: 0;
     --ha-card-box-shadow: none;
 }
-
-.ha-wrapper {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    overflow: visible;
-}
-
 .card {
     position: relative;
 
@@ -80,87 +76,6 @@ export const cardStyles = css`
     z-index: 1;
 }
 
-.scene-sun-glow {
-
-    position: absolute;
-
-    left: 50%;
-    top: -220px;
-
-    transition:
-    left 2s ease,
-    top 2s ease;
-
-    transform: translateX(-50%);
-
-    width: 1100px;
-    height: 900px;
-
-    background:
-    radial-gradient(
-        circle,
-        rgba(255,220,120,0.26),
-        rgba(255,220,120,0.10),
-        transparent 72%
-    );
-
-    filter: blur(30px);
-
-    pointer-events: none;
-
-    z-index: 1;
-}
-
-.scene-sun-disc {
-
-    position: absolute;
-
-    width: 64px;
-    height: 64px;
-
-    border-radius: 50%;
-
-    transform: translateX(-50%);
-
-    background:
-    radial-gradient(
-        circle,
-        rgba(255,230,120,1) 0%,
-        rgba(255,210,80,1) 60%,
-        rgba(255,180,50,0.95) 100%
-    );
-
-    box-shadow:
-    0 0 20px rgba(255,210,80,0.8),
-    0 0 50px rgba(255,210,80,0.5),
-    0 0 70px rgba(255,210,80,0.25);
-
-    z-index: 999;
-
-    transition:
-    left 2s ease,
-    top 2s ease;
-}
-
-.solar-production-label {
-    position: absolute;
-
-    transform: translateX(-50%);
-
-    color: white;
-
-    font-size: 22px;
-    font-weight: 700;
-
-    text-shadow:
-    0 0 8px rgba(255,220,100,0.8),
-    0 0 18px rgba(255,220,100,0.4);
-
-    z-index: 30;
-
-    pointer-events: none;
-}
-
 .scene-vignette {
 
     position: absolute;
@@ -200,58 +115,6 @@ export const cardStyles = css`
     scale(1.0);
 
     transform-origin: top center;
-}
-
-.flow-layer {
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    pointer-events: none;
-
-    z-index: 999;
-}
-
-.flow-svg {
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 1920px;
-    height: 1080px;
-
-    overflow: visible;
-
-    pointer-events: none;
-}
-
-.animated-flow {
-
-    filter:
-    drop-shadow(0 0 14px currentColor)
-    drop-shadow(0 0 28px currentColor)
-    drop-shadow(0 0 56px currentColor)
-    drop-shadow(0 0 96px currentColor);
-
-    stroke-dasharray: 44;
-
-    animation:
-    flowMove 0.7s linear infinite;
-}
-
-@keyframes flowMove {
-
-    from {
-    stroke-dashoffset: 88;
-    }
-
-    to {
-    stroke-dashoffset: 0;
-    }
 }
 
 .energy-node {
@@ -320,12 +183,53 @@ export const cardStyles = css`
 
 .energy-node.battery {
 
-    border:
-    1px solid rgba(120,255,180,0.30);
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
 
-    box-shadow:
-    0 0 50px rgba(80,255,160,0.14),
-    0 20px 60px rgba(0,0,0,0.30);
+    overflow: visible;
+
+    z-index: 40;
+}
+
+.energy-node.battery .node-glow,
+.energy-node.battery .node-shimmer,
+.energy-node.battery .node-header,
+.energy-node.battery .node-title,
+.energy-node.battery .node-status,
+.energy-node.battery .node-value,
+.energy-node.battery .node-secondary {
+
+    display: none !important;
+}
+
+.energy-node.battery .node-inner {
+
+    inset: 0;
+    padding: 0;
+
+    background: none;
+}
+
+.energy-node.battery .node-visual {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 190px;
+    height: 300px;
+
+    transform:
+        translate(-50%, -50%);
+
+    opacity: 1;
+
+    filter: none;
+
+    pointer-events: none;
 }
 
 .energy-node.car {
@@ -536,6 +440,43 @@ export const cardStyles = css`
     justify-content: center;
 
     flex-shrink: 0;
+
+    color: rgba(255,255,255,0.96);
+
+    filter:
+    drop-shadow(0 0 12px currentColor);
+
+    opacity: 0.95;
+}
+
+.energy-node.house .node-visual {
+
+    color: #4da3ff;
+}
+
+.energy-node.battery .node-visual {
+
+    color: #55ff88;
+}
+
+.energy-node.grid .node-visual {
+
+    color: #ff6a6a;
+}
+
+.energy-node.car .node-visual {
+
+    color: #b066ff;
+}
+
+.energy-node.spa .node-visual {
+
+    color: #39cfff;
+}
+
+.energy-node.solar .node-visual {
+
+    color: #ffd34d;
 }
 
 .node-icon {
@@ -550,39 +491,7 @@ export const cardStyles = css`
 
     justify-content: center;
 
-    color: rgba(255,255,255,0.96);
-
-    filter:
-    drop-shadow(0 0 12px currentColor);
-
-    opacity: 0.95;
-
     flex-shrink: 0;
-}
-
-.energy-node.house .node-icon {
-
-    color: #4da3ff;
-}
-
-.energy-node.battery .node-icon {
-
-    color: #55ff88;
-}
-
-.energy-node.grid .node-icon {
-
-    color: #ff6a6a;
-}
-
-.energy-node.car .node-icon {
-
-    color: #b066ff;
-}
-
-.energy-node.spa .node-icon {
-
-    color: #39cfff;
 }
 
 .node-icon svg {
@@ -1135,83 +1044,6 @@ export const cardStyles = css`
     font-size: 14px;
 }
 
-.solar-arc-svg {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 1920px;
-    height: 1080px;
-
-    overflow: visible;
-
-    pointer-events: none;
-
-    z-index: 20;
-}
-
-.solar-arc-path {
-
-    fill: none;
-
-    stroke:
-    rgba(255,220,120,0.45);
-
-    stroke-width: 3;
-
-    stroke-linecap: round;
-
-    filter:
-    drop-shadow(
-        0 0 10px
-        rgba(255,255,255,0.12)
-    );
-}
-
-.solar-arc-sun {
-
-    fill: #FFD54A;
-
-    filter:
-    drop-shadow(
-        0 0 12px
-        rgba(255,213,74,0.9)
-    )
-    drop-shadow(
-        0 0 24px
-        rgba(255,213,74,0.45)
-    );
-}
-
-.solar-arc-time {
-
-    fill:
-    rgba(255,255,255,0.75);
-
-    font-size: 18px;
-
-    font-weight: 600;
-
-    letter-spacing: 0.04em;
-}
-
-.solar-time {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-.solar-arrow {
-
-    color: #FFD54A;
-
-    font-weight: 700;
-}
-
 @media (max-width: 900px) {
 
     .scene-inner {
@@ -1340,5 +1172,99 @@ export const cardStyles = css`
 
     font-size: 10px;
     }
+
+.energy-node.battery-hidden {
+    display: none !important;
 }
+
+.energy-node.battery-asset {
+
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+.energy-node.battery-asset .node-glow,
+.energy-node.battery-asset .node-shimmer,
+.energy-node.battery-asset .node-header,
+.energy-node.battery-asset .node-title,
+.energy-node.battery-asset .node-status,
+.energy-node.battery-asset .node-value {
+
+    display: none !important;
+}
+
+.energy-node.battery-asset .node-secondary {
+
+    position: absolute;
+
+    left: 50%;
+    top: 220px;
+
+    transform: translateX(-50%);
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    color: #55ff88;
+
+    text-shadow:
+        0 0 12px rgba(80,255,160,0.8);
+
+    z-index: 20;
+}
+}
+${flowStyles}
+
+${solarArcStyles}
+
+.debug-panel {
+
+    position:absolute;
+
+    left:20px;
+    top:20px;
+
+    width:320px;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:rgba(0,0,0,.70);
+
+    backdrop-filter:blur(10px);
+
+    color:white;
+
+    font-size:13px;
+
+    font-family:monospace;
+
+    z-index:5000;
+
+}
+
+.debug-title {
+
+    font-size:15px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.debug-row {
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:2px 0;
+
+}
+
 `;

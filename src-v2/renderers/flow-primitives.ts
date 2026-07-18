@@ -15,7 +15,7 @@ export function formatPower(
 
 export function pipeManhattan(
   points: Array<{ x: number; y: number }>,
-  radius = 40
+  radius = 20
 ): string {
 
   if (points.length < 2) {
@@ -222,7 +222,7 @@ export function pipeHorizontal(
   y1: number,
   x2: number,
   y2: number,
-  radius = 40
+  radius = 20
 ): string {
 
   const midX = (x1 + x2) / 2;
@@ -249,7 +249,7 @@ export function pipeVertical(
   y1: number,
   x2: number,
   y2: number,
-  radius = 40
+  radius = 20
 ): string {
 
   const midY = (y1 + y2) / 2;
