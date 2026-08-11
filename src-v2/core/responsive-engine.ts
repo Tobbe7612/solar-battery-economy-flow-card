@@ -1,52 +1,34 @@
 import { desktopLayout } from '../layouts/desktop-layout';
 import { mobileLayout } from '../layouts/mobile-layout';
-import { tabletLayout } from '../layouts/tablet-layout';
-
+import type { LayoutType } from './layout-type';
+import type { SceneLayout } from '../types/layout';
 export interface ResponsiveContext {
+  layout: LayoutType;
   width: number;
   height: number;
-  aspectRatio: number;
-  layoutMode: 'auto' | 'panel' | 'sidebar' | 'masonry' | 'sections';
 }
-
+export interface ResponsiveLayout {
+  layout: SceneLayout;
+  scale: number;
+  offsetX: number;
+  offsetY: number;
+}
 export function getActiveLayout(
   context: ResponsiveContext
-) {
-
-  const {
-      width,
-      height,
-      aspectRatio,
-      layoutMode,
-  } = context;
-
-  if (layoutMode === 'panel') {
-    return desktopLayout;
-  }
-
-  if (
-    layoutMode === 'sidebar' ||
-    layoutMode === 'masonry' ||
-    layoutMode === 'sections'
-  ) {
-    return mobileLayout;
-  }
-
-  if (width <= 900) {
-    return mobileLayout;
-  }
-
-  if (width <= 1400) {
-    return tabletLayout;
-  }
-  console.log(
-      "[Responsive]",
-      {
-          width,
-          height,
-          aspectRatio,
-          layoutMode,
-      }
-  );
-  return desktopLayout;
+): ResponsiveLayout {
+  const layout =
+    context.layout === 'mobile'
+      ? mobileLayout
+      : desktopLayout;
+  const sceneWidth = layout.sceneWidth;
+  const sceneHeight = layout.sceneHeight;
+  const scaleX = context.width / sceneWidth;
+  const scaleY = context.height / sceneHeight;
+  const scale = Math.min(scaleX, scaleY);
+  return {
+    layout,
+    scale,
+    offsetX: 0,
+    offsetY: 0,
+  };
 }

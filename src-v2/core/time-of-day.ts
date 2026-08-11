@@ -2,6 +2,7 @@ export type TimeOfDay =
   | 'morning'
   | 'day'
   | 'sunset'
+  | 'bluehour'
   | 'night';
 
 export function getTimeOfDay(
@@ -24,6 +25,12 @@ export function getTimeOfDay(
     sun.state === 'above_horizon';
 
   if (!aboveHorizon) {
+
+    // Civil skymning (Blue Hour)
+    if (elevation > -6) {
+      return 'bluehour';
+    }
+
     return 'night';
   }
 

@@ -1,452 +1,164 @@
 import { svg, TemplateResult } from "lit";
 
-import { ParticleProfile } from "./particle-profile";
+import { FlowAnimationProfile } from "../../core/animation-profile";
+import { EnergyEdge, EnergyPoint } from "./edge-types";
+import { getEdgeWaypoints } from "./edge-geometry";
+import { pseudoRandom, hashString } from "../deterministic-random";
 
-function renderPacket(
-    path: string,
+/**
+ * Loose, dust-like flow particles — same principle as
+ * renderers/solar-particles.ts: every particle gets its own
+ * deterministically jittered path between the SAME anchors the
+ * flow already uses (via getEdgeWaypoints), instead of every
+ * particle riding the identical shared path. That's what removes
+ * the "pipe" look while leaving routing/anchors untouched.
+ *
+ * Deterministic (never Math.random()) for the same reason as
+ * solar particles: this tree is rewritten on every hass update,
+ * and a value that changes between renders would make the SMIL
+ * animation visibly restart.
+ */
+
+function buildParticlePath(
+    waypoints: EnergyPoint[],
+    seedBase: number
+): string {
+
+    let path = `M ${waypoints[0].x} ${waypoints[0].y}`;
+
+    for (let i = 0; i < waypoints.length - 1; i++) {
+
+        const a = waypoints[i];
+        const b = waypoints[i + 1];
+
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const perpX = -dy;
+        const perpY = dx;
+        const perpLength = Math.max(1, Math.hypot(perpX, perpY));
+
+        // Small, deterministic per-particle-per-segment offset —
+        // just enough that particles don't all overlap on the
+        // exact same line, without the earlier full "bow" curve.
+        const jitter =
+            pseudoRandom(seedBase + i * 31.7) - 0.5;
+
+        const offset = jitter * 14;
+
+        const midX =
+            (a.x + b.x) / 2 + (perpX / perpLength) * offset;
+        const midY =
+            (a.y + b.y) / 2 + (perpY / perpLength) * offset;
+
+        path += ` Q ${midX} ${midY} ${b.x} ${b.y}`;
+
+    }
+
+    return path;
+}
+
+function renderDustParticle(
+    index: number,
+    edgeSeed: number,
+    waypoints: EnergyPoint[],
     color: string,
-    begin: number,
-    duration: number,
-    profile: ParticleProfile,
-    intensity: number
+    duration: number
 ): TemplateResult {
 
+    const seed = edgeSeed + index * 53.1;
+
+    const beginOffset =
+        pseudoRandom(seed + 4.3) * duration;
+
+    const durationFactor =
+        0.85 + pseudoRandom(seed + 8.9) * 0.3;
+
+    const sizeFactor =
+        0.8 + pseudoRandom(seed + 13.1) * 0.5;
+
+    const path = buildParticlePath(waypoints, seed);
+    const particleDuration = duration * durationFactor;
+
+    const glowRadius = 4.5 * sizeFactor;
+    const coreRadius = 2.0 * sizeFactor;
+
     return svg`
-
-        <!-- Energy Trail -->
-
-        <ellipse
-
-            rx="7.0"
-
-            ry="0.7"
-
-            fill="${color}"
-
-            opacity="${profile.trailOpacity * 0.04}"
-
-            filter="url(#energy-glow)"
-
-        >
-
-            <animateMotion
-
-                dur="${duration}s"
-
-                begin="${begin}s"
-
-                repeatCount="indefinite"
-
-                rotate="auto"
-
-                calcMode="spline"
-
-                keySplines="0.25 0 0.75 1"
-
-                path="${path}"
-
-            />
-
-        </ellipse>
-
-        <ellipse
-
-            rx="4.5"
-
-            ry="0.45"
-
-            fill="${color}"
-
-            opacity="${profile.trailOpacity * 0.18}"
-
-        >
-
-            <animateMotion
-
-                dur="${duration}s"
-
-                begin="${begin}s"
-
-                repeatCount="indefinite"
-
-                rotate="auto"
-
-                calcMode="spline"
-
-                keySplines="0.25 0 0.75 1"
-
-                path="${path}"
-
-            />
-
-        </ellipse>
-
-        <!-- Conduit Flash -->
-
-        <ellipse
-
-            rx="14"
-
-            ry="3.2"
-
-            fill="#FFFFFF"
-
-            opacity="0.08"
-
-            filter="url(#energy-glow)"
-
-        >
-
-            <animateMotion
-
-                dur="${duration}s"
-
-                begin="${begin}s"
-
-                repeatCount="indefinite"
-
-                rotate="auto"
-
-                calcMode="spline"
-
-                keySplines="0.25 0 0.75 1"
-
-                path="${path}"
-
-            />
-
-            <animate
-
-                attributeName="opacity"
-
-                values="0.02;0.10;0.04;0.10;0.02"
-
-                dur="1.8s"
-
-                repeatCount="indefinite"
-
-            />
-
-        </ellipse>
-        
-        <!-- Packet Halo -->
-
-        <ellipse
-
-            rx="7.8"
-
-            ry="2.7"
-
-            fill="${color}"
-
-            opacity="${profile.trailOpacity * 0.12 * intensity}"
-
-            filter="url(#energy-glow)"
-
-        >
-
-            <animateMotion
-
-                dur="${duration}s"
-
-                begin="${begin}s"
-
-                repeatCount="indefinite"
-
-                rotate="auto"
-
-                calcMode="spline"
-
-                keySplines="0.25 0 0.75 1"
-
-                path="${path}"
-
-            />
-
-        <animate
-
-            attributeName="opacity"
-
-            values="0.08;0.13;0.08"
-
-            dur="2.4s"
-
-            repeatCount="indefinite"
-
-        />
-
-        <animate
-
-            attributeName="rx"
-
-            values="7.6;8.1;7.6"
-
-            dur="2.2s"
-
-            repeatCount="indefinite"
-
-        />
-
-        </ellipse>
-        
-
-        <!-- Packet Body -->
-        <ellipse
-
-            rx="8.8"
-
-            ry="2.3"
-
-            fill="${color}"
-
-            opacity="0.82"
-
-        >
-
-            <animateMotion
-
-                dur="${duration}s"
-
-                begin="${begin}s"
-
-                repeatCount="indefinite"
-
-                rotate="auto"
-
-                calcMode="spline"
-
-                keySplines="0.25 0 0.75 1"
-
-                path="${path}"
-
-            />
-            <animate
-
-                attributeName="opacity"
-
-                values="0.88;1;0.94;1;0.88"
-
-                dur="1.6s"
-
-                repeatCount="indefinite"
-
-            />
-
-        </ellipse>
-
-        <ellipse
-
-            rx="8.6"
-
-            ry="2.15"
-
-            fill="url(#energy-packet-gradient)"
-
-            opacity="${0.92 * intensity}"
-
-        >
-
-            <animateMotion
-
-                dur="${duration}s"
-
-                begin="${begin}s"
-
-                repeatCount="indefinite"
-
-                rotate="auto"
-
-                calcMode="spline"
-
-                keySplines="0.25 0 0.75 1"
-
-                path="${path}"
-
-            />
-
-        <animate
-
-            attributeName="opacity"
-
-            values="0.90;1;0.92;1;0.90"
-
-            dur="1.8s"
-
-            repeatCount="indefinite"
-
-        />
-
-        </ellipse>
-
-        <!-- Packet Core -->
-
-        <ellipse
-
-            rx="4.8"
-
-            ry="1.05"
-
-            fill="#FFFFFF"
-
-            opacity="1"
-
-        >
-
-            <animateMotion
-
-                dur="${duration}s"
-
-                begin="${begin}s"
-
-                repeatCount="indefinite"
-
-                rotate="auto"
-
-                calcMode="spline"
-
-                keySplines="0.25 0 0.75 1"
-
-                path="${path}"
-
-            />
-
-            <animate
-
-                attributeName="rx"
-
-                values="4.6;5.0;4.6"
-
-                dur="1.6s"
-
-                repeatCount="indefinite"
-
-            />
-
-            <animate
-
-                attributeName="ry"
-
-                values="0.95;1.10;0.95"
-
-                dur="1.6s"
-
-                repeatCount="indefinite"
-
-            />
-
-        </ellipse>
-
-        <!-- Packet Hotspot -->
-
-        <circle
-
-            r="1.65"
-
-            fill="#FFFFFF"
-
-            opacity="1"
-
-        >
-
-            <animateMotion
-
-                dur="${duration}s"
-
-                begin="${begin}s"
-
-                repeatCount="indefinite"
-
-                rotate="auto"
-
-                calcMode="spline"
-
-                keySplines="0.25 0 0.75 1"
-
-                path="${path}"
-
-            />
-
-        <animate
-
-            attributeName="r"
-
-            values="1.55;1.85;1.55"
-
-            dur="1.4s"
-
-            repeatCount="indefinite"
-
-        />
-
-        </circle>
-
+        <g class="energy-particle">
+
+            <circle
+                r="${glowRadius}"
+                fill="${color}"
+                opacity="0"
+                filter="url(#energy-glow)"
+            >
+                <animateMotion
+                    dur="${particleDuration}s"
+                    begin="-${beginOffset}s"
+                    repeatCount="indefinite"
+                    calcMode="spline"
+                    keySplines="0.3 0 0.7 1"
+                    path="${path}"
+                />
+                <animate
+                    attributeName="opacity"
+                    values="0;0.30;0.30;0"
+                    keyTimes="0;0.10;0.85;1"
+                    dur="${particleDuration}s"
+                    begin="-${beginOffset}s"
+                    repeatCount="indefinite"
+                />
+            </circle>
+
+            <circle
+                r="${coreRadius}"
+                fill="#FFFFFF"
+                opacity="0"
+            >
+                <animateMotion
+                    dur="${particleDuration}s"
+                    begin="-${beginOffset}s"
+                    repeatCount="indefinite"
+                    calcMode="spline"
+                    keySplines="0.3 0 0.7 1"
+                    path="${path}"
+                />
+                <animate
+                    attributeName="opacity"
+                    values="0;0.9;0.9;0"
+                    keyTimes="0;0.10;0.85;1"
+                    dur="${particleDuration}s"
+                    begin="-${beginOffset}s"
+                    repeatCount="indefinite"
+                />
+                <animate
+                    attributeName="r"
+                    values="${coreRadius * 0.85};${coreRadius * 1.15};${coreRadius * 0.85}"
+                    dur="1.6s"
+                    repeatCount="indefinite"
+                />
+            </circle>
+
+        </g>
     `;
 }
 
 export function renderParticles(
-    path: string,
-    color: string,
-    profile: ParticleProfile
+    edge: EnergyEdge,
+    profile: FlowAnimationProfile
 ): TemplateResult {
 
-    const duration = Math.max(0.35, profile.duration * 0.82);
+    const waypoints = getEdgeWaypoints(edge);
+    const edgeSeed = hashString(edge.id);
 
     return svg`
-
-        ${Array.from({
-
-            length: profile.particleCount
-
-        }).map((_, index) => {
-
-            const spacing = [
-                0.00,
-                0.18,
-                0.41,
-                0.63,
-                0.84,
-                1.00,
-                1.19,
-                1.43,
-                1.66,
-                1.88,
-            ];
-
-            const begin = -(
-                spacing[index % spacing.length] *
-                duration
-            );
-
-            const intensities = [
-                1.00,
-                0.93,
-                0.98,
-                0.88,
-                0.96,
-                1.00,
-                0.91,
-                0.97,
-            ];
-
-            return svg`
-
-                <g class="energy-particle">
-
-                    ${renderPacket(
-                        path,
-                        color,
-                        begin,
-                        duration,
-                        profile,
-                        intensities[index % intensities.length]
-                    )}
-
-                </g>
-
-            `;
-
-        })}
-
+        ${Array.from({ length: profile.particleCount }).map((_, i) =>
+            renderDustParticle(
+                i,
+                edgeSeed,
+                waypoints,
+                edge.color,
+                profile.duration,
+            )
+        )}
     `;
-
 }

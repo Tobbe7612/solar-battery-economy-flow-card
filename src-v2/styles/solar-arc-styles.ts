@@ -33,55 +33,6 @@ export const solarArcStyles = css`
     z-index: 1;
 }
 
-.scene-sun-disc {
-
-    position: absolute;
-
-    width: 64px;
-    height: 64px;
-
-    border-radius: 50%;
-
-    transform: translateX(-50%);
-
-    background:
-    radial-gradient(
-        circle,
-        rgba(255,230,120,1) 0%,
-        rgba(255,210,80,1) 60%,
-        rgba(255,180,50,0.95) 100%
-    );
-
-    box-shadow:
-    0 0 20px rgba(255,210,80,0.8),
-    0 0 50px rgba(255,210,80,0.5),
-    0 0 70px rgba(255,210,80,0.25);
-
-    z-index: 999;
-
-    transition:
-    left 2s ease,
-    top 2s ease;
-}
-
-.solar-production-label {
-    position: absolute;
-
-    transform: translateX(-50%);
-
-    color: white;
-
-    font-size: 22px;
-    font-weight: 700;
-
-    text-shadow:
-    0 0 8px rgba(255,220,100,0.8),
-    0 0 18px rgba(255,220,100,0.4);
-
-    z-index: 30;
-
-    pointer-events: none;
-}
 .solar-arc-svg {
 
     position: absolute;
@@ -143,19 +94,4 @@ export const solarArcStyles = css`
     letter-spacing: 0.04em;
 }
 
-.solar-time {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-.solar-arrow {
-
-    color: #FFD54A;
-
-    font-weight: 700;
-}
 `;

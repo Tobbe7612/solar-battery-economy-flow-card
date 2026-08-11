@@ -1,5 +1,6 @@
 import { pipeLine, pipeManhattan } from "../flow-primitives";
 import { EnergyEdge } from "./edge-types";
+
 export function buildPath(
     edge: EnergyEdge
 ): string {
@@ -19,41 +20,11 @@ export function buildPath(
         );
     }
 
-    // Solar till Batteri
-    if (
-        edge.id === "solar-battery"
-    ) {
-        return pipeManhattan(
-            [
-                edge.start,
-                {
-                    x: edge.end.x,
-                    y: edge.start.y
-                },
-                edge.end
-            ],
-            edge.radius ?? 38
-        );
-    }
-
-    // Solar till Grid
-    if (
-        edge.id === "solar-export"
-    ) {
-        return pipeManhattan(
-            [
-                edge.start,
-                {
-                    x: edge.end.x,
-                    y: edge.start.y
-                },
-                edge.end
-            ],
-            edge.radius ?? 38
-        );
-    }
-
-    // Default
+    // Default: direct line between anchors.
+    // (No more hardcoded per-id corner cases here — whether a
+    // flow is routed or direct is decided entirely by whether its
+    // FlowDefinition provides getWaypoints, so the line always
+    // matches what the particles/sparks do in edge-geometry.ts.)
     return pipeLine(
         edge.start.x,
         edge.start.y,

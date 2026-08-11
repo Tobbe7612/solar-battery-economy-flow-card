@@ -2,38 +2,80 @@ import { svg, TemplateResult } from "lit";
 
 export function renderGridIcon(
     x: number,
-    y: number
+    y: number,
+    color: string
 ): TemplateResult {
 
     return svg`
 
         <g
-            transform="translate(${x}, ${y})"
+            transform="translate(${x}, ${y}) scale(0.75, 0.90)"
             fill="none"
-            stroke="white"
+            stroke="${color}"
             stroke-width="2.2"
             stroke-linecap="round"
             stroke-linejoin="round"
+            style="filter: drop-shadow(0 0 4px ${color}80);"
         >
 
-            <!-- Stolpe -->
-            <line x1="0" y1="-22" x2="0" y2="24" />
+            <!-- Mast -->
+            <line x1="0" y1="-32" x2="-9" y2="30"/>
+            <line x1="0" y1="-32" x2="9" y2="30"/>
 
-            <!-- Övre tvärbalk -->
-            <line x1="-14" y1="-14" x2="14" y2="-14" />
+            <!-- Upper arm -->
+            <line x1="-22" y1="-13" x2="22" y2="-13"/>
+            <line x1="0" y1="-20" x2="-22" y2="-13"/>
+            <line x1="0" y1="-20" x2="22" y2="-13"/>
 
-            <!-- Nedre tvärbalk -->
-            <line x1="-10" y1="-2" x2="10" y2="-2" />
+            <!-- Upper insulators -->
+            <line x1="-22" y1="-13" x2="-22" y2="-8"/>
+            <line x1="-24" y1="-8" x2="-20" y2="-8"/>
+            <line x1="-24" y1="-5" x2="-20" y2="-5"/>
 
-            <!-- Vänster stag -->
-            <line x1="-14" y1="-14" x2="0" y2="0" />
+            <line x1="22" y1="-13" x2="22" y2="-8"/>
+            <line x1="20" y1="-8" x2="24" y2="-8"/>
+            <line x1="20" y1="-5" x2="24" y2="-5"/>
 
-            <!-- Höger stag -->
-            <line x1="14" y1="-14" x2="0" y2="0" />
+            <!-- Lower arm -->
+            <line x1="-30" y1="7" x2="30" y2="7"/>
+            <line x1="-9" y1="0" x2="-30" y2="7"/>
+            <line x1="9" y1="0" x2="30" y2="7"/>
 
-            <!-- Ben -->
-            <line x1="0" y1="24" x2="-8" y2="38" />
-            <line x1="0" y1="24" x2="8" y2="38" />
+            <!-- Lower insulators -->
+            <line x1="-30" y1="7" x2="-30" y2="12"/>
+            <line x1="-32" y1="12" x2="-28" y2="12"/>
+            <line x1="-32" y1="15" x2="-28" y2="15"/>
+
+            <line x1="30" y1="7" x2="30" y2="12"/>
+            <line x1="28" y1="12" x2="32" y2="12"/>
+            <line x1="28" y1="15" x2="32" y2="15"/>
+
+            <!-- Internal bracing -->
+            <line x1="-2" y1="-13" x2="7" y2="-1"/>
+            <line x1="-7" y1="-1" x2="7" y2="-1"/>
+
+            <line x1="-9" y1="7" x2="7" y2="-1"/>
+            <line x1="-9" y1="7" x2="9" y2="20"/>
+
+            <line x1="-9" y1="20" x2="9" y2="20"/>
+            <line x1="-9" y1="30" x2="9" y2="20"/>
+
+            <!-- Foundation -->
+            <rect
+                x="-12"
+                y="30"
+                width="24"
+                height="8"
+                rx="0.8"
+            />
+
+            <!-- Ground -->
+            <line
+                x1="-22"
+                y1="38"
+                x2="22"
+                y2="38"
+            />
 
         </g>
 

@@ -31,10 +31,6 @@ export function createFlowGraph(
                 flow?.active ?? false,
             color:
                 def.color,
-            particleColor:
-                def.particleColor,
-            width:
-                def.width,
             radius:
                 def.radius,
         };

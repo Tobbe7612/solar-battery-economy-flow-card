@@ -18,7 +18,5 @@ export interface FlowDefinition {
     ): EnergyPoint[];
 
     color: string;
-    particleColor: string;
-    width: number;
     radius?: number;
 }

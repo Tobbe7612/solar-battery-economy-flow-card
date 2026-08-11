@@ -10,7 +10,5 @@ export interface EnergyEdge {
     power: number;
     active: boolean;
     color: string;
-    particleColor: string;
-    width: number;
     radius?: number;
 }

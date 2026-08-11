@@ -2,54 +2,93 @@ import { svg, TemplateResult } from "lit";
 
 export function renderHeatpumpIcon(
     x: number,
-    y: number
+    y: number,
+    color: string
 ): TemplateResult {
 
     return svg`
 
         <g
-            transform="translate(${x},${y})"
+            transform="translate(${x}, ${y}) scale(1.0)"
             fill="none"
-            stroke="white"
-            stroke-width="2"
+            stroke="${color}"
+            stroke-width="2.2"
             stroke-linecap="round"
             stroke-linejoin="round"
+            style="filter: drop-shadow(0 0 4px ${color}80);"
         >
 
-            <!-- Pump -->
-
+            <!-- Cabinet -->
             <rect
-                x="-12"
-                y="-18"
-                width="24"
-                height="36"
-                rx="5"
+                x="-14"
+                y="-28"
+                width="28"
+                height="48"
+                rx="5.5"
+            />
+
+            <!-- Inner front -->
+            <rect
+                x="-11"
+                y="-25"
+                width="22"
+                height="42"
+                rx="3.5"
             />
 
             <!-- Display -->
-
-            <circle
-                cx="0"
-                cy="-8"
-                r="2"
-                fill="white"
+            <rect
+                x="-5.5"
+                y="-18.5"
+                width="11"
+                height="6"
+                rx="1.2"
             />
 
-            <!-- Coil -->
+            <!-- Status line -->
+            <line
+                x1="-3"
+                y1="-8"
+                x2="3"
+                y2="-8"
+            />
 
-            <path d="
-                M -6 4
-                q 3 -3 6 0
-                q 3 3 6 0
-            "/>
+            <!-- Front split -->
+            <line
+                x1="0"
+                y1="-2"
+                x2="0"
+                y2="15"
+            />
 
-            <!-- Bottom -->
+            <!-- Feet -->
+            <line
+                x1="-7"
+                y1="20"
+                x2="-7"
+                y2="23"
+            />
 
             <line
-                x1="-6"
-                y1="14"
-                x2="6"
-                y2="14"
+                x1="7"
+                y1="20"
+                x2="7"
+                y2="23"
+            />
+
+            <!-- Feet pads -->
+            <line
+                x1="-9"
+                y1="23"
+                x2="-5"
+                y2="23"
+            />
+
+            <line
+                x1="5"
+                y1="23"
+                x2="9"
+                y2="23"
             />
 
         </g>

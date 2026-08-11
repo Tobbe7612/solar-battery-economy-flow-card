@@ -1,4 +1,4 @@
-import { GraphAnchors } from "./anchors";
+import { GraphAnchors } from "./graph-anchors";
 export interface FlowPort {
 
     x: number;
@@ -8,20 +8,28 @@ export interface FlowPort {
 export interface FlowPorts {
     // Solar
     solar: FlowPort;
+    solarLeft: FlowPort;
+    solarRight: FlowPort;
+    solarBottom: FlowPort;
+    solarBottomLeft: FlowPort;
+    solarBottomCenter: FlowPort;
+    solarBottomRight: FlowPort;
 
     // Grid
     gridLeft: FlowPort;
     gridRight: FlowPort;
+    gridUpperRight: FlowPort;
+    gridLowerRight: FlowPort;
     gridTop: FlowPort;
     gridBottom: FlowPort;
-    gridUpperRight: FlowPort;
 
     // Battery
     batteryLeft: FlowPort;
+    batteryUpperLeft: FlowPort;
+    batteryLowerLeft: FlowPort;
     batteryRight: FlowPort;
     batteryTop: FlowPort;
     batteryBottom: FlowPort;
-    batteryUpperLeft: FlowPort;
 
     // House
     houseLeft: FlowPort;
@@ -51,11 +59,6 @@ export interface FlowPorts {
 
     // Routing
     solarJunction: FlowPort;
-
-    // Legacy aliases (tas bort senare)
-    grid: FlowPort;
-    battery: FlowPort;
-    house: FlowPort;
 }
 
 export function createFlowPorts(
@@ -65,20 +68,29 @@ export function createFlowPorts(
     return {
         // Solar
         solar: anchors.solarAnchorBottom,
+        solarLeft: anchors.solarAnchorLeft,
+        solarRight: anchors.solarAnchorRight,
+        solarBottom: anchors.solarAnchorBottom,
+        solarBottomLeft: anchors.solarAnchorBottomLeft,
+        solarBottomCenter: anchors.solarAnchorBottomCenter,
+        solarBottomRight: anchors.solarAnchorBottomRight,
 
         // Grid
         gridLeft: anchors.gridAnchorLeft,
         gridRight: anchors.gridAnchorRight,
+        gridUpperRight: anchors.gridAnchorUpperRight,
+        gridLowerRight: anchors.gridAnchorLowerRight,
         gridTop: anchors.gridAnchorTop,
         gridBottom: anchors.gridAnchorBottom,
-        gridUpperRight: anchors.gridAnchorUpperRight,
+
 
         // Battery
         batteryLeft: anchors.batteryAnchorLeft,
+        batteryUpperLeft: anchors.batteryAnchorUpperLeft,
+        batteryLowerLeft: anchors.batteryAnchorLowerLeft,
         batteryRight: anchors.batteryAnchorRight,
         batteryTop: anchors.batteryAnchorTop,
         batteryBottom: anchors.batteryAnchorBottom,
-        batteryUpperLeft: anchors.batteryAnchorUpperLeft,
 
         // House
         houseLeft: anchors.houseAnchorLeft,
@@ -111,10 +123,5 @@ export function createFlowPorts(
 
         // Routing
         solarJunction: anchors.solarJunction,
-
-        // Legacy aliases
-        grid: anchors.gridAnchorRight,
-        battery: anchors.batteryAnchorLeft,
-        house: anchors.houseAnchorRight,
     };
 }

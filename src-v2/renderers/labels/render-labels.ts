@@ -14,7 +14,8 @@ import { createApplianceLabel } from "./label-factory";
 import { CardData } from "../../core/card-data";
 export function renderLabels(
     labels: LabelDefinition[],
-    cardData: CardData
+    cardData: CardData,
+    host: HTMLElement,
 ): TemplateResult {
     return svg`
         <defs>
@@ -66,12 +67,14 @@ export function renderLabels(
                             line1: "1234 W",
                             line2: "",
                             line3: "",
+                            power: 0,
                         };
                         break;
                 }
                 return renderLabel(
                     label,
-                    state
+                    state,
+                    host,
                 );
             })}
         </g>

@@ -5,20 +5,27 @@ export interface GraphAnchors {
     solarAnchorLeft: EnergyPoint;
     solarAnchorRight: EnergyPoint;
     solarAnchorBottom: EnergyPoint;
+    solarAnchorBottomLeft: EnergyPoint;
+    solarAnchorBottomCenter: EnergyPoint;
+    solarAnchorBottomRight: EnergyPoint;
+
     solarJunction: EnergyPoint;
 
     // Battery
     batteryAnchorLeft: EnergyPoint;
+    batteryAnchorUpperLeft: EnergyPoint;
+    batteryAnchorLowerLeft: EnergyPoint;
     batteryAnchorRight: EnergyPoint;
     batteryAnchorTop: EnergyPoint;
-    batteryAnchorUpperLeft: EnergyPoint;
     batteryAnchorBottom: EnergyPoint;
 
     // Grid
     gridAnchorLeft: EnergyPoint;
     gridAnchorRight: EnergyPoint;
-    gridAnchorTop: EnergyPoint;
     gridAnchorUpperRight: EnergyPoint;
+    gridAnchorLowerRight: EnergyPoint;
+    gridAnchorTop: EnergyPoint;
+
     gridAnchorBottom: EnergyPoint;
 
     // House
@@ -49,9 +56,4 @@ export interface GraphAnchors {
     carAnchorLeft: EnergyPoint;
     carAnchorRight: EnergyPoint;
     carAnchorTop: EnergyPoint;
-
-    // Centers
-    batteryCenter: EnergyPoint;
-    gridCenter: EnergyPoint;
-    houseCenter: EnergyPoint;
 }

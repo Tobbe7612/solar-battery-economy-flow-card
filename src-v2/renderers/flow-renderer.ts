@@ -20,7 +20,8 @@ import {
 export function renderFlows(
   layout: any,
   liveFlows: Record<string, LiveFlow>,
-  cardData: CardData
+  cardData: CardData,
+  host: HTMLElement,
 ) {
   const labels =
   layout.sceneWidth < 1000
@@ -32,7 +33,6 @@ export function renderFlows(
       : DESKTOP_FLOW_DEFINITIONS;
   const anchors =
     createAnchors(
-        layout,
         labels
     );
   const ports =
@@ -52,7 +52,8 @@ return svg`
 
     ${renderLabels(
         labels,
-        cardData
+        cardData,
+        host,
     )}
   </svg>
 `;

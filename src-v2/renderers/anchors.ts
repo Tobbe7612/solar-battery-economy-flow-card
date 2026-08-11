@@ -15,19 +15,8 @@ import { DESKTOP_LABELS } from "./labels/desktop-labels";
 import { LabelDefinition } from "./labels/label-types";
 
 export function createAnchors(
-    layout: any,
     labels: LabelDefinition[]
 ) {
-    const house =
-        layout.nodes.house;
-    const battery =
-        layout.nodes.battery;
-    const grid =
-        layout.nodes.grid;
-    const heatpump =
-        layout.nodes.heatpump;
-    const appliance =
-        layout.nodes.appliance;
     const solarLabel =
         labels.find(
             l => l.id === "solar"
@@ -76,7 +65,7 @@ export function createAnchors(
         y: houseLabel.y,
     },
     houseAnchorTopLeft: {
-        x: houseLabel.x + houseLabel.width /2 - 10,
+        x: houseLabel.x + (houseLabel.width /2 - 10),
         y: houseLabel.y,
     },
     houseAnchorTopCenter: {
@@ -84,7 +73,7 @@ export function createAnchors(
         y: houseLabel.y,
     },
     houseAnchorTopRight: {
-        x: houseLabel.x + houseLabel.width / 2 + 10,
+        x: houseLabel.x + (houseLabel.width / 2 + 10),
         y: houseLabel.y,
     },
     houseAnchorBottom: {
@@ -92,15 +81,15 @@ export function createAnchors(
         y: houseLabel.y + houseLabel.height,
     },
     houseAnchorBottomLeft: {
-        x: houseLabel.x + houseLabel.width * 0.25,
+        x: houseLabel.x + (houseLabel.width / 2 - 10),
         y: houseLabel.y + houseLabel.height,
     },
     houseAnchorBottomCenter: {
-        x: houseLabel.x + houseLabel.width * 0.50,
+        x: houseLabel.x + houseLabel.width / 2,
         y: houseLabel.y + houseLabel.height,
     },
     houseAnchorBottomRight: {
-        x: houseLabel.x + houseLabel.width * 0.75,
+        x: houseLabel.x + (houseLabel.width / 2 + 10),
         y: houseLabel.y + houseLabel.height,
     },
 
@@ -109,6 +98,14 @@ export function createAnchors(
         x: batteryLabel.x,
         y: batteryLabel.y + batteryLabel.height / 2,
     },
+    batteryAnchorUpperLeft: {
+        x: batteryLabel.x,
+        y: batteryLabel.y + batteryLabel.height / 2 - 10,
+    },
+    batteryAnchorLowerLeft: {
+        x: batteryLabel.x,
+        y: batteryLabel.y + batteryLabel.height / 2 + 10,
+    },
     batteryAnchorRight: {
         x: batteryLabel.x + batteryLabel.width,
         y: batteryLabel.y + batteryLabel.height / 2,
@@ -116,10 +113,6 @@ export function createAnchors(
     batteryAnchorTop: {
         x: batteryLabel.x + batteryLabel.width / 2,
         y: batteryLabel.y,
-    },
-    batteryAnchorUpperLeft: {
-        x: batteryLabel.x,
-        y: batteryLabel.y + (batteryLabel.height * 0.25),
     },
     batteryAnchorBottom: {
         x: batteryLabel.x + batteryLabel.width / 2,
@@ -135,13 +128,17 @@ export function createAnchors(
         x: gridLabel.x + gridLabel.width,
         y: gridLabel.y + gridLabel.height / 2,
     },
+    gridAnchorUpperRight: {
+        x: gridLabel.x + gridLabel.width,
+        y: gridLabel.y + (gridLabel.height / 2 - 10),
+    },
+    gridAnchorLowerRight: {
+        x: gridLabel.x + gridLabel.width,
+        y: gridLabel.y + (gridLabel.height / 2 + 10),
+    },
     gridAnchorTop: {
         x: gridLabel.x + gridLabel.width / 2,
         y: gridLabel.y,
-    },
-    gridAnchorUpperRight: {
-        x: gridLabel.x + gridLabel.width,
-        y: gridLabel.y + (gridLabel.height * 0.25),
     },
     gridAnchorBottom: {
         x: gridLabel.x + gridLabel.width / 2,
@@ -161,23 +158,22 @@ export function createAnchors(
         x: solarLabel.x + solarLabel.width / 2,
         y: solarLabel.y + solarLabel.height,
     },
+    solarAnchorBottomLeft: {
+    x: solarLabel.x + (solarLabel.width / 2 - 10),
+    y: solarLabel.y + solarLabel.height,
+    },
+    solarAnchorBottomCenter: {
+        x: solarLabel.x + solarLabel.width / 2,
+        y: solarLabel.y + solarLabel.height,
+    },
+    solarAnchorBottomRight: {
+        x: solarLabel.x + (solarLabel.width / 2 + 10),
+        y: solarLabel.y + solarLabel.height,
+    },
+
     solarJunction: {
         x: solarLabel.x + solarLabel.width / 2,
         y: solarLabel.y + solarLabel.height + 55,
-    },
-
-    // Centers OLD
-    houseCenter: {
-      x: house.x + house.width / 2,
-      y: house.y + house.height / 2
-    },
-    batteryCenter: {
-      x: battery.x + battery.width / 2,
-      y: battery.y + battery.height / 2
-    },
-    gridCenter: {
-      x: grid.x + grid.width / 2,
-      y: grid.y + grid.height / 2
     },
 
     // Spa

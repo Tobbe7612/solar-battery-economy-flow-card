@@ -9,9 +9,6 @@
  * Any flow containing waypoints is automatically rendered
  * using Manhattan routing with rounded corners.
  */
-import { FlowPorts } from "./flow-ports";
-import { EnergyPoint } from "./edge-types";
-
 import { FlowDefinition } from "./flow-types";
 
 export const MOBILE_FLOW_DEFINITIONS: FlowDefinition[] = [
@@ -19,102 +16,89 @@ export const MOBILE_FLOW_DEFINITIONS: FlowDefinition[] = [
     {
         id: "solar-house",
         liveFlow: "solar-house",
-        getStart: (p) => p.solar,
-        getEnd: (p) => p.houseTop,
-        getWaypoints: (p) => [
-            p.solarJunction,
-            {
-                x: p.houseTop.x,
-                y: p.solarJunction.y,
-            },
-        ],
+        getStart: (p) => p.solarBottomCenter,
+        getEnd: (p) => p.houseTopCenter,
+//        getWaypoints: (p) => [
+//            {
+//                x: p.houseBottomCenter.x,
+//                y: p.houseBottomCenter.y,
+//            },
+//        ],
         color: "#FFD54A",
-        particleColor: "#FFF4B0",
-        width: 10,
     },
     {
         id: "solar-battery",
         liveFlow: "solar-battery",
-        getStart: (p) => p.solar,
+        getStart: (p) => p.solarRight,
         getEnd: (p) => p.batteryTop,
-        getWaypoints: (p) => [
-            p.solarJunction,
-            {
-                x: p.batteryTop.x,
-                y: p.solarJunction.y,
-            },
-        ],
-        color: "#7ED7FF",
-        particleColor: "#DFF6FF",
-        width: 10,
+//        getWaypoints: (p) => [
+//            {
+//                x: p.solarBottomRight.x,
+//                y: p.batteryUpperLeft.y,
+//            },
+//        ],
+        color: "#FFD54A",
+        radius: 30,
     },
     {
         id: "solar-export",
         liveFlow: "solar-export",
-        getStart: (p) => p.solar,
+        getStart: (p) => p.solarLeft,
         getEnd: (p) => p.gridTop,
-        getWaypoints: (p) => [
-            p.solarJunction,
-            {
-                x: p.gridTop.x,
-                y: p.solarJunction.y,
-            },
-        ],
-        color: "#FFB84A",
-        particleColor: "#FFF0B5",
-        width: 10,
+//        getWaypoints: (p) => [
+//            {
+//                x: p.solarBottomLeft.x,
+//                y: p.gridUpperRight.y,
+//            },
+//        ],
+        color: "#FFD54A",
+        radius: 30,
     },
 
     // BATTERI
     {
         id: "battery-house",
         liveFlow: "battery-house",
-        getStart: (p) => p.batteryLeft,
+        getStart: (p) => p.batteryLowerLeft,
         getEnd: (p) => p.houseTopRight,
-        getWaypoints: (p) => [
-            {
-                x: p.houseTopRight.x,
-                y: p.batteryLeft.y,
-            },
-        ],
+//        getWaypoints: (p) => [
+//            {
+//                x: p.houseTopRight.x,
+//                y: p.batteryLowerLeft.y,
+//            },
+//        ],
         color: "#59D990",
-        particleColor: "#D9FFE8",
-        width: 9,
+        radius: 30,
     },
     {
         id: "battery-grid",
         liveFlow: "battery-grid",
-        getStart: (p) => p.batteryUpperLeft,
-        getEnd: (p) => p.gridUpperRight,
+        getStart: (p) => p.batteryLeft,
+        getEnd: (p) => p.gridRight,
         color: "#67F59B",
-        particleColor: "#E2FFE8",
-        width: 9,
     },
 
     // GRID
     {
         id: "grid-house",
         liveFlow: "grid-house",
-        getStart: (p) => p.gridRight,
+        getStart: (p) => p.gridLowerRight,
         getEnd: (p) => p.houseTopLeft,
-        getWaypoints: (p) => [
-            {
-                x: p.houseTopLeft.x,
-                y: p.gridRight.y,
-            },
-        ],
-        color: "#8CC8FF",
-        particleColor: "#EDF7FF",
-        width: 9,
+//        getWaypoints: (p) => [
+//            {
+//                x: p.houseTopLeft.x,
+//                y: p.gridLowerRight.y,
+//            },
+//        ],
+        color: "#FF6B6B",
+        radius: 30,
     },
     {
         id: "grid-battery",
         liveFlow: "grid-battery",
-        getStart: (p) => p.gridUpperRight,
-        getEnd: (p) => p.batteryUpperLeft,
-        color: "#8CC8FF",
-        particleColor: "#EDF7FF",
-        width: 9,
+        getStart: (p) => p.gridRight,
+        getEnd: (p) => p.batteryLeft,
+        color: "#FF6B6B",
     },
 
     // HOUSE TO OTHER CONSUMERS
@@ -123,32 +107,27 @@ export const MOBILE_FLOW_DEFINITIONS: FlowDefinition[] = [
         liveFlow: "house-spa",
         getStart: (p) => p.houseBottomCenter,
         getEnd: (p) => p.spaRight,
-        getWaypoints: (p) => [
-            {
-                x: p.houseBottomCenter.x,
-                y: p.spaRight.y,
-            },
-        ],
-        color: "#8CC8FF",
-        particleColor: "#EDF7FF",
-        width: 8,
+//        getWaypoints: (p) => [
+//            {
+//                x: p.houseBottomCenter.x,
+//                y: p.spaRight.y,
+//            },
+//        ],
+        color: "#FF6B6B",
         radius: 30,
     },
     {
         id: "house-heatpump",
         liveFlow: "house-heatpump",
-        getStart: (p) => p.houseBottomCenter,
+        getStart: (p) => p.houseBottomLeft,
         getEnd: (p) => p.heatpumpRight,
-        getWaypoints: (p) => [
-            {
-                x: p.houseBottomCenter.x,
-                y: p.heatpumpRight.y,
-            },
-
-        ],
-        color: "#8CC8FF",
-        particleColor: "#EDF7FF",
-        width: 8,
+//        getWaypoints: (p) => [
+//            {
+//                x: p.houseBottomLeft.x,
+//                y: p.heatpumpRight.y,
+//            },
+//        ],
+        color: "#FF6B6B",
         radius: 30,
     },
     {
@@ -156,31 +135,27 @@ export const MOBILE_FLOW_DEFINITIONS: FlowDefinition[] = [
         liveFlow: "house-appliance",
         getStart: (p) => p.houseBottomCenter,
         getEnd: (p) => p.applianceLeft,
-        getWaypoints: (p) => [
-            {
-                x: p.houseBottomCenter.x,
-                y: p.applianceLeft.y,
-            },
-        ],
-        color: "#8CC8FF",
-        particleColor: "#EDF7FF",
-        width: 8,
+//        getWaypoints: (p) => [
+//            {
+//                x: p.houseBottomCenter.x,
+//                y: p.applianceLeft.y,
+//            },
+//        ],
+        color: "#FF6B6B",
         radius: 30,
     },
     {
         id: "house-car",
         liveFlow: "house-car",
-        getStart: (p) => p.houseBottomCenter,
+        getStart: (p) => p.houseBottomRight,
         getEnd: (p) => p.carLeft,
-        getWaypoints: (p) => [
-            {
-                x: p.houseBottomCenter.x,
-                y: p.carLeft.y,
-            },
-        ],
-        color: "#8CC8FF",
-        particleColor: "#EDF7FF",
-        width: 8,
+//        getWaypoints: (p) => [
+//            {
+//                x: p.houseBottomRight.x,
+//                y: p.carLeft.y,
+//            },
+//        ],
+        color: "#FF6B6B",
         radius: 30,
     },
 ];

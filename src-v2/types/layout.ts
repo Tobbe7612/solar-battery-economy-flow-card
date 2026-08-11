@@ -1,25 +1,15 @@
-export interface NodePort {
-  x: number;
-  y: number;
-}
-export interface NodePorts {
-  left?: NodePort;
-  right?: NodePort;
-  top?: NodePort;
-  bottom?: NodePort;
-}
-export interface SceneNode {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  label?: string;
-  ports?: NodePorts;
-}
 export interface PanelPosition {
   x: number;
   y: number;
+  /**
+   * Optional panel width for this layout.
+   * If omitted, the renderer will use its default width.
+   */
+  width?: number;
+  /**
+   * Enables the compact/mobile variant of the panel.
+   */
+  compact?: boolean;
 }
 export interface ScenePanels {
   left: PanelPosition;
@@ -36,6 +26,5 @@ export interface SceneLayout {
   sceneWidth: number;
   sceneHeight: number;
   panels: ScenePanels;
-  nodes: Record<string, SceneNode>;
   solarArc: SolarArcLayout;
 }

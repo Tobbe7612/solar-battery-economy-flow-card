@@ -1,5 +1,9 @@
 import { svg } from 'lit';
 import { SceneLayout } from "../types/layout";
+import { DESKTOP_LABELS } from "./labels/desktop-labels";
+import { MOBILE_LABELS } from "./labels/mobile-labels";
+import { getSolarAnimationProfile } from "../core/animation-profile";
+import { renderSolarParticles, renderSunRays } from "./solar-particles";
 function getQuadraticBezierPoint(
     t: number,
     p0: { x: number; y: number },
@@ -29,7 +33,8 @@ export function renderSolarArc(
     sunrise: string;
     sunset: string;
   },
-  layout: SceneLayout
+  layout: SceneLayout,
+  solarPower: number
 ) {
   const {
       centerX,
@@ -56,6 +61,21 @@ export function renderSolarArc(
       control,
       end
   );
+
+  const labels =
+      layout.sceneWidth < 1000
+          ? MOBILE_LABELS
+          : DESKTOP_LABELS;
+
+  const solarLabel = labels.find(l => l.id === "solar")!;
+
+  const solarLabelAnchor = {
+      x: solarLabel.x + solarLabel.width / 2,
+      y: solarLabel.y,
+  };
+
+  const solarParticleProfile = getSolarAnimationProfile(solarPower);
+
   return svg`
     <svg
       class="solar-arc-svg"
@@ -84,6 +104,15 @@ export function renderSolarArc(
               />
           `
           : svg``}
+      ${renderSolarParticles(
+          sun,
+          solarLabelAnchor,
+          solarParticleProfile,
+      )}
+      ${renderSunRays(
+          sun,
+          solarParticleProfile.particleCount,
+      )}
       <text
           x="${centerX - arcWidth / 2}"
           y="${centerY + arcHeight + 28}"

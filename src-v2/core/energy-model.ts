@@ -1,3 +1,5 @@
+import { findMainFlowEntities } from "../config/autodiscovery";
+
 export interface LiveFlow {
   id: string;
   active: boolean;
@@ -8,7 +10,11 @@ export interface LiveFlow {
 export function getLiveFlows(
     hass: any
 ): Record<string, LiveFlow> {
-  const getPower = (entity: string): number => {
+
+  const getPower = (entity?: string): number => {
+    if (!entity) {
+      return 0;
+    }
     const state = hass?.states?.[entity]?.state;
     const value = Number(state);
     return isNaN(value)
@@ -16,49 +22,41 @@ export function getLiveFlows(
       : value;
   };
 
+  // Same 8 sensors as card-data.ts's main flow, resolved via the
+  // same discovery lookup — one source of truth, no more risk of
+  // the two drifting apart.
+  const flowEntities = findMainFlowEntities(hass);
+
   const flows: Record<string, LiveFlow> = {
     'solar-house': createFlow(
       'solar-house',
-      getPower(
-        'sensor.solar_battery_economy_energy_system_power_solar_house'
-      )
+      getPower(flowEntities.solarHouse)
     ),
     'solar-battery': createFlow(
       'solar-battery',
-      getPower(
-        'sensor.solar_battery_economy_energy_system_power_solar_battery'
-      )
+      getPower(flowEntities.solarBattery)
     ),
     'solar-export': createFlow(
       'solar-export',
-      getPower(
-        'sensor.solar_battery_economy_energy_system_power_solar_export'
-      )
+      getPower(flowEntities.solarExport)
     ),
     'battery-house': createFlow(
       'battery-house',
-      getPower(
-        'sensor.solar_battery_economy_energy_system_power_battery_house'
-      )
+      getPower(flowEntities.batteryHouse)
     ),
     'battery-grid': createFlow(
       'battery-grid',
-      getPower(
-        'sensor.solar_battery_economy_energy_system_power_battery_grid'
-      )
+      getPower(flowEntities.batteryGrid)
     ),
     'grid-house': createFlow(
       'grid-house',
-      getPower(
-        'sensor.solar_battery_economy_energy_system_power_grid_house'
-      )
+      getPower(flowEntities.gridHouse)
     ),
     'grid-battery': createFlow(
       'grid-battery',
-      getPower(
-        'sensor.solar_battery_economy_energy_system_power_grid_battery'
-      )
+      getPower(flowEntities.gridBattery)
     ),
+    // Device flows — unchanged for now (Etapp 3b).
     'house-spa': createFlow(
       'house-spa',
       getPower(
