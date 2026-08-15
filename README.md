@@ -74,9 +74,13 @@ elements and more like a single, coherent energy visualization.
 
 ## 📸 Screenshots
 
-### 🖥️ Desktop
+### Desktop
 
-![Desktop](images/desktop.png)
+![Solar Battery Economy Flow Card — Desktop](images/desktop-v2.png)
+
+### Mobile
+
+![Solar Battery Economy Flow Card — Mobile](images/mobile-v2.png)
 
 ------------------------------------------------------------------------
 
