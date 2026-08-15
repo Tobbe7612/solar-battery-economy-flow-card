@@ -1,6 +1,6 @@
 {
   "name": "solar-battery-economy-flow-card",
-  "version": "2.0.0-dev",
+  "version": "2.0.0",
   "description": "Premium Scandinavian smart energy dashboard for Home Assistant",
   "main": "dist/solar-battery-economy-flow-card.js",
   "type": "module",

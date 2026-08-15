@@ -73,38 +73,46 @@ export function renderLeftPanel(
                 Energy
             </div>
             <div class="panel-section">
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${() =>
-                        openMoreInfo(
-                            host,
-                            cardData.importTodayEntity,
-                        )}
-                >
-                    <div class="side-label">
-                        Import today
-                    </div>
-                    <div class="side-value value-grid">
-                        ${cardData.importToday} kWh
-                    </div>
-                </div>
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${() =>
-                        openMoreInfo(
-                            host,
-                            cardData.exportTodayEntity,
-                        )}
-                >
-                    <div class="side-label">
-                        Export today
-                    </div>
-                    <div class="side-value value-export">
-                        ${cardData.exportToday} kWh
-                    </div>
-                </div>
+                ${cardData.importTodayEntity
+                    ? html`
+                        <div
+                            class="side-stat"
+                            style="cursor:pointer;"
+                            @click=${() =>
+                                openMoreInfo(
+                                    host,
+                                    cardData.importTodayEntity!,
+                                )}
+                        >
+                            <div class="side-label">
+                                Import today
+                            </div>
+                            <div class="side-value value-grid">
+                                ${cardData.importToday} kWh
+                            </div>
+                        </div>
+                    `
+                    : ""}
+                ${cardData.exportTodayEntity
+                    ? html`
+                        <div
+                            class="side-stat"
+                            style="cursor:pointer;"
+                            @click=${() =>
+                                openMoreInfo(
+                                    host,
+                                    cardData.exportTodayEntity!,
+                                )}
+                        >
+                            <div class="side-label">
+                                Export today
+                            </div>
+                            <div class="side-value value-export">
+                                ${cardData.exportToday} kWh
+                            </div>
+                        </div>
+                    `
+                    : ""}
                 <div class="side-divider"></div>
                 <div
                     class="side-stat"

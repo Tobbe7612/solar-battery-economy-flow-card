@@ -1,4 +1,15 @@
-import { FlowCardConfig } from "./config";
+import {
+    FlowCardConfig,
+    EnergyPanelConfig,
+    EconomyPanelConfig,
+} from "./config";
+
+export interface AutoFillConfig {
+    sidePanels?: {
+        energy?: Partial<EnergyPanelConfig>;
+        economy?: Partial<EconomyPanelConfig>;
+    };
+}
 
 /**
  * ============================================================
@@ -122,7 +133,7 @@ export function findMainFlowEntities(
 
 export function autofillFromIntegration(
     hass: any
-): Partial<FlowCardConfig> {
+): AutoFillConfig {
 
     if (!detectSolarBatteryEconomy(hass)) {
         return {};
@@ -159,14 +170,12 @@ export function autofillFromIntegration(
     return {
         sidePanels: {
             energy: {
-                show: true,
                 ...energy,
             },
             economy: {
-                show: true,
                 ...economy,
             },
         },
-    } as Partial<FlowCardConfig>;
+    };
 
 }

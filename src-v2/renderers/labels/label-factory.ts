@@ -31,6 +31,10 @@ export function createHouseLabel(
         line3: data.houseStatus,
         entityId: data.houseEntity,
         power: data.housePower,
+        color:
+            data.housePower > 1
+                ? "#FF6B6B"
+                : "#8A93A3",
     };
 }
 export function createGridLabel(
@@ -65,62 +69,21 @@ export function createSolarLabel(
                 : "#8A93A3",
     };
 }
-export function createCarLabel(
-    data: CardData
+export function createDeviceLabel(
+    device: CardData["devices"][number],
 ): LabelState {
     return {
-        line1: formatPower(data.carPower),
-        line2: formatPercent(data.carSoc),
-        line3: data.carStatus,
-        entityId: data.carEntity,
-        power: data.carPower,
+        line1: formatPower(device.power),
+        line2: device.optionalValue ?? "",
+        line3: device.status,
+        entityId: device.powerEntity,
+        power: device.power,
+        ...(device.soc !== undefined
+            ? { soc: device.soc }
+            : {}),
+        icon: device.icon,
         color:
-            data.carPower > 1
-                ? "#FF6B6B"
-                : "#8A93A3",
-    };
-}
-export function createSpaLabel(
-    data: CardData
-): LabelState {
-    return {
-        line1: formatPower(data.spaPower),
-        line2: `${data.spaTemperature.toFixed(0)} °C`,
-        line3: data.spaStatus,
-        entityId: data.spaEntity,
-        power: data.spaPower,
-        color:
-            data.spaPower > 1
-                ? "#FF6B6B"
-                : "#8A93A3",
-    };
-}
-export function createHeatpumpLabel(
-    data: CardData
-): LabelState {
-    return {
-        line1: formatPower(data.heatpumpPower),
-        line2: "",
-        line3: data.heatpumpStatus,
-        entityId: data.heatpumpEntity,
-        power: data.heatpumpPower,
-        color:
-            data.heatpumpPower > 1
-                ? "#FF6B6B"
-                : "#8A93A3",
-    };
-}
-export function createApplianceLabel(
-    data: CardData
-): LabelState {
-    return {
-        line1: formatPower(data.appliancePower),
-        line2: "",
-        line3: data.applianceStatus,
-        entityId: data.applianceEntity,
-        power: data.appliancePower,
-        color:
-            data.appliancePower > 1
+            device.power > 1
                 ? "#FF6B6B"
                 : "#8A93A3",
     };

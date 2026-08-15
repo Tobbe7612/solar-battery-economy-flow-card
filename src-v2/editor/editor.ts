@@ -3,6 +3,7 @@ import { customElement, property, state } from "lit/decorators.js";
 
 import { FlowCardConfig } from "../config/config";
 import { DEFAULT_CONFIG } from "../config/defaults";
+import { detectSolarBatteryEconomy } from "../config/autodiscovery";
 
 /**
  * ============================================================
@@ -131,42 +132,6 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
                 },
             },
         },
-        {
-            name: "gridIndependenceEntity",
-            label: "Grid Independence",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "solarSelfConsumptionEntity",
-            label: "Solar Self Consumption",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "batteryUtilizationEntity",
-            label: "Battery Utilization",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "co2SavedEntity",
-            label: "CO₂ Saved",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
     ];
 
     /**
@@ -180,76 +145,11 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
                 boolean: {},
             },
         },
-        {
-            name: "savingsTodayEntity",
-            label: "Savings Today",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "totalSavingsEntity",
-            label: "Total Savings",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "savingsThisMonthEntity",
-            label: "Savings This Month",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "savingsThisYearEntity",
-            label: "Savings This Year",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "estimatedAnnualSavingsEntity",
-            label: "Estimated Annual Savings",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "paybackTimeEntity",
-            label: "Payback Time",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "roiEntity",
-            label: "ROI",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
     ];
     /**
      * Device schema
      *
-     * The icon fields are conditional:
-     * - Premium SVG -> show Premium icon
-     * - MDI -> show MDI icon
+     * All device icons use the built-in SVG icon set.
      */
     private getDeviceSchema(device: FlowCardConfig["devices"][number]) {
         const schema: any[] = [
@@ -379,66 +279,33 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
             );
         }
 
-        // Icon configuration is kept together at the end.
         schema.push({
-            name: "iconType",
-            label: "Icon type",
+            name: "icon",
+            label: "Icon",
             selector: {
                 select: {
                     mode: "dropdown",
                     options: [
                         {
-                            value: "premium",
-                            label: "Premium SVG",
+                            value: "car",
+                            label: "Car",
                         },
                         {
-                            value: "mdi",
-                            label: "Material Design Icon",
+                            value: "spa",
+                            label: "Spa",
+                        },
+                        {
+                            value: "heatpump",
+                            label: "Heat Pump",
+                        },
+                        {
+                            value: "appliance",
+                            label: "Appliance",
                         },
                     ],
                 },
             },
         });
-
-        if (device.iconType === "premium") {
-            schema.push({
-                name: "premiumIcon",
-                label: "Premium icon",
-                selector: {
-                    select: {
-                        mode: "dropdown",
-                        options: [
-                            {
-                                value: "car",
-                                label: "Car",
-                            },
-                            {
-                                value: "spa",
-                                label: "Spa",
-                            },
-                            {
-                                value: "heatpump",
-                                label: "Heat Pump",
-                            },
-                            {
-                                value: "appliance",
-                                label: "Appliance",
-                            },
-                        ],
-                    },
-                },
-            });
-        }
-
-        if (device.iconType === "mdi") {
-            schema.push({
-                name: "mdiIcon",
-                label: "MDI icon",
-                selector: {
-                    text: {},
-                },
-            });
-        }
 
         return schema;
     }
@@ -617,10 +484,30 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
             }),
         );
     }
-    
+    private _isSolarBatteryEconomyDetected(): boolean {
+        return !!this.hass && detectSolarBatteryEconomy(this.hass);
+    }
 
     protected render(): TemplateResult {
+        const integrationDetected =
+            this._isSolarBatteryEconomyDetected();
+
         return html`
+            <div class="integration-status">
+                <div class="integration-status-title">
+                    Solar Battery Economy
+                </div>
+
+                <div
+                    class="integration-status-value
+                        ${integrationDetected ? "detected" : "not-detected"}"
+                >
+                    ${integrationDetected
+                        ? "✓ Detected"
+                        : "⚠ Not detected"}
+                </div>
+            </div>
+
             <details class="editor-section" open>
                 <summary>General</summary>
 
@@ -747,6 +634,32 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
         `;
     }
     static styles = css`
+        .integration-status {
+            margin: 0 0 8px 0;
+            padding: 12px 16px;
+            border: 1px solid var(--divider-color);
+            border-radius: 8px;
+            background: var(--card-background-color);
+        }
+
+        .integration-status-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-text-color);
+        }
+
+        .integration-status-value {
+            margin-top: 4px;
+            font-size: 13px;
+        }
+
+        .integration-status-value.detected {
+            color: var(--success-color);
+        }
+
+        .integration-status-value.not-detected {
+            color: var(--warning-color);
+        }
         .editor-section {
             margin: 0 0 8px 0;
             border: 1px solid var(--divider-color);

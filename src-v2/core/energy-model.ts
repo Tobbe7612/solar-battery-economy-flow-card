@@ -1,4 +1,5 @@
 import { findMainFlowEntities } from "../config/autodiscovery";
+import type { FlowCardConfig } from "../config/config";
 
 export interface LiveFlow {
   id: string;
@@ -8,7 +9,8 @@ export interface LiveFlow {
 }
 
 export function getLiveFlows(
-    hass: any
+    hass: any,
+    config: FlowCardConfig,
 ): Record<string, LiveFlow> {
 
   const getPower = (entity?: string): number => {
@@ -56,31 +58,33 @@ export function getLiveFlows(
       'grid-battery',
       getPower(flowEntities.gridBattery)
     ),
-    // Device flows — unchanged for now (Etapp 3b).
     'house-spa': createFlow(
-      'house-spa',
-      getPower(
-        'sensor.plugg_spabad_power'
-      )
-    ),
-    'house-car': createFlow(
-      'house-car',
-      getPower(
-        'sensor.volvo_ec40_charging_power'
-      )
-    ),
-    'house-heatpump': createFlow(
-      'house-heatpump',
-      getPower(
-        'sensor.thermia_power_estimator_total_effekt'
-      )
-    ),
-    'house-appliance': createFlow(
-      'house-appliance',
-      getPower(
-        'sensor.vitvaror_effekt'
-      )
-    ),
+          'house-spa',
+          getPower(
+              config.devices[1]?.powerEntity
+          )
+      ),
+
+      'house-car': createFlow(
+          'house-car',
+          getPower(
+              config.devices[0]?.powerEntity
+          )
+      ),
+
+      'house-heatpump': createFlow(
+          'house-heatpump',
+          getPower(
+              config.devices[2]?.powerEntity
+          )
+      ),
+
+      'house-appliance': createFlow(
+          'house-appliance',
+          getPower(
+              config.devices[3]?.powerEntity
+          )
+      ),
   };
   return flows;
 }

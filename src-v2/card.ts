@@ -79,19 +79,6 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
             width,
             height,
           });
-          console.count("ResizeObserver");
-
-          console.log({
-              width,
-              height,
-              scale: responsive.scale,
-              layout: this.layoutType,
-          });
-          console.log("Scene:", responsive.layout.sceneWidth, responsive.layout.sceneHeight);
-          console.log("Scale:", responsive.scale);
-          console.log("Layout:", this.layoutType);
-          console.log("Scene size:", responsive.layout.sceneWidth, responsive.layout.sceneHeight);
-
           this.activeLayout = responsive.layout;
           this.sceneScale = responsive.scale;
           this.layoutReady = true;
@@ -105,10 +92,6 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
   protected firstUpdated(): void {
     const element =
         this.renderRoot.querySelector(".card") as HTMLElement;
-
-    console.log(element);
-    console.log(element.clientWidth, element.clientHeight);
-
     this.resizeObserver?.observe(element);
   }
   public setConfig(config: any): void {
@@ -127,10 +110,14 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
         </ha-card>
       `;
     }
-    const liveFlows = getLiveFlows(this.hass);
     const effectiveConfig = mergeConfig(
-      autofillFromIntegration(this.hass),
-      this.config,
+        autofillFromIntegration(this.hass),
+        this.config,
+    );
+
+    const liveFlows = getLiveFlows(
+        this.hass,
+        effectiveConfig,
     );
     const cardData =
       getCardData(this.hass, effectiveConfig);

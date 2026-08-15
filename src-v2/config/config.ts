@@ -49,24 +49,13 @@ export interface FlowCardConfig {
 
 export interface EnergyPanelConfig {
     show: boolean;
-    // Never auto-filled — not part of the integration.
+    // Not provided by Solar Battery Economy — always manual.
     importTodayEntity?: string;
     exportTodayEntity?: string;
-    gridIndependenceEntity?: string;
-    solarSelfConsumptionEntity?: string;
-    batteryUtilizationEntity?: string;
-    co2SavedEntity?: string;
 }
 
 export interface EconomyPanelConfig {
     show: boolean;
-    savingsTodayEntity?: string;
-    totalSavingsEntity?: string;
-    savingsThisMonthEntity?: string;
-    savingsThisYearEntity?: string;
-    estimatedAnnualSavingsEntity?: string;
-    paybackTimeEntity?: string;
-    roiEntity?: string;
 }
 
 export interface DeviceSlotConfig {
@@ -100,12 +89,6 @@ export interface DeviceSlotConfig {
     }[];
 
     // Device icon
-    iconType: "premium" | "mdi";
-
-    // Only meaningful when iconType === "premium".
-    premiumIcon?: "car" | "spa" | "heatpump" | "appliance";
-
-    // Used when iconType === "mdi".
-    mdiIcon?: string;
+    icon?: "car" | "spa" | "heatpump" | "appliance";
 
 }

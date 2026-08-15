@@ -1,4 +1,9 @@
-import { FlowCardConfig, EnergyPanelConfig, EconomyPanelConfig } from "./config";
+import {
+    FlowCardConfig,
+    EnergyPanelConfig,
+    EconomyPanelConfig,
+} from "./config";
+import { AutoFillConfig } from "./autodiscovery";
 import { DEFAULT_CONFIG } from "./defaults";
 
 /**
@@ -8,20 +13,16 @@ import { DEFAULT_CONFIG } from "./defaults";
  * both inputs are cheap, pure lookups.
  */
 export function mergeConfig(
-    autofill: Partial<FlowCardConfig>,
+    autofill: AutoFillConfig,
     userConfig: Partial<FlowCardConfig> | undefined
 ): FlowCardConfig {
 
     const user = userConfig ?? {};
-    const autoEnergy: Partial<EnergyPanelConfig> =
-        autofill.sidePanels?.energy ?? {};
-    const autoEconomy: Partial<EconomyPanelConfig> =
-        autofill.sidePanels?.economy ?? {};
     const userEnergy: Partial<EnergyPanelConfig> =
         user.sidePanels?.energy ?? {};
+
     const userEconomy: Partial<EconomyPanelConfig> =
         user.sidePanels?.economy ?? {};
-
     return {
 
         layout:
@@ -41,57 +42,23 @@ export function mergeConfig(
             user.batteryInfoEntity,
 
         sidePanels: {
-
             energy: {
                 show:
                     userEnergy.show
                     ?? DEFAULT_CONFIG.sidePanels.energy.show,
-                // Never auto-filled (see config.ts) — manual only.
+
                 importTodayEntity:
                     userEnergy.importTodayEntity,
+
                 exportTodayEntity:
                     userEnergy.exportTodayEntity,
-                gridIndependenceEntity:
-                    userEnergy.gridIndependenceEntity
-                    ?? autoEnergy.gridIndependenceEntity,
-                solarSelfConsumptionEntity:
-                    userEnergy.solarSelfConsumptionEntity
-                    ?? autoEnergy.solarSelfConsumptionEntity,
-                batteryUtilizationEntity:
-                    userEnergy.batteryUtilizationEntity
-                    ?? autoEnergy.batteryUtilizationEntity,
-                co2SavedEntity:
-                    userEnergy.co2SavedEntity
-                    ?? autoEnergy.co2SavedEntity,
             },
 
             economy: {
                 show:
                     userEconomy.show
                     ?? DEFAULT_CONFIG.sidePanels.economy.show,
-                savingsTodayEntity:
-                    userEconomy.savingsTodayEntity
-                    ?? autoEconomy.savingsTodayEntity,
-                totalSavingsEntity:
-                    userEconomy.totalSavingsEntity
-                    ?? autoEconomy.totalSavingsEntity,
-                savingsThisMonthEntity:
-                    userEconomy.savingsThisMonthEntity
-                    ?? autoEconomy.savingsThisMonthEntity,
-                savingsThisYearEntity:
-                    userEconomy.savingsThisYearEntity
-                    ?? autoEconomy.savingsThisYearEntity,
-                estimatedAnnualSavingsEntity:
-                    userEconomy.estimatedAnnualSavingsEntity
-                    ?? autoEconomy.estimatedAnnualSavingsEntity,
-                paybackTimeEntity:
-                    userEconomy.paybackTimeEntity
-                    ?? autoEconomy.paybackTimeEntity,
-                roiEntity:
-                    userEconomy.roiEntity
-                    ?? autoEconomy.roiEntity,
             },
-
         },
 
         devices:

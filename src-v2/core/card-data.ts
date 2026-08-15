@@ -3,8 +3,29 @@ import {
     getString,
     getAttribute,
 } from "../utils/entity";
-import { findMainFlowEntities } from "../config/autodiscovery";
+import {
+    findMainFlowEntities,
+    autofillFromIntegration,
+} from "../config/autodiscovery";
 import { FlowCardConfig } from "../config/config";
+export interface DeviceCardData {
+    enabled: boolean;
+
+    title: string;
+
+    power: number;
+    powerEntity?: string;
+
+    optionalType?: "soc" | "temperature";
+    optionalValue?: string;
+    soc?: number;
+    optionalEntity?: string;
+
+    status: string;
+    statusEntity?: string;
+
+    icon?: "car" | "spa" | "heatpump" | "appliance";
+}
 
 export interface CardData {
     solarPower: number;
@@ -44,28 +65,12 @@ export interface CardData {
     gridStatus: string;
     gridEntity: string;
 
-    carPower: number;
-    carSoc: number;
-    carStatus: string;
-    carEntity: string;
-
-    spaPower: number;
-    spaTemperature: number;
-    spaStatus: string;
-    spaEntity: string;
-
-    heatpumpPower: number;
-    heatpumpStatus: string;
-    heatpumpEntity: string;
-
-    appliancePower: number;
-    applianceStatus: string;
-    applianceEntity: string;
+    devices: DeviceCardData[];
 
     importToday: number;
-    importTodayEntity: string;
+    importTodayEntity?: string;
     exportToday: number;
-    exportTodayEntity: string;
+    exportTodayEntity?: string;
 
     savingsThisMonth: number;
     savingsThisMonthEntity: string;
@@ -75,6 +80,82 @@ export interface CardData {
     estimatedAnnualSavingsEntity: string;
     paybackTime: number | string;
     paybackTimeEntity: string;
+}
+function getDeviceCardData(
+    hass: any,
+    device: FlowCardConfig["devices"][number],
+    index: number,
+): DeviceCardData {
+    const power =
+        device.powerEntity
+            ? getNumber(hass, device.powerEntity)
+            : 0;
+
+    let optionalValue: string | undefined;
+    let soc: number | undefined;
+
+    if (
+        device.optionalType === "soc" &&
+        device.optionalEntity
+    ) {
+        soc = getNumber(hass, device.optionalEntity);
+        optionalValue = `${Math.round(soc)} %`;
+    }
+
+    if (
+        device.optionalType === "temperature" &&
+        device.optionalEntity
+    ) {
+        const temperature = getNumber(
+            hass,
+            device.optionalEntity,
+        );
+
+        optionalValue = `${temperature.toFixed(0)} °C`;
+    }
+
+    let status = "Standby";
+
+    if (device.statusEntity) {
+        status = getString(
+            hass,
+            device.statusEntity,
+            "Unknown",
+        );
+    } else if (device.statusRules?.length) {
+        const sortedRules = [...device.statusRules]
+            .sort(
+                (a, b) =>
+                    a.threshold - b.threshold,
+            );
+
+        for (const rule of sortedRules) {
+            if (power >= rule.threshold) {
+                status = rule.label;
+            }
+        }
+    }
+
+    return {
+        enabled: device.enabled,
+
+        title:
+            device.title?.trim() ||
+            `Device ${index + 1}`,
+
+        power,
+        powerEntity: device.powerEntity,
+
+        optionalType: device.optionalType,
+        optionalValue,
+        soc,
+        optionalEntity: device.optionalEntity,
+
+        status,
+        statusEntity: device.statusEntity,
+
+        icon: device.icon,
+    };
 }
 
 export function getCardData(
@@ -90,6 +171,7 @@ export function getCardData(
   // ============================================================
 
   const flowEntities = findMainFlowEntities(hass);
+  const autoConfig = autofillFromIntegration(hass) as any;
 
   const solarHouse =
       flowEntities.solarHouse
@@ -220,177 +302,105 @@ export function getCardData(
   const batteryEntity =
       config?.batteryInfoEntity ?? "sensor.saj_realtime_battery_power";
 
-  // ============================================================
-  // Side panels — discovery/config-driven, with the previous
-  // hardcoded sensor names as fallback defaults (so the card keeps
-  // working exactly as before if no config/editor exists yet).
-  // importToday/exportToday are never auto-filled (not part of the
-  // integration) but still respect a manual override.
-  // ============================================================
+    // ============================================================
+    // Side panels
+    //
+    // Solar Battery Economy sensors are always auto-discovered.
+    // Only importToday/exportToday remain manual because they are
+    // not provided by the integration.
+    // ============================================================
 
-  const batteryUtilizationEntity =
-      config?.sidePanels?.energy?.batteryUtilizationEntity
-      ?? "sensor.solar_battery_economy_financial_31_battery_utilization";
-  const batteryUtilization =
-      getNumber(hass, batteryUtilizationEntity);
+    const batteryUtilizationEntity =
+        autoConfig.sidePanels?.energy?.batteryUtilizationEntity ?? "";
 
-  const savingsTodayEntity =
-      config?.sidePanels?.economy?.savingsTodayEntity
-      ?? "sensor.solar_battery_economy_financial_03_savings_today";
-  const savingsToday =
-      getNumber(hass, savingsTodayEntity);
+    const batteryUtilization =
+        getNumber(hass, batteryUtilizationEntity);
 
-  const co2SavedEntity =
-      config?.sidePanels?.energy?.co2SavedEntity
-      ?? "sensor.solar_battery_economy_financial_33_co2_saved";
-  const co2Saved =
-      getNumber(hass, co2SavedEntity);
+    const savingsTodayEntity =
+        autoConfig.sidePanels?.economy?.savingsTodayEntity ?? "";
 
-  const solarSelfConsumptionRateEntity =
-      config?.sidePanels?.energy?.solarSelfConsumptionEntity
-      ?? "sensor.solar_battery_economy_financial_32_solar_self_consumption_rate";
-  const solarSelfConsumptionRate =
-      getNumber(hass, solarSelfConsumptionRateEntity);
+    const savingsToday =
+        getNumber(hass, savingsTodayEntity);
 
-  const totalSavingsEntity =
-      config?.sidePanels?.economy?.totalSavingsEntity
-      ?? "sensor.solar_battery_economy_financial_01_total_savings";
-  const totalSavings =
-      getNumber(hass, totalSavingsEntity);
+    const co2SavedEntity =
+        autoConfig.sidePanels?.energy?.co2SavedEntity ?? "";
 
-  const roiEntity =
-      config?.sidePanels?.economy?.roiEntity
-      ?? "sensor.solar_battery_economy_financial_12_return_on_investment";
-  const roi =
-      getNumber(hass, roiEntity);
+    const co2Saved =
+        getNumber(hass, co2SavedEntity);
 
-  const importTodayEntity =
-      config?.sidePanels?.energy?.importTodayEntity
-      ?? "sensor.import_idag";
-  const importToday =
-      getNumber(hass, importTodayEntity);
+    const solarSelfConsumptionRateEntity =
+        autoConfig.sidePanels?.energy?.solarSelfConsumptionEntity ?? "";
 
-  const exportTodayEntity =
-      config?.sidePanels?.energy?.exportTodayEntity
-      ?? "sensor.export_idag";
-  const exportToday =
-      getNumber(hass, exportTodayEntity);
+    const solarSelfConsumptionRate =
+        getNumber(hass, solarSelfConsumptionRateEntity);
 
-  const savingsThisMonthEntity =
-      config?.sidePanels?.economy?.savingsThisMonthEntity
-      ?? "sensor.solar_battery_economy_financial_04_savings_this_month";
-  const savingsThisMonth =
-      getNumber(hass, savingsThisMonthEntity);
+    const totalSavingsEntity =
+        autoConfig.sidePanels?.economy?.totalSavingsEntity ?? "";
 
-  const savingsThisYearEntity =
-      config?.sidePanels?.economy?.savingsThisYearEntity
-      ?? "sensor.solar_battery_economy_financial_05_savings_this_year";
-  const savingsThisYear =
-      getNumber(hass, savingsThisYearEntity);
+    const totalSavings =
+        getNumber(hass, totalSavingsEntity);
 
-  const estimatedAnnualSavingsEntity =
-      config?.sidePanels?.economy?.estimatedAnnualSavingsEntity
-      ?? "sensor.solar_battery_economy_financial_02_estimated_annual_savings";
-  const estimatedAnnualSavings =
-      getNumber(hass, estimatedAnnualSavingsEntity);
+    const roiEntity =
+        autoConfig.sidePanels?.economy?.roiEntity ?? "";
 
-  const paybackTimeEntity =
-      config?.sidePanels?.economy?.paybackTimeEntity
-      ?? "sensor.solar_battery_economy_financial_10_payback_time";
-  const paybackTime =
-      getNumber(hass, paybackTimeEntity);
+    const roi =
+        getNumber(hass, roiEntity);
 
-  const gridIndependenceEntity =
-      config?.sidePanels?.energy?.gridIndependenceEntity
-      ?? "sensor.solar_battery_economy_financial_30_grid_independence";
-  const gridIndependence =
-      getNumber(hass, gridIndependenceEntity);
+    const importTodayEntity =
+        config?.sidePanels?.energy?.importTodayEntity;
 
-  // ============================================================
-  // Device slots (car/spa/heatpump/appliance) — unchanged for now.
-  // Generalizing these to config.devices is a separate, later step
-  // ("Etapp 3b").
-  // ============================================================
+    const importToday =
+        importTodayEntity
+            ? getNumber(hass, importTodayEntity)
+            : 0;
 
-  const carPower =
-      getNumber(
-          hass,
-          "sensor.volvo_ec40_charging_power"
-      );
+    const exportTodayEntity =
+        config?.sidePanels?.energy?.exportTodayEntity;
 
-  const carSoc =
-      getNumber(
-          hass,
-          "sensor.volvo_ec40_batteri"
-      );
+    const exportToday =
+        exportTodayEntity
+            ? getNumber(hass, exportTodayEntity)
+            : 0;
 
-  const carStatus =
-      getString(
-          hass,
-          "sensor.volvo_ec40_charging_status",
-          "Unknown"
-      );
+    const savingsThisMonthEntity =
+        autoConfig.sidePanels?.economy?.savingsThisMonthEntity ?? "";
 
-  const spaPower =
-      getNumber(
-          hass,
-          "sensor.plugg_spabad_power"
-      );
+    const savingsThisMonth =
+        getNumber(hass, savingsThisMonthEntity);
 
-  const spaTemperature =
-      getAttribute<number>(
-          hass,
-          "climate.spa_thermostat",
-          "current_temperature",
-          0
-      );
+    const savingsThisYearEntity =
+        autoConfig.sidePanels?.economy?.savingsThisYearEntity ?? "";
 
-  const hvacMode =
-      getString(
-          hass,
-          "climate.spa_thermostat"
-      );
+    const savingsThisYear =
+        getNumber(hass, savingsThisYearEntity);
 
-  const hvacAction =
-      getAttribute<string>(
-          hass,
-          "climate.spa_thermostat",
-          "hvac_action",
-          ""
-      );
+    const estimatedAnnualSavingsEntity =
+        autoConfig.sidePanels?.economy?.estimatedAnnualSavingsEntity ?? "";
 
-  const spaStatus =
-      hvacMode === "off"
-          ? "Heating Off"
-          : hvacAction === "Heating"
-              ? "Heating"
-              : "Standby";
+    const estimatedAnnualSavings =
+        getNumber(hass, estimatedAnnualSavingsEntity);
 
-  const heatpumpPower =
-      getNumber(
-          hass,
-          "sensor.thermia_power_estimator_total_effekt"
-      );
+    const paybackTimeEntity =
+        autoConfig.sidePanels?.economy?.paybackTimeEntity ?? "";
 
-  const heatpumpStatus =
-      getString(
-          hass,
-          "sensor.thermia_power_estimator_driftlage",
-          "Okänd"
-      );
+    const paybackTime =
+        getNumber(hass, paybackTimeEntity);
 
-  const appliancePower =
-      getNumber(
-          hass,
-          "sensor.vitvaror_effekt"
-      );
+    const gridIndependenceEntity =
+        autoConfig.sidePanels?.energy?.gridIndependenceEntity ?? "";
 
-  const applianceStatus =
-      appliancePower > 1
-          ? "Active"
-          : "Standby";
+    const gridIndependence =
+        getNumber(hass, gridIndependenceEntity);
 
   return {
+    devices: (config?.devices ?? []).map(
+        (device, index) =>
+            getDeviceCardData(
+                hass,
+                device,
+                index,
+            ),
+    ),
 
     solarPower,
     solarStatus,
@@ -446,27 +456,5 @@ export function getCardData(
     gridPower,
     gridStatus,
     gridEntity,
-
-    carPower,
-    carSoc,
-    carStatus,
-    carEntity:
-        "sensor.volvo_ec40_charging_power",
-
-    spaPower,
-    spaTemperature,
-    spaStatus,
-    spaEntity:
-        "sensor.plugg_spabad_power",
-
-    heatpumpPower,
-    heatpumpStatus,
-    heatpumpEntity:
-        "sensor.thermia_power_estimator_total_effekt",
-
-    appliancePower,
-    applianceStatus,
-    applianceEntity:
-        "sensor.vitvaror_effekt",
   };
 }

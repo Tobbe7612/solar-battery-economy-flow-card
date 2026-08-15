@@ -123,7 +123,7 @@ const pulseOriginY = definition.height / 2;
                     "
                 >
                     ${renderIcon(
-                        definition.icon,
+                        state.icon ?? definition.icon,
                         0,
                         0,
                         22,

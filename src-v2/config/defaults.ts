@@ -3,7 +3,6 @@ import { FlowCardConfig, DeviceSlotConfig } from "./config";
 function emptyDeviceSlot(): DeviceSlotConfig {
     return {
         enabled: false,
-        iconType: "premium",
     };
 }
 

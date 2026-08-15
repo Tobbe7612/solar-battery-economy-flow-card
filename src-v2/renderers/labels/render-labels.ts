@@ -7,10 +7,7 @@ import { createBatteryLabel } from "./label-factory";
 import { createHouseLabel } from "./label-factory";
 import { createGridLabel } from "./label-factory";
 import { createSolarLabel } from "./label-factory";
-import { createCarLabel } from "./label-factory";
-import { createSpaLabel } from "./label-factory";
-import { createHeatpumpLabel } from "./label-factory";
-import { createApplianceLabel } from "./label-factory";
+import { createDeviceLabel } from "./label-factory";
 import { CardData } from "../../core/card-data";
 export function renderLabels(
     labels: LabelDefinition[],
@@ -37,6 +34,7 @@ export function renderLabels(
         <g class="energy-label-layer">
             ${labels.map(label => {
                 let state: LabelState;
+                let definition = label;
                 switch (label.id) {
                     case "battery":
                         state = createBatteryLabel(cardData);
@@ -50,18 +48,65 @@ export function renderLabels(
                     case "solar":
                         state = createSolarLabel(cardData);
                         break;
-                    case "car":
-                        state = createCarLabel(cardData);
+                    case "car": {
+                        const device = cardData.devices[0];
+
+                        if (!device || !device.enabled) {
+                            return "";
+                        }
+
+                        state = createDeviceLabel(device);
+                        definition = {
+                            ...label,
+                            title: device.title,
+                        };
                         break;
-                    case "spa":
-                        state = createSpaLabel(cardData);
+                    }
+
+                    case "spa": {
+                        const device = cardData.devices[1];
+
+                        if (!device || !device.enabled) {
+                            return "";
+                        }
+
+                        state = createDeviceLabel(device);
+                        definition = {
+                            ...label,
+                            title: device.title,
+                        };
                         break;
-                    case "heatpump":
-                        state = createHeatpumpLabel(cardData);
+                    }
+
+                    case "heatpump": {
+                        const device = cardData.devices[2];
+
+                        if (!device || !device.enabled) {
+                            return "";
+                        }
+
+                        state = createDeviceLabel(device);
+                        definition = {
+                            ...label,
+                            title: device.title,
+                        };
                         break;
-                    case "appliance":
-                        state = createApplianceLabel(cardData);
+                    }
+
+                    case "appliance": {
+                        const device = cardData.devices[3];
+
+                        if (!device || !device.enabled) {
+                            return "";
+                        }
+
+                        state = createDeviceLabel(device);
+                        definition = {
+                            ...label,
+                            title: device.title,
+                        };
                         break;
+                    }
                     default:
                         state = {
                             line1: "1234 W",
@@ -72,7 +117,7 @@ export function renderLabels(
                         break;
                 }
                 return renderLabel(
-                    label,
+                    definition,
                     state,
                     host,
                 );

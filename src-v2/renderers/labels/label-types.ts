@@ -16,4 +16,5 @@ export interface LabelState {
     power: number;
     color?: string;
     soc?: number;
+    icon?: string;
 }
