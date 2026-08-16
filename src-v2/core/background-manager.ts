@@ -2,7 +2,7 @@ import { TimeOfDay } from './time-of-day';
 import type { LayoutType } from './layout-type';
 
 const BASE =
-  '/local/dev/solar-battery-economy-flow-card/assets/backgrounds';
+  '/hacsfiles/solar-battery-economy-flow-card/assets/backgrounds';
 type WeatherCondition =
   | 'clear'
   | 'cloudy'
