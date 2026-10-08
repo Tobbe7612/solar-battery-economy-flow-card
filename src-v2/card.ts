@@ -20,6 +20,10 @@ import {
 } from "./renderers/panels/panel-renderer";
 import { getCardData }
   from "./core/card-data";
+import { adaptLivePowerSnapshot }
+  from "./core/live-power";
+import type { LivePowerSnapshot }
+  from "./core/live-power";
 import { autofillFromIntegration }
   from "./config/autodiscovery";
 import { mergeConfig }
@@ -55,8 +59,15 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
   @state()
   private layoutReady = false;
   private resizeObserver?: ResizeObserver;
+  private livePowerEntryId?: string;
+  private livePowerSubscription?: () => Promise<void>;
+  private livePowerSnapshot?: LivePowerSnapshot;
+  private livePowerLookupStarted = false;
+  private livePowerSubscriptionStarted = false;
+  private livePowerLifecycle = 0;
   connectedCallback(): void {
     super.connectedCallback();
+    this.requestUpdate();
     this.resizeObserver =
       new ResizeObserver(
         (entries) => {
@@ -86,9 +97,99 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
       );
   }
   disconnectedCallback(): void {
+    this.livePowerLifecycle += 1;
+    this.livePowerLookupStarted = false;
+    this.livePowerSubscriptionStarted = false;
+    const unsubscribe = this.livePowerSubscription;
+    this.livePowerSubscription = undefined;
+    if (unsubscribe) {
+      void unsubscribe().catch(() => undefined);
+    }
     this.resizeObserver?.disconnect();
     super.disconnectedCallback();
   }
+  protected updated(): void {
+    if (
+      this.livePowerLookupStarted ||
+      !this.isConnected ||
+      typeof this.hass?.callWS !== 'function'
+    ) {
+      return;
+    }
+
+    this.livePowerLookupStarted = true;
+    void this.initializeLivePowerSubscription(
+      this.hass,
+      this.livePowerLifecycle,
+    );
+  }
+
+  private async initializeLivePowerSubscription(
+    hass: any,
+    lifecycle: number,
+  ): Promise<void> {
+    let entries: any;
+    try {
+      entries = await hass.callWS({
+        type: 'config_entries/get',
+        domain: 'solar_battery_economy',
+      });
+    } catch {
+      return;
+    }
+
+    if (
+      lifecycle !== this.livePowerLifecycle ||
+      !this.isConnected ||
+      !Array.isArray(entries) ||
+      entries.length !== 1 ||
+      entries[0]?.state !== 'loaded' ||
+      typeof entries[0]?.entry_id !== 'string' ||
+      !entries[0].entry_id
+    ) {
+      return;
+    }
+
+    this.livePowerEntryId = entries[0].entry_id;
+    if (
+      this.livePowerSubscriptionStarted ||
+      typeof hass.connection?.subscribeMessage !== 'function'
+    ) {
+      return;
+    }
+
+    this.livePowerSubscriptionStarted = true;
+    try {
+      const unsubscribe = await hass.connection.subscribeMessage(
+        (snapshot: unknown) => {
+          const livePowerSnapshot = adaptLivePowerSnapshot(snapshot);
+          if (!livePowerSnapshot) {
+            return;
+          }
+
+          this.livePowerSnapshot = livePowerSnapshot;
+          this.requestUpdate();
+        },
+        {
+          type: 'solar_battery_economy/subscribe_live_power',
+          config_entry_id: this.livePowerEntryId,
+        },
+      );
+
+      if (
+        lifecycle !== this.livePowerLifecycle ||
+        !this.isConnected
+      ) {
+        await unsubscribe();
+        return;
+      }
+
+      this.livePowerSubscription = unsubscribe;
+    } catch {
+      // Keep the card operational when Live Power is unavailable.
+    }
+  }
+
   protected firstUpdated(): void {
     const element =
         this.renderRoot.querySelector(".card") as HTMLElement;
@@ -118,9 +219,14 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
     const liveFlows = getLiveFlows(
         this.hass,
         effectiveConfig,
+        this.livePowerSnapshot,
     );
     const cardData =
-      getCardData(this.hass, effectiveConfig);
+      getCardData(
+        this.hass,
+        effectiveConfig,
+        this.livePowerSnapshot,
+      );
     const layout = this.activeLayout;
     const timeOfDay =
       getTimeOfDay(this.hass);

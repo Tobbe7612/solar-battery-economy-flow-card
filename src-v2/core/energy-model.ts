@@ -1,5 +1,5 @@
-import { findMainFlowEntities } from "../config/autodiscovery";
 import type { FlowCardConfig } from "../config/config";
+import type { LivePowerSnapshot } from "./live-power";
 
 export interface LiveFlow {
   id: string;
@@ -11,6 +11,7 @@ export interface LiveFlow {
 export function getLiveFlows(
     hass: any,
     config: FlowCardConfig,
+    livePowerSnapshot?: LivePowerSnapshot,
 ): Record<string, LiveFlow> {
 
   const getPower = (entity?: string): number => {
@@ -24,39 +25,36 @@ export function getLiveFlows(
       : value;
   };
 
-  // Same 8 sensors as card-data.ts's main flow, resolved via the
-  // same discovery lookup — one source of truth, no more risk of
-  // the two drifting apart.
-  const flowEntities = findMainFlowEntities(hass);
+  const livePower = livePowerSnapshot?.flows;
 
   const flows: Record<string, LiveFlow> = {
     'solar-house': createFlow(
       'solar-house',
-      getPower(flowEntities.solarHouse)
+      livePower?.solar_house ?? 0
     ),
     'solar-battery': createFlow(
       'solar-battery',
-      getPower(flowEntities.solarBattery)
+      livePower?.solar_battery ?? 0
     ),
     'solar-export': createFlow(
       'solar-export',
-      getPower(flowEntities.solarExport)
+      livePower?.solar_export ?? 0
     ),
     'battery-house': createFlow(
       'battery-house',
-      getPower(flowEntities.batteryHouse)
+      livePower?.battery_house ?? 0
     ),
     'battery-grid': createFlow(
       'battery-grid',
-      getPower(flowEntities.batteryGrid)
+      livePower?.battery_grid ?? 0
     ),
     'grid-house': createFlow(
       'grid-house',
-      getPower(flowEntities.gridHouse)
+      livePower?.grid_house ?? 0
     ),
     'grid-battery': createFlow(
       'grid-battery',
-      getPower(flowEntities.gridBattery)
+      livePower?.grid_battery ?? 0
     ),
     'house-spa': createFlow(
           'house-spa',

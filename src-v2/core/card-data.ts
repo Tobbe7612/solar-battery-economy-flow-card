@@ -4,9 +4,9 @@ import {
     getAttribute,
 } from "../utils/entity";
 import {
-    findMainFlowEntities,
     autofillFromIntegration,
 } from "../config/autodiscovery";
+import type { LivePowerSnapshot } from "./live-power";
 import { FlowCardConfig } from "../config/config";
 export interface DeviceCardData {
     enabled: boolean;
@@ -160,68 +160,26 @@ function getDeviceCardData(
 
 export function getCardData(
   hass: any,
-  config?: FlowCardConfig
+  config?: FlowCardConfig,
+  livePowerSnapshot?: LivePowerSnapshot,
 ): CardData {
 
   // ============================================================
-  // Main flow — always computed from auto-discovered
-  // energy_system_power_* sensors. No manual override: each of
-  // these is already a sum of several sensors, so there is no
-  // single entity a user could meaningfully swap in instead.
+  // Main flow — supplied by the shared Solar Battery Economy
+  // Live Power snapshot.
   // ============================================================
 
-  const flowEntities = findMainFlowEntities(hass);
   const autoConfig = autofillFromIntegration(hass) as any;
+  const livePowerFlows = livePowerSnapshot?.flows;
+  const livePowerAggregates = livePowerSnapshot?.aggregates;
 
-  const solarHouse =
-      flowEntities.solarHouse
-          ? getNumber(hass, flowEntities.solarHouse)
-          : 0;
-  const solarBattery =
-      flowEntities.solarBattery
-          ? getNumber(hass, flowEntities.solarBattery)
-          : 0;
-  const solarExport =
-      flowEntities.solarExport
-          ? getNumber(hass, flowEntities.solarExport)
-          : 0;
-  const batteryHouse =
-      flowEntities.batteryHouse
-          ? getNumber(hass, flowEntities.batteryHouse)
-          : 0;
-  const batteryGrid =
-      flowEntities.batteryGrid
-          ? getNumber(hass, flowEntities.batteryGrid)
-          : 0;
-  const gridHouse =
-      flowEntities.gridHouse
-          ? getNumber(hass, flowEntities.gridHouse)
-          : 0;
-  const gridBattery =
-      flowEntities.gridBattery
-          ? getNumber(hass, flowEntities.gridBattery)
-          : 0;
-  const houseGrid =
-      flowEntities.houseGrid
-          ? getNumber(hass, flowEntities.houseGrid)
-          : 0;
-
-  const solarPower =
-      solarHouse + solarBattery + solarExport;
-
-  const housePower =
-      solarHouse + batteryHouse + gridHouse;
-
-  const gridPower =
-      gridHouse + gridBattery
-      - houseGrid - batteryGrid - solarExport;
-
-  // Net battery power, derived the same way we verified against
-  // the real sensor list: (in) - (out). No SAJ-specific sensor
-  // needed anymore.
-  const batteryPower =
-      (solarBattery + gridBattery)
-      - (batteryHouse + batteryGrid);
+  const solarHouse = livePowerFlows?.solar_house ?? 0;
+  const batteryHouse = livePowerFlows?.battery_house ?? 0;
+  const gridHouse = livePowerFlows?.grid_house ?? 0;
+  const solarPower = livePowerAggregates?.solar_total ?? 0;
+  const housePower = livePowerAggregates?.house_total ?? 0;
+  const batteryPower = livePowerAggregates?.battery_net ?? 0;
+  const gridPower = livePowerAggregates?.grid_net ?? 0;
 
   // Cumulative energy (kWh) sensors — separate from the power (W)
   // sensors above. Not part of the Etapp 3a discovery scope; kept
