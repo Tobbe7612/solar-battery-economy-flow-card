@@ -75,6 +75,20 @@ export const cardStyles = css`
     top: 0;
     transform-origin: top left;
 }
+.live-power-status {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    padding: 4px 9px;
+    border-radius: 10px;
+    background: rgba(9, 16, 24, 0.72);
+    color: rgba(220, 230, 240, 0.78);
+    font-size: 12px;
+    line-height: 1.2;
+    pointer-events: none;
+}
 .side-panel {
     position: absolute;
     top: 20px;

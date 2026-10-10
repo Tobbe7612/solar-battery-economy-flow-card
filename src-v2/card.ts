@@ -24,6 +24,8 @@ import { adaptLivePowerSnapshot }
   from "./core/live-power";
 import type { LivePowerSnapshot }
   from "./core/live-power";
+import type { LivePowerValueIssue }
+  from "./core/live-power";
 import { autofillFromIntegration }
   from "./config/autodiscovery";
 import { mergeConfig }
@@ -62,6 +64,8 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
   private livePowerEntryId?: string;
   private livePowerSubscription?: () => Promise<void>;
   private livePowerSnapshot?: LivePowerSnapshot;
+  @state()
+  private livePowerIssue: LivePowerValueIssue | 'unavailable' | undefined = 'unavailable';
   private livePowerLookupStarted = false;
   private livePowerSubscriptionStarted = false;
   private livePowerLifecycle = 0;
@@ -135,6 +139,8 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
         domain: 'solar_battery_economy',
       });
     } catch {
+      this.livePowerIssue = 'unavailable';
+      this.requestUpdate();
       return;
     }
 
@@ -147,6 +153,8 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
       typeof entries[0]?.entry_id !== 'string' ||
       !entries[0].entry_id
     ) {
+      this.livePowerIssue = 'unavailable';
+      this.requestUpdate();
       return;
     }
 
@@ -162,12 +170,16 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
     try {
       const unsubscribe = await hass.connection.subscribeMessage(
         (snapshot: unknown) => {
-          const livePowerSnapshot = adaptLivePowerSnapshot(snapshot);
-          if (!livePowerSnapshot) {
+          const result = adaptLivePowerSnapshot(snapshot);
+          if (!result.snapshot) {
+            this.livePowerSnapshot = undefined;
+            this.livePowerIssue = result.issue;
+            this.requestUpdate();
             return;
           }
 
-          this.livePowerSnapshot = livePowerSnapshot;
+          this.livePowerSnapshot = result.snapshot;
+          this.livePowerIssue = undefined;
           this.requestUpdate();
         },
         {
@@ -187,6 +199,9 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
       this.livePowerSubscription = unsubscribe;
     } catch {
       // Keep the card operational when Live Power is unavailable.
+      this.livePowerSnapshot = undefined;
+      this.livePowerIssue = 'unavailable';
+      this.requestUpdate();
     }
   }
 
@@ -241,6 +256,9 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
     return html`
       <ha-card class="ha-wrapper">
         <div class="card ${this.layoutType} ${timeOfDay}">
+          ${this.livePowerIssue
+            ? html`<div class="live-power-status" role="status">Effektdata saknas</div>`
+            : ''}
           <div class="scene">
             <div
               class="scene-inner"
