@@ -17,38 +17,26 @@ import { LabelDefinition } from "./labels/label-types";
 export function createAnchors(
     labels: LabelDefinition[]
 ) {
+    const anchorLabel = (id: string) => {
+        const label = labels.find(item => item.id === id)!;
+        return { ...label, ...(label.anchorBounds ?? {}) };
+    };
     const solarLabel =
-        labels.find(
-            l => l.id === "solar"
-        )!;
+        anchorLabel("solar");
     const houseLabel =
-        labels.find(
-            l => l.id === "house"
-        )!;
+        anchorLabel("house");
     const batteryLabel =
-        labels.find(
-            l => l.id === "battery"
-        )!;
+        anchorLabel("battery");
     const gridLabel =
-        labels.find(
-            l => l.id === "grid"
-        )!;
+        anchorLabel("grid");
     const spaLabel =
-        labels.find(
-            l => l.id === "spa"
-        )!;
+        anchorLabel("spa");
     const heatpumpLabel =
-        labels.find(
-            l => l.id === "heatpump"
-        )!;
+        anchorLabel("heatpump");
     const applianceLabel =
-        labels.find(
-            l => l.id === "appliance"
-        )!;
+        anchorLabel("appliance");
     const carLabel =
-        labels.find(
-            l => l.id === "car"
-        )!;
+        anchorLabel("car");
   return {
 
     // House

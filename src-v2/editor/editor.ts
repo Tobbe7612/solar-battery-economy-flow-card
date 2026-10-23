@@ -32,7 +32,105 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
         this._config = {
             ...DEFAULT_CONFIG,
             ...config,
+            phaseLoad: {
+                ...DEFAULT_CONFIG.phaseLoad!,
+                ...config.phaseLoad,
+            },
+            sidePanels: {
+                energy: {
+                    ...DEFAULT_CONFIG.sidePanels.energy,
+                    ...config.sidePanels?.energy,
+                },
+                economy: {
+                    ...DEFAULT_CONFIG.sidePanels.economy,
+                    ...config.sidePanels?.economy,
+                },
+            },
         };
+    }
+
+    private phaseLoadSchema = [
+        {
+            name: "l1CurrentEntity",
+            label: "L1 Current",
+            selector: { entity: { domain: "sensor" } },
+        },
+        {
+            name: "l1PowerEntity",
+            label: "L1 Power",
+            selector: { entity: { domain: "sensor" } },
+        },
+        {
+            name: "l1PowerInverted",
+            label: "Invert L1 power sensor sign",
+            selector: { boolean: {} },
+        },
+        {
+            name: "l2CurrentEntity",
+            label: "L2 Current",
+            selector: { entity: { domain: "sensor" } },
+        },
+        {
+            name: "l2PowerEntity",
+            label: "L2 Power",
+            selector: { entity: { domain: "sensor" } },
+        },
+        {
+            name: "l2PowerInverted",
+            label: "Invert L2 power sensor sign",
+            selector: { boolean: {} },
+        },
+        {
+            name: "l3CurrentEntity",
+            label: "L3 Current",
+            selector: { entity: { domain: "sensor" } },
+        },
+        {
+            name: "l3PowerEntity",
+            label: "L3 Power",
+            selector: { entity: { domain: "sensor" } },
+        },
+        {
+            name: "l3PowerInverted",
+            label: "Invert L3 power sensor sign",
+            selector: { boolean: {} },
+        },
+        {
+            name: "mainFuse",
+            label: "Main fuse",
+            selector: {
+                select: {
+                    mode: "dropdown",
+                    options: [
+                        { value: 16, label: "16 A" },
+                        { value: 20, label: "20 A" },
+                        { value: 25, label: "25 A" },
+                    ],
+                },
+            },
+        },
+        {
+            name: "invertDirection",
+            label: "Invert import/export direction",
+            selector: { boolean: {} },
+        },
+    ];
+
+    private _phaseLoadValueChanged(ev: CustomEvent): void {
+        this._config = {
+            ...this._config,
+            phaseLoad: {
+                ...this._config.phaseLoad,
+                ...ev.detail.value,
+            },
+        };
+        this.dispatchEvent(
+            new CustomEvent("config-changed", {
+                detail: { config: this._config },
+                bubbles: true,
+                composed: true,
+            }),
+        );
     }
 
     /**
@@ -560,6 +658,20 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
                         .schema=${this.economyPanelSchema}
                         .computeLabel=${(schema: any) => schema.label}
                         @value-changed=${this._economyPanelValueChanged}
+                    ></ha-form>
+                </div>
+            </details>
+
+            <details class="editor-section">
+                <summary>Phase Load (optional)</summary>
+
+                <div class="editor-content">
+                    <ha-form
+                        .hass=${this.hass}
+                        .data=${this._config.phaseLoad}
+                        .schema=${this.phaseLoadSchema}
+                        .computeLabel=${(schema: any) => schema.label}
+                        @value-changed=${this._phaseLoadValueChanged}
                     ></ha-form>
                 </div>
             </details>

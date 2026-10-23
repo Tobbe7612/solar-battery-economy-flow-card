@@ -6,6 +6,13 @@ export interface LabelDefinition {
     y: number;
     width: number;
     height: number;
+    /** Explicit graph-port bounds. Keep aligned with the visible frame edges. */
+    anchorBounds?: {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+    };
     accentColor?: string;
 }
 export interface LabelState {

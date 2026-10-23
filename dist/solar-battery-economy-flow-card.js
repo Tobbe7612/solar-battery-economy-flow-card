@@ -1,42 +1,42 @@
-function t(t,e,i,o){var s,r=arguments.length,n=r<3?e:null===o?o=Object.getOwnPropertyDescriptor(e,i):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)n=Reflect.decorate(t,e,i,o);else for(var a=t.length-1;a>=0;a--)(s=t[a])&&(n=(r<3?s(n):r>3?s(e,i,n):s(e,i))||n);return r>3&&n&&Object.defineProperty(e,i,n),n}"function"==typeof SuppressedError&&SuppressedError;
+function e(e,t,i,o){var r,n=arguments.length,a=n<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,i):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(e,t,i,o);else for(var s=e.length-1;s>=0;s--)(r=e[s])&&(a=(n<3?r(a):n>3?r(t,i,a):r(t,i))||a);return n>3&&a&&Object.defineProperty(t,i,a),a}"function"==typeof SuppressedError&&SuppressedError;
 /**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const e=globalThis,i=e.ShadowRoot&&(void 0===e.ShadyCSS||e.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,o=Symbol(),s=new WeakMap;class r{constructor(t,e,i){if(this._$cssResult$=!0,i!==o)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const e=this.t;if(i&&void 0===t){const i=void 0!==e&&1===e.length;i&&(t=s.get(e)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),i&&s.set(e,t))}return t}toString(){return this.cssText}}const n=(t,...e)=>{const i=1===t.length?t[0]:e.reduce((e,i,o)=>e+(t=>{if(!0===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+t[o+1],t[0]);return new r(i,t,o)},a=i?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const i of t.cssRules)e+=i.cssText;return(t=>new r("string"==typeof t?t:t+"",void 0,o))(e)})(t):t,{is:l,defineProperty:c,getOwnPropertyDescriptor:h,getOwnPropertyNames:d,getOwnPropertySymbols:u,getPrototypeOf:p}=Object,y=globalThis,g=y.trustedTypes,f=g?g.emptyScript:"",v=y.reactiveElementPolyfillSupport,m=(t,e)=>t,b={toAttribute(t,e){switch(e){case Boolean:t=t?f:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t)}return t},fromAttribute(t,e){let i=t;switch(e){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t)}catch(t){i=null}}return i}},x=(t,e)=>!l(t,e),$={attribute:!0,type:String,converter:b,reflect:!1,useDefault:!1,hasChanged:x};
+const t=globalThis,i=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,o=Symbol(),r=new WeakMap;class n{constructor(e,t,i){if(this._$cssResult$=!0,i!==o)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(i&&void 0===e){const i=void 0!==t&&1===t.length;i&&(e=r.get(t)),void 0===e&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),i&&r.set(t,e))}return e}toString(){return this.cssText}}const a=(e,...t)=>{const i=1===e.length?e[0]:t.reduce((t,i,o)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if("number"==typeof e)return e;throw Error("Value passed to 'css' function must be a 'css' function result: "+e+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+e[o+1],e[0]);return new n(i,e,o)},s=i?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t="";for(const i of e.cssRules)t+=i.cssText;return(e=>new n("string"==typeof e?e:e+"",void 0,o))(t)})(e):e,{is:l,defineProperty:d,getOwnPropertyDescriptor:c,getOwnPropertyNames:h,getOwnPropertySymbols:p,getPrototypeOf:u}=Object,y=globalThis,g=y.trustedTypes,f=g?g.emptyScript:"",m=y.reactiveElementPolyfillSupport,b=(e,t)=>e,x={toAttribute(e,t){switch(t){case Boolean:e=e?f:null;break;case Object:case Array:e=null==e?e:JSON.stringify(e)}return e},fromAttribute(e,t){let i=e;switch(t){case Boolean:i=null!==e;break;case Number:i=null===e?null:Number(e);break;case Object:case Array:try{i=JSON.parse(e)}catch(e){i=null}}return i}},v=(e,t)=>!l(e,t),w={attribute:!0,type:String,converter:x,reflect:!1,useDefault:!1,hasChanged:v};
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */Symbol.metadata??=Symbol("metadata"),y.litPropertyMetadata??=new WeakMap;class w extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,e=$){if(e.state&&(e.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((e=Object.create(e)).wrapped=!0),this.elementProperties.set(t,e),!e.noAccessor){const i=Symbol(),o=this.getPropertyDescriptor(t,i,e);void 0!==o&&c(this.prototype,t,o)}}static getPropertyDescriptor(t,e,i){const{get:o,set:s}=h(this.prototype,t)??{get(){return this[e]},set(t){this[e]=t}};return{get:o,set(e){const r=o?.call(this);s?.call(this,e),this.requestUpdate(t,r,i)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??$}static _$Ei(){if(this.hasOwnProperty(m("elementProperties")))return;const t=p(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(m("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(m("properties"))){const t=this.properties,e=[...d(t),...u(t)];for(const i of e)this.createProperty(i,t[i])}const t=this[Symbol.metadata];if(null!==t){const e=litPropertyMetadata.get(t);if(void 0!==e)for(const[t,i]of e)this.elementProperties.set(t,i)}this._$Eh=new Map;for(const[t,e]of this.elementProperties){const i=this._$Eu(t,e);void 0!==i&&this._$Eh.set(i,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const i=new Set(t.flat(1/0).reverse());for(const t of i)e.unshift(a(t))}else void 0!==t&&e.push(a(t));return e}static _$Eu(t,e){const i=e.attribute;return!1===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,e=this.constructor.elementProperties;for(const i of e.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((t,o)=>{if(i)t.adoptedStyleSheets=o.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const i of o){const o=document.createElement("style"),s=e.litNonce;void 0!==s&&o.setAttribute("nonce",s),o.textContent=i.cssText,t.appendChild(o)}})(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,e,i){this._$AK(t,i)}_$ET(t,e){const i=this.constructor.elementProperties.get(t),o=this.constructor._$Eu(t,i);if(void 0!==o&&!0===i.reflect){const s=(void 0!==i.converter?.toAttribute?i.converter:b).toAttribute(e,i.type);this._$Em=t,null==s?this.removeAttribute(o):this.setAttribute(o,s),this._$Em=null}}_$AK(t,e){const i=this.constructor,o=i._$Eh.get(t);if(void 0!==o&&this._$Em!==o){const t=i.getPropertyOptions(o),s="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:b;this._$Em=o;const r=s.fromAttribute(e,t.type);this[o]=r??this._$Ej?.get(o)??r,this._$Em=null}}requestUpdate(t,e,i,o=!1,s){if(void 0!==t){const r=this.constructor;if(!1===o&&(s=this[t]),i??=r.getPropertyOptions(t),!((i.hasChanged??x)(s,e)||i.useDefault&&i.reflect&&s===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,i))))return;this.C(t,e,i)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(t,e,{useDefault:i,reflect:o,wrapped:s},r){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??e??this[t]),!0!==s||void 0!==r)||(this._$AL.has(t)||(this.hasUpdated||i||(e=void 0),this._$AL.set(t,e)),!0===o&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,e]of this._$Ep)this[t]=e;this._$Ep=void 0}const t=this.constructor.elementProperties;if(t.size>0)for(const[e,i]of t){const{wrapped:t}=i,o=this[e];!0!==t||this._$AL.has(e)||void 0===o||this.C(e,void 0,i,o)}}let t=!1;const e=this._$AL;try{t=this.shouldUpdate(e),t?(this.willUpdate(e),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(e)):this._$EM()}catch(e){throw t=!1,this._$EM(),e}t&&this._$AE(e)}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(t){}firstUpdated(t){}}w.elementStyles=[],w.shadowRootOptions={mode:"open"},w[m("elementProperties")]=new Map,w[m("finalized")]=new Map,v?.({ReactiveElement:w}),(y.reactiveElementVersions??=[]).push("2.1.2");
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-const _=globalThis,A=t=>t,E=_.trustedTypes,S=E?E.createPolicy("lit-html",{createHTML:t=>t}):void 0,k="$lit$",C=`lit$${Math.random().toFixed(9).slice(2)}$`,L="?"+C,P=`<${L}>`,F=document,T=()=>F.createComment(""),M=t=>null===t||"object"!=typeof t&&"function"!=typeof t,R=Array.isArray,B="[ \t\n\f\r]",D=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,I=/-->/g,U=/>/g,O=RegExp(`>|${B}(?:([^\\s"'>=/]+)(${B}*=${B}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),z=/'/g,N=/"/g,H=/^(?:script|style|textarea|title)$/i,j=t=>(e,...i)=>({_$litType$:t,strings:e,values:i}),W=j(1),V=j(2),G=Symbol.for("lit-noChange"),q=Symbol.for("lit-nothing"),Q=new WeakMap,Y=F.createTreeWalker(F,129);function X(t,e){if(!R(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==S?S.createHTML(e):e}const J=(t,e)=>{const i=t.length-1,o=[];let s,r=2===e?"<svg>":3===e?"<math>":"",n=D;for(let e=0;e<i;e++){const i=t[e];let a,l,c=-1,h=0;for(;h<i.length&&(n.lastIndex=h,l=n.exec(i),null!==l);)h=n.lastIndex,n===D?"!--"===l[1]?n=I:void 0!==l[1]?n=U:void 0!==l[2]?(H.test(l[2])&&(s=RegExp("</"+l[2],"g")),n=O):void 0!==l[3]&&(n=O):n===O?">"===l[0]?(n=s??D,c=-1):void 0===l[1]?c=-2:(c=n.lastIndex-l[2].length,a=l[1],n=void 0===l[3]?O:'"'===l[3]?N:z):n===N||n===z?n=O:n===I||n===U?n=D:(n=O,s=void 0);const d=n===O&&t[e+1].startsWith("/>")?" ":"";r+=n===D?i+P:c>=0?(o.push(a),i.slice(0,c)+k+i.slice(c)+C+d):i+C+(-2===c?e:d)}return[X(t,r+(t[i]||"<?>")+(2===e?"</svg>":3===e?"</math>":"")),o]};class K{constructor({strings:t,_$litType$:e},i){let o;this.parts=[];let s=0,r=0;const n=t.length-1,a=this.parts,[l,c]=J(t,e);if(this.el=K.createElement(l,i),Y.currentNode=this.el.content,2===e||3===e){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes)}for(;null!==(o=Y.nextNode())&&a.length<n;){if(1===o.nodeType){if(o.hasAttributes())for(const t of o.getAttributeNames())if(t.endsWith(k)){const e=c[r++],i=o.getAttribute(t).split(C),n=/([.?@])?(.*)/.exec(e);a.push({type:1,index:s,name:n[2],strings:i,ctor:"."===n[1]?ot:"?"===n[1]?st:"@"===n[1]?rt:it}),o.removeAttribute(t)}else t.startsWith(C)&&(a.push({type:6,index:s}),o.removeAttribute(t));if(H.test(o.tagName)){const t=o.textContent.split(C),e=t.length-1;if(e>0){o.textContent=E?E.emptyScript:"";for(let i=0;i<e;i++)o.append(t[i],T()),Y.nextNode(),a.push({type:2,index:++s});o.append(t[e],T())}}}else if(8===o.nodeType)if(o.data===L)a.push({type:2,index:s});else{let t=-1;for(;-1!==(t=o.data.indexOf(C,t+1));)a.push({type:7,index:s}),t+=C.length-1}s++}}static createElement(t,e){const i=F.createElement("template");return i.innerHTML=t,i}}function Z(t,e,i=t,o){if(e===G)return e;let s=void 0!==o?i._$Co?.[o]:i._$Cl;const r=M(e)?void 0:e._$litDirective$;return s?.constructor!==r&&(s?._$AO?.(!1),void 0===r?s=void 0:(s=new r(t),s._$AT(t,i,o)),void 0!==o?(i._$Co??=[])[o]=s:i._$Cl=s),void 0!==s&&(e=Z(t,s._$AS(t,e.values),s,o)),e}class tt{constructor(t,e){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:e},parts:i}=this._$AD,o=(t?.creationScope??F).importNode(e,!0);Y.currentNode=o;let s=Y.nextNode(),r=0,n=0,a=i[0];for(;void 0!==a;){if(r===a.index){let e;2===a.type?e=new et(s,s.nextSibling,this,t):1===a.type?e=new a.ctor(s,a.name,a.strings,this,t):6===a.type&&(e=new nt(s,this,t)),this._$AV.push(e),a=i[++n]}r!==a?.index&&(s=Y.nextNode(),r++)}return Y.currentNode=F,o}p(t){let e=0;for(const i of this._$AV)void 0!==i&&(void 0!==i.strings?(i._$AI(t,i,e),e+=i.strings.length-2):i._$AI(t[e])),e++}}class et{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,e,i,o){this.type=2,this._$AH=q,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=i,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return void 0!==e&&11===t?.nodeType&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=Z(this,t,e),M(t)?t===q||null==t||""===t?(this._$AH!==q&&this._$AR(),this._$AH=q):t!==this._$AH&&t!==G&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):(t=>R(t)||"function"==typeof t?.[Symbol.iterator])(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==q&&M(this._$AH)?this._$AA.nextSibling.data=t:this.T(F.createTextNode(t)),this._$AH=t}$(t){const{values:e,_$litType$:i}=t,o="number"==typeof i?this._$AC(t):(void 0===i.el&&(i.el=K.createElement(X(i.h,i.h[0]),this.options)),i);if(this._$AH?._$AD===o)this._$AH.p(e);else{const t=new tt(o,this),i=t.u(this.options);t.p(e),this.T(i),this._$AH=t}}_$AC(t){let e=Q.get(t.strings);return void 0===e&&Q.set(t.strings,e=new K(t)),e}k(t){R(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let i,o=0;for(const s of t)o===e.length?e.push(i=new et(this.O(T()),this.O(T()),this,this.options)):i=e[o],i._$AI(s),o++;o<e.length&&(this._$AR(i&&i._$AB.nextSibling,o),e.length=o)}_$AR(t=this._$AA.nextSibling,e){for(this._$AP?.(!1,!0,e);t!==this._$AB;){const e=A(t).nextSibling;A(t).remove(),t=e}}setConnected(t){void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t))}}class it{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,e,i,o,s){this.type=1,this._$AH=q,this._$AN=void 0,this.element=t,this.name=e,this._$AM=o,this.options=s,i.length>2||""!==i[0]||""!==i[1]?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=q}_$AI(t,e=this,i,o){const s=this.strings;let r=!1;if(void 0===s)t=Z(this,t,e,0),r=!M(t)||t!==this._$AH&&t!==G,r&&(this._$AH=t);else{const o=t;let n,a;for(t=s[0],n=0;n<s.length-1;n++)a=Z(this,o[i+n],e,n),a===G&&(a=this._$AH[n]),r||=!M(a)||a!==this._$AH[n],a===q?t=q:t!==q&&(t+=(a??"")+s[n+1]),this._$AH[n]=a}r&&!o&&this.j(t)}j(t){t===q?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class ot extends it{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===q?void 0:t}}class st extends it{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==q)}}class rt extends it{constructor(t,e,i,o,s){super(t,e,i,o,s),this.type=5}_$AI(t,e=this){if((t=Z(this,t,e,0)??q)===G)return;const i=this._$AH,o=t===q&&i!==q||t.capture!==i.capture||t.once!==i.once||t.passive!==i.passive,s=t!==q&&(i===q||o);o&&this.element.removeEventListener(this.name,this,i),s&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class nt{constructor(t,e,i){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(t){Z(this,t)}}const at=_.litHtmlPolyfillSupport;at?.(K,et),(_.litHtmlVersions??=[]).push("3.3.3");const lt=globalThis;
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */class ct extends w{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=((t,e,i)=>{const o=i?.renderBefore??e;let s=o._$litPart$;if(void 0===s){const t=i?.renderBefore??null;o._$litPart$=s=new et(e.insertBefore(T(),t),t,void 0,i??{})}return s._$AI(t),s})(e,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return G}}ct._$litElement$=!0,ct.finalized=!0,lt.litElementHydrateSupport?.({LitElement:ct});const ht=lt.litElementPolyfillSupport;ht?.({LitElement:ct}),(lt.litElementVersions??=[]).push("4.2.2");
+ */Symbol.metadata??=Symbol("metadata"),y.litPropertyMetadata??=new WeakMap;class $ extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=w){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const i=Symbol(),o=this.getPropertyDescriptor(e,i,t);void 0!==o&&d(this.prototype,e,o)}}static getPropertyDescriptor(e,t,i){const{get:o,set:r}=c(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:o,set(t){const n=o?.call(this);r?.call(this,t),this.requestUpdate(e,n,i)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??w}static _$Ei(){if(this.hasOwnProperty(b("elementProperties")))return;const e=u(this);e.finalize(),void 0!==e.l&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(b("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(b("properties"))){const e=this.properties,t=[...h(e),...p(e)];for(const i of t)this.createProperty(i,e[i])}const e=this[Symbol.metadata];if(null!==e){const t=litPropertyMetadata.get(e);if(void 0!==t)for(const[e,i]of t)this.elementProperties.set(e,i)}this._$Eh=new Map;for(const[e,t]of this.elementProperties){const i=this._$Eu(e,t);void 0!==i&&this._$Eh.set(i,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const i=new Set(e.flat(1/0).reverse());for(const e of i)t.unshift(s(e))}else void 0!==e&&t.push(s(e));return t}static _$Eu(e,t){const i=t.attribute;return!1===i?void 0:"string"==typeof i?i:"string"==typeof e?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),void 0!==this.renderRoot&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const i of t.keys())this.hasOwnProperty(i)&&(e.set(i,this[i]),delete this[i]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((e,o)=>{if(i)e.adoptedStyleSheets=o.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(const i of o){const o=document.createElement("style"),r=t.litNonce;void 0!==r&&o.setAttribute("nonce",r),o.textContent=i.cssText,e.appendChild(o)}})(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,i){this._$AK(e,i)}_$ET(e,t){const i=this.constructor.elementProperties.get(e),o=this.constructor._$Eu(e,i);if(void 0!==o&&!0===i.reflect){const r=(void 0!==i.converter?.toAttribute?i.converter:x).toAttribute(t,i.type);this._$Em=e,null==r?this.removeAttribute(o):this.setAttribute(o,r),this._$Em=null}}_$AK(e,t){const i=this.constructor,o=i._$Eh.get(e);if(void 0!==o&&this._$Em!==o){const e=i.getPropertyOptions(o),r="function"==typeof e.converter?{fromAttribute:e.converter}:void 0!==e.converter?.fromAttribute?e.converter:x;this._$Em=o;const n=r.fromAttribute(t,e.type);this[o]=n??this._$Ej?.get(o)??n,this._$Em=null}}requestUpdate(e,t,i,o=!1,r){if(void 0!==e){const n=this.constructor;if(!1===o&&(r=this[e]),i??=n.getPropertyOptions(e),!((i.hasChanged??v)(r,t)||i.useDefault&&i.reflect&&r===this._$Ej?.get(e)&&!this.hasAttribute(n._$Eu(e,i))))return;this.C(e,t,i)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:i,reflect:o,wrapped:r},n){i&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,n??t??this[e]),!0!==r||void 0!==n)||(this._$AL.has(e)||(this.hasUpdated||i||(t=void 0),this._$AL.set(e,t)),!0===o&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}const e=this.scheduleUpdate();return null!=e&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}const e=this.constructor.elementProperties;if(e.size>0)for(const[t,i]of e){const{wrapped:e}=i,o=this[t];!0!==e||this._$AL.has(t)||void 0===o||this.C(t,void 0,i,o)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}}$.elementStyles=[],$.shadowRootOptions={mode:"open"},$[b("elementProperties")]=new Map,$[b("finalized")]=new Map,m?.({ReactiveElement:$}),(y.reactiveElementVersions??=[]).push("2.1.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}):customElements.define(t,e)},ut={attribute:!0,type:String,converter:b,reflect:!1,hasChanged:x},pt=(t=ut,e,i)=>{const{kind:o,metadata:s}=i;let r=globalThis.litPropertyMetadata.get(s);if(void 0===r&&globalThis.litPropertyMetadata.set(s,r=new Map),"setter"===o&&((t=Object.create(t)).wrapped=!0),r.set(i.name,t),"accessor"===o){const{name:o}=i;return{set(i){const s=e.get.call(this);e.set.call(this,i),this.requestUpdate(o,s,t,!0,i)},init(e){return void 0!==e&&this.C(o,void 0,t,e),e}}}if("setter"===o){const{name:o}=i;return function(i){const s=this[o];e.call(this,i),this.requestUpdate(o,s,t,!0,i)}}throw Error("Unsupported decorator location: "+o)};
+const _=globalThis,E=e=>e,A=_.trustedTypes,S=A?A.createPolicy("lit-html",{createHTML:e=>e}):void 0,L="$lit$",P=`lit$${Math.random().toFixed(9).slice(2)}$`,C="?"+P,k=`<${C}>`,F=document,T=()=>F.createComment(""),M=e=>null===e||"object"!=typeof e&&"function"!=typeof e,B=Array.isArray,R="[ \t\n\f\r]",I=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,D=/-->/g,z=/>/g,U=RegExp(`>|${R}(?:([^\\s"'>=/]+)(${R}*=${R}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),O=/'/g,N=/"/g,H=/^(?:script|style|textarea|title)$/i,j=e=>(t,...i)=>({_$litType$:e,strings:t,values:i}),W=j(1),V=j(2),G=Symbol.for("lit-noChange"),q=Symbol.for("lit-nothing"),Q=new WeakMap,Y=F.createTreeWalker(F,129);function X(e,t){if(!B(e)||!e.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==S?S.createHTML(t):t}const K=(e,t)=>{const i=e.length-1,o=[];let r,n=2===t?"<svg>":3===t?"<math>":"",a=I;for(let t=0;t<i;t++){const i=e[t];let s,l,d=-1,c=0;for(;c<i.length&&(a.lastIndex=c,l=a.exec(i),null!==l);)c=a.lastIndex,a===I?"!--"===l[1]?a=D:void 0!==l[1]?a=z:void 0!==l[2]?(H.test(l[2])&&(r=RegExp("</"+l[2],"g")),a=U):void 0!==l[3]&&(a=U):a===U?">"===l[0]?(a=r??I,d=-1):void 0===l[1]?d=-2:(d=a.lastIndex-l[2].length,s=l[1],a=void 0===l[3]?U:'"'===l[3]?N:O):a===N||a===O?a=U:a===D||a===z?a=I:(a=U,r=void 0);const h=a===U&&e[t+1].startsWith("/>")?" ":"";n+=a===I?i+k:d>=0?(o.push(s),i.slice(0,d)+L+i.slice(d)+P+h):i+P+(-2===d?t:h)}return[X(e,n+(e[i]||"<?>")+(2===t?"</svg>":3===t?"</math>":"")),o]};class J{constructor({strings:e,_$litType$:t},i){let o;this.parts=[];let r=0,n=0;const a=e.length-1,s=this.parts,[l,d]=K(e,t);if(this.el=J.createElement(l,i),Y.currentNode=this.el.content,2===t||3===t){const e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;null!==(o=Y.nextNode())&&s.length<a;){if(1===o.nodeType){if(o.hasAttributes())for(const e of o.getAttributeNames())if(e.endsWith(L)){const t=d[n++],i=o.getAttribute(e).split(P),a=/([.?@])?(.*)/.exec(t);s.push({type:1,index:r,name:a[2],strings:i,ctor:"."===a[1]?oe:"?"===a[1]?re:"@"===a[1]?ne:ie}),o.removeAttribute(e)}else e.startsWith(P)&&(s.push({type:6,index:r}),o.removeAttribute(e));if(H.test(o.tagName)){const e=o.textContent.split(P),t=e.length-1;if(t>0){o.textContent=A?A.emptyScript:"";for(let i=0;i<t;i++)o.append(e[i],T()),Y.nextNode(),s.push({type:2,index:++r});o.append(e[t],T())}}}else if(8===o.nodeType)if(o.data===C)s.push({type:2,index:r});else{let e=-1;for(;-1!==(e=o.data.indexOf(P,e+1));)s.push({type:7,index:r}),e+=P.length-1}r++}}static createElement(e,t){const i=F.createElement("template");return i.innerHTML=e,i}}function Z(e,t,i=e,o){if(t===G)return t;let r=void 0!==o?i._$Co?.[o]:i._$Cl;const n=M(t)?void 0:t._$litDirective$;return r?.constructor!==n&&(r?._$AO?.(!1),void 0===n?r=void 0:(r=new n(e),r._$AT(e,i,o)),void 0!==o?(i._$Co??=[])[o]=r:i._$Cl=r),void 0!==r&&(t=Z(e,r._$AS(e,t.values),r,o)),t}class ee{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:i}=this._$AD,o=(e?.creationScope??F).importNode(t,!0);Y.currentNode=o;let r=Y.nextNode(),n=0,a=0,s=i[0];for(;void 0!==s;){if(n===s.index){let t;2===s.type?t=new te(r,r.nextSibling,this,e):1===s.type?t=new s.ctor(r,s.name,s.strings,this,e):6===s.type&&(t=new ae(r,this,e)),this._$AV.push(t),s=i[++a]}n!==s?.index&&(r=Y.nextNode(),n++)}return Y.currentNode=F,o}p(e){let t=0;for(const i of this._$AV)void 0!==i&&(void 0!==i.strings?(i._$AI(e,i,t),t+=i.strings.length-2):i._$AI(e[t])),t++}}class te{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,i,o){this.type=2,this._$AH=q,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=i,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return void 0!==t&&11===e?.nodeType&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=Z(this,e,t),M(e)?e===q||null==e||""===e?(this._$AH!==q&&this._$AR(),this._$AH=q):e!==this._$AH&&e!==G&&this._(e):void 0!==e._$litType$?this.$(e):void 0!==e.nodeType?this.T(e):(e=>B(e)||"function"==typeof e?.[Symbol.iterator])(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==q&&M(this._$AH)?this._$AA.nextSibling.data=e:this.T(F.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:i}=e,o="number"==typeof i?this._$AC(e):(void 0===i.el&&(i.el=J.createElement(X(i.h,i.h[0]),this.options)),i);if(this._$AH?._$AD===o)this._$AH.p(t);else{const e=new ee(o,this),i=e.u(this.options);e.p(t),this.T(i),this._$AH=e}}_$AC(e){let t=Q.get(e.strings);return void 0===t&&Q.set(e.strings,t=new J(e)),t}k(e){B(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let i,o=0;for(const r of e)o===t.length?t.push(i=new te(this.O(T()),this.O(T()),this,this.options)):i=t[o],i._$AI(r),o++;o<t.length&&(this._$AR(i&&i._$AB.nextSibling,o),t.length=o)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const t=E(e).nextSibling;E(e).remove(),e=t}}setConnected(e){void 0===this._$AM&&(this._$Cv=e,this._$AP?.(e))}}class ie{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,i,o,r){this.type=1,this._$AH=q,this._$AN=void 0,this.element=e,this.name=t,this._$AM=o,this.options=r,i.length>2||""!==i[0]||""!==i[1]?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=q}_$AI(e,t=this,i,o){const r=this.strings;let n=!1;if(void 0===r)e=Z(this,e,t,0),n=!M(e)||e!==this._$AH&&e!==G,n&&(this._$AH=e);else{const o=e;let a,s;for(e=r[0],a=0;a<r.length-1;a++)s=Z(this,o[i+a],t,a),s===G&&(s=this._$AH[a]),n||=!M(s)||s!==this._$AH[a],s===q?e=q:e!==q&&(e+=(s??"")+r[a+1]),this._$AH[a]=s}n&&!o&&this.j(e)}j(e){e===q?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class oe extends ie{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===q?void 0:e}}class re extends ie{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==q)}}class ne extends ie{constructor(e,t,i,o,r){super(e,t,i,o,r),this.type=5}_$AI(e,t=this){if((e=Z(this,e,t,0)??q)===G)return;const i=this._$AH,o=e===q&&i!==q||e.capture!==i.capture||e.once!==i.once||e.passive!==i.passive,r=e!==q&&(i===q||o);o&&this.element.removeEventListener(this.name,this,i),r&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class ae{constructor(e,t,i){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(e){Z(this,e)}}const se=_.litHtmlPolyfillSupport;se?.(J,te),(_.litHtmlVersions??=[]).push("3.3.3");const le=globalThis;
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function yt(t){return(e,i)=>"object"==typeof i?pt(t,e,i):((t,e,i)=>{const o=e.hasOwnProperty(i);return e.constructor.createProperty(i,t),o?Object.getOwnPropertyDescriptor(e,i):void 0})(t,e,i)}
+ */class de extends ${constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=((e,t,i)=>{const o=i?.renderBefore??t;let r=o._$litPart$;if(void 0===r){const e=i?.renderBefore??null;o._$litPart$=r=new te(t.insertBefore(T(),e),e,void 0,i??{})}return r._$AI(e),r})(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return G}}de._$litElement$=!0,de.finalized=!0,le.litElementHydrateSupport?.({LitElement:de});const ce=le.litElementPolyfillSupport;ce?.({LitElement:de}),(le.litElementVersions??=[]).push("4.2.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function gt(t){return yt({...t,state:!0,attribute:!1})}const ft={sceneWidth:1920,sceneHeight:1080,solarArc:{centerX:960,centerY:-20,width:1300,height:220,sunRadius:16},panels:{left:{x:10,y:300,width:220,compact:!1},right:{x:1690,y:300,width:220,compact:!1}}},vt={sceneWidth:430,sceneHeight:1e3,solarArc:{centerX:215,centerY:40,width:340,height:50,sunRadius:10},panels:{left:{x:18,y:540,width:185,compact:!0},right:{x:227,y:540,width:185,compact:!0}}};function mt(t,e){return{id:t,power:e,active:e>1,intensity:Math.min(1,e/5e3)}}function bt(t){return Number(t?.attributes?.cloud_coverage??0)}function xt(t){return t>40}function $t(t,e,i){const o=function(t){const e=t?.states;if(e){if(e["weather.smhi_weather"])return e["weather.smhi_weather"];for(const t of Object.keys(e))if(t.startsWith("weather."))return e[t]}}(t),s=function(t){switch(t?.state??""){case"rainy":case"pouring":case"lightning-rainy":return"rain";case"cloudy":case"exceptional":return"cloudy";default:return xt(bt(t))?"cloudy":"clear"}}(o),r=function(t){return"mobile"===t?"landscape":"villa"}(i),n=function(t,e,i){if("rain"===e)return{folder:"weather",filename:`${i}_rain.webp`};switch(t){case"night":return{folder:"night",filename:"cloudy"===e?`${i}_night_cloudy.webp`:`${i}_night_clear.webp`};case"bluehour":return{folder:"evening",filename:`${i}_bluehour.webp`};case"sunset":return{folder:"evening",filename:`${i}_evening.webp`};default:return{folder:"day",filename:"cloudy"===e?`${i}_day_cloudy.webp`:`${i}_day_clear.webp`}}}(e,s,r);return a=n.folder,l=n.filename,`/hacsfiles/solar-battery-economy-flow-card/assets/backgrounds/${a}/${l}`;var a,l}function wt(t){return t.waypoints&&t.waypoints.length>0?function(t,e=20){if(t.length<2)return"";let i=`M ${t[0].x} ${t[0].y}`;for(let o=1;o<t.length-1;o++){const s=t[o-1],r=t[o],n=t[o+1],a=r.x-s.x,l=r.y-s.y,c=n.x-r.x,h=n.y-r.y,d=r.x-Math.sign(a)*e,u=r.y-Math.sign(l)*e,p=r.x+Math.sign(c)*e,y=r.y+Math.sign(h)*e;i+=`\n      L ${d} ${u}\n      Q ${r.x} ${r.y}\n        ${p} ${y}\n    `}const o=t[t.length-1];return i+=`\n    L ${o.x} ${o.y}\n  `,i}([t.start,...t.waypoints,t.end],t.radius??38):(e=t.start.x,i=t.start.y,o=t.end.x,s=t.end.y,`\n    M ${e} ${i}\n    L ${o} ${s}\n  `);var e,i,o,s}function _t(t){const e=Math.abs(t);return e<300?{particleCount:4,duration:6,lineOpacity:.1,lineWidth:2,sparkInterval:9}:e<800?{particleCount:6,duration:5.2,lineOpacity:.14,lineWidth:2.3,sparkInterval:7}:e<1500?{particleCount:8,duration:4.4,lineOpacity:.18,lineWidth:2.6,sparkInterval:6}:e<3e3?{particleCount:10,duration:3.7,lineOpacity:.22,lineWidth:2.9,sparkInterval:5}:e<5e3?{particleCount:12,duration:3,lineOpacity:.26,lineWidth:3.2,sparkInterval:4}:{particleCount:14,duration:2.2,lineOpacity:.3,lineWidth:3.5,sparkInterval:3}}function At(t,e){const i=Math.abs(t);return i<=1?{active:!1,color:e,opacity:0,blur:0}:i<300?{active:!0,color:e,opacity:.03,blur:8}:i<800?{active:!0,color:e,opacity:.045,blur:10}:i<1500?{active:!0,color:e,opacity:.06,blur:12}:i<3e3?{active:!0,color:e,opacity:.08,blur:14}:i<5e3?{active:!0,color:e,opacity:.1,blur:16}:{active:!0,color:e,opacity:.12,blur:18}}const Et=3.5;function St(t){return t.waypoints&&t.waypoints.length>0?[t.start,...t.waypoints,t.end]:[t.start,t.end]}function kt(t){const e=43758.5453*Math.sin(12.9898*t);return e-Math.floor(e)}function Ct(t){let e=0;for(let i=0;i<t.length;i++)e=(31*e+t.charCodeAt(i))%1e5;return e}function Lt(t,e,i,o,s){const r=e+53.1*t,n=kt(r+4.3)*s,a=.85+.3*kt(r+8.9),l=.8+.5*kt(r+13.1),c=function(t,e){let i=`M ${t[0].x} ${t[0].y}`;for(let o=0;o<t.length-1;o++){const s=t[o],r=t[o+1],n=r.x-s.x,a=-(r.y-s.y),l=n,c=Math.max(1,Math.hypot(a,l)),h=14*(kt(e+31.7*o)-.5);i+=` Q ${(s.x+r.x)/2+a/c*h} ${(s.y+r.y)/2+l/c*h} ${r.x} ${r.y}`}return i}(i,r),h=s*a,d=2*l;return V`
+ */
+const he=e=>(t,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(e,t)}):customElements.define(e,t)},pe={attribute:!0,type:String,converter:x,reflect:!1,hasChanged:v},ue=(e=pe,t,i)=>{const{kind:o,metadata:r}=i;let n=globalThis.litPropertyMetadata.get(r);if(void 0===n&&globalThis.litPropertyMetadata.set(r,n=new Map),"setter"===o&&((e=Object.create(e)).wrapped=!0),n.set(i.name,e),"accessor"===o){const{name:o}=i;return{set(i){const r=t.get.call(this);t.set.call(this,i),this.requestUpdate(o,r,e,!0,i)},init(t){return void 0!==t&&this.C(o,void 0,e,t),t}}}if("setter"===o){const{name:o}=i;return function(i){const r=this[o];t.call(this,i),this.requestUpdate(o,r,e,!0,i)}}throw Error("Unsupported decorator location: "+o)};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function ye(e){return(t,i)=>"object"==typeof i?ue(e,t,i):((e,t,i)=>{const o=t.hasOwnProperty(i);return t.constructor.createProperty(i,e),o?Object.getOwnPropertyDescriptor(t,i):void 0})(e,t,i)}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function ge(e){return ye({...e,state:!0,attribute:!1})}const fe={sceneWidth:1920,sceneHeight:1080,solarArc:{centerX:960,centerY:-20,width:1300,height:220,sunRadius:16},panels:{left:{x:10,y:300,width:220,compact:!1},right:{x:1690,y:300,width:220,compact:!1}}},me={sceneWidth:430,sceneHeight:1e3,solarArc:{centerX:215,centerY:40,width:340,height:50,sunRadius:10},panels:{left:{x:18,y:550,width:394,compact:!0},right:{x:227,y:540,width:185,compact:!0}}};function be(e,t){return{id:e,power:t,active:t>1,intensity:Math.min(1,t/5e3)}}function xe(e,t,i){if(!t)return null;const o=e?.states?.[t];if(!o)return null;const r=o.state,n="number"==typeof r?r:"string"==typeof r&&""!==r.trim()?Number(r):NaN;if(!Number.isFinite(n))return null;const a=o.attributes??{};if(a.device_class&&a.device_class!==i)return null;const s="string"==typeof a.unit_of_measurement?a.unit_of_measurement.trim().toLowerCase():"";return"power"===i?"w"===s?n:"kw"===s?1e3*n:null:"a"===s?n:"ma"===s?n/1e3:null}function ve(e){return Number(e?.attributes?.cloud_coverage??0)}function we(e){return e>40}function $e(e,t,i){const o=function(e){const t=e?.states;if(t){if(t["weather.smhi_weather"])return t["weather.smhi_weather"];for(const e of Object.keys(t))if(e.startsWith("weather."))return t[e]}}(e),r=function(e){switch(e?.state??""){case"rainy":case"pouring":case"lightning-rainy":return"rain";case"cloudy":case"exceptional":return"cloudy";default:return we(ve(e))?"cloudy":"clear"}}(o),n=function(e){return"mobile"===e?"landscape":"villa"}(i),a=function(e,t,i){if("rain"===t)return{folder:"weather",filename:`${i}_rain.webp`};switch(e){case"night":return{folder:"night",filename:"cloudy"===t?`${i}_night_cloudy.webp`:`${i}_night_clear.webp`};case"bluehour":return{folder:"evening",filename:`${i}_bluehour.webp`};case"sunset":return{folder:"evening",filename:`${i}_evening.webp`};default:return{folder:"day",filename:"cloudy"===t?`${i}_day_cloudy.webp`:`${i}_day_clear.webp`}}}(t,r,n);return s=a.folder,l=a.filename,`/hacsfiles/solar-battery-economy-flow-card/assets/backgrounds/${s}/${l}`;var s,l}function _e(e){return e.waypoints&&e.waypoints.length>0?function(e,t=20){if(e.length<2)return"";let i=`M ${e[0].x} ${e[0].y}`;for(let o=1;o<e.length-1;o++){const r=e[o-1],n=e[o],a=e[o+1],s=n.x-r.x,l=n.y-r.y,d=a.x-n.x,c=a.y-n.y,h=n.x-Math.sign(s)*t,p=n.y-Math.sign(l)*t,u=n.x+Math.sign(d)*t,y=n.y+Math.sign(c)*t;i+=`\n      L ${h} ${p}\n      Q ${n.x} ${n.y}\n        ${u} ${y}\n    `}const o=e[e.length-1];return i+=`\n    L ${o.x} ${o.y}\n  `,i}([e.start,...e.waypoints,e.end],e.radius??38):(t=e.start.x,i=e.start.y,o=e.end.x,r=e.end.y,`\n    M ${t} ${i}\n    L ${o} ${r}\n  `);var t,i,o,r}function Ee(e){const t=Math.abs(e);return t<300?{particleCount:4,duration:6,lineOpacity:.1,lineWidth:2,sparkInterval:9}:t<800?{particleCount:6,duration:5.2,lineOpacity:.14,lineWidth:2.3,sparkInterval:7}:t<1500?{particleCount:8,duration:4.4,lineOpacity:.18,lineWidth:2.6,sparkInterval:6}:t<3e3?{particleCount:10,duration:3.7,lineOpacity:.22,lineWidth:2.9,sparkInterval:5}:t<5e3?{particleCount:12,duration:3,lineOpacity:.26,lineWidth:3.2,sparkInterval:4}:{particleCount:14,duration:2.2,lineOpacity:.3,lineWidth:3.5,sparkInterval:3}}function Ae(e,t){const i=Math.abs(e);return i<=1?{active:!1,color:t,opacity:0,blur:0}:i<300?{active:!0,color:t,opacity:.03,blur:8}:i<800?{active:!0,color:t,opacity:.045,blur:10}:i<1500?{active:!0,color:t,opacity:.06,blur:12}:i<3e3?{active:!0,color:t,opacity:.08,blur:14}:i<5e3?{active:!0,color:t,opacity:.1,blur:16}:{active:!0,color:t,opacity:.12,blur:18}}const Se=3.5;function Le(e){return e.waypoints&&e.waypoints.length>0?[e.start,...e.waypoints,e.end]:[e.start,e.end]}function Pe(e){const t=43758.5453*Math.sin(12.9898*e);return t-Math.floor(t)}function Ce(e){let t=0;for(let i=0;i<e.length;i++)t=(31*t+e.charCodeAt(i))%1e5;return t}function ke(e,t,i,o,r){const n=t+53.1*e,a=Pe(n+4.3)*r,s=.85+.3*Pe(n+8.9),l=.8+.5*Pe(n+13.1),d=function(e,t){let i=`M ${e[0].x} ${e[0].y}`;for(let o=0;o<e.length-1;o++){const r=e[o],n=e[o+1],a=n.x-r.x,s=-(n.y-r.y),l=a,d=Math.max(1,Math.hypot(s,l)),c=14*(Pe(t+31.7*o)-.5);i+=` Q ${(r.x+n.x)/2+s/d*c} ${(r.y+n.y)/2+l/d*c} ${n.x} ${n.y}`}return i}(i,n),c=r*s,h=2*l;return V`
         <g class="energy-particle">
 
             <circle
@@ -46,68 +46,68 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
                 filter="url(#energy-glow)"
             >
                 <animateMotion
-                    dur="${h}s"
-                    begin="-${n}s"
+                    dur="${c}s"
+                    begin="-${a}s"
                     repeatCount="indefinite"
                     calcMode="spline"
                     keySplines="0.3 0 0.7 1"
-                    path="${c}"
+                    path="${d}"
                 />
                 <animate
                     attributeName="opacity"
                     values="0;0.30;0.30;0"
                     keyTimes="0;0.10;0.85;1"
-                    dur="${h}s"
-                    begin="-${n}s"
+                    dur="${c}s"
+                    begin="-${a}s"
                     repeatCount="indefinite"
                 />
             </circle>
 
             <circle
-                r="${d}"
+                r="${h}"
                 fill="#FFFFFF"
                 opacity="0"
             >
                 <animateMotion
-                    dur="${h}s"
-                    begin="-${n}s"
+                    dur="${c}s"
+                    begin="-${a}s"
                     repeatCount="indefinite"
                     calcMode="spline"
                     keySplines="0.3 0 0.7 1"
-                    path="${c}"
+                    path="${d}"
                 />
                 <animate
                     attributeName="opacity"
                     values="0;0.9;0.9;0"
                     keyTimes="0;0.10;0.85;1"
-                    dur="${h}s"
-                    begin="-${n}s"
+                    dur="${c}s"
+                    begin="-${a}s"
                     repeatCount="indefinite"
                 />
                 <animate
                     attributeName="r"
-                    values="${.85*d};${1.15*d};${.85*d}"
+                    values="${.85*h};${1.15*h};${.85*h}"
                     dur="1.6s"
                     repeatCount="indefinite"
                 />
             </circle>
 
         </g>
-    `}function Pt(t,e){return V`
-        ${Array.from({length:2}).map((i,o)=>function(t,e,i){const o=St(t),s=Math.floor(Date.now()/(1e3*e.sparkInterval)),r=Ct(t.id)+41.7*i+97.3*s,n=o.length-1,a=Math.min(n-1,Math.floor(kt(r)*n)),l=o[a],c=o[a+1],h=.2+.6*kt(r+3.7),d=l.x+(c.x-l.x)*h,u=l.y+(c.y-l.y)*h,p=180*Math.atan2(c.y-l.y,c.x-l.x)/Math.PI,y=kt(r+9.1)*e.sparkInterval;return V`
-        <g transform="translate(${d}, ${u})" opacity="0">
+    `}function Fe(e,t){return V`
+        ${Array.from({length:2}).map((i,o)=>function(e,t,i){const o=Le(e),r=Math.floor(Date.now()/(1e3*t.sparkInterval)),n=Ce(e.id)+41.7*i+97.3*r,a=o.length-1,s=Math.min(a-1,Math.floor(Pe(n)*a)),l=o[s],d=o[s+1],c=.2+.6*Pe(n+3.7),h=l.x+(d.x-l.x)*c,p=l.y+(d.y-l.y)*c,u=180*Math.atan2(d.y-l.y,d.x-l.x)/Math.PI,y=Pe(n+9.1)*t.sparkInterval;return V`
+        <g transform="translate(${h}, ${p})" opacity="0">
             <animate
                 attributeName="opacity"
                 values="0;0;1;0.5;0;0"
                 keyTimes="0;0.70;0.75;0.82;0.90;1"
-                dur="${e.sparkInterval}s"
+                dur="${t.sparkInterval}s"
                 begin="-${y}s"
                 repeatCount="indefinite"
             />
-            ${function(t,e,i,o){return V`
+            ${function(e,t,i,o){return V`
         <g
             class="energy-spark"
-            transform="translate(${t} ${e}) rotate(${i})"
+            transform="translate(${e} ${t}) rotate(${i})"
         >
 
             <!-- Main discharge -->
@@ -183,18 +183,18 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
             />
 
         </g>
-    `}(0,0,p,t.color)}
+    `}(0,0,u,e.color)}
         </g>
-    `}(t,e,o))}
-    `}function Ft(t){if(!t.active||Math.abs(t.power)<1)return V``;const e=wt(t),i=(o=t.power,{flow:_t(o)}).flow;var o;return V`
+    `}(e,t,o))}
+    `}function Te(e){if(!e.active||Math.abs(e.power)<1)return V``;const t=_e(e),i=(o=e.power,{flow:Ee(o)}).flow;var o;return V`
 
         <g class="energy-edge">
 
             <path
                 class="energy-edge-line"
-                d="${e}"
+                d="${t}"
                 fill="none"
-                stroke="${t.color}"
+                stroke="${e.color}"
                 stroke-width="${i.lineWidth}"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -204,15 +204,15 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
                 "
             />
 
-            ${function(t,e){const i=St(t),o=Ct(t.id);return V`
-        ${Array.from({length:e.particleCount}).map((s,r)=>Lt(r,o,i,t.color,e.duration))}
-    `}(t,i)}
+            ${function(e,t){const i=Le(e),o=Ce(e.id);return V`
+        ${Array.from({length:t.particleCount}).map((r,n)=>ke(n,o,i,e.color,t.duration))}
+    `}(e,i)}
 
-            ${Pt(t,i)}
+            ${Fe(e,i)}
 
         </g>
 
-    `}function Tt(t,e,i){const o=function(t,e,i){return i.map(i=>{const o=e[i.liveFlow];return{id:i.id,start:i.getStart(t),end:i.getEnd(t),waypoints:i.getWaypoints?i.getWaypoints(t):[],power:o?.power??0,active:o?.active??!1,color:i.color,radius:i.radius}})}(t,e,i);return V`
+    `}function Me(e,t,i){const o=function(e,t,i){return i.map(i=>{const o=t[i.liveFlow];return{id:i.id,start:i.getStart(e),end:i.getEnd(e),waypoints:i.getWaypoints?i.getWaypoints(e):[],power:o?.power??0,active:o?.active??!1,color:i.color,radius:i.radius}})}(e,t,i);return V`
 
         ${V`
 
@@ -254,11 +254,11 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
     `}
         <g class="graph-engine">
-            ${o.map(t=>Ft(t))}
+            ${o.map(e=>Te(e))}
         </g>
-    `}function Mt(t,e){t.dispatchEvent(new CustomEvent("hass-more-info",{bubbles:!0,composed:!0,detail:{entityId:e}}))}function Rt(t,e,i,o,s,r){switch(t){case"solar":return function(t,e,i){return V`
+    `}function Be(e,t){e.dispatchEvent(new CustomEvent("hass-more-info",{bubbles:!0,composed:!0,detail:{entityId:t}}))}function Re(e,t,i,o,r,n){switch(e){case"solar":return function(e,t,i){return V`
         <g
-            transform="translate(${t}, ${e})"
+            transform="translate(${e}, ${t})"
             fill="none"
             stroke="${i}"
             stroke-width="2.2"
@@ -313,9 +313,9 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
             <line x1="-8.8" y1="-12.8" x2="-16.5" y2="-20"/>
 
         </g>
-    `}(e,i,s);case"house":return function(t,e,i){return V`
+    `}(t,i,r);case"house":return function(e,t,i){return V`
         <g
-            transform="translate(${t}, ${e}) scale(1.28)"
+            transform="translate(${e}, ${t}) scale(1.28)"
             fill="none"
             stroke="${i}"
             stroke-width="2.2"
@@ -393,10 +393,10 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
             />
 
         </g>
-    `}(e,i,s);case"grid":return function(t,e,i){return V`
+    `}(t,i,r);case"grid":return function(e,t,i){return V`
 
         <g
-            transform="translate(${t}, ${e}) scale(0.75, 0.90)"
+            transform="translate(${e}, ${t}) scale(0.75, 0.90)"
             fill="none"
             stroke="${i}"
             stroke-width="2.2"
@@ -466,26 +466,26 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
         </g>
 
-    `}(e,i,s);case"battery":{const t=Math.max(0,Math.min(100,r??0));return V`
-                <g transform="translate(${e}, ${i}) rotate(-90)">
+    `}(t,i,r);case"battery":{const e=Math.max(0,Math.min(100,n??0));return V`
+                <g transform="translate(${t}, ${i}) rotate(-90)">
 
                     <rect
                         x="-28"
                         y="-16"
-                        width="${56*(t/100)}"
+                        width="${56*(e/100)}"
                         height="32"
                         rx="2"
-                        fill="${s}"
+                        fill="${r}"
                         opacity="0.85"
                     />
 
                     <g
                         fill="none"
-                        stroke="${s}"
+                        stroke="${r}"
                         stroke-width="2"
                         stroke-linejoin="round"
                         stroke-linecap="round"
-                        style="filter: drop-shadow(0 0 4px ${s}80);"
+                        style="filter: drop-shadow(0 0 4px ${r}80);"
                     >
                         <rect
                             x="-30"
@@ -504,10 +504,10 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
                     </g>
 
                 </g>
-            `}case"car":return function(t,e,i){return V`
+            `}case"car":return function(e,t,i){return V`
 
         <g
-            transform="translate(${t}, ${e}) scale(1.02)"
+            transform="translate(${e}, ${t}) scale(1.02)"
             fill="none"
             stroke="${i}"
             stroke-width="2.2"
@@ -639,10 +639,10 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
         </g>
 
-    `}(e,i,s);case"spa":return function(t,e,i){return V`
+    `}(t,i,r);case"spa":return function(e,t,i){return V`
 
         <g
-            transform="translate(${t}, ${e}) scale(1.10)"
+            transform="translate(${e}, ${t}) scale(1.10)"
             fill="none"
             stroke="${i}"
             stroke-width="2.2"
@@ -722,10 +722,10 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
         </g>
 
-    `}(e,i,s);case"heatpump":return function(t,e,i){return V`
+    `}(t,i,r);case"heatpump":return function(e,t,i){return V`
 
         <g
-            transform="translate(${t}, ${e}) scale(1.0)"
+            transform="translate(${e}, ${t}) scale(1.0)"
             fill="none"
             stroke="${i}"
             stroke-width="2.2"
@@ -809,10 +809,10 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
         </g>
 
-    `}(e,i,s);case"appliance":return function(t,e,i){return V`
+    `}(t,i,r);case"appliance":return function(e,t,i){return V`
 
         <g
-            transform="translate(${t},${e}) scale(1.05)"
+            transform="translate(${e},${t}) scale(1.05)"
             fill="none"
             stroke="${i}"
             stroke-width="2.2"
@@ -903,41 +903,41 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
         </g>
 
-    `}(e,i,s);default:return V`
+    `}(t,i,r);default:return V`
                 <text
-                    x="${e}"
+                    x="${t}"
                     y="${i}"
-                    fill="${s}"
+                    fill="${r}"
                     font-size="${o}"
                     text-anchor="middle"
                     dominant-baseline="middle"
                 >
                     ?
                 </text>
-            `}}function Bt(t,e,i){const o=t.width<=155,s=o?.6:1,r=o?.65:1,n=o?25:32,a=o?30:55,l=16*s,c=24*s,h=18*s,d=13*s,u=18*s,p=28*s,y=56*s,g=78*s,f=100*s,v=(m=e.power,b=e.color??t.accentColor??"#FFFFFF",{glow:At(m,b),pulse:{active:Math.abs(m)>1,scale:1.015,duration:3.2}});var m,b;const x=t.width/2,$=t.height/2;return V`
+            `}}function Ie(e,t,i){const o=e.width<=155,r=o?.6:1,n=o?.65:1,a=o?22:34,s=o?30:49,l=17*r,d=(o?25:26)*r,c=(o?18:19)*r,h=14*r,p=o?50:78,u=e.width/2,y=p+(o?6:10),g=28*r,f=(o?56:59)*r,m=(o?78:82)*r,b=(o?100:105)*r,x=(v=t.power,w=t.color??e.accentColor??"#FFFFFF",{glow:Ae(v,w),pulse:{active:Math.abs(v)>1,scale:1.015,duration:3.2}});var v,w;const $=e.width/2,_=e.height/2;return V`
 
         <g
             class="energy-label"
-            transform="translate(${t.x}, ${t.y})"
+            transform="translate(${e.x}, ${e.y})"
             pointer-events="all"
             style="cursor:pointer;"
-            @click=${()=>{e.entityId&&Mt(i,e.entityId)}}
+            @click=${()=>{t.entityId&&Be(i,t.entityId)}}
         >
 
-            ${v.glow.active?V`
+            ${x.glow.active?V`
                     <rect
                         class="energy-label-glow"
                         x="-8"
                         y="-8"
-                        width="${t.width+16}"
-                        height="${t.height+16}"
+                        width="${e.width+16}"
+                        height="${e.height+16}"
                         rx="26"
                         ry="26"
-                        fill="${v.glow.color}"
+                        fill="${x.glow.color}"
                         style="
-                            filter: blur(${v.glow.blur}px);
-                            --glow-opacity-min: ${.5*v.glow.opacity};
-                            --glow-opacity-max: ${v.glow.opacity};
+                            filter: blur(${x.glow.blur}px);
+                            --glow-opacity-min: ${.5*x.glow.opacity};
+                            --glow-opacity-max: ${x.glow.opacity};
                         "
                     />
                 `:""}
@@ -945,82 +945,83 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
             <g>
 
                 <rect
-                    class="energy-label-frame${v.pulse.active?" is-pulsing":""}"
+                    class="energy-label-frame${x.pulse.active?" is-pulsing":""}"
                     filter="url(#label-shadow)"
-                    width="${t.width}"
-                    height="${t.height}"
+                    width="${e.width}"
+                    height="${e.height}"
 
                     rx="22"
                     ry="22"
 
-                    fill="rgba(18,24,34,0.72)"
+                    fill="rgba(249,252,255,0.94)"
 
-                    stroke="rgba(255,255,255,0.10)"
+                    stroke="rgba(255,255,255,0.94)"
 
                     stroke-width="1.5"
 
-                    style="transform-origin: ${x}px ${$}px;"
+                    style="transform-origin: ${$}px ${_}px;"
                 />
 
                 <text
                     class="energy-label-title"
-                    x="${u}"
-                    y="${p}"
+                    x="${y}"
+                    y="${g}"
                     font-size="${l}"
-                    fill="white"
+                    fill="#315474"
                     font-weight="700"
                 >
-                    ${t.title}
+                    ${e.title}
                 </text>
 
                 <g
                     transform="
                         translate(
-                            ${t.width-n},
-                            ${a}
+                            ${a},
+                            ${s}
                         )
-                        scale(${r})
+                        scale(${n})
                     "
                 >
-                    ${Rt(e.icon??t.icon,0,0,22,v.glow.color,e.soc)}
+                    ${Re(t.icon??e.icon,0,0,22,x.glow.color,t.soc)}
                 </g>
 
-                ${e.line1?V`
+                ${t.line1?V`
                         <text
                             class="energy-label-line1"
-                            x="${u}"
-                            y="${y}"
-                            font-size="${c}"
-                            fill="white"
+                            x="${y}"
+                            y="${f}"
+                            font-size="${d}"
+                            fill="#153653"
                             font-weight="700"
                         >
-                            ${e.line1}
+                            ${t.line1}
                         </text>
                     `:""}
 
-                ${e.line2?V`
+                ${t.line2?V`
                         <text
                             class="energy-label-line2"
-                            x="${u}"
-                            y="${g}"
-                            font-size="${h}"
-                            fill="white"
-                            opacity="0.92"
+                            x="${y}"
+                            y="${m}"
+                            font-size="${c}"
+                            fill="#345570"
+                            opacity="0.96"
                         >
-                            ${e.line2}
+                            ${t.line2}
                         </text>
                     `:""}
 
-                ${e.line3?V`
+                ${t.line3?V`
                         <text
                             class="energy-label-line3"
                             x="${u}"
-                            y="${f}"
-                            font-size="${d}"
-                            fill="white"
-                            opacity="0.70"
+                            y="${b}"
+                            font-size="${h}"
+                            text-anchor="middle"
+                            fill="#526d87"
+                            opacity="0.92"
                         >
-                            ${e.line3}
+                            ${t.line3}
                         </text>
                     `:""}
 
@@ -1028,7 +1029,7 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
         </g>
 
-    `}function Dt(t){return Math.abs(t)<1e3?`${Math.round(t)} W`:`${(t/1e3).toFixed(1)} kW`}function It(t){return{line1:Dt(t.power),line2:t.optionalValue??"",line3:t.status,entityId:t.powerEntity,power:t.power,...void 0!==t.soc?{soc:t.soc}:{},icon:t.icon,color:t.power>1?"#FF6B6B":"#8A93A3"}}function Ut(t,e,i){return V`
+    `}function De(e){return Math.abs(e)<1e3?`${Math.round(e)} W`:`${(e/1e3).toFixed(1)} kW`}function ze(e){return{line1:De(e.power),line2:e.optionalValue??"",line3:e.status,entityId:e.powerEntity,power:e.power,...void 0!==e.soc?{soc:e.soc}:{},icon:e.icon,color:e.power>1?"#FF6B6B":"#8A93A3"}}function Ue(e,t,i){return V`
         <defs>
             <filter
                 id="label-shadow"
@@ -1046,104 +1047,104 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
             </filter>
         </defs>
         <g class="energy-label-layer">
-            ${t.map(t=>{let o,s=t;switch(t.id){case"battery":o={line1:Dt((r=e).batteryPower),line2:(n=r.batterySoc,`${Math.round(n)}%`),line3:r.batteryStatus,entityId:r.batteryEntity,power:r.batteryPower,soc:r.batterySoc,color:r.batteryPower<-1?"#61FF8B":r.batteryPower>1?"#FFB347":"#FFFFFF"};break;case"house":o=function(t){return{line1:Dt(t.housePower),line2:"",line3:t.houseStatus,entityId:t.houseEntity,power:t.housePower,color:t.housePower>1?"#FF6B6B":"#8A93A3"}}(e);break;case"grid":o=function(t){return{line1:Dt(t.gridPower),line2:"",line3:t.gridStatus,entityId:t.gridEntity,power:t.gridPower,color:t.gridPower>1?"#FF6B6B":t.gridPower<-1?"#61FF8B":"#4FC3F7"}}(e);break;case"solar":o=function(t){return{line1:Dt(t.solarPower),line2:"",line3:t.solarStatus,entityId:t.solarEntity,power:t.solarPower,color:t.solarPower>1?"#FFD54A":"#8A93A3"}}(e);break;case"car":{const i=e.devices[0];if(!i||!i.enabled)return"";o=It(i),s={...t,title:i.title};break}case"spa":{const i=e.devices[1];if(!i||!i.enabled)return"";o=It(i),s={...t,title:i.title};break}case"heatpump":{const i=e.devices[2];if(!i||!i.enabled)return"";o=It(i),s={...t,title:i.title};break}case"appliance":{const i=e.devices[3];if(!i||!i.enabled)return"";o=It(i),s={...t,title:i.title};break}default:o={line1:"1234 W",line2:"",line3:"",power:0}}var r,n;return Bt(s,o,i)})}
+            ${e.map(e=>{let o,r=e;switch(e.id){case"battery":o={line1:De((n=t).batteryPower),line2:(a=n.batterySoc,`${Math.round(a)}%`),line3:n.batteryStatus,entityId:n.batteryEntity,power:n.batteryPower,soc:n.batterySoc,color:n.batteryPower<-1?"#61FF8B":n.batteryPower>1?"#FFB347":"#FFFFFF"};break;case"house":o=function(e){return{line1:De(e.housePower),line2:"",line3:e.houseStatus,entityId:e.houseEntity,power:e.housePower,color:e.housePower>1?"#FF6B6B":"#8A93A3"}}(t);break;case"grid":o=function(e){return{line1:De(e.gridPower),line2:"",line3:e.gridStatus,entityId:e.gridEntity,power:e.gridPower,color:e.gridPower>1?"#FF6B6B":e.gridPower<-1?"#61FF8B":"#4FC3F7"}}(t);break;case"solar":o=function(e){return{line1:De(e.solarPower),line2:"",line3:e.solarStatus,entityId:e.solarEntity,power:e.solarPower,color:e.solarPower>1?"#FFD54A":"#8A93A3"}}(t);break;case"car":{const i=t.devices[0];if(!i||!i.enabled)return"";o=ze(i),r={...e,title:i.title};break}case"spa":{const i=t.devices[1];if(!i||!i.enabled)return"";o=ze(i),r={...e,title:i.title};break}case"heatpump":{const i=t.devices[2];if(!i||!i.enabled)return"";o=ze(i),r={...e,title:i.title};break}case"appliance":{const i=t.devices[3];if(!i||!i.enabled)return"";o=ze(i),r={...e,title:i.title};break}default:o={line1:"1234 W",line2:"",line3:"",power:0}}var n,a;return Ie(r,o,i)})}
         </g>
-    `}const Ot=[{id:"solar",title:"SOLAR",icon:"solar",x:890,y:300,width:180,height:110,accentColor:"#FFD54A"},{id:"grid",title:"GRID",icon:"grid",x:480,y:440,width:180,height:110,accentColor:"#4FC3F7"},{id:"house",title:"HOUSE",icon:"house",x:890,y:600,width:180,height:110,accentColor:"#FFFFFF"},{id:"battery",title:"BATTERY",icon:"battery",x:1230,y:440,width:180,height:110,accentColor:"#FFFFFF"},{id:"spa",title:"SPA",icon:"spa",x:565,y:750,width:180,height:110,accentColor:"#FF8A65"},{id:"heatpump",title:"HEATPUMP",icon:"heatpump",x:790,y:850,width:180,height:110,accentColor:"#4FC3F7"},{id:"appliance",title:"APPLIANCE",icon:"appliance",x:1e3,y:850,width:180,height:110,accentColor:"#FFFFFF"},{id:"car",title:"CAR",icon:"car",x:1230,y:750,width:180,height:110,accentColor:"#81D4FA"}],zt=[{id:"solar",title:"SOLAR",icon:"solar",x:160,y:130,width:110,height:70,accentColor:"#FFD54A"},{id:"grid",title:"GRID",icon:"grid",x:25,y:220,width:110,height:70,accentColor:"#4FC3F7"},{id:"house",title:"HOUSE",icon:"house",x:160,y:300,width:110,height:70,accentColor:"#FFFFFF"},{id:"battery",title:"BATTERY",icon:"battery",x:300,y:220,width:110,height:70,accentColor:"#FFFFFF"},{id:"spa",title:"SPA",icon:"spa",x:25,y:460,width:105,height:70,accentColor:"#FF8A65"},{id:"heatpump",title:"HEATPUMP",icon:"heatpump",x:25,y:380,width:105,height:70,accentColor:"#4FC3F7"},{id:"appliance",title:"APPLIANCE",icon:"appliance",x:300,y:460,width:105,height:70,accentColor:"#FFFFFF"},{id:"car",title:"CAR",icon:"car",x:300,y:380,width:105,height:70,accentColor:"#81D4FA"}],Nt=[{id:"solar-house",liveFlow:"solar-house",getStart:t=>t.solar,getEnd:t=>t.houseTop,color:"#FFD54A"},{id:"solar-battery",liveFlow:"solar-battery",getStart:t=>t.solarRight,getEnd:t=>t.batteryTop,color:"#FFD54A"},{id:"solar-export",liveFlow:"solar-export",getStart:t=>t.solarLeft,getEnd:t=>t.gridTop,color:"#FFD54A"},{id:"battery-house",liveFlow:"battery-house",getStart:t=>t.batteryLeft,getEnd:t=>t.houseTopRight,color:"#59D990"},{id:"battery-grid",liveFlow:"battery-grid",getStart:t=>t.batteryUpperLeft,getEnd:t=>t.gridUpperRight,color:"#67F59B"},{id:"grid-house",liveFlow:"grid-house",getStart:t=>t.gridRight,getEnd:t=>t.houseTopLeft,color:"#FF6B6B"},{id:"grid-battery",liveFlow:"grid-battery",getStart:t=>t.gridUpperRight,getEnd:t=>t.batteryUpperLeft,color:"#FF6B6B"},{id:"house-spa",liveFlow:"house-spa",getStart:t=>t.houseBottomLeft,getEnd:t=>t.spa,color:"#FF6B6B"},{id:"house-heatpump",liveFlow:"house-heatpump",getStart:t=>t.houseBottomCenter,getEnd:t=>t.heatpump,color:"#FF6B6B"},{id:"house-appliance",liveFlow:"house-appliance",getStart:t=>t.houseBottomCenter,getEnd:t=>t.appliance,color:"#FF6B6B"},{id:"house-car",liveFlow:"house-car",getStart:t=>t.houseBottomRight,getEnd:t=>t.car,color:"#FF6B6B"}],Ht=[{id:"solar-house",liveFlow:"solar-house",getStart:t=>t.solarBottomCenter,getEnd:t=>t.houseTopCenter,color:"#FFD54A"},{id:"solar-battery",liveFlow:"solar-battery",getStart:t=>t.solarRight,getEnd:t=>t.batteryTop,color:"#FFD54A",radius:30},{id:"solar-export",liveFlow:"solar-export",getStart:t=>t.solarLeft,getEnd:t=>t.gridTop,color:"#FFD54A",radius:30},{id:"battery-house",liveFlow:"battery-house",getStart:t=>t.batteryLowerLeft,getEnd:t=>t.houseTopRight,color:"#59D990",radius:30},{id:"battery-grid",liveFlow:"battery-grid",getStart:t=>t.batteryLeft,getEnd:t=>t.gridRight,color:"#67F59B"},{id:"grid-house",liveFlow:"grid-house",getStart:t=>t.gridLowerRight,getEnd:t=>t.houseTopLeft,color:"#FF6B6B",radius:30},{id:"grid-battery",liveFlow:"grid-battery",getStart:t=>t.gridRight,getEnd:t=>t.batteryLeft,color:"#FF6B6B"},{id:"house-spa",liveFlow:"house-spa",getStart:t=>t.houseBottomCenter,getEnd:t=>t.spaRight,color:"#FF6B6B",radius:30},{id:"house-heatpump",liveFlow:"house-heatpump",getStart:t=>t.houseBottomLeft,getEnd:t=>t.heatpumpRight,color:"#FF6B6B",radius:30},{id:"house-appliance",liveFlow:"house-appliance",getStart:t=>t.houseBottomCenter,getEnd:t=>t.applianceLeft,color:"#FF6B6B",radius:30},{id:"house-car",liveFlow:"house-car",getStart:t=>t.houseBottomRight,getEnd:t=>t.carLeft,color:"#FF6B6B",radius:30}];function jt(t,e,i){return i.particleCount<=0?V``:V`
-        ${Array.from({length:i.particleCount}).map((o,s)=>function(t,e,i,o){const s=kt(7.31*t)-.5,r=kt(13.7*t+3)-.5,n=kt(19.1*t+11)-.5,a=kt(5.13*t+9)*o,l=.7+.6*kt(2.9*t+17),c=.85+.3*kt(3.7*t+23),h=i.x-e.x,d=-(i.y-e.y),u=h,p=Math.max(1,Math.hypot(d,u)),y=26*n,g=(e.x+i.x)/2+d/p*y,f=(e.y+i.y)/2+u/p*y,v=`M ${e.x+14*s} ${e.y+14*r} Q ${g} ${f} ${i.x} ${i.y}`,m=o*c;return V`
+    `}const Oe=[{id:"solar",title:"SOLAR",icon:"solar",x:880,y:300,width:200,height:120,anchorBounds:{x:880,y:300,width:200,height:120},accentColor:"#FFD54A"},{id:"grid",title:"GRID",icon:"grid",x:470,y:440,width:200,height:120,anchorBounds:{x:470,y:440,width:200,height:120},accentColor:"#4FC3F7"},{id:"house",title:"HOUSE",icon:"house",x:880,y:600,width:200,height:120,anchorBounds:{x:880,y:600,width:200,height:120},accentColor:"#FFFFFF"},{id:"battery",title:"BATTERY",icon:"battery",x:1220,y:440,width:200,height:120,anchorBounds:{x:1220,y:440,width:200,height:120},accentColor:"#FFFFFF"},{id:"spa",title:"SPA",icon:"spa",x:555,y:750,width:200,height:120,anchorBounds:{x:555,y:750,width:200,height:120},accentColor:"#FF8A65"},{id:"heatpump",title:"HEATPUMP",icon:"heatpump",x:780,y:820,width:200,height:120,anchorBounds:{x:780,y:820,width:200,height:120},accentColor:"#4FC3F7"},{id:"appliance",title:"APPLIANCE",icon:"appliance",x:990,y:820,width:200,height:120,anchorBounds:{x:990,y:820,width:200,height:120},accentColor:"#FFFFFF"},{id:"car",title:"CAR",icon:"car",x:1220,y:750,width:200,height:120,anchorBounds:{x:1220,y:750,width:200,height:120},accentColor:"#81D4FA"}],Ne=[{id:"solar",title:"SOLAR",icon:"solar",x:156,y:130,width:118,height:76,anchorBounds:{x:156,y:130,width:118,height:76},accentColor:"#FFD54A"},{id:"grid",title:"GRID",icon:"grid",x:21,y:220,width:118,height:76,anchorBounds:{x:21,y:220,width:118,height:76},accentColor:"#4FC3F7"},{id:"house",title:"HOUSE",icon:"house",x:156,y:300,width:118,height:76,anchorBounds:{x:156,y:300,width:118,height:76},accentColor:"#FFFFFF"},{id:"battery",title:"BATTERY",icon:"battery",x:296,y:220,width:118,height:76,anchorBounds:{x:296,y:220,width:118,height:76},accentColor:"#FFFFFF"},{id:"spa",title:"SPA",icon:"spa",x:18,y:460,width:118,height:76,anchorBounds:{x:18,y:460,width:118,height:76},accentColor:"#FF8A65"},{id:"heatpump",title:"HEATPUMP",icon:"heatpump",x:18,y:380,width:118,height:76,anchorBounds:{x:18,y:380,width:118,height:76},accentColor:"#4FC3F7"},{id:"appliance",title:"APPLIANCE",icon:"appliance",x:293,y:460,width:118,height:76,anchorBounds:{x:293,y:460,width:118,height:76},accentColor:"#FFFFFF"},{id:"car",title:"CAR",icon:"car",x:296,y:380,width:118,height:76,anchorBounds:{x:296,y:380,width:118,height:76},accentColor:"#81D4FA"}],He=[{id:"solar-house",liveFlow:"solar-house",getStart:e=>e.solar,getEnd:e=>e.houseTop,color:"#FFD54A"},{id:"solar-battery",liveFlow:"solar-battery",getStart:e=>e.solarRight,getEnd:e=>e.batteryTop,color:"#FFD54A"},{id:"solar-export",liveFlow:"solar-export",getStart:e=>e.solarLeft,getEnd:e=>e.gridTop,color:"#FFD54A"},{id:"battery-house",liveFlow:"battery-house",getStart:e=>e.batteryLeft,getEnd:e=>e.houseTopRight,color:"#59D990"},{id:"battery-grid",liveFlow:"battery-grid",getStart:e=>e.batteryUpperLeft,getEnd:e=>e.gridUpperRight,color:"#67F59B"},{id:"grid-house",liveFlow:"grid-house",getStart:e=>e.gridRight,getEnd:e=>e.houseTopLeft,color:"#FF6B6B"},{id:"grid-battery",liveFlow:"grid-battery",getStart:e=>e.gridUpperRight,getEnd:e=>e.batteryUpperLeft,color:"#FF6B6B"},{id:"house-spa",liveFlow:"house-spa",getStart:e=>e.houseBottomLeft,getEnd:e=>e.spa,color:"#FF6B6B"},{id:"house-heatpump",liveFlow:"house-heatpump",getStart:e=>e.houseBottomCenter,getEnd:e=>e.heatpump,color:"#FF6B6B"},{id:"house-appliance",liveFlow:"house-appliance",getStart:e=>e.houseBottomCenter,getEnd:e=>e.appliance,color:"#FF6B6B"},{id:"house-car",liveFlow:"house-car",getStart:e=>e.houseBottomRight,getEnd:e=>e.car,color:"#FF6B6B"}],je=[{id:"solar-house",liveFlow:"solar-house",getStart:e=>e.solarBottomCenter,getEnd:e=>e.houseTopCenter,color:"#FFD54A"},{id:"solar-battery",liveFlow:"solar-battery",getStart:e=>e.solarRight,getEnd:e=>e.batteryTop,color:"#FFD54A",radius:30},{id:"solar-export",liveFlow:"solar-export",getStart:e=>e.solarLeft,getEnd:e=>e.gridTop,color:"#FFD54A",radius:30},{id:"battery-house",liveFlow:"battery-house",getStart:e=>e.batteryLowerLeft,getEnd:e=>e.houseTopRight,color:"#59D990",radius:30},{id:"battery-grid",liveFlow:"battery-grid",getStart:e=>e.batteryLeft,getEnd:e=>e.gridRight,color:"#67F59B"},{id:"grid-house",liveFlow:"grid-house",getStart:e=>e.gridLowerRight,getEnd:e=>e.houseTopLeft,color:"#FF6B6B",radius:30},{id:"grid-battery",liveFlow:"grid-battery",getStart:e=>e.gridRight,getEnd:e=>e.batteryLeft,color:"#FF6B6B"},{id:"house-spa",liveFlow:"house-spa",getStart:e=>e.houseBottomCenter,getEnd:e=>e.spaRight,color:"#FF6B6B",radius:30},{id:"house-heatpump",liveFlow:"house-heatpump",getStart:e=>e.houseBottomLeft,getEnd:e=>e.heatpumpRight,color:"#FF6B6B",radius:30},{id:"house-appliance",liveFlow:"house-appliance",getStart:e=>e.houseBottomCenter,getEnd:e=>e.applianceLeft,color:"#FF6B6B",radius:30},{id:"house-car",liveFlow:"house-car",getStart:e=>e.houseBottomRight,getEnd:e=>e.carLeft,color:"#FF6B6B",radius:30}];function We(e,t,i){return i.particleCount<=0?V``:V`
+        ${Array.from({length:i.particleCount}).map((o,r)=>function(e,t,i,o){const r=Pe(7.31*e)-.5,n=Pe(13.7*e+3)-.5,a=Pe(19.1*e+11)-.5,s=Pe(5.13*e+9)*o,l=.7+.6*Pe(2.9*e+17),d=.85+.3*Pe(3.7*e+23),c=i.x-t.x,h=-(i.y-t.y),p=c,u=Math.max(1,Math.hypot(h,p)),y=26*a,g=(t.x+i.x)/2+h/u*y,f=(t.y+i.y)/2+p/u*y,m=`M ${t.x+14*r} ${t.y+14*n} Q ${g} ${f} ${i.x} ${i.y}`,b=o*d;return V`
         <circle
             r="${1.4*l}"
             fill="#FFE9A8"
             opacity="0"
         >
             <animateMotion
-                dur="${m}s"
-                begin="-${a}s"
+                dur="${b}s"
+                begin="-${s}s"
                 repeatCount="indefinite"
                 calcMode="spline"
                 keySplines="0.3 0 0.7 1"
-                path="${v}"
+                path="${m}"
             />
             <animate
                 attributeName="opacity"
                 values="0;0.55;0.55;0"
                 keyTimes="0;0.15;0.7;1"
-                dur="${m}s"
-                begin="-${a}s"
+                dur="${b}s"
+                begin="-${s}s"
                 repeatCount="indefinite"
             />
         </circle>
-    `}(s,t,e,i.duration))}
-    `}function Wt(t,e){return e<=0?V``:V`
-        ${Array.from({length:e}).map((e,i)=>function(t,e){const i=kt(17.3*t+31)*Math.PI*2,o=14+10*kt(23.9*t+5),s=2.2*kt(8.1*t+11),r=1.6+.8*kt(4.4*t+19),n=.7+.6*kt(6.7*t+41),a=Math.cos(i)*o,l=Math.sin(i)*o,c=`M ${e.x} ${e.y} L ${e.x+a} ${e.y+l}`;return V`
+    `}(r,e,t,i.duration))}
+    `}function Ve(e,t){return t<=0?V``:V`
+        ${Array.from({length:t}).map((t,i)=>function(e,t){const i=Pe(17.3*e+31)*Math.PI*2,o=14+10*Pe(23.9*e+5),r=2.2*Pe(8.1*e+11),n=1.6+.8*Pe(4.4*e+19),a=.7+.6*Pe(6.7*e+41),s=Math.cos(i)*o,l=Math.sin(i)*o,d=`M ${t.x} ${t.y} L ${t.x+s} ${t.y+l}`;return V`
         <circle
-            r="${1.3*n}"
+            r="${1.3*a}"
             fill="#FFE9A8"
             opacity="0"
         >
             <animateMotion
-                dur="${r}s"
-                begin="-${s}s"
+                dur="${n}s"
+                begin="-${r}s"
                 repeatCount="indefinite"
                 calcMode="spline"
                 keySplines="0.2 0 0.6 1"
-                path="${c}"
+                path="${d}"
             />
             <animate
                 attributeName="opacity"
                 values="0;0.70;0"
                 keyTimes="0;0.25;1"
-                dur="${r}s"
-                begin="-${s}s"
+                dur="${n}s"
+                begin="-${r}s"
                 repeatCount="indefinite"
             />
         </circle>
-    `}(i,t))}
-    `}function Vt(t,e,i){const{centerX:o,centerY:s,width:r,height:n,sunRadius:a}=e.solarArc,l={x:o-r/2,y:s+n},c={x:o,y:s-20},h={x:o+r/2,y:s+n},d=function(t,e,i,o){const s=1-t;return{x:s*s*e.x+2*s*t*i.x+t*t*o.x,y:s*s*e.y+2*s*t*i.y+t*t*o.y}}(t.progress,l,c,h),u=(e.sceneWidth<1e3?zt:Ot).find(t=>"solar"===t.id),p={x:u.x+u.width/2,y:u.y},y=function(t){const e=Math.max(0,t);return e<=0?{particleCount:0,duration:Et}:e<500?{particleCount:4,duration:Et}:e<1500?{particleCount:8,duration:Et}:e<3e3?{particleCount:12,duration:Et}:{particleCount:15,duration:Et}}(i);return V`
+    `}(i,e))}
+    `}function Ge(e,t,i){const{centerX:o,centerY:r,width:n,height:a,sunRadius:s}=t.solarArc,l={x:o-n/2,y:r+a},d={x:o,y:r-20},c={x:o+n/2,y:r+a},h=function(e,t,i,o){const r=1-e;return{x:r*r*t.x+2*r*e*i.x+e*e*o.x,y:r*r*t.y+2*r*e*i.y+e*e*o.y}}(e.progress,l,d,c),p=(t.sceneWidth<1e3?Ne:Oe).find(e=>"solar"===e.id),u={x:p.x+p.width/2,y:p.y},y=function(e){const t=Math.max(0,e);return t<=0?{particleCount:0,duration:Se}:t<500?{particleCount:4,duration:Se}:t<1500?{particleCount:8,duration:Se}:t<3e3?{particleCount:12,duration:Se}:{particleCount:15,duration:Se}}(i);return V`
     <svg
       class="solar-arc-svg"
       viewBox="0 0 1920 1080"
     >
       <path
         d="
-          M ${o-r/2}
-            ${s+n}
+          M ${o-n/2}
+            ${r+a}
 
           Q ${o}
-            ${s-20}
+            ${r-20}
 
-            ${o+r/2}
-            ${s+n}
+            ${o+n/2}
+            ${r+a}
         "
         class="solar-arc-path"
       />
-      ${t.aboveHorizon?V`
+      ${e.aboveHorizon?V`
               <circle
-                  cx="${d.x}"
-                  cy="${d.y}"
-                  r="${a}"
+                  cx="${h.x}"
+                  cy="${h.y}"
+                  r="${s}"
                   class="solar-arc-sun"
               />
           `:V``}
-      ${jt(d,p,y)}
-      ${Wt(d,y.particleCount)}
+      ${We(h,u,y)}
+      ${Ve(h,y.particleCount)}
       <text
-          x="${o-r/2}"
-          y="${s+n+28}"
+          x="${o-n/2}"
+          y="${r+a+28}"
           text-anchor="start"
           class="solar-arc-time"
       >
-          ${t.sunrise}
+          ${e.sunrise}
       </text>
       <text
-          x="${o+r/2}"
-          y="${s+n+28}"
+          x="${o+n/2}"
+          y="${r+a+28}"
           text-anchor="end"
           class="solar-arc-time"
       >
-          ${t.sunset}
+          ${e.sunset}
       </text>
     </svg>
-  `}const Gt=n`
+  `}const qe=a`
 .flow-layer {
 
     position: absolute;
@@ -1195,7 +1196,7 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
         infinite;
 }
 
-`,qt=n`
+`,Qe=a`
 
 .scene-sun-glow {
 
@@ -1289,7 +1290,7 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
     letter-spacing: 0.04em;
 }
 
-`,Qt=n`
+`,Ye=a`
  
 /*
  * Label frame pulse + glow pulse.
@@ -1340,13 +1341,19 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
         infinite;
 }
  
-`,Yt=n`
+`,Xe=a`
 :host {
     display: block;
     width: 100%;
     --ha-card-background: transparent;
     --ha-card-border-width: 0;
     --ha-card-box-shadow: none;
+    --info-card-bg: rgba(249, 252, 255, 0.93);
+    --info-card-bg-soft: rgba(241, 247, 252, 0.88);
+    --info-card-border: rgba(255, 255, 255, 0.88);
+    --info-card-text: #173652;
+    --info-card-muted: #526d87;
+    --info-card-shadow: 0 12px 30px rgba(8, 24, 42, 0.22);
 }
 .card {
     position: relative;
@@ -1427,6 +1434,94 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
     line-height: 1.2;
     pointer-events: none;
 }
+.phase-load-panel {
+    position: absolute;
+    z-index: 18;
+    top: 300px;
+    right: 20px;
+    width: 410px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    background: linear-gradient(145deg, var(--info-card-bg), var(--info-card-bg-soft));
+    box-shadow: var(--info-card-shadow);
+    backdrop-filter: blur(16px) saturate(1.18);
+    color: var(--info-card-text);
+    pointer-events: none;
+}
+.phase-load-title {
+    margin-bottom: 6px;
+    color: #315474;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+.phase-load-title::before {
+    content: "ϟ";
+    display: inline-block;
+    margin-right: 6px;
+    color: #1684b8;
+    font-size: 14px;
+    line-height: 0.8;
+    vertical-align: -1px;
+}
+.phase-load-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+}
+.phase-load-phase {
+    min-width: 0;
+    padding: 5px 8px;
+    border: 1px solid rgba(72, 108, 143, 0.14);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.58);
+}
+.phase-load-heading,
+.phase-load-details,
+.phase-load-values,
+.phase-load-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+.phase-load-heading { margin-bottom: 3px; }
+.phase-load-heading strong { color: #173652; font-size: 14px; }
+.phase-load-missing { color: #a35b16; font-size: 10px; }
+.phase-load-direction { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap; }
+.phase-load-direction.import { color: #ff6b6b; }
+.phase-load-direction.export { color: #57e889; }
+.phase-load-direction.missing { color: #9a671c; }
+.phase-load-values { font-size: 12px; font-variant-numeric: tabular-nums; color: #173652; }
+.phase-load-values { white-space: nowrap; }
+.phase-load-values span:last-child { color: var(--info-card-muted); }
+.phase-load-bar { display: grid; grid-template-columns: repeat(16, 1fr); gap: 2px; margin-top: 4px; }
+.phase-load-segment { height: 4px; border-radius: 2px; background: #d9e2eb; }
+.phase-load-phase.import .phase-load-segment.active { background: #ff6b6b; }
+.phase-load-phase.export .phase-load-segment.active { background: #57e889; }
+.phase-load-phase.missing .phase-load-segment.active { background: #9aa8b8; }
+.phase-load-footer { font-size: 10px; font-variant-numeric: tabular-nums; color: #173652; }
+.phase-load-footer span:last-child { color: var(--info-card-muted); }
+.phase-load-phase.warning .phase-load-footer span:last-child { color: #b87813; }
+.phase-load-phase.critical .phase-load-footer span:last-child { color: #bd3842; }
+.phase-load-phase.normal .phase-load-footer span:last-child { color: #278a49; }
+.phase-load-direction.phase-load-net { color: #315474; }
+.phase-load-summary-row .phase-load-values span { white-space: nowrap; }
+.phase-load-summary-row .phase-load-bar { visibility: hidden; }
+.card.mobile .phase-load-panel { top: 735px; right: auto; left: 3%; bottom: auto; width: 94%; padding: 7px 8px; }
+.card.mobile .phase-load-title { margin-bottom: 4px; }
+.card.mobile .phase-load-grid { gap: 3px; }
+.card.mobile .phase-load-phase { padding: 4px 6px; }
+.card.mobile .phase-load-heading { margin-bottom: 2px; }
+.card.mobile .phase-load-heading strong { font-size: 11px; }
+.card.mobile .phase-load-details { gap: 5px; }
+.card.mobile .phase-load-values { font-size: 10px; gap: 4px; }
+.card.mobile .phase-load-missing { font-size: 8px; }
+.card.mobile .phase-load-direction { font-size: 8px; }
+.card.mobile .phase-load-footer { font-size: 9px; }
+.card.mobile .phase-load-direction { letter-spacing: 0; }
 .side-panel {
     position: absolute;
     top: 20px;
@@ -1434,7 +1529,7 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
     width: 220px;
 
-    padding: 30px;
+    padding: 14px;
 
     box-sizing: border-box;
 
@@ -1442,11 +1537,11 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
     flex-direction: column;
     justify-content: flex-start;
 
-    border-radius: 22px;
+    border-radius: 18px;
 
-    border: 1px solid rgba(255,255,255,0.06);
+    border: 1px solid var(--info-card-border);
 
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(18px) saturate(1.16);
 
     z-index: 20;
 
@@ -1455,8 +1550,7 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
         border-color 0.8s ease,
         box-shadow 0.8s ease;
 
-    box-shadow:
-        0 20px 60px rgba(0,0,0,0.35);
+    box-shadow: var(--info-card-shadow);
 }
 
 .side-title {
@@ -1464,19 +1558,18 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
     display: flex;
     align-items: center;
 
-    color: rgba(180,205,230,.82);
+    color: #173c5d;
 
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 800;
 
     text-transform: uppercase;
 
-    letter-spacing: .20em;
+    letter-spacing: .11em;
 
-    margin-bottom: 32px;
+    margin-bottom: 10px;
 
-    text-shadow:
-        0 0 12px rgba(255,255,255,.08);
+    text-shadow: none;
 }
 
 .panel-section {
@@ -1484,7 +1577,7 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
     display: flex;
     flex-direction: column;
 
-    gap: 14px;
+    gap: 6px;
 }
 
 .panel-section-title {
@@ -1504,46 +1597,81 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 
 .side-stat {
 
+    position: relative;
     display: flex;
 
     flex-direction: column;
 
-    gap: 6px;
+    gap: 2px;
+    min-height: 42px;
+    justify-content: center;
+    padding: 6px 8px 6px 25px;
+    border: 1px solid rgba(211, 225, 238, 0.9);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 3px 9px rgba(28, 58, 86, 0.06);
+    transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.side-stat:hover {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(123, 166, 202, 0.72);
+    box-shadow: 0 5px 13px rgba(28, 58, 86, 0.1);
+}
+
+.side-stat::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: #278bc4;
+    box-shadow: 0 0 0 4px rgba(39, 139, 196, 0.11);
 }
 
 .side-label {
 
-    color: rgba(255,255,255,.56);
+    color: #526d87;
 
-    font-size: 11px;
+    font-size: 9px;
 
     font-weight: 600;
 
-    text-transform: uppercase;
+    text-transform: none;
 
-    letter-spacing: .08em;
+    letter-spacing: .01em;
 }
 
 .side-value {
 
-    color: white;
+    color: #173652;
 
-    font-size: 21px;
+    font-size: 16px;
 
     font-weight: 700;
 
     line-height: 1.05;
 
-    letter-spacing: -.03em;
+    letter-spacing: -.015em;
 
     transition:
-        color .35s ease,
-        text-shadow .35s ease;
+        color .35s ease;
 }
+
+.side-stat:has(.value-grid)::before { background: #e25d69; box-shadow: 0 0 0 4px rgba(226, 93, 105, 0.12); }
+.side-stat:has(.value-export)::before { background: #18a873; box-shadow: 0 0 0 4px rgba(24, 168, 115, 0.12); }
+.side-stat:has(.value-independence)::before { background: #288fc8; box-shadow: 0 0 0 4px rgba(40, 143, 200, 0.12); }
+.side-stat:has(.value-solar)::before { background: #e5a91b; box-shadow: 0 0 0 4px rgba(229, 169, 27, 0.14); }
+.side-stat:has(.value-battery)::before { background: #1aa873; box-shadow: 0 0 0 4px rgba(26, 168, 115, 0.12); }
+.side-stat:has(.value-co2)::before { background: #1aa873; box-shadow: 0 0 0 4px rgba(26, 168, 115, 0.12); }
+.side-stat:has(.value-money)::before { background: #1aa873; box-shadow: 0 0 0 4px rgba(26, 168, 115, 0.12); }
 
 .side-divider {
 
-    margin: 26px 0;
+    margin: 2px 0;
 
     height: 1px;
 
@@ -1551,7 +1679,7 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.08),
+            rgba(82,109,135,.18),
             transparent
         );
 }
@@ -1567,17 +1695,17 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
     align-items: flex-end;
 }
 .side-panel.compact {
-    padding: 18px;
+    padding: 8px;
 }
 
 .side-panel.compact .side-title {
-    font-size: 13px;
-    margin-bottom: 20px;
-    letter-spacing: .16em;
+    font-size: 12px;
+    margin-bottom: 6px;
+    letter-spacing: .08em;
 }
 
 .side-panel.compact .panel-section {
-    gap: 10px;
+    gap: 4px;
 }
 
 .side-panel.compact .panel-section-title {
@@ -1586,19 +1714,35 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 }
 
 .side-panel.compact .side-stat {
-    gap: 4px;
+    gap: 2px;
+    min-height: 35px;
+    padding: 4px 5px 4px 20px;
+}
+
+.card.mobile .side-panel-left .panel-section {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.card.mobile .side-panel-left .side-divider { grid-column: 1 / -1; }
+.card.mobile .side-panel-left .side-stat {
+    min-height: 26px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    gap: 1px;
 }
 
 .side-panel.compact .side-label {
-    font-size: 10px;
+    font-size: 9px;
 }
 
 .side-panel.compact .side-value {
-    font-size: 18px;
+    font-size: 14px;
 }
 
+.side-panel.compact .side-stat::before { left: 7px; width: 6px; height: 6px; }
+
 .side-panel.compact .side-divider {
-    margin: 18px 0;
+    margin: 3px 0;
 }
 
 .side-panel.compact .panel-footer {
@@ -1608,109 +1752,68 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 /* DAG */
 .card.day .side-panel,
 .card.morning .side-panel {
-    background:
-    linear-gradient(
-        180deg,
-        rgba(28,45,65,0.42),
-        rgba(16,28,42,0.42)
-    );
-    border:
-    1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(145deg, var(--info-card-bg), var(--info-card-bg-soft));
 }
 /* KVÄLL */
 .card.sunset .side-panel,
 .card.evening .side-panel {
-    background:
-    linear-gradient(
-        180deg,
-        rgba(24,30,48,0.55),
-        rgba(14,20,34,0.55)
-    );
-    border:
-    1px solid rgba(255,200,120,0.08);
-    box-shadow:
-    0 20px 60px rgba(0,0,0,0.45),
-    0 0 30px rgba(255,180,90,0.05);
+    background: linear-gradient(145deg, var(--info-card-bg), var(--info-card-bg-soft));
 }
 /* NATT */
 .card.night .side-panel {
-    background:
-    linear-gradient(
-        180deg,
-        rgba(12,20,34,0.68),
-        rgba(8,14,24,0.72)
-    );
-    border:
-    1px solid rgba(120,180,255,0.08);
-    box-shadow:
-    0 20px 70px rgba(0,0,0,0.55),
-    0 0 40px rgba(70,120,255,0.06);
+    background: linear-gradient(145deg, var(--info-card-bg), var(--info-card-bg-soft));
 }
 .value-solar {
-    color: rgba(255, 220, 90, 0.95);
-    text-shadow:
-    0 0 10px rgba(255,220,90,0.12);
+    color: #8b6500;
+    text-shadow: none;
 }
 .value-battery {
-    color: rgba(110, 255, 170, 0.95);
-    text-shadow:
-    0 0 10px rgba(110,255,170,0.10);
+    color: #14734e;
+    text-shadow: none;
 }
 .value-export {
-    color: rgba(120, 190, 255, 0.95);
-    text-shadow:
-    0 0 10px rgba(120,190,255,0.10);
+    color: #147f59;
+    text-shadow: none;
 }
 .value-grid {
-    color: rgba(255, 185, 110, 0.95);
-    text-shadow:
-    0 0 10px rgba(255,185,110,0.10);
+    color: #b64b43;
+    text-shadow: none;
 }
 .value-money {
-    color: rgba(110,255,170,0.95);
-    text-shadow:
-    0 0 10px rgba(110,255,170,0.10);
+    color: #14734e;
+    text-shadow: none;
 }
 .value-total {
-    color: rgba(255,255,255,0.95);
+    color: #173652;
 }
 .value-independence {
-    color: rgba(120,220,255,0.95);
-    text-shadow:
-    0 0 10px rgba(120,220,255,0.10);
+    color: #176f9e;
+    text-shadow: none;
 }
 .value-co2 {
-    color: rgba(110,255,170,0.95);
-    text-shadow:
-    0 0 10px rgba(110,255,170,0.10);
+    color: #14734e;
+    text-shadow: none;
 }
 .value-solar {
-    text-shadow:
-    0 0 14px rgba(255,220,90,0.18);
+    text-shadow: none;
 }
 .value-battery {
-    text-shadow:
-    0 0 14px rgba(110,255,170,0.18);
+    text-shadow: none;
 }
 .value-export {
-    text-shadow:
-    0 0 14px rgba(120,190,255,0.18);
+    text-shadow: none;
 }
 .value-grid {
-    text-shadow:
-    0 0 14px rgba(255,185,110,0.18);
+    text-shadow: none;
 }
 .value-money {
-    text-shadow:
-    0 0 14px rgba(110,255,170,0.18);
+    text-shadow: none;
 }
 .value-independence {
-    text-shadow:
-    0 0 14px rgba(120,220,255,0.18);
+    text-shadow: none;
 }
 .value-co2 {
-    text-shadow:
-    0 0 14px rgba(110,255,170,0.18);
+    text-shadow: none;
 }
 .card.desktop {
     aspect-ratio: 1920 / 1080;
@@ -1718,20 +1821,69 @@ const dt=t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}
 .card.mobile {
     aspect-ratio: 430 / 1000;
 }
-${Gt}
-${qt}
-${Qt}
+${qe}
+${Qe}
+${Ye}
 `
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */,Xt=1;class Jt{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}}
+ */,Ke=1;class Je{constructor(e){}get _$AU(){return this._$AM._$AU}_$AT(e,t,i){this._$Ct=e,this._$AM=t,this._$Ci=i}_$AS(e,t){return this.update(e,t)}update(e,t){return this.render(...t)}}
 /**
  * @license
  * Copyright 2018 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Kt="important",Zt=" !"+Kt,te=(t=>(...e)=>({_$litDirective$:t,values:e}))(class extends Jt{constructor(t){if(super(t),t.type!==Xt||"style"!==t.name||t.strings?.length>2)throw Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.")}render(t){return Object.keys(t).reduce((e,i)=>{const o=t[i];return null==o?e:e+`${i=i.includes("-")?i:i.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g,"-$&").toLowerCase()}:${o};`},"")}update(t,[e]){const{style:i}=t.element;if(void 0===this.ft)return this.ft=new Set(Object.keys(e)),this.render(e);for(const t of this.ft)null==e[t]&&(this.ft.delete(t),t.includes("-")?i.removeProperty(t):i[t]=null);for(const t in e){const o=e[t];if(null!=o){this.ft.add(t);const e="string"==typeof o&&o.endsWith(Zt);t.includes("-")||e?i.setProperty(t,e?o.slice(0,-11):o,e?Kt:""):i[t]=o}}return G}});function ee(t,e,i=0){const o=t?.states?.[e]?.state,s=Number(o);return Number.isFinite(s)?s:i}function ie(t,e,i=""){const o=t?.states?.[e]?.state;return o??i}const oe="energy_system_power_solar_house",se={gridIndependenceEntity:"financial_30_grid_independence",batteryUtilizationEntity:"financial_31_battery_utilization",solarSelfConsumptionEntity:"financial_32_solar_self_consumption_rate",co2SavedEntity:"financial_33_co2_saved"},re={savingsTodayEntity:"financial_03_savings_today",totalSavingsEntity:"financial_01_total_savings",savingsThisMonthEntity:"financial_04_savings_this_month",savingsThisYearEntity:"financial_05_savings_this_year",estimatedAnnualSavingsEntity:"financial_02_estimated_annual_savings",paybackTimeEntity:"financial_10_payback_time",roiEntity:"financial_12_return_on_investment"};function ne(t,e){const i=t?.states;if(i)return Object.keys(i).find(t=>t.endsWith(e))}function ae(t){return void 0!==ne(t,oe)}function le(t){if(!ae(t))return{};const e={};for(const i of Object.keys(se)){const o=ne(t,se[i]);o&&(e[i]=o)}const i={};for(const e of Object.keys(re)){const o=ne(t,re[e]);o&&(i[e]=o)}return{sidePanels:{energy:{...e},economy:{...i}}}}function ce(t,e,i){const o=le(t),s=i?.flows,r=i?.aggregates,n=s?.solar_house??0,a=s?.battery_house??0,l=s?.grid_house??0,c=r?.solar_total??0,h=r?.house_total??0,d=r?.battery_net??0,u=r?.grid_net??0,p=ee(t,"sensor.solar_battery_economy_energy_system_energy_battery_house"),y=ee(t,"sensor.solar_battery_economy_energy_system_energy_solar_export"),g=ee(t,"sensor.solar_battery_economy_energy_system_energy_grid_house"),f="above_horizon"===ie(t,"sun.sun")?"Over horizon":"Under horizon",v=d>1?"Charging":d<-1?"Discharging":"Standby",m=[];n>1&&m.push("Solar"),a>1&&m.push("Battery"),l>1&&m.push("Grid");const b=m.length>0?m.join(" + "):"No load",x=u>1?"Importing":u<-1?"Exporting":"Balance",$=e?.batterySocEntity?ee(t,e.batterySocEntity):0,w=e?.solarInfoEntity??"sensor.solaredge_ac_power",_=e?.gridInfoEntity??"sensor.effekt_alla_faser",A=e?.houseInfoEntity??"sensor.forbrukning_nu_ny",E=e?.batteryInfoEntity??"sensor.saj_realtime_battery_power",S=o.sidePanels?.energy?.batteryUtilizationEntity??"",k=ee(t,S),C=o.sidePanels?.economy?.savingsTodayEntity??"",L=ee(t,C),P=o.sidePanels?.energy?.co2SavedEntity??"",F=ee(t,P),T=o.sidePanels?.energy?.solarSelfConsumptionEntity??"",M=ee(t,T),R=o.sidePanels?.economy?.totalSavingsEntity??"",B=ee(t,R),D=o.sidePanels?.economy?.roiEntity??"",I=ee(t,D),U=e?.sidePanels?.energy?.importTodayEntity,O=U?ee(t,U):0,z=e?.sidePanels?.energy?.exportTodayEntity,N=z?ee(t,z):0,H=o.sidePanels?.economy?.savingsThisMonthEntity??"",j=ee(t,H),W=o.sidePanels?.economy?.savingsThisYearEntity??"",V=ee(t,W),G=o.sidePanels?.economy?.estimatedAnnualSavingsEntity??"",q=ee(t,G),Q=o.sidePanels?.economy?.paybackTimeEntity??"",Y=ee(t,Q),X=o.sidePanels?.energy?.gridIndependenceEntity??"",J=ee(t,X);return{devices:(e?.devices??[]).map((e,i)=>function(t,e,i){const o=e.powerEntity?ee(t,e.powerEntity):0;let s,r;"soc"===e.optionalType&&e.optionalEntity&&(r=ee(t,e.optionalEntity),s=`${Math.round(r)} %`),"temperature"===e.optionalType&&e.optionalEntity&&(s=`${ee(t,e.optionalEntity).toFixed(0)} °C`);let n="Standby";if(e.statusEntity)n=ie(t,e.statusEntity,"Unknown");else if(e.statusRules?.length){const t=[...e.statusRules].sort((t,e)=>t.threshold-e.threshold);for(const e of t)o>=e.threshold&&(n=e.label)}return{enabled:e.enabled,title:e.title?.trim()||`Device ${i+1}`,power:o,powerEntity:e.powerEntity,optionalType:e.optionalType,optionalValue:s,soc:r,optionalEntity:e.optionalEntity,status:n,statusEntity:e.statusEntity,icon:e.icon}}(t,e,i)),solarPower:c,solarStatus:f,solarEntity:w,batteryToHouse:p,solarExportEnergy:y,gridToHouseEnergy:g,batteryUtilization:k,batteryUtilizationEntity:S,savingsToday:L,savingsTodayEntity:C,totalSavings:B,totalSavingsEntity:R,roi:I,roiEntity:D,importToday:O,importTodayEntity:U,exportToday:N,exportTodayEntity:z,savingsThisMonth:j,savingsThisMonthEntity:H,savingsThisYear:V,savingsThisYearEntity:W,estimatedAnnualSavings:q,estimatedAnnualSavingsEntity:G,paybackTime:Y,paybackTimeEntity:Q,gridIndependence:J,gridIndependenceEntity:X,co2Saved:F,co2SavedEntity:P,solarSelfConsumptionRate:M,solarSelfConsumptionRateEntity:T,batterySoc:$,batteryPower:d,batteryStatus:v,batteryEntity:E,housePower:h,houseStatus:b,houseEntity:A,gridPower:u,gridStatus:x,gridEntity:_}}function he(t){return null!==t&&"object"==typeof t?t:void 0}function de(t,e){if(!t||!(e in t))return{issue:"missing"};const i=he(t[e]);if(!i||!("value"in i))return{issue:"missing"};const o=i.value;if(null===o)return{issue:"null"};if("number"!=typeof o&&"string"!=typeof o)return{issue:"invalid"};if("string"==typeof o&&""===o.trim())return{issue:"invalid"};const s=Number(o);return Number.isFinite(s)?{value:s}:{issue:"invalid"}}const ue={layout:"desktop",sidePanels:{energy:{show:!0},economy:{show:!0}},devices:[{enabled:!1},{enabled:!1},{enabled:!1},{enabled:!1}]};let pe=class extends ct{constructor(){super(...arguments),this._config=ue,this._deviceDrafts={},this.generalSchema=[{name:"layout",label:"Layout",selector:{select:{mode:"dropdown",options:[{value:"desktop",label:"Desktop"},{value:"mobile",label:"Mobile"}]}}}],this.batteryInfoSchema=[{name:"batterySocEntity",label:"Battery SOC",selector:{entity:{domain:"sensor"}}},{name:"solarInfoEntity",label:"Solar info",selector:{entity:{}}},{name:"gridInfoEntity",label:"Grid info",selector:{entity:{}}},{name:"houseInfoEntity",label:"House info",selector:{entity:{}}},{name:"batteryInfoEntity",label:"Battery info",selector:{entity:{}}}],this.energyPanelSchema=[{name:"show",label:"Show Energy Panel",selector:{boolean:{}}},{name:"importTodayEntity",label:"Import Today",selector:{entity:{domain:"sensor"}}},{name:"exportTodayEntity",label:"Export Today",selector:{entity:{domain:"sensor"}}}],this.economyPanelSchema=[{name:"show",label:"Show Economy Panel",selector:{boolean:{}}}]}setConfig(t){this._config={...ue,...t}}getDeviceSchema(t){const e=[{name:"enabled",label:"Enabled",selector:{boolean:{}}},{name:"title",label:"Title",selector:{text:{}}},{name:"powerEntity",label:"Power",selector:{entity:{}}},{name:"optionalType",label:"Optional",selector:{select:{mode:"dropdown",options:[{value:"",label:"None"},{value:"soc",label:"SOC"},{value:"temperature",label:"Temperature"}]}}}];return"soc"!==t.optionalType&&"temperature"!==t.optionalType||e.push({name:"optionalEntity",label:"Optional entity",selector:{entity:{}}}),e.push({name:"statusEntity",label:"Status",selector:{entity:{}}}),t.statusEntity||e.push({name:"statusThreshold1",label:"Status threshold 1 (W)",selector:{number:{mode:"box",step:1}}},{name:"statusLabel1",label:"Status 1",selector:{text:{}}},{name:"statusThreshold2",label:"Status threshold 2 (W)",selector:{number:{mode:"box",step:1}}},{name:"statusLabel2",label:"Status 2",selector:{text:{}}},{name:"statusThreshold3",label:"Status threshold 3 (W)",selector:{number:{mode:"box",step:1}}},{name:"statusLabel3",label:"Status 3",selector:{text:{}}}),e.push({name:"icon",label:"Icon",selector:{select:{mode:"dropdown",options:[{value:"car",label:"Car"},{value:"spa",label:"Spa"},{value:"heatpump",label:"Heat Pump"},{value:"appliance",label:"Appliance"}]}}}),e}_valueChanged(t){this._config={...this._config,...t.detail.value},this._fireConfigChanged()}_energyPanelValueChanged(t){const e=t.detail.value;this._config={...this._config,sidePanels:{...this._config.sidePanels,energy:{...this._config.sidePanels.energy,...e}}},this._fireConfigChanged()}_economyPanelValueChanged(t){const e=t.detail.value;this._config={...this._config,sidePanels:{...this._config.sidePanels,economy:{...this._config.sidePanels.economy,...e}}},this._fireConfigChanged()}_getDeviceFormData(t,e){const i=this._deviceDrafts[t]??{},o={...e,...i};if(!this._deviceDrafts[t]){(e.statusRules??[]).forEach((t,e)=>{const i=e+1;i<=3&&(o[`statusThreshold${i}`]=t.threshold,o[`statusLabel${i}`]=t.label)})}return o}_updateDeviceDraft(t,e){const i={...this._deviceDrafts[t]??{},...e};return this._deviceDrafts={...this._deviceDrafts,[t]:i},i}_buildStatusRules(t){const e=[];for(let i=1;i<=3;i++){const o=Number(t[`statusThreshold${i}`]),s=String(t[`statusLabel${i}`]??"").trim();Number.isFinite(o)&&s&&e.push({threshold:o,label:s})}return e.sort((t,e)=>t.threshold-e.threshold)}_deviceValueChanged(t,e){const i=e.detail.value;this._updateDeviceDraft(t,i);const{statusThreshold1:o,statusLabel1:s,statusThreshold2:r,statusLabel2:n,statusThreshold3:a,statusLabel3:l,...c}=i,h=this._deviceDrafts[t]??{},d=[...this._config.devices];d[t]={...d[t],...c,statusRules:this._buildStatusRules(h)},this._config={...this._config,devices:d},this._fireConfigChanged()}_device1ValueChanged(t){this._deviceValueChanged(0,t)}_device2ValueChanged(t){this._deviceValueChanged(1,t)}_device3ValueChanged(t){this._deviceValueChanged(2,t)}_device4ValueChanged(t){this._deviceValueChanged(3,t)}_fireConfigChanged(){this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:this._config},bubbles:!0,composed:!0}))}_isSolarBatteryEconomyDetected(){return!!this.hass&&ae(this.hass)}render(){const t=this._isSolarBatteryEconomyDetected();return W`
+ */const Ze="important",et=" !"+Ze,tt=(e=>(...t)=>({_$litDirective$:e,values:t}))(class extends Je{constructor(e){if(super(e),e.type!==Ke||"style"!==e.name||e.strings?.length>2)throw Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.")}render(e){return Object.keys(e).reduce((t,i)=>{const o=e[i];return null==o?t:t+`${i=i.includes("-")?i:i.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g,"-$&").toLowerCase()}:${o};`},"")}update(e,[t]){const{style:i}=e.element;if(void 0===this.ft)return this.ft=new Set(Object.keys(t)),this.render(t);for(const e of this.ft)null==t[e]&&(this.ft.delete(e),e.includes("-")?i.removeProperty(e):i[e]=null);for(const e in t){const o=t[e];if(null!=o){this.ft.add(e);const t="string"==typeof o&&o.endsWith(et);e.includes("-")||t?i.setProperty(e,t?o.slice(0,-11):o,t?Ze:""):i[e]=o}}return G}});function it(e,t=!1){if(null===e)return"—";const i=Math.abs(e),o=i>=1e3?`${(i/1e3).toFixed(2)} kW`:`${i>=100?i.toFixed(0):i>=10?i.toFixed(1):i.toFixed(2)} W`;return t&&0!==e?`${e>0?"+":"−"}${o}`:o}function ot(e){const t=null===e.current||null===e.power,i="import"===e.direction?"IMPORT →":"export"===e.direction?"← EXPORT":"RIKTNING SAKNAS",o="critical"===e.loadState?"ÖVERLAST":"warning"===e.loadState?"HÖG BELASTNING":"normal"===e.loadState?"NORMAL":"BELASTNING SAKNAS";return W`
+        <div class="phase-load-phase ${e.loadState} ${e.direction}" aria-label="${e.name}">
+            <div class="phase-load-heading">
+                <strong>${e.name}</strong>
+                ${t?W`<span class="phase-load-missing" role="status">Data saknas</span>`:""}
+            </div>
+            <div class="phase-load-details">
+                <div class="phase-load-direction ${e.direction}">${i}</div>
+                <div class="phase-load-values">
+                    <span>${function(e){if(null===e)return"—";const t=Math.abs(e);return`${t>=100?e.toFixed(0):t>=10?e.toFixed(1):e.toFixed(2)} A`}(e.current)}</span>
+                    <span>${it(e.power)}</span>
+                </div>
+                <div class="phase-load-footer">
+                    <span>${null===e.percent?"—":`${e.percent} %`}</span>
+                    <span>${o}</span>
+                </div>
+            </div>
+            <div class="phase-load-bar" aria-hidden="true">
+                ${Array.from({length:16},(t,i)=>W`
+                    <span class="phase-load-segment ${null!==e.activeSegments&&("export"===e.direction?i>=16-e.activeSegments:i<e.activeSegments)?"active":""}"></span>
+                `)}
+            </div>
+        </div>
+    `}function rt(e,t){return W`
+        <section class="phase-load-panel" aria-label="Fasbelastning och fasöversikt">
+            <div class="phase-load-title">FASBELASTNING</div>
+            <div class="phase-load-grid">${e.map(ot)}${function(e){const t=e.powerComplete;return W`
+        <div class="phase-load-phase phase-load-summary-row" aria-label="SUMMA">
+            <div class="phase-load-heading">
+                <strong>SUMMA</strong>
+                ${t?"":W`<span class="phase-load-missing" role="status">Effektdata ofullständig</span>`}
+            </div>
+            <div class="phase-load-details">
+                <div class="phase-load-direction phase-load-net">NETTO</div>
+                <div class="phase-load-values">
+                    <span>${t?it(e.netPower,!0):"—"}</span>
+                    <span>${t?`IMP ${it(e.importPower)}`:"IMP —"}</span>
+                </div>
+                <div class="phase-load-footer">
+                    <span>${t?`EXP ${it(e.exportPower)}`:"EXP —"}</span>
+                    <span>${t?"3 FASER":"OFULLSTÄNDIG"}</span>
+                </div>
+            </div>
+            <div class="phase-load-bar" aria-hidden="true">
+                ${Array.from({length:16},()=>W`<span class="phase-load-segment"></span>`)}
+            </div>
+        </div>
+    `}(t)}</div>
+        </section>
+    `}function nt(e,t,i=0){const o=e?.states?.[t]?.state,r=Number(o);return Number.isFinite(r)?r:i}function at(e,t,i=""){const o=e?.states?.[t]?.state;return o??i}const st="energy_system_power_solar_house",lt={gridIndependenceEntity:"financial_30_grid_independence",batteryUtilizationEntity:"financial_31_battery_utilization",solarSelfConsumptionEntity:"financial_32_solar_self_consumption_rate",co2SavedEntity:"financial_33_co2_saved"},dt={savingsTodayEntity:"financial_03_savings_today",totalSavingsEntity:"financial_01_total_savings",savingsThisMonthEntity:"financial_04_savings_this_month",savingsThisYearEntity:"financial_05_savings_this_year",estimatedAnnualSavingsEntity:"financial_02_estimated_annual_savings",paybackTimeEntity:"financial_10_payback_time",roiEntity:"financial_12_return_on_investment"};function ct(e,t){const i=e?.states;if(i)return Object.keys(i).find(e=>e.endsWith(t))}function ht(e){return void 0!==ct(e,st)}function pt(e){if(!ht(e))return{};const t={};for(const i of Object.keys(lt)){const o=ct(e,lt[i]);o&&(t[i]=o)}const i={};for(const t of Object.keys(dt)){const o=ct(e,dt[t]);o&&(i[t]=o)}return{sidePanels:{energy:{...t},economy:{...i}}}}function ut(e,t,i){const o=pt(e),r=i?.flows,n=i?.aggregates,a=r?.solar_house??0,s=r?.battery_house??0,l=r?.grid_house??0,d=n?.solar_total??0,c=n?.house_total??0,h=n?.battery_net??0,p=n?.grid_net??0,u=nt(e,"sensor.solar_battery_economy_energy_system_energy_battery_house"),y=nt(e,"sensor.solar_battery_economy_energy_system_energy_solar_export"),g=nt(e,"sensor.solar_battery_economy_energy_system_energy_grid_house"),f="above_horizon"===at(e,"sun.sun")?"Over horizon":"Under horizon",m=h>1?"Charging":h<-1?"Discharging":"Standby",b=[];a>1&&b.push("Solar"),s>1&&b.push("Battery"),l>1&&b.push("Grid");const x=b.length>0?b.join(" + "):"No load",v=p>1?"Importing":p<-1?"Exporting":"Balance",w=t?.batterySocEntity?nt(e,t.batterySocEntity):0,$=t?.solarInfoEntity??"sensor.solaredge_ac_power",_=t?.gridInfoEntity??"sensor.effekt_alla_faser",E=t?.houseInfoEntity??"sensor.forbrukning_nu_ny",A=t?.batteryInfoEntity??"sensor.saj_realtime_battery_power",S=o.sidePanels?.energy?.batteryUtilizationEntity??"",L=nt(e,S),P=o.sidePanels?.economy?.savingsTodayEntity??"",C=nt(e,P),k=o.sidePanels?.energy?.co2SavedEntity??"",F=nt(e,k),T=o.sidePanels?.energy?.solarSelfConsumptionEntity??"",M=nt(e,T),B=o.sidePanels?.economy?.totalSavingsEntity??"",R=nt(e,B),I=o.sidePanels?.economy?.roiEntity??"",D=nt(e,I),z=t?.sidePanels?.energy?.importTodayEntity,U=z?nt(e,z):0,O=t?.sidePanels?.energy?.exportTodayEntity,N=O?nt(e,O):0,H=o.sidePanels?.economy?.savingsThisMonthEntity??"",j=nt(e,H),W=o.sidePanels?.economy?.savingsThisYearEntity??"",V=nt(e,W),G=o.sidePanels?.economy?.estimatedAnnualSavingsEntity??"",q=nt(e,G),Q=o.sidePanels?.economy?.paybackTimeEntity??"",Y=nt(e,Q),X=o.sidePanels?.energy?.gridIndependenceEntity??"",K=nt(e,X);return{devices:(t?.devices??[]).map((t,i)=>function(e,t,i){const o=t.powerEntity?nt(e,t.powerEntity):0;let r,n;"soc"===t.optionalType&&t.optionalEntity&&(n=nt(e,t.optionalEntity),r=`${Math.round(n)} %`),"temperature"===t.optionalType&&t.optionalEntity&&(r=`${nt(e,t.optionalEntity).toFixed(0)} °C`);let a="Standby";if(t.statusEntity)a=at(e,t.statusEntity,"Unknown");else if(t.statusRules?.length){const e=[...t.statusRules].sort((e,t)=>e.threshold-t.threshold);for(const t of e)o>=t.threshold&&(a=t.label)}return{enabled:t.enabled,title:t.title?.trim()||`Device ${i+1}`,power:o,powerEntity:t.powerEntity,optionalType:t.optionalType,optionalValue:r,soc:n,optionalEntity:t.optionalEntity,status:a,statusEntity:t.statusEntity,icon:t.icon}}(e,t,i)),solarPower:d,solarStatus:f,solarEntity:$,batteryToHouse:u,solarExportEnergy:y,gridToHouseEnergy:g,batteryUtilization:L,batteryUtilizationEntity:S,savingsToday:C,savingsTodayEntity:P,totalSavings:R,totalSavingsEntity:B,roi:D,roiEntity:I,importToday:U,importTodayEntity:z,exportToday:N,exportTodayEntity:O,savingsThisMonth:j,savingsThisMonthEntity:H,savingsThisYear:V,savingsThisYearEntity:W,estimatedAnnualSavings:q,estimatedAnnualSavingsEntity:G,paybackTime:Y,paybackTimeEntity:Q,gridIndependence:K,gridIndependenceEntity:X,co2Saved:F,co2SavedEntity:k,solarSelfConsumptionRate:M,solarSelfConsumptionRateEntity:T,batterySoc:w,batteryPower:h,batteryStatus:m,batteryEntity:A,housePower:c,houseStatus:x,houseEntity:E,gridPower:p,gridStatus:v,gridEntity:_}}function yt(e){return null!==e&&"object"==typeof e?e:void 0}function gt(e,t){if(!e||!(t in e))return{issue:"missing"};const i=yt(e[t]);if(!i||!("value"in i))return{issue:"missing"};const o=i.value;if(null===o)return{issue:"null"};if("number"!=typeof o&&"string"!=typeof o)return{issue:"invalid"};if("string"==typeof o&&""===o.trim())return{issue:"invalid"};const r=Number(o);return Number.isFinite(r)?{value:r}:{issue:"invalid"}}const ft={layout:"desktop",phaseLoad:{mainFuse:20,invertDirection:!1,l1PowerInverted:!1,l2PowerInverted:!1,l3PowerInverted:!1},sidePanels:{energy:{show:!0},economy:{show:!0}},devices:[{enabled:!1},{enabled:!1},{enabled:!1},{enabled:!1}]};let mt=class extends de{constructor(){super(...arguments),this._config=ft,this._deviceDrafts={},this.phaseLoadSchema=[{name:"l1CurrentEntity",label:"L1 Current",selector:{entity:{domain:"sensor"}}},{name:"l1PowerEntity",label:"L1 Power",selector:{entity:{domain:"sensor"}}},{name:"l1PowerInverted",label:"Invert L1 power sensor sign",selector:{boolean:{}}},{name:"l2CurrentEntity",label:"L2 Current",selector:{entity:{domain:"sensor"}}},{name:"l2PowerEntity",label:"L2 Power",selector:{entity:{domain:"sensor"}}},{name:"l2PowerInverted",label:"Invert L2 power sensor sign",selector:{boolean:{}}},{name:"l3CurrentEntity",label:"L3 Current",selector:{entity:{domain:"sensor"}}},{name:"l3PowerEntity",label:"L3 Power",selector:{entity:{domain:"sensor"}}},{name:"l3PowerInverted",label:"Invert L3 power sensor sign",selector:{boolean:{}}},{name:"mainFuse",label:"Main fuse",selector:{select:{mode:"dropdown",options:[{value:16,label:"16 A"},{value:20,label:"20 A"},{value:25,label:"25 A"}]}}},{name:"invertDirection",label:"Invert import/export direction",selector:{boolean:{}}}],this.generalSchema=[{name:"layout",label:"Layout",selector:{select:{mode:"dropdown",options:[{value:"desktop",label:"Desktop"},{value:"mobile",label:"Mobile"}]}}}],this.batteryInfoSchema=[{name:"batterySocEntity",label:"Battery SOC",selector:{entity:{domain:"sensor"}}},{name:"solarInfoEntity",label:"Solar info",selector:{entity:{}}},{name:"gridInfoEntity",label:"Grid info",selector:{entity:{}}},{name:"houseInfoEntity",label:"House info",selector:{entity:{}}},{name:"batteryInfoEntity",label:"Battery info",selector:{entity:{}}}],this.energyPanelSchema=[{name:"show",label:"Show Energy Panel",selector:{boolean:{}}},{name:"importTodayEntity",label:"Import Today",selector:{entity:{domain:"sensor"}}},{name:"exportTodayEntity",label:"Export Today",selector:{entity:{domain:"sensor"}}}],this.economyPanelSchema=[{name:"show",label:"Show Economy Panel",selector:{boolean:{}}}]}setConfig(e){this._config={...ft,...e,phaseLoad:{...ft.phaseLoad,...e.phaseLoad},sidePanels:{energy:{...ft.sidePanels.energy,...e.sidePanels?.energy},economy:{...ft.sidePanels.economy,...e.sidePanels?.economy}}}}_phaseLoadValueChanged(e){this._config={...this._config,phaseLoad:{...this._config.phaseLoad,...e.detail.value}},this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:this._config},bubbles:!0,composed:!0}))}getDeviceSchema(e){const t=[{name:"enabled",label:"Enabled",selector:{boolean:{}}},{name:"title",label:"Title",selector:{text:{}}},{name:"powerEntity",label:"Power",selector:{entity:{}}},{name:"optionalType",label:"Optional",selector:{select:{mode:"dropdown",options:[{value:"",label:"None"},{value:"soc",label:"SOC"},{value:"temperature",label:"Temperature"}]}}}];return"soc"!==e.optionalType&&"temperature"!==e.optionalType||t.push({name:"optionalEntity",label:"Optional entity",selector:{entity:{}}}),t.push({name:"statusEntity",label:"Status",selector:{entity:{}}}),e.statusEntity||t.push({name:"statusThreshold1",label:"Status threshold 1 (W)",selector:{number:{mode:"box",step:1}}},{name:"statusLabel1",label:"Status 1",selector:{text:{}}},{name:"statusThreshold2",label:"Status threshold 2 (W)",selector:{number:{mode:"box",step:1}}},{name:"statusLabel2",label:"Status 2",selector:{text:{}}},{name:"statusThreshold3",label:"Status threshold 3 (W)",selector:{number:{mode:"box",step:1}}},{name:"statusLabel3",label:"Status 3",selector:{text:{}}}),t.push({name:"icon",label:"Icon",selector:{select:{mode:"dropdown",options:[{value:"car",label:"Car"},{value:"spa",label:"Spa"},{value:"heatpump",label:"Heat Pump"},{value:"appliance",label:"Appliance"}]}}}),t}_valueChanged(e){this._config={...this._config,...e.detail.value},this._fireConfigChanged()}_energyPanelValueChanged(e){const t=e.detail.value;this._config={...this._config,sidePanels:{...this._config.sidePanels,energy:{...this._config.sidePanels.energy,...t}}},this._fireConfigChanged()}_economyPanelValueChanged(e){const t=e.detail.value;this._config={...this._config,sidePanels:{...this._config.sidePanels,economy:{...this._config.sidePanels.economy,...t}}},this._fireConfigChanged()}_getDeviceFormData(e,t){const i=this._deviceDrafts[e]??{},o={...t,...i};if(!this._deviceDrafts[e]){(t.statusRules??[]).forEach((e,t)=>{const i=t+1;i<=3&&(o[`statusThreshold${i}`]=e.threshold,o[`statusLabel${i}`]=e.label)})}return o}_updateDeviceDraft(e,t){const i={...this._deviceDrafts[e]??{},...t};return this._deviceDrafts={...this._deviceDrafts,[e]:i},i}_buildStatusRules(e){const t=[];for(let i=1;i<=3;i++){const o=Number(e[`statusThreshold${i}`]),r=String(e[`statusLabel${i}`]??"").trim();Number.isFinite(o)&&r&&t.push({threshold:o,label:r})}return t.sort((e,t)=>e.threshold-t.threshold)}_deviceValueChanged(e,t){const i=t.detail.value;this._updateDeviceDraft(e,i);const{statusThreshold1:o,statusLabel1:r,statusThreshold2:n,statusLabel2:a,statusThreshold3:s,statusLabel3:l,...d}=i,c=this._deviceDrafts[e]??{},h=[...this._config.devices];h[e]={...h[e],...d,statusRules:this._buildStatusRules(c)},this._config={...this._config,devices:h},this._fireConfigChanged()}_device1ValueChanged(e){this._deviceValueChanged(0,e)}_device2ValueChanged(e){this._deviceValueChanged(1,e)}_device3ValueChanged(e){this._deviceValueChanged(2,e)}_device4ValueChanged(e){this._deviceValueChanged(3,e)}_fireConfigChanged(){this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:this._config},bubbles:!0,composed:!0}))}_isSolarBatteryEconomyDetected(){return!!this.hass&&ht(this.hass)}render(){const e=this._isSolarBatteryEconomyDetected();return W`
             <div class="integration-status">
                 <div class="integration-status-title">
                     Solar Battery Economy
@@ -1739,9 +1891,9 @@ ${Qt}
 
                 <div
                     class="integration-status-value
-                        ${t?"detected":"not-detected"}"
+                        ${e?"detected":"not-detected"}"
                 >
-                    ${t?"✓ Detected":"⚠ Not detected"}
+                    ${e?"✓ Detected":"⚠ Not detected"}
                 </div>
             </div>
 
@@ -1753,7 +1905,7 @@ ${Qt}
                         .hass=${this.hass}
                         .data=${this._config}
                         .schema=${this.generalSchema}
-                        .computeLabel=${t=>t.label}
+                        .computeLabel=${e=>e.label}
                         @value-changed=${this._valueChanged}
                     ></ha-form>
                 </div>
@@ -1767,7 +1919,7 @@ ${Qt}
                         .hass=${this.hass}
                         .data=${this._config}
                         .schema=${this.batteryInfoSchema}
-                        .computeLabel=${t=>t.label}
+                        .computeLabel=${e=>e.label}
                         @value-changed=${this._valueChanged}
                     ></ha-form>
                 </div>
@@ -1781,7 +1933,7 @@ ${Qt}
                         .hass=${this.hass}
                         .data=${this._config.sidePanels.energy}
                         .schema=${this.energyPanelSchema}
-                        .computeLabel=${t=>t.label}
+                        .computeLabel=${e=>e.label}
                         @value-changed=${this._energyPanelValueChanged}
                     ></ha-form>
                 </div>
@@ -1795,8 +1947,22 @@ ${Qt}
                         .hass=${this.hass}
                         .data=${this._config.sidePanels.economy}
                         .schema=${this.economyPanelSchema}
-                        .computeLabel=${t=>t.label}
+                        .computeLabel=${e=>e.label}
                         @value-changed=${this._economyPanelValueChanged}
+                    ></ha-form>
+                </div>
+            </details>
+
+            <details class="editor-section">
+                <summary>Phase Load (optional)</summary>
+
+                <div class="editor-content">
+                    <ha-form
+                        .hass=${this.hass}
+                        .data=${this._config.phaseLoad}
+                        .schema=${this.phaseLoadSchema}
+                        .computeLabel=${e=>e.label}
+                        @value-changed=${this._phaseLoadValueChanged}
                     ></ha-form>
                 </div>
             </details>
@@ -1809,7 +1975,7 @@ ${Qt}
                         .hass=${this.hass}
                         .data=${this._getDeviceFormData(0,this._config.devices[0])}
                         .schema=${this.getDeviceSchema(this._config.devices[0])}
-                        .computeLabel=${t=>t.label}
+                        .computeLabel=${e=>e.label}
                         @value-changed=${this._device1ValueChanged}
                     ></ha-form>
                 </div>
@@ -1823,7 +1989,7 @@ ${Qt}
                         .hass=${this.hass}
                         .data=${this._getDeviceFormData(1,this._config.devices[1])}
                         .schema=${this.getDeviceSchema(this._config.devices[1])}
-                        .computeLabel=${t=>t.label}
+                        .computeLabel=${e=>e.label}
                         @value-changed=${this._device2ValueChanged}
                     ></ha-form>
                 </div>
@@ -1837,7 +2003,7 @@ ${Qt}
                         .hass=${this.hass}
                         .data=${this._getDeviceFormData(2,this._config.devices[2])}
                         .schema=${this.getDeviceSchema(this._config.devices[2])}
-                        .computeLabel=${t=>t.label}
+                        .computeLabel=${e=>e.label}
                         @value-changed=${this._device3ValueChanged}
                     ></ha-form>
                 </div>
@@ -1851,12 +2017,12 @@ ${Qt}
                         .hass=${this.hass}
                         .data=${this._getDeviceFormData(3,this._config.devices[3])}
                         .schema=${this.getDeviceSchema(this._config.devices[3])}
-                        .computeLabel=${t=>t.label}
+                        .computeLabel=${e=>e.label}
                         @value-changed=${this._device4ValueChanged}
                     ></ha-form>
                 </div>
             </details>
-        `}static{this.styles=n`
+        `}static{this.styles=a`
         .integration-status {
             margin: 0 0 8px 0;
             padding: 12px 16px;
@@ -1918,59 +2084,59 @@ ${Qt}
         .editor-section[open] summary {
             border-bottom: 1px solid var(--divider-color);
         }
-    `}};t([yt({attribute:!1})],pe.prototype,"hass",void 0),t([gt()],pe.prototype,"_config",void 0),t([gt()],pe.prototype,"_deviceDrafts",void 0),pe=t([dt("solar-battery-economy-flow-card-editor")],pe);let ye=class extends ct{constructor(){super(...arguments),this.activeLayout=ft,this.layoutType="desktop",this.sceneScale=1,this.layoutReady=!1,this.livePowerIssue="unavailable",this.livePowerLookupStarted=!1,this.livePowerSubscriptionStarted=!1,this.livePowerLifecycle=0}static{this.styles=Yt}static getConfigElement(){return document.createElement("solar-battery-economy-flow-card-editor")}static getStubConfig(){return ue}connectedCallback(){super.connectedCallback(),this.requestUpdate(),this.resizeObserver=new ResizeObserver(t=>{const e=t[0].contentRect.width,i=t[0].contentRect.height;if(e<10||i<10)return;this.sceneScale=1;const o=function(t){const e="mobile"===t.layout?vt:ft,i=e.sceneWidth,o=e.sceneHeight,s=t.width/i,r=t.height/o;return{layout:e,scale:Math.min(s,r),offsetX:0,offsetY:0}}({layout:this.layoutType,width:e,height:i});this.activeLayout=o.layout,this.sceneScale=o.scale,this.layoutReady=!0})}disconnectedCallback(){this.livePowerLifecycle+=1,this.livePowerLookupStarted=!1,this.livePowerSubscriptionStarted=!1;const t=this.livePowerSubscription;this.livePowerSubscription=void 0,t&&t().catch(()=>{}),this.resizeObserver?.disconnect(),super.disconnectedCallback()}updated(){!this.livePowerLookupStarted&&this.isConnected&&"function"==typeof this.hass?.callWS&&(this.livePowerLookupStarted=!0,this.initializeLivePowerSubscription(this.hass,this.livePowerLifecycle))}async initializeLivePowerSubscription(t,e){let i;try{i=await t.callWS({type:"config_entries/get",domain:"solar_battery_economy"})}catch{return this.livePowerIssue="unavailable",void this.requestUpdate()}if(e!==this.livePowerLifecycle||!this.isConnected||!Array.isArray(i)||1!==i.length||"loaded"!==i[0]?.state||"string"!=typeof i[0]?.entry_id||!i[0].entry_id)return this.livePowerIssue="unavailable",void this.requestUpdate();if(this.livePowerEntryId=i[0].entry_id,!this.livePowerSubscriptionStarted&&"function"==typeof t.connection?.subscribeMessage){this.livePowerSubscriptionStarted=!0;try{const i=await t.connection.subscribeMessage(t=>{const e=function(t){const e=he(t),i=he(e?.flows),o=he(e?.aggregates);if(!i||!o)return{issue:"missing"};const s={solar_house:de(i,"solar_house"),solar_battery:de(i,"solar_battery"),solar_export:de(i,"solar_export"),battery_house:de(i,"battery_house"),battery_grid:de(i,"battery_grid"),grid_house:de(i,"grid_house"),grid_battery:de(i,"grid_battery"),unknown_grid_export:de(i,"unknown_grid_export")},r={solar_total:de(o,"solar_total"),house_total:de(o,"house_total"),battery_net:de(o,"battery_net"),grid_net:de(o,"grid_net")},n=[...Object.values(s),...Object.values(r)].find(t=>"issue"in t);if(n)return{issue:n.issue};const a=t=>{if("value"in t)return t.value;throw new Error("Unreachable Live Power value state")};return{snapshot:{unit:"string"==typeof e?.unit?e.unit:void 0,flows:{solar_house:a(s.solar_house),solar_battery:a(s.solar_battery),solar_export:a(s.solar_export),battery_house:a(s.battery_house),battery_grid:a(s.battery_grid),grid_house:a(s.grid_house),grid_battery:a(s.grid_battery),unknown_grid_export:a(s.unknown_grid_export)},aggregates:{solar_total:a(r.solar_total),house_total:a(r.house_total),battery_net:a(r.battery_net),grid_net:a(r.grid_net)}}}}(t);if(!e.snapshot)return this.livePowerSnapshot=void 0,this.livePowerIssue=e.issue,void this.requestUpdate();this.livePowerSnapshot=e.snapshot,this.livePowerIssue=void 0,this.requestUpdate()},{type:"solar_battery_economy/subscribe_live_power",config_entry_id:this.livePowerEntryId});if(e!==this.livePowerLifecycle||!this.isConnected)return void await i();this.livePowerSubscription=i}catch{this.livePowerSnapshot=void 0,this.livePowerIssue="unavailable",this.requestUpdate()}}}firstUpdated(){const t=this.renderRoot.querySelector(".card");this.resizeObserver?.observe(t)}setConfig(t){this.config=t;const e=t?.layout;this.layoutType="mobile"===e?"mobile":"desktop"}render(){if(!this.layoutReady)return W`
+    `}};e([ye({attribute:!1})],mt.prototype,"hass",void 0),e([ge()],mt.prototype,"_config",void 0),e([ge()],mt.prototype,"_deviceDrafts",void 0),mt=e([he("solar-battery-economy-flow-card-editor")],mt);let bt=class extends de{constructor(){super(...arguments),this.activeLayout=fe,this.layoutType="desktop",this.sceneScale=1,this.layoutReady=!1,this.livePowerIssue="unavailable",this.livePowerLookupStarted=!1,this.livePowerSubscriptionStarted=!1,this.livePowerLifecycle=0}static{this.styles=Xe}static getConfigElement(){return document.createElement("solar-battery-economy-flow-card-editor")}static getStubConfig(){return ft}connectedCallback(){super.connectedCallback(),this.requestUpdate(),this.resizeObserver=new ResizeObserver(e=>{const t=e[0].contentRect.width,i=e[0].contentRect.height;if(t<10||i<10)return;this.sceneScale=1;const o=function(e){const t="mobile"===e.layout?me:fe,i=t.sceneWidth,o=t.sceneHeight,r=e.width/i,n=e.height/o;return{layout:t,scale:Math.min(r,n),offsetX:0,offsetY:0}}({layout:this.layoutType,width:t,height:i});this.activeLayout=o.layout,this.sceneScale=o.scale,this.layoutReady=!0})}disconnectedCallback(){this.livePowerLifecycle+=1,this.livePowerLookupStarted=!1,this.livePowerSubscriptionStarted=!1;const e=this.livePowerSubscription;this.livePowerSubscription=void 0,e&&e().catch(()=>{}),this.resizeObserver?.disconnect(),super.disconnectedCallback()}updated(){!this.livePowerLookupStarted&&this.isConnected&&"function"==typeof this.hass?.callWS&&(this.livePowerLookupStarted=!0,this.initializeLivePowerSubscription(this.hass,this.livePowerLifecycle))}async initializeLivePowerSubscription(e,t){let i;try{i=await e.callWS({type:"config_entries/get",domain:"solar_battery_economy"})}catch{return this.livePowerIssue="unavailable",void this.requestUpdate()}if(t!==this.livePowerLifecycle||!this.isConnected||!Array.isArray(i)||1!==i.length||"loaded"!==i[0]?.state||"string"!=typeof i[0]?.entry_id||!i[0].entry_id)return this.livePowerIssue="unavailable",void this.requestUpdate();if(this.livePowerEntryId=i[0].entry_id,!this.livePowerSubscriptionStarted&&"function"==typeof e.connection?.subscribeMessage){this.livePowerSubscriptionStarted=!0;try{const i=await e.connection.subscribeMessage(e=>{const t=function(e){const t=yt(e),i=yt(t?.flows),o=yt(t?.aggregates);if(!i||!o)return{issue:"missing"};const r={solar_house:gt(i,"solar_house"),solar_battery:gt(i,"solar_battery"),solar_export:gt(i,"solar_export"),battery_house:gt(i,"battery_house"),battery_grid:gt(i,"battery_grid"),grid_house:gt(i,"grid_house"),grid_battery:gt(i,"grid_battery"),unknown_grid_export:gt(i,"unknown_grid_export")},n={solar_total:gt(o,"solar_total"),house_total:gt(o,"house_total"),battery_net:gt(o,"battery_net"),grid_net:gt(o,"grid_net")},a=[...Object.values(r),...Object.values(n)].find(e=>"issue"in e);if(a)return{issue:a.issue};const s=e=>{if("value"in e)return e.value;throw new Error("Unreachable Live Power value state")};return{snapshot:{unit:"string"==typeof t?.unit?t.unit:void 0,flows:{solar_house:s(r.solar_house),solar_battery:s(r.solar_battery),solar_export:s(r.solar_export),battery_house:s(r.battery_house),battery_grid:s(r.battery_grid),grid_house:s(r.grid_house),grid_battery:s(r.grid_battery),unknown_grid_export:s(r.unknown_grid_export)},aggregates:{solar_total:s(n.solar_total),house_total:s(n.house_total),battery_net:s(n.battery_net),grid_net:s(n.grid_net)}}}}(e);if(!t.snapshot)return this.livePowerSnapshot=void 0,this.livePowerIssue=t.issue,void this.requestUpdate();this.livePowerSnapshot=t.snapshot,this.livePowerIssue=void 0,this.requestUpdate()},{type:"solar_battery_economy/subscribe_live_power",config_entry_id:this.livePowerEntryId});if(t!==this.livePowerLifecycle||!this.isConnected)return void await i();this.livePowerSubscription=i}catch{this.livePowerSnapshot=void 0,this.livePowerIssue="unavailable",this.requestUpdate()}}}firstUpdated(){const e=this.renderRoot.querySelector(".card");this.resizeObserver?.observe(e)}setConfig(e){this.config=e;const t=e?.layout;this.layoutType="mobile"===t?"mobile":"desktop"}render(){if(!this.layoutReady)return W`
         <ha-card class="ha-wrapper">
           <div class="card ${this.layoutType}"></div>
         </ha-card>
-      `;const t=function(t,e){const i=e??{},o=i.sidePanels?.energy??{},s=i.sidePanels?.economy??{};return{layout:i.layout??ue.layout,batterySocEntity:i.batterySocEntity,solarInfoEntity:i.solarInfoEntity,gridInfoEntity:i.gridInfoEntity,houseInfoEntity:i.houseInfoEntity,batteryInfoEntity:i.batteryInfoEntity,sidePanels:{energy:{show:o.show??ue.sidePanels.energy.show,importTodayEntity:o.importTodayEntity,exportTodayEntity:o.exportTodayEntity},economy:{show:s.show??ue.sidePanels.economy.show}},devices:i.devices??ue.devices}}(le(this.hass),this.config),e=function(t,e,i){const o=e=>{if(!e)return 0;const i=t?.states?.[e]?.state,o=Number(i);return isNaN(o)?0:o},s=i?.flows;return{"solar-house":mt("solar-house",s?.solar_house??0),"solar-battery":mt("solar-battery",s?.solar_battery??0),"solar-export":mt("solar-export",s?.solar_export??0),"battery-house":mt("battery-house",s?.battery_house??0),"battery-grid":mt("battery-grid",s?.battery_grid??0),"grid-house":mt("grid-house",s?.grid_house??0),"grid-battery":mt("grid-battery",s?.grid_battery??0),"house-spa":mt("house-spa",o(e.devices[1]?.powerEntity)),"house-car":mt("house-car",o(e.devices[0]?.powerEntity)),"house-heatpump":mt("house-heatpump",o(e.devices[2]?.powerEntity)),"house-appliance":mt("house-appliance",o(e.devices[3]?.powerEntity))}}(this.hass,t,this.livePowerSnapshot),i=ce(this.hass,t,this.livePowerSnapshot),o=this.activeLayout,s=function(t){const e=t?.states?.["sun.sun"];if(!e)return"day";const i=Number(e.attributes?.elevation??0);return"above_horizon"===e.state?i<8?"morning":i<20?"sunset":"day":i>-6?"bluehour":"night"}(this.hass),r=function(t){const e=t?.states?.["sun.sun"];if(!e)return{progress:0,aboveHorizon:!1,left:0,top:0,sunrise:"--:--",sunset:"--:--"};const i=Number(e.attributes?.elevation??0),o=Number(e.attributes?.azimuth??180),s="above_horizon"===e.state,r=Math.max(0,Math.min(1,(o-90)/180));return{progress:r,aboveHorizon:s,left:100*r,top:Math.max(40,280-6*i),sunrise:new Date(e.attributes.next_rising).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}),sunset:new Date(e.attributes.next_setting).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}}(this.hass),n=$t(this.hass,s,this.layoutType);return W`
+      `;const e=function(e,t){const i=t??{},o=i.sidePanels?.energy??{},r=i.sidePanels?.economy??{};return{layout:i.layout??ft.layout,batterySocEntity:i.batterySocEntity,solarInfoEntity:i.solarInfoEntity,gridInfoEntity:i.gridInfoEntity,houseInfoEntity:i.houseInfoEntity,batteryInfoEntity:i.batteryInfoEntity,phaseLoad:{mainFuse:i.phaseLoad?.mainFuse??ft.phaseLoad.mainFuse,invertDirection:i.phaseLoad?.invertDirection??ft.phaseLoad.invertDirection,l1CurrentEntity:i.phaseLoad?.l1CurrentEntity,l1PowerEntity:i.phaseLoad?.l1PowerEntity,l1PowerInverted:i.phaseLoad?.l1PowerInverted??ft.phaseLoad.l1PowerInverted,l2CurrentEntity:i.phaseLoad?.l2CurrentEntity,l2PowerEntity:i.phaseLoad?.l2PowerEntity,l2PowerInverted:i.phaseLoad?.l2PowerInverted??ft.phaseLoad.l2PowerInverted,l3CurrentEntity:i.phaseLoad?.l3CurrentEntity,l3PowerEntity:i.phaseLoad?.l3PowerEntity,l3PowerInverted:i.phaseLoad?.l3PowerInverted??ft.phaseLoad.l3PowerInverted},sidePanels:{energy:{show:o.show??ft.sidePanels.energy.show,importTodayEntity:o.importTodayEntity,exportTodayEntity:o.exportTodayEntity},economy:{show:r.show??ft.sidePanels.economy.show}},devices:i.devices??ft.devices}}(pt(this.hass),this.config),t=function(e,t,i){const o=t=>{if(!t)return 0;const i=e?.states?.[t]?.state,o=Number(i);return isNaN(o)?0:o},r=i?.flows;return{"solar-house":be("solar-house",r?.solar_house??0),"solar-battery":be("solar-battery",r?.solar_battery??0),"solar-export":be("solar-export",r?.solar_export??0),"battery-house":be("battery-house",r?.battery_house??0),"battery-grid":be("battery-grid",r?.battery_grid??0),"grid-house":be("grid-house",r?.grid_house??0),"grid-battery":be("grid-battery",r?.grid_battery??0),"house-spa":be("house-spa",o(t.devices[1]?.powerEntity)),"house-car":be("house-car",o(t.devices[0]?.powerEntity)),"house-heatpump":be("house-heatpump",o(t.devices[2]?.powerEntity)),"house-appliance":be("house-appliance",o(t.devices[3]?.powerEntity))}}(this.hass,e,this.livePowerSnapshot),i=ut(this.hass,e,this.livePowerSnapshot),o=(r=e.phaseLoad,Boolean(r?.l1CurrentEntity||r?.l1PowerEntity||r?.l2CurrentEntity||r?.l2PowerEntity||r?.l3CurrentEntity||r?.l3PowerEntity));var r;const n=o?function(e,t){const i=[{name:"L1",current:t?.l1CurrentEntity,power:t?.l1PowerEntity,powerInverted:t?.l1PowerInverted},{name:"L2",current:t?.l2CurrentEntity,power:t?.l2PowerEntity,powerInverted:t?.l2PowerInverted},{name:"L3",current:t?.l3CurrentEntity,power:t?.l3PowerEntity,powerInverted:t?.l3PowerInverted}],o=t?.mainFuse;return i.map(i=>{const r=xe(e,i.current,"current"),n=xe(e,i.power,"power"),a=null===n?null:n*(i.powerInverted?-1:1),s=null!==r&&Number.isFinite(o)&&o>0,l=s?Math.min(100,Math.round(Math.abs(r)/o*100)):null,d=s?Math.max(0,Math.min(16,Math.round(Math.abs(r)/o*16))):null,c=null===l?"missing":l>=100?"critical":l>=80?"warning":"normal";let h="missing";if(null!==a){const e=a>=0;h=(t?.invertDirection?!e:e)?"import":"export"}return{name:i.name,current:r,power:a,percent:l,activeSegments:d,direction:h,loadState:c}})}(this.hass,e.phaseLoad):[],a=function(e,t=!1){const i=3===e.length&&e.every(e=>null!==e.power);let o=null,r=null,n=null;if(i){const i=e.map(e=>e.power*(t?-1:1));o=i.reduce((e,t)=>e+t,0),r=i.reduce((e,t)=>e+Math.max(t,0),0),n=i.reduce((e,t)=>e+Math.max(-t,0),0)}const a=3===e.length&&e.every(e=>null!==e.percent);return{powerComplete:i,netPower:o,importPower:r,exportPower:n,loadComplete:a,mostLoadedPhase:a?e.reduce((e,t)=>t.percent>e.percent?{name:t.name,percent:t.percent}:e,{name:e[0].name,percent:e[0].percent}):null}}(n,e.phaseLoad?.invertDirection),s=this.activeLayout,l=function(e){const t=e?.states?.["sun.sun"];if(!t)return"day";const i=Number(t.attributes?.elevation??0);return"above_horizon"===t.state?i<8?"morning":i<20?"sunset":"day":i>-6?"bluehour":"night"}(this.hass),d=function(e){const t=e?.states?.["sun.sun"];if(!t)return{progress:0,aboveHorizon:!1,left:0,top:0,sunrise:"--:--",sunset:"--:--"};const i=Number(t.attributes?.elevation??0),o=Number(t.attributes?.azimuth??180),r="above_horizon"===t.state,n=Math.max(0,Math.min(1,(o-90)/180));return{progress:n,aboveHorizon:r,left:100*n,top:Math.max(40,280-6*i),sunrise:new Date(t.attributes.next_rising).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}),sunset:new Date(t.attributes.next_setting).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}}(this.hass),c=$e(this.hass,l,this.layoutType);return W`
       <ha-card class="ha-wrapper">
-        <div class="card ${this.layoutType} ${s}">
+        <div class="card ${this.layoutType} ${l}">
           ${this.livePowerIssue?W`<div class="live-power-status" role="status">Effektdata saknas</div>`:""}
           <div class="scene">
             <div
               class="scene-inner"
               style="
-                width:${o.sceneWidth}px;
-                height:${o.sceneHeight}px;
+                width:${s.sceneWidth}px;
+                height:${s.sceneHeight}px;
                 transform:
                   translate(0px, 0px)
                   scale(${this.sceneScale});
               "
             >
-              ${t.sidePanels.energy.show?function(t){const{x:e,y:i,panel:o,host:s,cardData:r}=t,n=r.gridIndependence,a=r.gridIndependenceEntity,l=r.solarSelfConsumptionRate,c=r.solarSelfConsumptionRateEntity,h=r.batteryUtilization,d=r.batteryUtilizationEntity,u=r.co2Saved,p=r.co2SavedEntity;return W`
+              ${e.sidePanels.energy.show?function(e){const{x:t,y:i,panel:o,host:r,cardData:n}=e,a=n.gridIndependence,s=n.gridIndependenceEntity,l=n.solarSelfConsumptionRate,d=n.solarSelfConsumptionRateEntity,c=n.batteryUtilization,h=n.batteryUtilizationEntity;return W`
         <div
             class=${"side-panel side-panel-left"+(o.compact?" compact":"")}
-            style=${te({left:`${e}px`,top:`${i}px`,width:o.width?`${o.width}px`:void 0})}
+            style=${tt({left:`${t}px`,top:`${i}px`,width:o.width?`${o.width}px`:void 0})}
         >
             <div class="side-title">
                 Energy
             </div>
             <div class="panel-section">
-                ${r.importTodayEntity?W`
+                ${n.importTodayEntity?W`
                         <div
                             class="side-stat"
                             style="cursor:pointer;"
-                            @click=${()=>Mt(s,r.importTodayEntity)}
+                            @click=${()=>Be(r,n.importTodayEntity)}
                         >
                             <div class="side-label">
                                 Import today
                             </div>
                             <div class="side-value value-grid">
-                                ${r.importToday} kWh
+                                ${n.importToday} kWh
                             </div>
                         </div>
                     `:""}
-                ${r.exportTodayEntity?W`
+                ${n.exportTodayEntity?W`
                         <div
                             class="side-stat"
                             style="cursor:pointer;"
-                            @click=${()=>Mt(s,r.exportTodayEntity)}
+                            @click=${()=>Be(r,n.exportTodayEntity)}
                         >
                             <div class="side-label">
                                 Export today
                             </div>
                             <div class="side-value value-export">
-                                ${r.exportToday} kWh
+                                ${n.exportToday} kWh
                             </div>
                         </div>
                     `:""}
@@ -1978,19 +2144,19 @@ ${Qt}
                 <div
                     class="side-stat"
                     style="cursor:pointer;"
-                    @click=${()=>Mt(s,a)}
+                    @click=${()=>Be(r,s)}
                 >
                     <div class="side-label">
                         Grid Independance
                     </div>
                     <div class="side-value value-independence">
-                        ${n} %
+                        ${a} %
                     </div>
                 </div>
                 <div
                     class="side-stat"
                     style="cursor:pointer;"
-                    @click=${()=>Mt(s,c)}
+                    @click=${()=>Be(r,d)}
                 >
                     <div class="side-label">
                         Solar self consumption
@@ -2002,117 +2168,19 @@ ${Qt}
                 <div
                     class="side-stat"
                     style="cursor:pointer;"
-                    @click=${()=>Mt(s,d)}
+                    @click=${()=>Be(r,h)}
                 >
                     <div class="side-label">
                         Battery utilization
                     </div>
                     <div class="side-value value-battery">
-                        ${h} %
-                    </div>
-                </div>
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${()=>Mt(s,p)}
-                >
-                    <div class="side-label">
-                        CO₂ saved
-                    </div>
-                    <div class="side-value value-co2">
-                        ${u} kg
+                        ${c} %
                     </div>
                 </div>
             </div>
         </div>
-    `}({x:o.panels.left.x,y:o.panels.left.y,panel:o.panels.left,host:this,cardData:i}):""}
+    `}({x:s.panels.left.x,y:s.panels.left.y,panel:s.panels.left,host:this,cardData:i}):""}
 
-              ${t.sidePanels.economy.show?function(t){const{x:e,y:i,panel:o,host:s,cardData:r}=t,n=r.savingsToday,a=r.savingsTodayEntity;r.totalSavings,r.totalSavingsEntity;const l=r.roi,c=r.roiEntity;return W`
-        <div
-            class=${"side-panel side-panel-right"+(o.compact?" compact":"")}
-            style=${te({left:`${e}px`,top:`${i}px`,width:o.width?`${o.width}px`:void 0})}
-        >
-            <div class="side-title">
-                Economy
-            </div>
-            <div class="panel-section">
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${()=>Mt(s,a)}
-                >
-                    <div class="side-label">
-                        Savings today
-                    </div>
-                    <div class="side-value value-money">
-                        ${n} kr
-                    </div>
-                </div>
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${()=>Mt(s,r.savingsThisMonthEntity)}
-                >
-                    <div class="side-label">
-                        Savings this month
-                    </div>
-                    <div class="side-value value-money">
-                        ${r.savingsThisMonth} kr
-                    </div>
-                </div>
-                <div class="side-divider"></div>
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${()=>Mt(s,r.paybackTimeEntity)}
-                >
-                    <div class="side-label">
-                        Payback time
-                    </div>
-                    <div class="side-value value-money">
-                        ${r.paybackTime} år
-                    </div>
-                </div>
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${()=>Mt(s,r.savingsThisYearEntity)}
-                >
-                    <div class="side-label">
-                        Savings this year
-                    </div>
-                    <div class="side-value value-money">
-                        ${r.savingsThisYear} kr
-                    </div>
-                </div>
-            <div class="panel-section">
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${()=>Mt(s,r.estimatedAnnualSavingsEntity)}
-                >
-                    <div class="side-label">
-                        Estimated annual saving
-                    </div>
-                    <div class="side-value value-money">
-                        ${r.estimatedAnnualSavings} kr
-                    </div>
-                </div>
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${()=>Mt(s,c)}
-                >
-                    <div class="side-label">
-                        Estimated ROI
-                    </div>
-                    <div class="side-value value-money">
-                        ${l} %
-                    </div>
-                </div>
-            </div>
-        </div>
-    `}({x:o.panels.right.x,y:o.panels.right.y,panel:o.panels.right,host:this,cardData:i}):""}
               <div
                 class="hero-background"
                 style="
@@ -2122,7 +2190,7 @@ ${Qt}
                       rgba(5,10,20,0.08),
                       rgba(5,10,20,0.25)
                     ),
-                    url('${n}');
+                    url('${c}');
                 "
               ></div>
               <div class="background-glow"></div>
@@ -2130,33 +2198,34 @@ ${Qt}
                 class="scene-sun-glow"
                 style="
                   left:50%;
-                  top:${r.top}px;
+                  top:${d.top}px;
                 "
               ></div>
               <div class="scene-vignette"></div>
-              ${Vt(r,o,i.solarPower)}
+              ${Ge(d,s,i.solarPower)}
               <div
                 class="flow-layer"
                 style="
-                  width:${o.sceneWidth}px;
-                  height:${o.sceneHeight}px;
+                  width:${s.sceneWidth}px;
+                  height:${s.sceneHeight}px;
                 "
               >
-                ${function(t,e,i,o){const s=t.sceneWidth<1e3?zt:Ot,r=t.sceneWidth<1e3?Ht:Nt,n=function(t){const e=t.find(t=>"solar"===t.id),i=t.find(t=>"house"===t.id),o=t.find(t=>"battery"===t.id),s=t.find(t=>"grid"===t.id),r=t.find(t=>"spa"===t.id),n=t.find(t=>"heatpump"===t.id),a=t.find(t=>"appliance"===t.id),l=t.find(t=>"car"===t.id);return{houseAnchorLeft:{x:i.x,y:i.y+i.height/2},houseAnchorRight:{x:i.x+i.width,y:i.y+i.height/2},houseAnchorTop:{x:i.x+i.width/2,y:i.y},houseAnchorTopLeft:{x:i.x+(i.width/2-10),y:i.y},houseAnchorTopCenter:{x:i.x+i.width/2,y:i.y},houseAnchorTopRight:{x:i.x+(i.width/2+10),y:i.y},houseAnchorBottom:{x:i.x+i.width/2,y:i.y+i.height},houseAnchorBottomLeft:{x:i.x+(i.width/2-10),y:i.y+i.height},houseAnchorBottomCenter:{x:i.x+i.width/2,y:i.y+i.height},houseAnchorBottomRight:{x:i.x+(i.width/2+10),y:i.y+i.height},batteryAnchorLeft:{x:o.x,y:o.y+o.height/2},batteryAnchorUpperLeft:{x:o.x,y:o.y+o.height/2-10},batteryAnchorLowerLeft:{x:o.x,y:o.y+o.height/2+10},batteryAnchorRight:{x:o.x+o.width,y:o.y+o.height/2},batteryAnchorTop:{x:o.x+o.width/2,y:o.y},batteryAnchorBottom:{x:o.x+o.width/2,y:o.y+o.height},gridAnchorLeft:{x:s.x,y:s.y+s.height/2},gridAnchorRight:{x:s.x+s.width,y:s.y+s.height/2},gridAnchorUpperRight:{x:s.x+s.width,y:s.y+(s.height/2-10)},gridAnchorLowerRight:{x:s.x+s.width,y:s.y+(s.height/2+10)},gridAnchorTop:{x:s.x+s.width/2,y:s.y},gridAnchorBottom:{x:s.x+s.width/2,y:s.y+s.height},solarAnchorLeft:{x:e.x,y:e.y+e.height/2},solarAnchorRight:{x:e.x+e.width,y:e.y+e.height/2},solarAnchorBottom:{x:e.x+e.width/2,y:e.y+e.height},solarAnchorBottomLeft:{x:e.x+(e.width/2-10),y:e.y+e.height},solarAnchorBottomCenter:{x:e.x+e.width/2,y:e.y+e.height},solarAnchorBottomRight:{x:e.x+(e.width/2+10),y:e.y+e.height},solarJunction:{x:e.x+e.width/2,y:e.y+e.height+55},spaAnchorLeft:{x:r.x,y:r.y+r.height/2},spaAnchorRight:{x:r.x+r.width,y:r.y+r.height/2},spaAnchorTop:{x:r.x+r.width/2,y:r.y},heatpumpAnchorLeft:{x:n.x,y:n.y+n.height/2},heatpumpAnchorRight:{x:n.x+n.width,y:n.y+n.height/2},heatpumpAnchorTop:{x:n.x+n.width/2,y:n.y},applianceAnchorLeft:{x:a.x,y:a.y+a.height/2},applianceAnchorRight:{x:a.x+a.width,y:a.y+a.height/2},applianceAnchorTop:{x:a.x+a.width/2,y:a.y},carAnchorLeft:{x:l.x,y:l.y+l.height/2},carAnchorRight:{x:l.x+l.width,y:l.y+l.height/2},carAnchorTop:{x:l.x+l.width/2,y:l.y}}}(s),a=function(t){return{solar:t.solarAnchorBottom,solarLeft:t.solarAnchorLeft,solarRight:t.solarAnchorRight,solarBottom:t.solarAnchorBottom,solarBottomLeft:t.solarAnchorBottomLeft,solarBottomCenter:t.solarAnchorBottomCenter,solarBottomRight:t.solarAnchorBottomRight,gridLeft:t.gridAnchorLeft,gridRight:t.gridAnchorRight,gridUpperRight:t.gridAnchorUpperRight,gridLowerRight:t.gridAnchorLowerRight,gridTop:t.gridAnchorTop,gridBottom:t.gridAnchorBottom,batteryLeft:t.batteryAnchorLeft,batteryUpperLeft:t.batteryAnchorUpperLeft,batteryLowerLeft:t.batteryAnchorLowerLeft,batteryRight:t.batteryAnchorRight,batteryTop:t.batteryAnchorTop,batteryBottom:t.batteryAnchorBottom,houseLeft:t.houseAnchorLeft,houseRight:t.houseAnchorRight,houseTop:t.houseAnchorTop,houseBottom:t.houseAnchorBottom,houseBottomLeft:t.houseAnchorBottomLeft,houseBottomCenter:t.houseAnchorBottomCenter,houseBottomRight:t.houseAnchorBottomRight,houseTopLeft:t.houseAnchorTopLeft,houseTopCenter:t.houseAnchorTopCenter,houseTopRight:t.houseAnchorTopRight,spaLeft:t.spaAnchorLeft,spaRight:t.spaAnchorRight,spa:t.spaAnchorTop,heatpumpLeft:t.heatpumpAnchorLeft,heatpumpRight:t.heatpumpAnchorRight,heatpump:t.heatpumpAnchorTop,applianceLeft:t.applianceAnchorLeft,applianceRight:t.applianceAnchorRight,appliance:t.applianceAnchorTop,carLeft:t.carAnchorLeft,carRight:t.carAnchorRight,car:t.carAnchorTop,solarJunction:t.solarJunction}}(n);return V`
+                ${function(e,t,i,o){const r=e.sceneWidth<1e3?Ne:Oe,n=e.sceneWidth<1e3?je:He,a=function(e){return{solar:e.solarAnchorBottom,solarLeft:e.solarAnchorLeft,solarRight:e.solarAnchorRight,solarBottom:e.solarAnchorBottom,solarBottomLeft:e.solarAnchorBottomLeft,solarBottomCenter:e.solarAnchorBottomCenter,solarBottomRight:e.solarAnchorBottomRight,gridLeft:e.gridAnchorLeft,gridRight:e.gridAnchorRight,gridUpperRight:e.gridAnchorUpperRight,gridLowerRight:e.gridAnchorLowerRight,gridTop:e.gridAnchorTop,gridBottom:e.gridAnchorBottom,batteryLeft:e.batteryAnchorLeft,batteryUpperLeft:e.batteryAnchorUpperLeft,batteryLowerLeft:e.batteryAnchorLowerLeft,batteryRight:e.batteryAnchorRight,batteryTop:e.batteryAnchorTop,batteryBottom:e.batteryAnchorBottom,houseLeft:e.houseAnchorLeft,houseRight:e.houseAnchorRight,houseTop:e.houseAnchorTop,houseBottom:e.houseAnchorBottom,houseBottomLeft:e.houseAnchorBottomLeft,houseBottomCenter:e.houseAnchorBottomCenter,houseBottomRight:e.houseAnchorBottomRight,houseTopLeft:e.houseAnchorTopLeft,houseTopCenter:e.houseAnchorTopCenter,houseTopRight:e.houseAnchorTopRight,spaLeft:e.spaAnchorLeft,spaRight:e.spaAnchorRight,spa:e.spaAnchorTop,heatpumpLeft:e.heatpumpAnchorLeft,heatpumpRight:e.heatpumpAnchorRight,heatpump:e.heatpumpAnchorTop,applianceLeft:e.applianceAnchorLeft,applianceRight:e.applianceAnchorRight,appliance:e.applianceAnchorTop,carLeft:e.carAnchorLeft,carRight:e.carAnchorRight,car:e.carAnchorTop,solarJunction:e.solarJunction}}(function(e){const t=t=>{const i=e.find(e=>e.id===t);return{...i,...i.anchorBounds??{}}},i=t("solar"),o=t("house"),r=t("battery"),n=t("grid"),a=t("spa"),s=t("heatpump"),l=t("appliance"),d=t("car");return{houseAnchorLeft:{x:o.x,y:o.y+o.height/2},houseAnchorRight:{x:o.x+o.width,y:o.y+o.height/2},houseAnchorTop:{x:o.x+o.width/2,y:o.y},houseAnchorTopLeft:{x:o.x+(o.width/2-10),y:o.y},houseAnchorTopCenter:{x:o.x+o.width/2,y:o.y},houseAnchorTopRight:{x:o.x+(o.width/2+10),y:o.y},houseAnchorBottom:{x:o.x+o.width/2,y:o.y+o.height},houseAnchorBottomLeft:{x:o.x+(o.width/2-10),y:o.y+o.height},houseAnchorBottomCenter:{x:o.x+o.width/2,y:o.y+o.height},houseAnchorBottomRight:{x:o.x+(o.width/2+10),y:o.y+o.height},batteryAnchorLeft:{x:r.x,y:r.y+r.height/2},batteryAnchorUpperLeft:{x:r.x,y:r.y+r.height/2-10},batteryAnchorLowerLeft:{x:r.x,y:r.y+r.height/2+10},batteryAnchorRight:{x:r.x+r.width,y:r.y+r.height/2},batteryAnchorTop:{x:r.x+r.width/2,y:r.y},batteryAnchorBottom:{x:r.x+r.width/2,y:r.y+r.height},gridAnchorLeft:{x:n.x,y:n.y+n.height/2},gridAnchorRight:{x:n.x+n.width,y:n.y+n.height/2},gridAnchorUpperRight:{x:n.x+n.width,y:n.y+(n.height/2-10)},gridAnchorLowerRight:{x:n.x+n.width,y:n.y+(n.height/2+10)},gridAnchorTop:{x:n.x+n.width/2,y:n.y},gridAnchorBottom:{x:n.x+n.width/2,y:n.y+n.height},solarAnchorLeft:{x:i.x,y:i.y+i.height/2},solarAnchorRight:{x:i.x+i.width,y:i.y+i.height/2},solarAnchorBottom:{x:i.x+i.width/2,y:i.y+i.height},solarAnchorBottomLeft:{x:i.x+(i.width/2-10),y:i.y+i.height},solarAnchorBottomCenter:{x:i.x+i.width/2,y:i.y+i.height},solarAnchorBottomRight:{x:i.x+(i.width/2+10),y:i.y+i.height},solarJunction:{x:i.x+i.width/2,y:i.y+i.height+55},spaAnchorLeft:{x:a.x,y:a.y+a.height/2},spaAnchorRight:{x:a.x+a.width,y:a.y+a.height/2},spaAnchorTop:{x:a.x+a.width/2,y:a.y},heatpumpAnchorLeft:{x:s.x,y:s.y+s.height/2},heatpumpAnchorRight:{x:s.x+s.width,y:s.y+s.height/2},heatpumpAnchorTop:{x:s.x+s.width/2,y:s.y},applianceAnchorLeft:{x:l.x,y:l.y+l.height/2},applianceAnchorRight:{x:l.x+l.width,y:l.y+l.height/2},applianceAnchorTop:{x:l.x+l.width/2,y:l.y},carAnchorLeft:{x:d.x,y:d.y+d.height/2},carAnchorRight:{x:d.x+d.width,y:d.y+d.height/2},carAnchorTop:{x:d.x+d.width/2,y:d.y}}}(r));return V`
   <svg
     class="flow-svg"
     viewBox="0 0 1920 1080"
     xmlns="http://www.w3.org/2000/svg"
   >
-    ${Tt(a,e,r)}
+    ${Me(a,t,n)}
 
-    ${Ut(s,i,o)}
+    ${Ue(r,i,o)}
   </svg>
-`}(o,e,i,this)}
+`}(s,t,i,this)}
               </div>
+              ${o?rt(n,a):""}
             </div>
           </div>
         </div>
       </ha-card>
-    `}};t([yt({attribute:!1})],ye.prototype,"hass",void 0),t([yt({attribute:!1})],ye.prototype,"config",void 0),t([gt()],ye.prototype,"activeLayout",void 0),t([gt()],ye.prototype,"layoutType",void 0),t([gt()],ye.prototype,"sceneScale",void 0),t([gt()],ye.prototype,"layoutReady",void 0),t([gt()],ye.prototype,"livePowerIssue",void 0),ye=t([dt("solar-battery-economy-flow-card")],ye);export{ye as SolarBatteryEconomyFlowCard};
+    `}};e([ye({attribute:!1})],bt.prototype,"hass",void 0),e([ye({attribute:!1})],bt.prototype,"config",void 0),e([ge()],bt.prototype,"activeLayout",void 0),e([ge()],bt.prototype,"layoutType",void 0),e([ge()],bt.prototype,"sceneScale",void 0),e([ge()],bt.prototype,"layoutReady",void 0),e([ge()],bt.prototype,"livePowerIssue",void 0),bt=e([he("solar-battery-economy-flow-card")],bt);export{bt as SolarBatteryEconomyFlowCard};
 //# sourceMappingURL=solar-battery-economy-flow-card.js.map

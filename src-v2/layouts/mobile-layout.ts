@@ -21,8 +21,8 @@ export const mobileLayout: SceneLayout = {
 
       left: {
       x: 18,
-      y: 540,
-      width: 185,
+      y: 550,
+      width: 394,
       compact: true,
   },
 

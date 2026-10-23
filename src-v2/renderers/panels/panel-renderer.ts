@@ -56,10 +56,6 @@ export function renderLeftPanel(
         cardData.batteryUtilization;
     const batteryUtilizationEntity =
         cardData.batteryUtilizationEntity;
-    const co2Saved =
-        cardData.co2Saved;
-    const co2SavedEntity =
-        cardData.co2SavedEntity;
     return html`
         <div
             class=${`side-panel side-panel-left${panel.compact ? " compact" : ""}`}
@@ -160,22 +156,6 @@ export function renderLeftPanel(
                     </div>
                     <div class="side-value value-battery">
                         ${batteryUtilization} %
-                    </div>
-                </div>
-                <div
-                    class="side-stat"
-                    style="cursor:pointer;"
-                    @click=${() =>
-                        openMoreInfo(
-                            host,
-                            co2SavedEntity,
-                        )}
-                >
-                    <div class="side-label">
-                        CO₂ saved
-                    </div>
-                    <div class="side-value value-co2">
-                        ${co2Saved} kg
                     </div>
                 </div>
             </div>

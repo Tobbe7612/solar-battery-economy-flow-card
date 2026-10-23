@@ -21,21 +21,23 @@ export function renderLabel(
 const isMobile = definition.width <= 155;
 const scale = isMobile ? 0.6 : 1;
 const iconScale = isMobile ? 0.65 : 1;
-const iconOffsetX = isMobile ? 25 : 32;
-const iconOffsetY = isMobile ? 30 : 55;
+const iconOffsetX = isMobile ? 22 : 34;
+const iconOffsetY = isMobile ? 30 : 49;
 
-const titleSize = 16 * scale;
-const valueSize = 24 * scale;
-const line2Size = 18 * scale;
-const line3Size = 13 * scale;
+const titleSize = 17 * scale;
+const valueSize = (isMobile ? 25 : 26) * scale;
+const line2Size = (isMobile ? 18 : 19) * scale;
+const line3Size = 14 * scale;
 const iconSize = 22 * scale;
 
-const leftPadding = 18 * scale;
+const contentBaseX = isMobile ? 50 : 78;
+const statusX = definition.width / 2;
+const contentX = contentBaseX + (isMobile ? 6 : 10);
 
 const titleY = 28 * scale;
-const valueY = 56 * scale;
-const line2Y = 78 * scale;
-const line3Y = 100 * scale;
+const valueY = (isMobile ? 56 : 59) * scale;
+const line2Y = (isMobile ? 78 : 82) * scale;
+const line3Y = (isMobile ? 100 : 105) * scale;
 
 const animation = getLabelAnimationProfile(
     state.power,
@@ -93,9 +95,9 @@ const pulseOriginY = definition.height / 2;
                     rx="22"
                     ry="22"
 
-                    fill="rgba(18,24,34,0.72)"
+                    fill="rgba(249,252,255,0.94)"
 
-                    stroke="rgba(255,255,255,0.10)"
+                    stroke="rgba(255,255,255,0.94)"
 
                     stroke-width="1.5"
 
@@ -104,10 +106,10 @@ const pulseOriginY = definition.height / 2;
 
                 <text
                     class="energy-label-title"
-                    x="${leftPadding}"
+                    x="${contentX}"
                     y="${titleY}"
                     font-size="${titleSize}"
-                    fill="white"
+                    fill="#315474"
                     font-weight="700"
                 >
                     ${definition.title}
@@ -116,7 +118,7 @@ const pulseOriginY = definition.height / 2;
                 <g
                     transform="
                         translate(
-                            ${definition.width - iconOffsetX},
+                            ${iconOffsetX},
                             ${iconOffsetY}
                         )
                         scale(${iconScale})
@@ -136,10 +138,10 @@ const pulseOriginY = definition.height / 2;
                     ? svg`
                         <text
                             class="energy-label-line1"
-                            x="${leftPadding}"
+                            x="${contentX}"
                             y="${valueY}"
                             font-size="${valueSize}"
-                            fill="white"
+                            fill="#153653"
                             font-weight="700"
                         >
                             ${state.line1}
@@ -151,11 +153,11 @@ const pulseOriginY = definition.height / 2;
                     ? svg`
                         <text
                             class="energy-label-line2"
-                            x="${leftPadding}"
+                            x="${contentX}"
                             y="${line2Y}"
                             font-size="${line2Size}"
-                            fill="white"
-                            opacity="0.92"
+                            fill="#345570"
+                            opacity="0.96"
                         >
                             ${state.line2}
                         </text>
@@ -166,11 +168,12 @@ const pulseOriginY = definition.height / 2;
                     ? svg`
                         <text
                             class="energy-label-line3"
-                            x="${leftPadding}"
+                            x="${statusX}"
                             y="${line3Y}"
                             font-size="${line3Size}"
-                            fill="white"
-                            opacity="0.70"
+                            text-anchor="middle"
+                            fill="#526d87"
+                            opacity="0.92"
                         >
                             ${state.line3}
                         </text>

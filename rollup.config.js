@@ -29,16 +29,6 @@ export default {
     copy({
  
       targets: [
- 
-        {
-          src: 'dist/solar-battery-economy-flow-card.js',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card'
-        },
-        {
-          src: 'dist/solar-battery-economy-flow-card.js.map',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card'
-        },
- 
         {
           src: 'src-v2/assets/backgrounds',
           dest: 'dist/assets'
@@ -58,27 +48,6 @@ export default {
         {
           src: 'src-v2/assets/vehicles',
           dest: 'dist/assets'
-        },
- 
-        {
-          src: 'dist/assets/backgrounds',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets'
-        },
-        {
-          src: 'dist/assets/batteries',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets'
-        },
-        {
-          src: 'dist/assets/icons',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets'
-        },
-        {
-          src: 'dist/assets/overlays',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets'
-        },
-        {
-          src: 'dist/assets/vehicles',
-          dest: 'Z:/www/dev/solar-battery-economy-flow-card/assets'
         }
  
       ],

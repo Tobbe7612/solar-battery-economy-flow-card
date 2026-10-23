@@ -4,6 +4,11 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { getActiveLayout } from './core/responsive-engine';
 import type { LayoutType } from './core/layout-type';
 import { getLiveFlows } from './core/energy-model';
+import {
+  buildPhaseLoadData,
+  buildPhaseLoadSummary,
+  hasConfiguredPhaseSensors,
+} from './core/phase-load';
 import { getTimeOfDay } from './core/time-of-day';
 import { getSunPosition } from './core/sun-position';
 import { getBackgroundImage } from './core/background-manager';
@@ -16,8 +21,8 @@ import { cardStyles }
   from './styles/card-styles';
 import {
     renderLeftPanel,
-    renderRightPanel,
 } from "./renderers/panels/panel-renderer";
+import { renderPhaseLoadPanel } from "./renderers/phase-load-renderer";
 import { getCardData }
   from "./core/card-data";
 import { adaptLivePowerSnapshot }
@@ -242,6 +247,14 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
         effectiveConfig,
         this.livePowerSnapshot,
       );
+    const phaseLoadVisible = hasConfiguredPhaseSensors(effectiveConfig.phaseLoad);
+    const phaseLoadData = phaseLoadVisible
+      ? buildPhaseLoadData(this.hass, effectiveConfig.phaseLoad)
+      : [];
+    const phaseLoadSummary = buildPhaseLoadSummary(
+      phaseLoadData,
+      effectiveConfig.phaseLoad?.invertDirection,
+    );
     const layout = this.activeLayout;
     const timeOfDay =
       getTimeOfDay(this.hass);
@@ -280,15 +293,6 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
                 })
                 : ""}
 
-              ${effectiveConfig.sidePanels.economy.show
-                ? renderRightPanel({
-                    x: layout.panels.right.x,
-                    y: layout.panels.right.y,
-                    panel: layout.panels.right,
-                    host: this,
-                    cardData,
-                })
-                : ""}
               <div
                 class="hero-background"
                 style="
@@ -329,6 +333,7 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
                     this,
                 )}
               </div>
+              ${phaseLoadVisible ? renderPhaseLoadPanel(phaseLoadData, phaseLoadSummary) : ''}
             </div>
           </div>
         </div>

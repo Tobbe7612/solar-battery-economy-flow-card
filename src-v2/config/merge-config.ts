@@ -41,6 +41,24 @@ export function mergeConfig(
         batteryInfoEntity:
             user.batteryInfoEntity,
 
+        phaseLoad: {
+            mainFuse:
+                user.phaseLoad?.mainFuse
+                ?? DEFAULT_CONFIG.phaseLoad!.mainFuse,
+            invertDirection:
+                user.phaseLoad?.invertDirection
+                ?? DEFAULT_CONFIG.phaseLoad!.invertDirection,
+            l1CurrentEntity: user.phaseLoad?.l1CurrentEntity,
+            l1PowerEntity: user.phaseLoad?.l1PowerEntity,
+            l1PowerInverted: user.phaseLoad?.l1PowerInverted ?? DEFAULT_CONFIG.phaseLoad!.l1PowerInverted,
+            l2CurrentEntity: user.phaseLoad?.l2CurrentEntity,
+            l2PowerEntity: user.phaseLoad?.l2PowerEntity,
+            l2PowerInverted: user.phaseLoad?.l2PowerInverted ?? DEFAULT_CONFIG.phaseLoad!.l2PowerInverted,
+            l3CurrentEntity: user.phaseLoad?.l3CurrentEntity,
+            l3PowerEntity: user.phaseLoad?.l3PowerEntity,
+            l3PowerInverted: user.phaseLoad?.l3PowerInverted ?? DEFAULT_CONFIG.phaseLoad!.l3PowerInverted,
+        },
+
         sidePanels: {
             energy: {
                 show:

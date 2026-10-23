@@ -29,6 +29,10 @@ export interface FlowCardConfig {
     houseInfoEntity?: string;
     batteryInfoEntity?: string;
 
+    // Optional phase load panel. Existing cards without this block keep
+    // their current layout and behavior.
+    phaseLoad?: PhaseLoadConfig;
+
     sidePanels: {
         energy: EnergyPanelConfig;
         economy: EconomyPanelConfig;
@@ -45,6 +49,20 @@ export interface FlowCardConfig {
         DeviceSlotConfig,
     ];
 
+}
+
+export interface PhaseLoadConfig {
+    mainFuse: 16 | 20 | 25;
+    invertDirection: boolean;
+    l1CurrentEntity?: string;
+    l1PowerEntity?: string;
+    l1PowerInverted?: boolean;
+    l2CurrentEntity?: string;
+    l2PowerEntity?: string;
+    l2PowerInverted?: boolean;
+    l3CurrentEntity?: string;
+    l3PowerEntity?: string;
+    l3PowerInverted?: boolean;
 }
 
 export interface EnergyPanelConfig {
