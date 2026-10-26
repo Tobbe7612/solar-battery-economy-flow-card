@@ -73,17 +73,21 @@ export function createDeviceLabel(
     device: CardData["devices"][number],
 ): LabelState {
     return {
-        line1: formatPower(device.power),
+        line1: device.powerQuality === "valid" && device.power !== null
+            ? formatPower(device.power)
+            : "—",
         line2: device.optionalValue ?? "",
         line3: device.status,
-        entityId: device.powerEntity,
-        power: device.power,
+        entityId: device.consumerPowerEntity,
+        power: device.power ?? 0,
         ...(device.soc !== undefined
             ? { soc: device.soc }
             : {}),
         icon: device.icon,
         color:
-            device.power > 1
+            device.powerQuality !== "valid"
+                ? "#8A93A3"
+                : device.power! > 1
                 ? "#FF6B6B"
                 : "#8A93A3",
     };

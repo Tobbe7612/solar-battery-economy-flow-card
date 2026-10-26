@@ -1,14 +1,9 @@
 import { LitElement, html } from 'lit';
-import { styleMap } from 'lit/directives/style-map.js';
 import { customElement, property, state } from 'lit/decorators.js';
 import { getActiveLayout } from './core/responsive-engine';
 import type { LayoutType } from './core/layout-type';
 import { getLiveFlows } from './core/energy-model';
-import {
-  buildPhaseLoadData,
-  buildPhaseLoadSummary,
-  hasConfiguredPhaseSensors,
-} from './core/phase-load';
+import type { RuntimePhase, LiveRuntimeSnapshot } from './core/live-runtime';
 import { getTimeOfDay } from './core/time-of-day';
 import { getSunPosition } from './core/sun-position';
 import { getBackgroundImage } from './core/background-manager';
@@ -19,20 +14,12 @@ import { renderSolarArc }
   from './renderers/solar-arc';
 import { cardStyles }
   from './styles/card-styles';
-import {
-    renderLeftPanel,
-} from "./renderers/panels/panel-renderer";
 import { renderPhaseLoadPanel } from "./renderers/phase-load-renderer";
 import { getCardData }
   from "./core/card-data";
-import { adaptLivePowerSnapshot }
-  from "./core/live-power";
-import type { LivePowerSnapshot }
-  from "./core/live-power";
 import type { LivePowerValueIssue }
   from "./core/live-power";
-import { autofillFromIntegration }
-  from "./config/autodiscovery";
+import { adaptLiveRuntimeSnapshot } from "./core/live-runtime";
 import { mergeConfig }
   from "./config/merge-config";
 import { DEFAULT_CONFIG }
@@ -67,12 +54,12 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
   private layoutReady = false;
   private resizeObserver?: ResizeObserver;
   private livePowerEntryId?: string;
-  private livePowerSubscription?: () => Promise<void>;
-  private livePowerSnapshot?: LivePowerSnapshot;
+  private liveRuntimeSubscription?: () => Promise<void>;
+  private liveRuntimeSnapshot?: LiveRuntimeSnapshot;
   @state()
   private livePowerIssue: LivePowerValueIssue | 'unavailable' | undefined = 'unavailable';
   private livePowerLookupStarted = false;
-  private livePowerSubscriptionStarted = false;
+  private liveRuntimeSubscriptionStarted = false;
   private livePowerLifecycle = 0;
   connectedCallback(): void {
     super.connectedCallback();
@@ -91,8 +78,6 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
             return;
           }
 
-          const aspectRatio =
-            width / Math.max(height, 1);
           this.sceneScale = 1;
           const responsive = getActiveLayout({
             layout: this.layoutType,
@@ -108,9 +93,9 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
   disconnectedCallback(): void {
     this.livePowerLifecycle += 1;
     this.livePowerLookupStarted = false;
-    this.livePowerSubscriptionStarted = false;
-    const unsubscribe = this.livePowerSubscription;
-    this.livePowerSubscription = undefined;
+    this.liveRuntimeSubscriptionStarted = false;
+    const unsubscribe = this.liveRuntimeSubscription;
+    this.liveRuntimeSubscription = undefined;
     if (unsubscribe) {
       void unsubscribe().catch(() => undefined);
     }
@@ -165,32 +150,21 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
 
     this.livePowerEntryId = entries[0].entry_id;
     if (
-      this.livePowerSubscriptionStarted ||
+      this.liveRuntimeSubscriptionStarted ||
       typeof hass.connection?.subscribeMessage !== 'function'
     ) {
       return;
     }
 
-    this.livePowerSubscriptionStarted = true;
     try {
+      this.liveRuntimeSubscriptionStarted = true;
       const unsubscribe = await hass.connection.subscribeMessage(
-        (snapshot: unknown) => {
-          const result = adaptLivePowerSnapshot(snapshot);
-          if (!result.snapshot) {
-            this.livePowerSnapshot = undefined;
-            this.livePowerIssue = result.issue;
-            this.requestUpdate();
-            return;
-          }
-
-          this.livePowerSnapshot = result.snapshot;
-          this.livePowerIssue = undefined;
+        (payload: unknown) => {
+          this.liveRuntimeSnapshot = adaptLiveRuntimeSnapshot(payload);
+          this.livePowerIssue = this.liveRuntimeSnapshot ? undefined : 'unavailable';
           this.requestUpdate();
         },
-        {
-          type: 'solar_battery_economy/subscribe_live_power',
-          config_entry_id: this.livePowerEntryId,
-        },
+        { type: 'solar_battery_economy/subscribe_live_runtime', config_entry_id: this.livePowerEntryId },
       );
 
       if (
@@ -201,10 +175,10 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
         return;
       }
 
-      this.livePowerSubscription = unsubscribe;
+      this.liveRuntimeSubscription = unsubscribe;
     } catch {
-      // Keep the card operational when Live Power is unavailable.
-      this.livePowerSnapshot = undefined;
+      // Keep the card operational when SBE live runtime is unavailable.
+      this.liveRuntimeSnapshot = undefined;
       this.livePowerIssue = 'unavailable';
       this.requestUpdate();
     }
@@ -231,30 +205,24 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
         </ha-card>
       `;
     }
-    const effectiveConfig = mergeConfig(
-        autofillFromIntegration(this.hass),
-        this.config,
-    );
+    const effectiveConfig = mergeConfig(this.config);
 
     const liveFlows = getLiveFlows(
-        this.hass,
         effectiveConfig,
-        this.livePowerSnapshot,
+        this.liveRuntimeSnapshot?.livePower,
+        this.liveRuntimeSnapshot?.consumers,
     );
     const cardData =
       getCardData(
         this.hass,
         effectiveConfig,
-        this.livePowerSnapshot,
+        this.liveRuntimeSnapshot?.livePower,
+        this.liveRuntimeSnapshot?.consumers,
+        this.liveRuntimeSnapshot?.batterySoc.value ?? null,
       );
-    const phaseLoadVisible = hasConfiguredPhaseSensors(effectiveConfig.phaseLoad);
-    const phaseLoadData = phaseLoadVisible
-      ? buildPhaseLoadData(this.hass, effectiveConfig.phaseLoad)
-      : [];
-    const phaseLoadSummary = buildPhaseLoadSummary(
-      phaseLoadData,
-      effectiveConfig.phaseLoad?.invertDirection,
-    );
+    const phaseLoadData: RuntimePhase[] = this.liveRuntimeSnapshot?.phaseLoad.phases ?? [];
+    const phaseLoadVisible = phaseLoadData.some((phase) => phase.current !== null || phase.power !== null);
+    const phaseLoadSummary = this.liveRuntimeSnapshot?.phaseLoad.summary;
     const layout = this.activeLayout;
     const timeOfDay =
       getTimeOfDay(this.hass);
@@ -283,16 +251,6 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
                   scale(${this.sceneScale});
               "
             >
-              ${effectiveConfig.sidePanels.energy.show
-                ? renderLeftPanel({
-                    x: layout.panels.left.x,
-                    y: layout.panels.left.y,
-                    panel: layout.panels.left,
-                    host: this,
-                    cardData,
-                })
-                : ""}
-
               <div
                 class="hero-background"
                 style="
@@ -333,7 +291,7 @@ export class SolarBatteryEconomyFlowCard extends LitElement {
                     this,
                 )}
               </div>
-              ${phaseLoadVisible ? renderPhaseLoadPanel(phaseLoadData, phaseLoadSummary) : ''}
+              ${phaseLoadVisible && phaseLoadSummary ? renderPhaseLoadPanel(phaseLoadData, phaseLoadSummary) : ''}
             </div>
           </div>
         </div>

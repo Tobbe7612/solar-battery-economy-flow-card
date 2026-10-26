@@ -17,20 +17,4 @@ export const desktopLayout: SceneLayout = {
 
   },
 
-  panels: {
-
-    left: {
-      x: 10,
-      y: 300,
-      width: 220,
-      compact: false,
-    },
-
-    right: {
-      x: 1920 - 220 - 10,
-      y: 300,
-      width: 220,
-      compact: false,
-    }
-  }
 };

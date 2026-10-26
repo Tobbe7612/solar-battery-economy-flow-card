@@ -17,20 +17,4 @@ export const mobileLayout: SceneLayout = {
 
   },
 
-  panels: {
-
-      left: {
-      x: 18,
-      y: 550,
-      width: 394,
-      compact: true,
-  },
-
-  right: {
-      x: 227,
-      y: 540,
-      width: 185,
-      compact: true,
-  }
-  }
 };

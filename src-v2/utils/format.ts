@@ -13,10 +13,9 @@ export function formatPower(
 }
 
 export function formatPercent(
-    value: number
+    value: number | null
 ): string {
-
-    return `${Math.round(value)}%`;
+    return value === null || !Number.isFinite(value) ? "—" : `${Math.round(value)}%`;
 }
 
 export function formatEnergy(

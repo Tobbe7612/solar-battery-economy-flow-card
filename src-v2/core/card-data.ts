@@ -1,28 +1,25 @@
-import {
-    getNumber,
-    getString,
-    getAttribute,
-} from "../utils/entity";
-import {
-    autofillFromIntegration,
-} from "../config/autodiscovery";
+import { getString } from "../utils/entity";
 import type { LivePowerSnapshot } from "./live-power";
+import {
+    getConsumerName,
+    type ConsumerRuntimeSnapshot,
+} from "./consumer-runtime";
+import { resolveDevicePower } from "./device-power";
 import { FlowCardConfig } from "../config/config";
 export interface DeviceCardData {
     enabled: boolean;
 
     title: string;
 
-    power: number;
-    powerEntity?: string;
+    power: number | null;
+    powerQuality: ReturnType<typeof resolveDevicePower>["quality"];
+    consumerPowerEntity?: string;
 
     optionalType?: "soc" | "temperature";
     optionalValue?: string;
     soc?: number;
-    optionalEntity?: string;
 
     status: string;
-    statusEntity?: string;
 
     icon?: "car" | "spa" | "heatpump" | "appliance";
 }
@@ -32,27 +29,7 @@ export interface CardData {
     solarStatus: string;
     solarEntity: string;
 
-  batteryToHouse: number;
-  solarExportEnergy: number;
-  gridToHouseEnergy: number;
-
-    batteryUtilization: number;
-    batteryUtilizationEntity: string;
-    savingsToday: number;
-    savingsTodayEntity: string;
-    totalSavings: number;
-    totalSavingsEntity: string;
-    roi: number;
-    roiEntity: string;
-
-    gridIndependence: number;
-    gridIndependenceEntity: string;
-    co2Saved: number;
-    co2SavedEntity: string;
-    solarSelfConsumptionRate: number;
-    solarSelfConsumptionRateEntity: string;
-
-    batterySoc: number;
+    batterySoc: number | null;
     batteryPower: number;
     batteryStatus: string;
     batteryEntity: string;
@@ -67,92 +44,65 @@ export interface CardData {
 
     devices: DeviceCardData[];
 
-    importToday: number;
-    importTodayEntity?: string;
-    exportToday: number;
-    exportTodayEntity?: string;
-
-    savingsThisMonth: number;
-    savingsThisMonthEntity: string;
-    savingsThisYear: number;
-    savingsThisYearEntity: string;
-    estimatedAnnualSavings: number;
-    estimatedAnnualSavingsEntity: string;
-    paybackTime: number | string;
-    paybackTimeEntity: string;
 }
 function getDeviceCardData(
-    hass: any,
     device: FlowCardConfig["devices"][number],
     index: number,
+    consumerRuntime?: ConsumerRuntimeSnapshot,
 ): DeviceCardData {
-    const power =
-        device.powerEntity
-            ? getNumber(hass, device.powerEntity)
-            : 0;
+    const resolvedPower = resolveDevicePower(device, consumerRuntime);
+    const power = resolvedPower.value;
+    const runtimeConsumer = device.consumerId
+        ? consumerRuntime?.consumers.get(device.consumerId)
+        : undefined;
 
     let optionalValue: string | undefined;
     let soc: number | undefined;
 
-    if (
-        device.optionalType === "soc" &&
-        device.optionalEntity
-    ) {
-        soc = getNumber(hass, device.optionalEntity);
-        optionalValue = `${Math.round(soc)} %`;
+    if (device.consumerId && device.optionalType === "soc") {
+        const reading = runtimeConsumer?.soc;
+        soc = reading?.quality === "valid" ? reading.value ?? undefined : undefined;
+        optionalValue = soc === undefined ? "—" : `${Math.round(soc)} ${reading?.unit ?? "%"}`;
     }
 
-    if (
-        device.optionalType === "temperature" &&
-        device.optionalEntity
-    ) {
-        const temperature = getNumber(
-            hass,
-            device.optionalEntity,
-        );
-
-        optionalValue = `${temperature.toFixed(0)} °C`;
+    if (device.consumerId && device.optionalType === "temperature") {
+        const reading = runtimeConsumer?.temperature;
+        optionalValue = reading?.quality === "valid" && reading.value !== null
+            ? `${Math.round(reading.value)} ${reading.unit ?? ""}`.trim()
+            : "—";
     }
 
-    let status = "Standby";
-
-    if (device.statusEntity) {
-        status = getString(
-            hass,
-            device.statusEntity,
-            "Unknown",
-        );
-    } else if (device.statusRules?.length) {
-        const sortedRules = [...device.statusRules]
-            .sort(
-                (a, b) =>
-                    a.threshold - b.threshold,
-            );
-
-        for (const rule of sortedRules) {
-            if (power >= rule.threshold) {
-                status = rule.label;
-            }
-        }
-    }
+    const statusRuntime = runtimeConsumer?.status;
+    const statusLevel = statusRuntime?.level;
+    const status = !runtimeConsumer
+        ? (device.consumerId ? "SBE consumer unavailable" : "Select SBE consumer")
+        : statusRuntime?.quality !== "valid"
+            ? "Status unavailable"
+            : statusLevel !== null && statusLevel !== undefined
+                ? statusLevel <= 0
+                    ? "Standby"
+                    : device.statusLabels?.[statusLevel - 1] ?? `Level ${statusLevel}`
+                : statusRuntime.value !== null && statusRuntime.value !== undefined
+                    ? String(statusRuntime.value)
+                    : "Status unavailable";
 
     return {
         enabled: device.enabled,
 
         title:
             device.title?.trim() ||
+            getConsumerName(device.consumerId, consumerRuntime) ||
             `Device ${index + 1}`,
 
         power,
-        powerEntity: device.powerEntity,
+        powerQuality: resolvedPower.quality,
+        consumerPowerEntity: resolvedPower.entity,
 
         optionalType: device.optionalType,
         optionalValue,
         soc,
-        optionalEntity: device.optionalEntity,
 
         status,
-        statusEntity: device.statusEntity,
 
         icon: device.icon,
     };
@@ -162,6 +112,8 @@ export function getCardData(
   hass: any,
   config?: FlowCardConfig,
   livePowerSnapshot?: LivePowerSnapshot,
+    consumerRuntime?: ConsumerRuntimeSnapshot,
+    batterySocValue: number | null = null,
 ): CardData {
 
   // ============================================================
@@ -169,7 +121,6 @@ export function getCardData(
   // Live Power snapshot.
   // ============================================================
 
-  const autoConfig = autofillFromIntegration(hass) as any;
   const livePowerFlows = livePowerSnapshot?.flows;
   const livePowerAggregates = livePowerSnapshot?.aggregates;
 
@@ -180,27 +131,6 @@ export function getCardData(
   const housePower = livePowerAggregates?.house_total ?? 0;
   const batteryPower = livePowerAggregates?.battery_net ?? 0;
   const gridPower = livePowerAggregates?.grid_net ?? 0;
-
-  // Cumulative energy (kWh) sensors — separate from the power (W)
-  // sensors above. Not part of the Etapp 3a discovery scope; kept
-  // hardcoded exactly as before.
-  const batteryToHouse =
-      getNumber(
-          hass,
-          "sensor.solar_battery_economy_energy_system_energy_battery_house"
-      );
-
-  const solarExportEnergy =
-      getNumber(
-          hass,
-          "sensor.solar_battery_economy_energy_system_energy_solar_export"
-      );
-
-  const gridToHouseEnergy =
-      getNumber(
-          hass,
-          "sensor.solar_battery_economy_energy_system_energy_grid_house"
-      );
 
   const solarStatus =
     getString(hass, "sun.sun") === "above_horizon"
@@ -240,12 +170,8 @@ export function getCardData(
               ? "Exporting"
               : "Balance";
 
-  // Battery SOC has no integration sensor at all (verified against
-  // the full sensor list) — always manual config.
-  const batterySoc =
-      config?.batterySocEntity
-          ? getNumber(hass, config.batterySocEntity)
-          : 0;
+  // Battery SOC is supplied by the SBE live runtime contract.
+  const batterySoc = batterySocValue;
 
   // "More info" click targets — independent of the computed sums
   // above, since a computed value has no entity_id of its own.
@@ -260,147 +186,19 @@ export function getCardData(
   const batteryEntity =
       config?.batteryInfoEntity ?? "sensor.saj_realtime_battery_power";
 
-    // ============================================================
-    // Side panels
-    //
-    // Solar Battery Economy sensors are always auto-discovered.
-    // Only importToday/exportToday remain manual because they are
-    // not provided by the integration.
-    // ============================================================
-
-    const batteryUtilizationEntity =
-        autoConfig.sidePanels?.energy?.batteryUtilizationEntity ?? "";
-
-    const batteryUtilization =
-        getNumber(hass, batteryUtilizationEntity);
-
-    const savingsTodayEntity =
-        autoConfig.sidePanels?.economy?.savingsTodayEntity ?? "";
-
-    const savingsToday =
-        getNumber(hass, savingsTodayEntity);
-
-    const co2SavedEntity =
-        autoConfig.sidePanels?.energy?.co2SavedEntity ?? "";
-
-    const co2Saved =
-        getNumber(hass, co2SavedEntity);
-
-    const solarSelfConsumptionRateEntity =
-        autoConfig.sidePanels?.energy?.solarSelfConsumptionEntity ?? "";
-
-    const solarSelfConsumptionRate =
-        getNumber(hass, solarSelfConsumptionRateEntity);
-
-    const totalSavingsEntity =
-        autoConfig.sidePanels?.economy?.totalSavingsEntity ?? "";
-
-    const totalSavings =
-        getNumber(hass, totalSavingsEntity);
-
-    const roiEntity =
-        autoConfig.sidePanels?.economy?.roiEntity ?? "";
-
-    const roi =
-        getNumber(hass, roiEntity);
-
-    const importTodayEntity =
-        config?.sidePanels?.energy?.importTodayEntity;
-
-    const importToday =
-        importTodayEntity
-            ? getNumber(hass, importTodayEntity)
-            : 0;
-
-    const exportTodayEntity =
-        config?.sidePanels?.energy?.exportTodayEntity;
-
-    const exportToday =
-        exportTodayEntity
-            ? getNumber(hass, exportTodayEntity)
-            : 0;
-
-    const savingsThisMonthEntity =
-        autoConfig.sidePanels?.economy?.savingsThisMonthEntity ?? "";
-
-    const savingsThisMonth =
-        getNumber(hass, savingsThisMonthEntity);
-
-    const savingsThisYearEntity =
-        autoConfig.sidePanels?.economy?.savingsThisYearEntity ?? "";
-
-    const savingsThisYear =
-        getNumber(hass, savingsThisYearEntity);
-
-    const estimatedAnnualSavingsEntity =
-        autoConfig.sidePanels?.economy?.estimatedAnnualSavingsEntity ?? "";
-
-    const estimatedAnnualSavings =
-        getNumber(hass, estimatedAnnualSavingsEntity);
-
-    const paybackTimeEntity =
-        autoConfig.sidePanels?.economy?.paybackTimeEntity ?? "";
-
-    const paybackTime =
-        getNumber(hass, paybackTimeEntity);
-
-    const gridIndependenceEntity =
-        autoConfig.sidePanels?.energy?.gridIndependenceEntity ?? "";
-
-    const gridIndependence =
-        getNumber(hass, gridIndependenceEntity);
-
   return {
     devices: (config?.devices ?? []).map(
         (device, index) =>
             getDeviceCardData(
-                hass,
                 device,
                 index,
+                consumerRuntime,
             ),
     ),
 
     solarPower,
     solarStatus,
     solarEntity,
-
-    batteryToHouse,
-    solarExportEnergy,
-    gridToHouseEnergy,
-
-    batteryUtilization,
-    batteryUtilizationEntity,
-    savingsToday,
-    savingsTodayEntity,
-    totalSavings,
-    totalSavingsEntity,
-    roi,
-    roiEntity,
-
-    importToday,
-    importTodayEntity,
-
-    exportToday,
-    exportTodayEntity,
-
-    savingsThisMonth,
-    savingsThisMonthEntity,
-
-    savingsThisYear,
-    savingsThisYearEntity,
-
-    estimatedAnnualSavings,
-    estimatedAnnualSavingsEntity,
-
-    paybackTime,
-    paybackTimeEntity,
-
-    gridIndependence,
-    gridIndependenceEntity,
-    co2Saved,
-    co2SavedEntity,
-    solarSelfConsumptionRate,
-    solarSelfConsumptionRateEntity,
 
     batterySoc,
     batteryPower,

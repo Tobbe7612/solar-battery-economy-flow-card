@@ -22,6 +22,6 @@ export interface LabelState {
     entityId?: string;
     power: number;
     color?: string;
-    soc?: number;
+    soc?: number | null;
     icon?: string;
 }

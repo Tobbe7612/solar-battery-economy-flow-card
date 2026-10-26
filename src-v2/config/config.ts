@@ -6,8 +6,8 @@
  * from fixed Solar Battery Economy sensor suffixes (see
  * config/autodiscovery.ts) — there is no per-entity override for
  * them, since each is already a sum of several sensors. Battery
- * SOC is the one main-flow value the integration does not expose,
- * so it stays a manual Entity Picker field.
+ * SOC and device runtime values are supplied by SBE. The InfoEntity
+ * fields are presentation-only More Info targets.
  *
  * The four "InfoEntity" fields are separate from the computed
  * values on purpose: a computed sum has no entity_id of its own
@@ -17,9 +17,16 @@
 
 export interface FlowCardConfig {
 
-    layout: "desktop" | "mobile";
+    // Home Assistant-managed card and view metadata. These pass through
+    // editor normalization unchanged and are not interpreted by the card.
+    type?: string;
+    grid_options?: unknown;
+    layout_options?: unknown;
+    view_layout?: unknown;
+    visibility?: unknown;
+    card_mod?: unknown;
 
-    batterySocEntity?: string;
+    layout: "desktop" | "mobile";
 
     // "More info" click targets for the four main-flow labels.
     // Independent of the computed power values — falls back to
@@ -28,15 +35,6 @@ export interface FlowCardConfig {
     gridInfoEntity?: string;
     houseInfoEntity?: string;
     batteryInfoEntity?: string;
-
-    // Optional phase load panel. Existing cards without this block keep
-    // their current layout and behavior.
-    phaseLoad?: PhaseLoadConfig;
-
-    sidePanels: {
-        energy: EnergyPanelConfig;
-        economy: EconomyPanelConfig;
-    };
 
     // Exactly 4 entries. Index = fixed geometric position (today's
     // car/spa/heatpump/appliance slots in the layout + flow
@@ -51,31 +49,6 @@ export interface FlowCardConfig {
 
 }
 
-export interface PhaseLoadConfig {
-    mainFuse: 16 | 20 | 25;
-    invertDirection: boolean;
-    l1CurrentEntity?: string;
-    l1PowerEntity?: string;
-    l1PowerInverted?: boolean;
-    l2CurrentEntity?: string;
-    l2PowerEntity?: string;
-    l2PowerInverted?: boolean;
-    l3CurrentEntity?: string;
-    l3PowerEntity?: string;
-    l3PowerInverted?: boolean;
-}
-
-export interface EnergyPanelConfig {
-    show: boolean;
-    // Not provided by Solar Battery Economy — always manual.
-    importTodayEntity?: string;
-    exportTodayEntity?: string;
-}
-
-export interface EconomyPanelConfig {
-    show: boolean;
-}
-
 export interface DeviceSlotConfig {
 
     enabled: boolean;
@@ -83,28 +56,16 @@ export interface DeviceSlotConfig {
     // Display title
     title?: string;
 
-    // Main power value
-    powerEntity?: string;
+    // Stable SBE identity is the only source of consumer runtime data.
+    consumerId?: string;
 
     // Optional row 3:
     // - SOC
     // - Temperature
     // - none
     optionalType?: "soc" | "temperature";
-    optionalEntity?: string;
-
-    // Optional row 4:
-    // If present, use this entity for the displayed status.
-    // If absent, status is calculated from power rules.
-    statusEntity?: string;
-
-    // Power-based status rules used when statusEntity is not configured.
-    // Rules are evaluated by threshold, with the highest matching
-    // threshold determining the displayed label.
-    statusRules?: {
-        threshold: number;
-        label: string;
-    }[];
+    // Presentation labels for runtime status levels 1..3; thresholds live in SBE.
+    statusLabels?: [string?, string?, string?];
 
     // Device icon
     icon?: "car" | "spa" | "heatpump" | "appliance";

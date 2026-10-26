@@ -11,7 +11,6 @@
  * Moving a label automatically moves every connected flow.
  */
 
-import { DESKTOP_LABELS } from "./labels/desktop-labels";
 import { LabelDefinition } from "./labels/label-types";
 
 export function createAnchors(

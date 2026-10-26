@@ -1,19 +1,6 @@
-import {
-    FlowCardConfig,
-    EnergyPanelConfig,
-    EconomyPanelConfig,
-} from "./config";
-
-export interface AutoFillConfig {
-    sidePanels?: {
-        energy?: Partial<EnergyPanelConfig>;
-        economy?: Partial<EconomyPanelConfig>;
-    };
-}
-
 /**
  * ============================================================
- * Solar Battery Economy Auto-Discovery
+ * Solar Battery Economy Detection
  * ============================================================
  * Matches on entity_id SUFFIX, never prefix — Home Assistant can
  * prepend a device name (e.g. "hem_") to avoid naming collisions,
@@ -21,24 +8,9 @@ export interface AutoFillConfig {
  * across installations. Suffix matching works regardless of what,
  * if anything, comes before it.
  *
- * Scope, verified against a full sensor export from a real
- * installation:
- *   - Main flow (solar/battery/house/grid power): all computable
- *     from 8 fixed "energy_system_power_*" sensors.
- *   - Economy side panel: all 7 fields map to fixed, numbered
- *     "financial_NN_*" sensors.
- *   - Energy side panel: only 4 of 6 fields are covered by the
- *     integration (gridIndependence, batteryUtilization,
- *     solarSelfConsumption, co2Saved). importToday/exportToday are
- *     NOT part of the integration in this installation and stay
- *     manual.
- *   - Battery SOC: not exposed by the integration at all (verified
- *     against the full sensor list) — always manual.
- *
- * Any custom/manually-added sensors (e.g. ones with a "hem_"
- * prefix from a separate helper package) are deliberately excluded
- * by suffix matching, so discovery behaves the same for every user
- * of the integration, not just this installation.
+ * The editor uses a representative main-flow entity to show whether
+ * the integration is present. Matching by suffix tolerates a device
+ * name prefix added by Home Assistant.
  */
 
 const MAIN_FLOW_SUFFIXES = {
@@ -50,25 +22,6 @@ const MAIN_FLOW_SUFFIXES = {
     gridHouse: "energy_system_power_grid_house",
     gridBattery: "energy_system_power_grid_battery",
     houseGrid: "energy_system_power_house_grid",
-} as const;
-
-const ENERGY_PANEL_SUFFIXES = {
-    gridIndependenceEntity: "financial_30_grid_independence",
-    batteryUtilizationEntity: "financial_31_battery_utilization",
-    solarSelfConsumptionEntity: "financial_32_solar_self_consumption_rate",
-    co2SavedEntity: "financial_33_co2_saved",
-    // importTodayEntity / exportTodayEntity intentionally absent —
-    // not part of the integration, always manual.
-} as const;
-
-const ECONOMY_PANEL_SUFFIXES = {
-    savingsTodayEntity: "financial_03_savings_today",
-    totalSavingsEntity: "financial_01_total_savings",
-    savingsThisMonthEntity: "financial_04_savings_this_month",
-    savingsThisYearEntity: "financial_05_savings_this_year",
-    estimatedAnnualSavingsEntity: "financial_02_estimated_annual_savings",
-    paybackTimeEntity: "financial_10_payback_time",
-    roiEntity: "financial_12_return_on_investment",
 } as const;
 
 function findEntityBySuffix(
@@ -87,7 +40,6 @@ function findEntityBySuffix(
     );
 
 }
-
 export function detectSolarBatteryEconomy(hass: any): boolean {
 
     // A single representative main-flow sensor is enough to confirm
@@ -128,54 +80,5 @@ export function findMainFlowEntities(
     }
 
     return result;
-
-}
-
-export function autofillFromIntegration(
-    hass: any
-): AutoFillConfig {
-
-    if (!detectSolarBatteryEconomy(hass)) {
-        return {};
-    }
-
-    const energy: Record<string, string> = {};
-
-    for (const key of Object.keys(ENERGY_PANEL_SUFFIXES) as
-        (keyof typeof ENERGY_PANEL_SUFFIXES)[]
-    ) {
-        const found = findEntityBySuffix(
-            hass,
-            ENERGY_PANEL_SUFFIXES[key]
-        );
-        if (found) {
-            energy[key] = found;
-        }
-    }
-
-    const economy: Record<string, string> = {};
-
-    for (const key of Object.keys(ECONOMY_PANEL_SUFFIXES) as
-        (keyof typeof ECONOMY_PANEL_SUFFIXES)[]
-    ) {
-        const found = findEntityBySuffix(
-            hass,
-            ECONOMY_PANEL_SUFFIXES[key]
-        );
-        if (found) {
-            economy[key] = found;
-        }
-    }
-
-    return {
-        sidePanels: {
-            energy: {
-                ...energy,
-            },
-            economy: {
-                ...economy,
-            },
-        },
-    };
 
 }

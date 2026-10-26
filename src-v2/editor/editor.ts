@@ -3,18 +3,19 @@ import { customElement, property, state } from "lit/decorators.js";
 
 import { FlowCardConfig } from "../config/config";
 import { DEFAULT_CONFIG } from "../config/defaults";
+import { mergeConfig } from "../config/merge-config";
 import { detectSolarBatteryEconomy } from "../config/autodiscovery";
 
 /**
  * ============================================================
- * Config Editor — General + Battery / Info + Side Panels
+ * Config Editor — General + Battery / Info + Devices + Phase Load
  * ============================================================
  *
  * Current sections:
  * - General
  * - Battery / Info
- * - Energy Panel
- * - Economy Panel
+ * - Phase Load
+ * - Devices
  *
  * Uses Home Assistant's ha-form for all configuration fields.
  */
@@ -27,110 +28,74 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
     private _config: FlowCardConfig = DEFAULT_CONFIG;
     @state()
     private _deviceDrafts: Record<number, Record<string, any>> = {};
+    @state()
+    private _consumerOptions: { value: string; label: string }[] = [
+        { value: "", label: "Select an SBE consumer" },
+    ];
+    private _consumerLookupStarted = false;
 
     public setConfig(config: Partial<FlowCardConfig>): void {
-        this._config = {
-            ...DEFAULT_CONFIG,
-            ...config,
-            phaseLoad: {
-                ...DEFAULT_CONFIG.phaseLoad!,
-                ...config.phaseLoad,
-            },
-            sidePanels: {
-                energy: {
-                    ...DEFAULT_CONFIG.sidePanels.energy,
-                    ...config.sidePanels?.energy,
-                },
-                economy: {
-                    ...DEFAULT_CONFIG.sidePanels.economy,
-                    ...config.sidePanels?.economy,
-                },
-            },
-        };
+        this._consumerLookupStarted = false;
+        this._deviceDrafts = {};
+        this._config = mergeConfig(config);
     }
 
-    private phaseLoadSchema = [
-        {
-            name: "l1CurrentEntity",
-            label: "L1 Current",
-            selector: { entity: { domain: "sensor" } },
-        },
-        {
-            name: "l1PowerEntity",
-            label: "L1 Power",
-            selector: { entity: { domain: "sensor" } },
-        },
-        {
-            name: "l1PowerInverted",
-            label: "Invert L1 power sensor sign",
-            selector: { boolean: {} },
-        },
-        {
-            name: "l2CurrentEntity",
-            label: "L2 Current",
-            selector: { entity: { domain: "sensor" } },
-        },
-        {
-            name: "l2PowerEntity",
-            label: "L2 Power",
-            selector: { entity: { domain: "sensor" } },
-        },
-        {
-            name: "l2PowerInverted",
-            label: "Invert L2 power sensor sign",
-            selector: { boolean: {} },
-        },
-        {
-            name: "l3CurrentEntity",
-            label: "L3 Current",
-            selector: { entity: { domain: "sensor" } },
-        },
-        {
-            name: "l3PowerEntity",
-            label: "L3 Power",
-            selector: { entity: { domain: "sensor" } },
-        },
-        {
-            name: "l3PowerInverted",
-            label: "Invert L3 power sensor sign",
-            selector: { boolean: {} },
-        },
-        {
-            name: "mainFuse",
-            label: "Main fuse",
-            selector: {
-                select: {
-                    mode: "dropdown",
-                    options: [
-                        { value: 16, label: "16 A" },
-                        { value: 20, label: "20 A" },
-                        { value: 25, label: "25 A" },
-                    ],
-                },
-            },
-        },
-        {
-            name: "invertDirection",
-            label: "Invert import/export direction",
-            selector: { boolean: {} },
-        },
-    ];
+    protected updated(): void {
+        if (
+            this._consumerLookupStarted ||
+            !this.hass ||
+            typeof this.hass.callWS !== "function"
+        ) {
+            return;
+        }
+        this._consumerLookupStarted = true;
+        void this._loadConsumerOptions(this.hass);
+    }
 
-    private _phaseLoadValueChanged(ev: CustomEvent): void {
-        this._config = {
-            ...this._config,
-            phaseLoad: {
-                ...this._config.phaseLoad,
-                ...ev.detail.value,
-            },
-        };
-        this.dispatchEvent(
-            new CustomEvent("config-changed", {
-                detail: { config: this._config },
-                bubbles: true,
-                composed: true,
-            }),
-        );
+    private async _loadConsumerOptions(hass: any): Promise<void> {
+        try {
+            const entries = await hass.callWS({
+                type: "config_entries/get",
+                domain: "solar_battery_economy",
+            });
+            if (
+                !Array.isArray(entries) ||
+                entries.length !== 1 ||
+                entries[0]?.state !== "loaded" ||
+                typeof entries[0]?.entry_id !== "string"
+            ) {
+                return;
+            }
+            const payload = await hass.callWS({
+                type: "solar_battery_economy/get_live_runtime",
+                config_entry_id: entries[0].entry_id,
+            });
+            const runtime = payload?.consumers;
+            if (
+                payload?.contract_version !== 1 ||
+                runtime?.contract_version !== 1 ||
+                !Array.isArray(runtime.consumers)
+            ) {
+                return;
+            }
+            const options = runtime.consumers
+                .filter((consumer: any) =>
+                    typeof consumer?.consumer_id === "string" &&
+                    consumer.consumer_id &&
+                    typeof consumer?.name === "string" &&
+                    typeof consumer?.power_entity === "string"
+                )
+                .map((consumer: any) => ({
+                    value: consumer.consumer_id as string,
+                    label: consumer.name as string,
+                }));
+            this._consumerOptions = [
+                { value: "", label: "Select an SBE consumer" },
+                ...options,
+            ];
+        } catch {
+            // The slot stays unconfigured until an SBE consumer is selected.
+        }
     }
 
     /**
@@ -163,15 +128,6 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
      */
     private batteryInfoSchema = [
         {
-            name: "batterySocEntity",
-            label: "Battery SOC",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
             name: "solarInfoEntity",
             label: "Solar info",
             selector: {
@@ -202,49 +158,6 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
     ];
 
     /**
-     * Energy Panel
-     */
-    private energyPanelSchema = [
-        {
-            name: "show",
-            label: "Show Energy Panel",
-            selector: {
-                boolean: {},
-            },
-        },
-        {
-            name: "importTodayEntity",
-            label: "Import Today",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-        {
-            name: "exportTodayEntity",
-            label: "Export Today",
-            selector: {
-                entity: {
-                    domain: "sensor",
-                },
-            },
-        },
-    ];
-
-    /**
-     * Economy Panel
-     */
-    private economyPanelSchema = [
-        {
-            name: "show",
-            label: "Show Economy Panel",
-            selector: {
-                boolean: {},
-            },
-        },
-    ];
-    /**
      * Device schema
      *
      * All device icons use the built-in SVG icon set.
@@ -266,10 +179,13 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
                 },
             },
             {
-                name: "powerEntity",
-                label: "Power",
+                name: "consumerId",
+                label: "SBE consumer",
                 selector: {
-                    entity: {},
+                    select: {
+                        mode: "dropdown",
+                        options: this._getConsumerOptions(device.consumerId),
+                    },
                 },
             },
             {
@@ -297,85 +213,15 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
             },
         ];
 
-        // Optional entity belongs directly to Optional.
-        if (
-            device.optionalType === "soc" ||
-            device.optionalType === "temperature"
-        ) {
-            schema.push({
-                name: "optionalEntity",
-                label: "Optional entity",
-                selector: {
-                    entity: {},
-                },
-            });
-        }
+        // SOC and temperature are selected from the SBE runtime row.
 
-        // Status entity always comes next.
-        schema.push({
-            name: "statusEntity",
-            label: "Status",
-            selector: {
-                entity: {},
-            },
-        });
+        // Status thresholds are configured centrally in SBE; only labels stay local.
 
-        // If there is no status entity, show power-based status rules.
-        if (!device.statusEntity) {
-            schema.push(
-                {
-                    name: "statusThreshold1",
-                    label: "Status threshold 1 (W)",
-                    selector: {
-                        number: {
-                            mode: "box",
-                            step: 1,
-                        },
-                    },
-                },
-                {
-                    name: "statusLabel1",
-                    label: "Status 1",
-                    selector: {
-                        text: {},
-                    },
-                },
-                {
-                    name: "statusThreshold2",
-                    label: "Status threshold 2 (W)",
-                    selector: {
-                        number: {
-                            mode: "box",
-                            step: 1,
-                        },
-                    },
-                },
-                {
-                    name: "statusLabel2",
-                    label: "Status 2",
-                    selector: {
-                        text: {},
-                    },
-                },
-                {
-                    name: "statusThreshold3",
-                    label: "Status threshold 3 (W)",
-                    selector: {
-                        number: {
-                            mode: "box",
-                            step: 1,
-                        },
-                    },
-                },
-                {
-                    name: "statusLabel3",
-                    label: "Status 3",
-                    selector: {
-                        text: {},
-                    },
-                },
-            );
-        }
+        schema.push(...[1, 2, 3].map((level) => ({
+            name: `statusLabel${level}`,
+            label: `SBE status level ${level} label`,
+            selector: { text: {} },
+        })));
 
         schema.push({
             name: "icon",
@@ -408,6 +254,27 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
         return schema;
     }
 
+    private _getConsumerOptions(currentConsumerId?: string): {
+        value: string;
+        label: string;
+    }[] {
+        if (
+            currentConsumerId &&
+            !this._consumerOptions.some(
+                (option) => option.value === currentConsumerId,
+            )
+        ) {
+            return [
+                ...this._consumerOptions,
+                {
+                    value: currentConsumerId,
+                    label: `Unavailable SBE consumer (${currentConsumerId})`,
+                },
+            ];
+        }
+        return this._consumerOptions;
+    }
+
     private _valueChanged(ev: CustomEvent): void {
         this._config = {
             ...this._config,
@@ -417,39 +284,6 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
         this._fireConfigChanged();
     }
 
-    private _energyPanelValueChanged(ev: CustomEvent): void {
-        const energyValues = ev.detail.value;
-
-        this._config = {
-            ...this._config,
-            sidePanels: {
-                ...this._config.sidePanels,
-                energy: {
-                    ...this._config.sidePanels.energy,
-                    ...energyValues,
-                },
-            },
-        };
-
-        this._fireConfigChanged();
-    }
-
-    private _economyPanelValueChanged(ev: CustomEvent): void {
-        const economyValues = ev.detail.value;
-
-        this._config = {
-            ...this._config,
-            sidePanels: {
-                ...this._config.sidePanels,
-                economy: {
-                    ...this._config.sidePanels.economy,
-                    ...economyValues,
-                },
-            },
-        };
-
-        this._fireConfigChanged();
-    }
     private _getDeviceFormData(
         index: number,
         device: FlowCardConfig["devices"][number],
@@ -461,18 +295,9 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
             ...draft,
         };
 
-        // Reconstruct the editor-only status fields from saved statusRules
-        // when no draft exists yet.
         if (!this._deviceDrafts[index]) {
-            const rules = device.statusRules ?? [];
-
-            rules.forEach((rule, ruleIndex) => {
-                const number = ruleIndex + 1;
-
-                if (number <= 3) {
-                    formData[`statusThreshold${number}`] = rule.threshold;
-                    formData[`statusLabel${number}`] = rule.label;
-                }
+            device.statusLabels?.forEach((label, labelIndex) => {
+                formData[`statusLabel${labelIndex + 1}`] = label;
             });
         }
 
@@ -495,29 +320,6 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
 
         return draft;
     }
-    private _buildStatusRules(values: any): {
-        threshold: number;
-        label: string;
-    }[] {
-        const rules: {
-            threshold: number;
-            label: string;
-        }[] = [];
-
-        for (let i = 1; i <= 3; i++) {
-            const threshold = Number(values[`statusThreshold${i}`]);
-            const label = String(values[`statusLabel${i}`] ?? "").trim();
-
-            if (Number.isFinite(threshold) && label) {
-                rules.push({
-                    threshold,
-                    label,
-                });
-            }
-        }
-
-        return rules.sort((a, b) => a.threshold - b.threshold);
-    }
     private _deviceValueChanged(
         index: number,
         ev: CustomEvent,
@@ -527,24 +329,18 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
         // Keep the editor values alive while the user is typing.
         this._updateDeviceDraft(index, deviceValues);
 
-        const {
-            statusThreshold1,
-            statusLabel1,
-            statusThreshold2,
-            statusLabel2,
-            statusThreshold3,
-            statusLabel3,
-            ...configValues
-        } = deviceValues;
-
-        const draft = this._deviceDrafts[index] ?? {};
+        const { statusLabel1, statusLabel2, statusLabel3, ...configValues } = deviceValues;
 
         const devices = [...this._config.devices] as FlowCardConfig["devices"];
 
         devices[index] = {
             ...devices[index],
             ...configValues,
-            statusRules: this._buildStatusRules(draft),
+            statusLabels: [statusLabel1, statusLabel2, statusLabel3]
+                .map((label) => {
+                    const normalized = String(label ?? "").trim();
+                    return normalized || undefined;
+                }) as [string?, string?, string?],
         };
 
         this._config = {
@@ -630,48 +426,6 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
                         .schema=${this.batteryInfoSchema}
                         .computeLabel=${(schema: any) => schema.label}
                         @value-changed=${this._valueChanged}
-                    ></ha-form>
-                </div>
-            </details>
-
-            <details class="editor-section">
-                <summary>Energy Panel</summary>
-
-                <div class="editor-content">
-                    <ha-form
-                        .hass=${this.hass}
-                        .data=${this._config.sidePanels.energy}
-                        .schema=${this.energyPanelSchema}
-                        .computeLabel=${(schema: any) => schema.label}
-                        @value-changed=${this._energyPanelValueChanged}
-                    ></ha-form>
-                </div>
-            </details>
-
-            <details class="editor-section">
-                <summary>Economy Panel</summary>
-
-                <div class="editor-content">
-                    <ha-form
-                        .hass=${this.hass}
-                        .data=${this._config.sidePanels.economy}
-                        .schema=${this.economyPanelSchema}
-                        .computeLabel=${(schema: any) => schema.label}
-                        @value-changed=${this._economyPanelValueChanged}
-                    ></ha-form>
-                </div>
-            </details>
-
-            <details class="editor-section">
-                <summary>Phase Load (optional)</summary>
-
-                <div class="editor-content">
-                    <ha-form
-                        .hass=${this.hass}
-                        .data=${this._config.phaseLoad}
-                        .schema=${this.phaseLoadSchema}
-                        .computeLabel=${(schema: any) => schema.label}
-                        @value-changed=${this._phaseLoadValueChanged}
                     ></ha-form>
                 </div>
             </details>

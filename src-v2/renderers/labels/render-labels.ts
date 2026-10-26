@@ -1,6 +1,5 @@
 import { svg, TemplateResult } from "lit";
 import { LabelDefinition } from "./label-types";
-import { DESKTOP_LABELS } from "./desktop-labels";
 import { renderLabel } from "./label-renderer";
 import { LabelState } from "./label-types";
 import { createBatteryLabel } from "./label-factory";

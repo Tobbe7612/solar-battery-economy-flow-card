@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "test": "node --test tests/runtime-contract.test.mjs"
   },
   "keywords": [
     "home-assistant",

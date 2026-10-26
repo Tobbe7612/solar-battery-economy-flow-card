@@ -1,5 +1,5 @@
 import { html, TemplateResult } from "lit";
-import type { PhaseLoadData, PhaseLoadSummary } from "../core/phase-load";
+import type { RuntimePhase as PhaseLoadData, RuntimePhaseSummary as PhaseLoadSummary } from "../core/live-runtime";
 
 function formatCurrent(value: number | null): string {
     if (value === null) return "—";
@@ -17,71 +17,99 @@ function formatPower(value: number | null, signed = false): string {
     return `${value > 0 ? "+" : "−"}${number}`;
 }
 
-function renderPhase(phase: PhaseLoadData): TemplateResult {
-    const isIncomplete = phase.current === null || phase.power === null;
-    const directionLabel = phase.direction === "import"
+interface PhaseRowView {
+    name: string;
+    currentValue: string;
+    powerValue: string;
+    percentValue: string;
+    status: string;
+    incomplete: boolean;
+    activeSegments: number | null;
+    direction: "import" | "export" | "missing";
+    loadState: "normal" | "warning" | "critical" | "missing";
+    directionText?: string;
+    footerText?: string;
+    percentText?: string;
+}
+
+function renderPhaseRow(row: PhaseRowView): TemplateResult {
+    const directionLabel = row.directionText ?? (row.direction === "import"
         ? "IMPORT →"
-        : phase.direction === "export"
+        : row.direction === "export"
             ? "← EXPORT"
-            : "RIKTNING SAKNAS";
-    const loadLabel = phase.loadState === "critical"
-        ? "ÖVERLAST"
-        : phase.loadState === "warning"
-            ? "HÖG BELASTNING"
-            : phase.loadState === "normal"
-                ? "NORMAL"
-                : "BELASTNING SAKNAS";
+            : "RIKTNING SAKNAS");
 
     return html`
-        <div class="phase-load-phase ${phase.loadState} ${phase.direction}" aria-label="${phase.name}">
+        <div class="phase-load-phase ${row.loadState} ${row.direction}" aria-label="${row.name}">
             <div class="phase-load-heading">
-                <strong>${phase.name}</strong>
-                ${isIncomplete ? html`<span class="phase-load-missing" role="status">Data saknas</span>` : ""}
+                <strong>${row.name}</strong>
+                ${row.incomplete ? html`<span class="phase-load-missing" role="status">Data saknas</span>` : ""}
             </div>
             <div class="phase-load-details">
-                <div class="phase-load-direction ${phase.direction}">${directionLabel}</div>
+                <div class="phase-load-direction ${row.direction}">${directionLabel}</div>
                 <div class="phase-load-values">
-                    <span>${formatCurrent(phase.current)}</span>
-                    <span>${formatPower(phase.power)}</span>
+                    <span>${row.currentValue}</span>
+                    <span>${row.powerValue}</span>
                 </div>
                 <div class="phase-load-footer">
-                    <span>${phase.percent === null ? "—" : `${phase.percent} %`}</span>
-                    <span>${loadLabel}</span>
+                    <span>${row.percentText ?? row.percentValue}</span>
+                    <span>${row.footerText ?? row.status}</span>
                 </div>
             </div>
             <div class="phase-load-bar" aria-hidden="true">
                 ${Array.from({ length: 16 }, (_, index) => html`
-                    <span class="phase-load-segment ${phase.activeSegments !== null && (phase.direction === "export" ? index >= 16 - phase.activeSegments : index < phase.activeSegments) ? "active" : ""}"></span>
+                    <span class="phase-load-segment ${row.activeSegments !== null && (row.direction === "export" ? index >= 16 - row.activeSegments : index < row.activeSegments) ? "active" : ""}"></span>
                 `)}
             </div>
         </div>
     `;
 }
 
+function renderPhase(phase: PhaseLoadData): TemplateResult {
+    const status = phase.loadState === "critical"
+        ? "ÖVERLAST"
+        : phase.loadState === "warning"
+            ? "HÖG BELASTNING"
+            : phase.loadState === "normal"
+                ? "NORMAL"
+                : "BELASTNING SAKNAS";
+    return renderPhaseRow({
+        name: phase.name,
+        currentValue: formatCurrent(phase.current),
+        powerValue: formatPower(phase.power),
+        percentValue: phase.percent === null ? "—" : `${phase.percent} %`,
+        status,
+        incomplete: phase.current === null || phase.power === null,
+        activeSegments: phase.activeSegments,
+        direction: phase.direction,
+        loadState: phase.loadState,
+    });
+}
+
 function renderSummary(summary: PhaseLoadSummary): TemplateResult {
     const complete = summary.powerComplete;
-    return html`
-        <div class="phase-load-phase phase-load-summary-row" aria-label="SUMMA">
-            <div class="phase-load-heading">
-                <strong>SUMMA</strong>
-                ${complete ? "" : html`<span class="phase-load-missing" role="status">Effektdata ofullständig</span>`}
-            </div>
-            <div class="phase-load-details">
-                <div class="phase-load-direction phase-load-net">NETTO</div>
-                <div class="phase-load-values">
-                    <span>${complete ? formatPower(summary.netPower, true) : "—"}</span>
-                    <span>${complete ? `IMP ${formatPower(summary.importPower)}` : "IMP —"}</span>
-                </div>
-                <div class="phase-load-footer">
-                    <span>${complete ? `EXP ${formatPower(summary.exportPower)}` : "EXP —"}</span>
-                    <span>${complete ? "3 FASER" : "OFULLSTÄNDIG"}</span>
-                </div>
-            </div>
-            <div class="phase-load-bar" aria-hidden="true">
-                ${Array.from({ length: 16 }, () => html`<span class="phase-load-segment"></span>`)}
-            </div>
-        </div>
-    `;
+    const stateLabel = summary.loadState === "critical"
+        ? "ÖVERLAST"
+        : summary.loadState === "warning"
+            ? "HÖG BELASTNING"
+            : summary.loadState === "normal"
+                ? "NORMAL"
+                : "BELASTNING SAKNAS";
+    const maxPhase = summary.mostLoadedPhase;
+    return renderPhaseRow({
+        name: "SUMMA",
+        currentValue: "—",
+        powerValue: complete ? formatPower(summary.netPower, true) : "—",
+        percentValue: maxPhase ? `${maxPhase.percent} %` : "—",
+        status: stateLabel,
+        footerText: complete ? `IMP ${formatPower(summary.importPower)} · EXP ${formatPower(summary.exportPower)}` : "IMP — · EXP —",
+        percentText: maxPhase ? `${maxPhase.percent} % · MAX ${maxPhase.name}` : "—",
+        incomplete: !complete || !summary.loadComplete,
+        activeSegments: summary.activeSegments,
+        direction: summary.direction,
+        loadState: summary.loadState,
+        directionText: `NETTO ${summary.direction === "import" ? "IMPORT →" : summary.direction === "export" ? "← EXPORT" : "SAKNAS"}`,
+    });
 }
 
 export function renderPhaseLoadPanel(

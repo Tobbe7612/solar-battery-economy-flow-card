@@ -1,29 +1,21 @@
 import type { FlowCardConfig } from "../config/config";
 import type { LivePowerSnapshot } from "./live-power";
+import type { ConsumerRuntimeSnapshot } from "./consumer-runtime";
+import { resolveDevicePower, type DevicePowerResolution } from "./device-power";
 
 export interface LiveFlow {
   id: string;
   active: boolean;
   power: number;
   intensity: number;
+  quality: DevicePowerResolution["quality"] | "valid";
 }
 
 export function getLiveFlows(
-    hass: any,
     config: FlowCardConfig,
     livePowerSnapshot?: LivePowerSnapshot,
+    consumerRuntime?: ConsumerRuntimeSnapshot,
 ): Record<string, LiveFlow> {
-
-  const getPower = (entity?: string): number => {
-    if (!entity) {
-      return 0;
-    }
-    const state = hass?.states?.[entity]?.state;
-    const value = Number(state);
-    return isNaN(value)
-      ? 0
-      : value;
-  };
 
   const livePower = livePowerSnapshot?.flows;
 
@@ -58,30 +50,22 @@ export function getLiveFlows(
     ),
     'house-spa': createFlow(
           'house-spa',
-          getPower(
-              config.devices[1]?.powerEntity
-          )
+          resolveDevicePower(config.devices[1], consumerRuntime)
       ),
 
       'house-car': createFlow(
           'house-car',
-          getPower(
-              config.devices[0]?.powerEntity
-          )
+          resolveDevicePower(config.devices[0], consumerRuntime)
       ),
 
       'house-heatpump': createFlow(
           'house-heatpump',
-          getPower(
-              config.devices[2]?.powerEntity
-          )
+          resolveDevicePower(config.devices[2], consumerRuntime)
       ),
 
       'house-appliance': createFlow(
           'house-appliance',
-          getPower(
-              config.devices[3]?.powerEntity
-          )
+          resolveDevicePower(config.devices[3], consumerRuntime)
       ),
   };
   return flows;
@@ -89,18 +73,21 @@ export function getLiveFlows(
 
 function createFlow(
   id: string,
-  power: number
+  power: number | DevicePowerResolution
 ): LiveFlow {
-  const active = power > 1;
+  const quality = typeof power === "number" ? "valid" : power.quality;
+  const watts = typeof power === "number" ? power : power.value ?? 0;
+  const active = quality === "valid" && watts > 1;
   const intensity = Math.min(
     1,
-    power / 5000
+    watts / 5000
   );
 
   return {
     id,
-    power,
+    power: watts,
     active,
-    intensity
+    intensity,
+    quality,
   };
 }

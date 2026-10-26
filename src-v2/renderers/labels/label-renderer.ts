@@ -28,8 +28,6 @@ const titleSize = 17 * scale;
 const valueSize = (isMobile ? 25 : 26) * scale;
 const line2Size = (isMobile ? 18 : 19) * scale;
 const line3Size = 14 * scale;
-const iconSize = 22 * scale;
-
 const contentBaseX = isMobile ? 50 : 78;
 const statusX = definition.width / 2;
 const contentX = contentBaseX + (isMobile ? 6 : 10);

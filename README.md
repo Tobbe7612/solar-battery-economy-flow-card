@@ -34,7 +34,6 @@ designed around the **Solar Battery Economy** integration.
 -   🔄 **Animated energy flows**
 -   📈 **Flow visualization that follows the actual power values**
 -   🎨 **Dynamic colors, glow and animation effects**
--   📊 **Energy and economy side panels**
 -   🔎 **Automatic Solar Battery Economy sensor discovery**
 -   🚗 **Configurable device visualization**
 -   🧖 **Built-in SVG device icons**
@@ -162,14 +161,7 @@ Available values:
 -   `desktop`
 -   `mobile`
 
-### `batterySocEntity`
-
-The Solar Battery Economy integration does not provide the battery SOC
-used by the card, so this remains a manual entity.
-
-``` yaml
-batterySocEntity: sensor.home_battery_soc
-```
+Battery SOC is supplied by the SBE live-runtime subscription.
 
 ------------------------------------------------------------------------
 
@@ -196,85 +188,11 @@ If they are not configured, the card uses its built-in fallback targets.
 
 ------------------------------------------------------------------------
 
-# 📊 Side Panels
-
-The card contains two optional side panels:
-
--   **Energy**
--   **Economy**
-
-Both can be shown or hidden independently.
-
-``` yaml
-sidePanels:
-  energy:
-    show: true
-
-  economy:
-    show: true
-```
-
-------------------------------------------------------------------------
-
-## ⚡ Energy Panel
-
-The Energy panel can display values discovered automatically from Solar
-Battery Economy.
-
-Automatically discovered:
-
--   Grid independence
--   Battery utilization
--   Solar self-consumption
--   CO₂ saved
-
-Two daily energy values are intentionally manual:
-
-``` yaml
-sidePanels:
-  energy:
-    show: true
-    importTodayEntity: sensor.grid_import_today
-    exportTodayEntity: sensor.grid_export_today
-```
-
-`importTodayEntity` and `exportTodayEntity` are optional.
-
-If they are not configured, the card does not substitute an unrelated
-sensor.
-
-------------------------------------------------------------------------
-
-## 💰 Economy Panel
-
-The Economy panel automatically discovers the Solar Battery Economy
-sensors for:
-
--   Savings today
--   Total savings
--   Savings this month
--   Savings this year
--   Estimated annual savings
--   Payback time
--   Return on investment (ROI)
-
-There are no individual economy sensor selectors in the card
-configuration.
-
-``` yaml
-sidePanels:
-  economy:
-    show: true
-```
-
-------------------------------------------------------------------------
-
 # 🔌 Solar Battery Economy Integration
 
-Version 2 is designed around the **Solar Battery Economy** integration.
-
-When the integration is detected, the card automatically discovers its
-relevant entities.
+Version 2 consumes the **Solar Battery Economy** live-runtime contract.
+The editor lists consumers with configured power entities and stores the
+selected stable consumer ID for each visual slot.
 
 ### Automatic discovery
 
@@ -286,7 +204,8 @@ or installation prefix can still be discovered correctly.
 
 ### Main energy flow
 
-The following energy-flow values are discovered automatically:
+The integration publishes the following energy-flow values in its live
+runtime contract:
 
 ``` text
 energy_system_power_solar_house
@@ -312,40 +231,6 @@ These values are used to calculate the displayed:
 
 The main flow sensors are therefore **not user-configurable**.
 
-### Energy panel
-
-Automatically discovered:
-
-``` text
-financial_30_grid_independence
-financial_31_battery_utilization
-financial_32_solar_self_consumption_rate
-financial_33_co2_saved
-```
-
-Not provided by the integration and therefore manual:
-
-``` text
-Import Today
-Export Today
-```
-
-### Economy panel
-
-Automatically discovered:
-
-``` text
-financial_03_savings_today
-financial_01_total_savings
-financial_04_savings_this_month
-financial_05_savings_this_year
-financial_02_estimated_annual_savings
-financial_10_payback_time
-financial_12_return_on_investment
-```
-
-------------------------------------------------------------------------
-
 # 🚗🧖 Device 1--4
 
 Version 2 provides **four configurable device slots**.
@@ -359,25 +244,23 @@ Each slot can be independently enabled and configured.
 devices:
   - enabled: true
     title: Car
-    powerEntity: sensor.car_power
+    consumerId: <stable SBE consumer ID>
     optionalType: soc
-    optionalEntity: sensor.car_soc
-    statusEntity: sensor.car_status
     icon: car
 
   - enabled: true
     title: Spa
-    powerEntity: sensor.spa_power
+    consumerId: <stable SBE consumer ID>
     icon: spa
 
   - enabled: true
     title: Heat Pump
-    powerEntity: sensor.heatpump_power
+    consumerId: <stable SBE consumer ID>
     icon: heatpump
 
   - enabled: true
     title: Dishwasher
-    powerEntity: sensor.dishwasher_power
+    consumerId: <stable SBE consumer ID>
     icon: appliance
 ```
 
@@ -401,17 +284,12 @@ The title shown in the device label.
 title: Heat Pump
 ```
 
-### `powerEntity`
+### `consumerId`
 
-The power sensor controlling the device's displayed power and flow.
-
-``` yaml
-powerEntity: sensor.heatpump_power
-```
-
-The flow is only meaningful when a power entity is configured. The
-visualization follows the actual power value rather than using a fixed
-decorative flow.
+Select the stable consumer ID configured in Solar Battery Economy. SBE
+provides normalized power, status, SOC and temperature readings. There is
+no local sensor fallback; missing or invalid runtime data is shown as
+unavailable rather than as zero.
 
 ### `optionalType`
 
@@ -428,50 +306,17 @@ Example:
 
 ``` yaml
 optionalType: soc
-optionalEntity: sensor.car_soc
 ```
 
 or:
 
 ``` yaml
 optionalType: temperature
-optionalEntity: sensor.spa_temperature
 ```
 
-### `optionalEntity`
-
-The entity used for the optional value.
-
-### `statusEntity`
-
-Optional entity used to display the device status.
-
-``` yaml
-statusEntity: sensor.car_status
-```
-
-If a `statusEntity` is configured, its value is used for the displayed
-status.
-
-### `statusRules`
-
-If no `statusEntity` is configured, the device can calculate its status
-from its power value.
-
-Example:
-
-``` yaml
-statusRules:
-  - threshold: 1
-    label: Standby
-  - threshold: 500
-    label: Active
-  - threshold: 2000
-    label: High load
-```
-
-Rules are evaluated by threshold, with the highest matching threshold
-determining the displayed status.
+The selected SOC or temperature value comes from the selected SBE
+consumer. SBE owns sensor sources and numeric status thresholds;
+`statusLabels` optionally supplies card-local labels for SBE status levels.
 
 ### `icon`
 
@@ -578,12 +423,9 @@ For the complete V2 experience, the Solar Battery Economy integration is
 strongly recommended because the main energy flow is built around its
 energy-system sensors.
 
-Additional manually configured entities are required for:
-
--   Battery SOC
--   Import Today
--   Export Today
--   Device power/status/optional values, when used
+Configure consumer sensors, status sources and thresholds in SBE, then
+select the relevant consumer ID in each enabled Flow Card slot. The card
+retains only slot and presentation settings.
 
 ------------------------------------------------------------------------
 
@@ -605,35 +447,20 @@ Check that:
 enabled: true
 ```
 
-and that a valid:
+and that a valid SBE consumer ID is selected. Check the SBE live-runtime
+subscription and that the consumer reports power quality `valid` in W.
 
-``` yaml
-powerEntity:
-```
+### Legacy panel settings
 
-is configured.
+Older saved Lovelace configurations may still contain `sidePanels`,
+`importTodayEntity` or `exportTodayEntity`. These retired settings are
+ignored; editing and saving the card removes them from its configuration.
 
-### Import Today / Export Today show no value
+### Consumer data is unavailable
 
-These two sensors are manual and are not provided by Solar Battery
-Economy.
-
-Configure them explicitly under:
-
-``` yaml
-sidePanels:
-  energy:
-```
-
-### Battery SOC is not shown
-
-Configure:
-
-``` yaml
-batterySocEntity: sensor.your_battery_soc
-```
-
-The battery SOC is not automatically supplied by Solar Battery Economy.
+Confirm the selected consumer still exists in SBE and that its runtime
+power, status, SOC or temperature quality is valid. The card does not
+substitute local entities.
 
 ------------------------------------------------------------------------
 

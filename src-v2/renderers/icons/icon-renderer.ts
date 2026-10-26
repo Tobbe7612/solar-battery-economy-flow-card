@@ -14,7 +14,7 @@ export function renderIcon(
     y: number,
     size: number,
     color: string,
-    soc?: number
+    soc?: number | null
 ): TemplateResult {
     switch (icon) {
         case "solar":
