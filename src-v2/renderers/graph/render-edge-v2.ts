@@ -7,14 +7,32 @@ import { renderParticles } from "./particle-renderer";
 import { renderEdgeSparks } from "./spark-renderer";
 
 export function renderEdgeV2(
-    edge: EnergyEdge
+    edge: EnergyEdge,
+    animate = true,
 ): TemplateResult {
 
-    if (!edge.active || Math.abs(edge.power) < 1) {
+    if (animate && (!edge.active || Math.abs(edge.power) < 1)) {
         return svg``;
     }
 
     const path = buildPath(edge);
+
+    if (!animate) {
+        return svg`
+            <g class="energy-edge energy-edge-static" aria-hidden="true">
+                <path
+                    class="energy-edge-line"
+                    d="${path}"
+                    fill="none"
+                    stroke="${edge.color}"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    opacity="0.28"
+                />
+            </g>
+        `;
+    }
 
     const profile =
         getAnimationProfile(edge.power).flow;

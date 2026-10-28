@@ -36,11 +36,14 @@ export interface FlowCardConfig {
     houseInfoEntity?: string;
     batteryInfoEntity?: string;
 
-    // Exactly 4 entries. Index = fixed geometric position (today's
-    // car/spa/heatpump/appliance slots in the layout + flow
-    // routing). Never reordered or resized by config — only the
-    // content shown at each fixed position is configurable.
+    // Eight fixed positions. Existing indexes 0..3 keep their historic
+    // car/spa/heatpump/appliance meanings; 4..6 add consumers and 7 adds
+    // the second vehicle position. Never reordered by config.
     devices: [
+        DeviceSlotConfig,
+        DeviceSlotConfig,
+        DeviceSlotConfig,
+        DeviceSlotConfig,
         DeviceSlotConfig,
         DeviceSlotConfig,
         DeviceSlotConfig,

@@ -34,7 +34,8 @@ export function renderSolarArc(
     sunset: string;
   },
   layout: SceneLayout,
-  solarPower: number
+  solarPower: number,
+  showParticles = true,
 ) {
   const {
       centerX,
@@ -104,15 +105,15 @@ export function renderSolarArc(
               />
           `
           : svg``}
-      ${renderSolarParticles(
+      ${showParticles ? renderSolarParticles(
           sun,
           solarLabelAnchor,
           solarParticleProfile,
-      )}
-      ${renderSunRays(
+      ) : svg``}
+      ${showParticles ? renderSunRays(
           sun,
           solarParticleProfile.particleCount,
-      )}
+      ) : svg``}
       <text
           x="${centerX - arcWidth / 2}"
           y="${centerY + arcHeight + 28}"

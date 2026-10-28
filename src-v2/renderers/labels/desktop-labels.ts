@@ -46,6 +46,7 @@ export const DESKTOP_LABELS: LabelDefinition[] = [
     },
     {
         id: "spa",
+        deviceIndex: 1,
         title: "SPA",
         icon: "spa",
         x: 555,
@@ -57,6 +58,7 @@ export const DESKTOP_LABELS: LabelDefinition[] = [
     },
     {
         id: "heatpump",
+        deviceIndex: 2,
         title: "HEATPUMP",
         icon: "heatpump",
         x: 780,
@@ -68,6 +70,7 @@ export const DESKTOP_LABELS: LabelDefinition[] = [
     },
     {
         id: "appliance",
+        deviceIndex: 3,
         title: "APPLIANCE",
         icon: "appliance",
         x: 990,
@@ -79,6 +82,7 @@ export const DESKTOP_LABELS: LabelDefinition[] = [
     },
     {
         id: "car",
+        deviceIndex: 0,
         title: "CAR",
         icon: "car",
         x: 1220,
@@ -88,4 +92,8 @@ export const DESKTOP_LABELS: LabelDefinition[] = [
         anchorBounds: { x: 1220, y: 750, width: 200, height: 120 },
         accentColor: "#81D4FA",
     },
+    { id: "consumer-5", deviceIndex: 4, title: "CONSUMER 4", icon: "appliance", x: 145, y: 565, width: 200, height: 120, anchorBounds: { x: 145, y: 565, width: 200, height: 120 }, accentColor: "#FFFFFF" },
+    { id: "consumer-6", deviceIndex: 5, title: "CONSUMER 5", icon: "appliance", x: 455, y: 565, width: 200, height: 120, anchorBounds: { x: 455, y: 565, width: 200, height: 120 }, accentColor: "#FFFFFF" },
+    { id: "consumer-7", deviceIndex: 6, title: "CONSUMER 6", icon: "appliance", x: 765, y: 565, width: 200, height: 120, anchorBounds: { x: 765, y: 565, width: 200, height: 120 }, accentColor: "#FFFFFF" },
+    { id: "car-2", deviceIndex: 7, title: "CAR 2", icon: "car", x: 1630, y: 888, width: 200, height: 120, anchorBounds: { x: 1630, y: 888, width: 200, height: 120 }, accentColor: "#81D4FA" },
 ];

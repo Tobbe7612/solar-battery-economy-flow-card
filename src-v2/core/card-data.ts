@@ -8,6 +8,7 @@ import { resolveDevicePower } from "./device-power";
 import { FlowCardConfig } from "../config/config";
 export interface DeviceCardData {
     enabled: boolean;
+    consumerId?: string;
 
     title: string;
 
@@ -88,6 +89,7 @@ function getDeviceCardData(
 
     return {
         enabled: device.enabled,
+        consumerId: device.consumerId,
 
         title:
             device.title?.trim() ||

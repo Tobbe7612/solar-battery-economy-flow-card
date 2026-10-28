@@ -15,6 +15,10 @@ export const DEFAULT_CONFIG: FlowCardConfig = {
         emptyDeviceSlot(),
         emptyDeviceSlot(),
         emptyDeviceSlot(),
+        emptyDeviceSlot(),
+        emptyDeviceSlot(),
+        emptyDeviceSlot(),
+        emptyDeviceSlot(),
     ],
 
 };

@@ -12,6 +12,7 @@
 import { FlowDefinition } from "./flow-types";
 
 export const DESKTOP_FLOW_DEFINITIONS: FlowDefinition[] = [
+    { id: "house-consumer-summary", liveFlow: "house-consumer-summary", getStart: (p) => p.houseBottomCenter, getEnd: (p) => p.consumerSummary, color: "#FF6B6B" },
     // SOLAR
     {
         id: "solar-house",

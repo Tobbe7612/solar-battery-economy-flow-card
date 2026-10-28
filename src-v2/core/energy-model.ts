@@ -2,19 +2,27 @@ import type { FlowCardConfig } from "../config/config";
 import type { LivePowerSnapshot } from "./live-power";
 import type { ConsumerRuntimeSnapshot } from "./consumer-runtime";
 import { resolveDevicePower, type DevicePowerResolution } from "./device-power";
+import { getDeviceFlowId } from "./device-slots";
 
 export interface LiveFlow {
   id: string;
   active: boolean;
   power: number;
   intensity: number;
-  quality: DevicePowerResolution["quality"] | "valid";
+  quality: DevicePowerResolution["quality"] | "valid" | "partial";
+}
+
+export interface ConsumerAggregatePower {
+  value: number;
+  validCount: number;
+  missingCount: number;
 }
 
 export function getLiveFlows(
     config: FlowCardConfig,
     livePowerSnapshot?: LivePowerSnapshot,
     consumerRuntime?: ConsumerRuntimeSnapshot,
+    consumerAggregate?: ConsumerAggregatePower,
 ): Record<string, LiveFlow> {
 
   const livePower = livePowerSnapshot?.flows;
@@ -67,6 +75,17 @@ export function getLiveFlows(
           'house-appliance',
           resolveDevicePower(config.devices[3], consumerRuntime)
       ),
+  };
+  for (let index = 4; index < config.devices.length; index += 1) {
+    const id = getDeviceFlowId(index);
+    flows[id] = createFlow(id, resolveDevicePower(config.devices[index], consumerRuntime));
+  }
+  const aggregate = consumerAggregate ?? { value: 0, validCount: 0, missingCount: 0 };
+  flows["house-consumer-summary"] = {
+    id: "house-consumer-summary", power: aggregate.value,
+    active: aggregate.validCount > 0 && aggregate.value > 1,
+    intensity: Math.min(1, aggregate.value / 5000),
+    quality: aggregate.validCount === 0 ? "missing" : aggregate.missingCount > 0 ? "partial" : "valid",
   };
   return flows;
 }

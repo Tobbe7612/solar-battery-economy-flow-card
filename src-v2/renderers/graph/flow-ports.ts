@@ -6,6 +6,8 @@ export interface FlowPort {
 }
 
 export interface FlowPorts {
+    deviceSlots: GraphAnchors["deviceSlotAnchors"];
+    consumerHouseBranches: GraphAnchors["consumerHouseBranches"];
     // Solar
     solar: FlowPort;
     solarLeft: FlowPort;
@@ -42,6 +44,7 @@ export interface FlowPorts {
     houseTopLeft: FlowPort;
     houseTopCenter: FlowPort;
     houseTopRight: FlowPort;
+    consumerSummary: FlowPort;
 
     // Consumers
     spaLeft: FlowPort;
@@ -66,6 +69,8 @@ export function createFlowPorts(
 ): FlowPorts {
 
     return {
+        deviceSlots: anchors.deviceSlotAnchors,
+        consumerHouseBranches: anchors.consumerHouseBranches,
         // Solar
         solar: anchors.solarAnchorBottom,
         solarLeft: anchors.solarAnchorLeft,
@@ -103,6 +108,7 @@ export function createFlowPorts(
         houseTopLeft: anchors.houseAnchorTopLeft,
         houseTopCenter: anchors.houseAnchorTopCenter,
         houseTopRight: anchors.houseAnchorTopRight,
+        consumerSummary: { x: 980, y: 750 },
 
         // Consumers
         spaLeft: anchors.spaAnchorLeft,

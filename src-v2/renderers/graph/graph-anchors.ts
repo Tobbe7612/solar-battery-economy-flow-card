@@ -1,5 +1,12 @@
 import { EnergyPoint } from "./edge-types";
 export interface GraphAnchors {
+    consumerHouseBranches: Record<number, EnergyPoint>;
+    deviceSlotAnchors: Record<number, {
+        left: EnergyPoint;
+        right: EnergyPoint;
+        top: EnergyPoint;
+        bottom: EnergyPoint;
+    }>;
 
     // Solar
     solarAnchorLeft: EnergyPoint;

@@ -52,4 +52,8 @@ export const flowStyles = css`
         infinite;
 }
 
+.energy-edge-static .energy-edge-line {
+    animation: none;
+}
+
 `;

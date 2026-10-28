@@ -4,13 +4,31 @@ import {
     formatPower,
     formatPercent
 } from "../../utils/format";
+export interface LabelMetric {
+    line1: string;
+    line2?: string;
+    line3?: string;
+    line1Indicator?: string;
+    line2Indicator?: string;
+    line1IndicatorLabel?: string;
+    line2IndicatorLabel?: string;
+    line1IndicatorColor?: string;
+    line2IndicatorColor?: string;
+}
 export function createBatteryLabel(
-    data: CardData
+    data: CardData,
+    metric?: LabelMetric,
 ): LabelState {
     return {
-        line1: formatPower(data.batteryPower),
-        line2: formatPercent(data.batterySoc),
-        line3: data.batteryStatus,
+        line1: metric?.line1 ?? formatPower(data.batteryPower),
+        line2: metric?.line2 ?? formatPercent(data.batterySoc),
+        line3: metric?.line3 ?? data.batteryStatus,
+        line1Indicator: metric?.line1Indicator,
+        line2Indicator: metric?.line2Indicator,
+        line1IndicatorLabel: metric?.line1IndicatorLabel,
+        line2IndicatorLabel: metric?.line2IndicatorLabel,
+        line1IndicatorColor: metric?.line1IndicatorColor,
+        line2IndicatorColor: metric?.line2IndicatorColor,
         entityId: data.batteryEntity,
         power: data.batteryPower,
         soc: data.batterySoc,
@@ -23,12 +41,13 @@ export function createBatteryLabel(
     };
 }
 export function createHouseLabel(
-    data: CardData
+    data: CardData,
+    metric?: LabelMetric,
 ): LabelState {
     return {
-        line1: formatPower(data.housePower),
-        line2: "",
-        line3: data.houseStatus,
+        line1: metric?.line1 ?? formatPower(data.housePower),
+        line2: metric?.line2 ?? "",
+        line3: metric?.line3 ?? data.houseStatus,
         entityId: data.houseEntity,
         power: data.housePower,
         color:
@@ -38,12 +57,19 @@ export function createHouseLabel(
     };
 }
 export function createGridLabel(
-    data: CardData
+    data: CardData,
+    metric?: LabelMetric,
 ): LabelState {
     return {
-        line1: formatPower(data.gridPower),
-        line2: "",
-        line3: data.gridStatus,
+        line1: metric?.line1 ?? formatPower(data.gridPower),
+        line2: metric?.line2 ?? "",
+        line3: metric?.line3 ?? data.gridStatus,
+        line1Indicator: metric?.line1Indicator,
+        line2Indicator: metric?.line2Indicator,
+        line1IndicatorLabel: metric?.line1IndicatorLabel,
+        line2IndicatorLabel: metric?.line2IndicatorLabel,
+        line1IndicatorColor: metric?.line1IndicatorColor,
+        line2IndicatorColor: metric?.line2IndicatorColor,
         entityId: data.gridEntity,
         power: data.gridPower,
         color:
@@ -55,12 +81,13 @@ export function createGridLabel(
     };
 }
 export function createSolarLabel(
-    data: CardData
+    data: CardData,
+    metric?: LabelMetric,
 ): LabelState {
     return {
-        line1: formatPower(data.solarPower),
-        line2: "",
-        line3: data.solarStatus,
+        line1: metric?.line1 ?? formatPower(data.solarPower),
+        line2: metric?.line2 ?? "",
+        line3: metric?.line3 ?? data.solarStatus,
         entityId: data.solarEntity,
         power: data.solarPower,
         color:
@@ -71,13 +98,14 @@ export function createSolarLabel(
 }
 export function createDeviceLabel(
     device: CardData["devices"][number],
+    metric?: LabelMetric,
 ): LabelState {
     return {
-        line1: device.powerQuality === "valid" && device.power !== null
+        line1: metric?.line1 ?? (device.powerQuality === "valid" && device.power !== null
             ? formatPower(device.power)
-            : "—",
-        line2: device.optionalValue ?? "",
-        line3: device.status,
+            : "—"),
+        line2: metric?.line2 ?? device.optionalValue ?? "",
+        line3: metric?.line3 ?? device.status,
         entityId: device.consumerPowerEntity,
         power: device.power ?? 0,
         ...(device.soc !== undefined

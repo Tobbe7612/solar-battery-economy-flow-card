@@ -3,7 +3,7 @@ import { SceneLayout } from '../types/layout';
 export const mobileLayout: SceneLayout = {
 
   sceneWidth: 430,
-  sceneHeight: 1000,
+  sceneHeight: 790,
 
   solarArc: {
 

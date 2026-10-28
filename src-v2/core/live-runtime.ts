@@ -3,6 +3,8 @@ import { adaptLivePowerSnapshot, type LivePowerSnapshot } from "./live-power";
 
 export interface RuntimePhase {
   name: "L1" | "L2" | "L3";
+  currentEntity: string | null;
+  powerEntity: string | null;
   current: number | null;
   power: number | null;
   percent: number | null;
@@ -60,6 +62,8 @@ export function adaptLiveRuntimeSnapshot(value: unknown): LiveRuntimeSnapshot | 
       ? phase.load_state : "missing";
     phases.push({
       name: phase.name,
+      currentEntity: typeof phase.current_entity === "string" ? phase.current_entity : null,
+      powerEntity: typeof phase.power_entity === "string" ? phase.power_entity : null,
       current: finite(phase.current),
       power: finite(phase.power),
       percent: finite(phase.percent),

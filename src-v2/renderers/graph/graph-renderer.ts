@@ -11,6 +11,7 @@ export function renderGraph(
     ports: any,
     liveFlows: Record<string, LiveFlow>,
     flowDefinitions: FlowDefinition[],
+    animate = true,
 ): TemplateResult {
     const graph = createFlowGraph(
         ports,
@@ -21,7 +22,7 @@ export function renderGraph(
 
         ${renderParticleDefs()}
         <g class="graph-engine">
-            ${graph.map(edge => renderEdgeV2(edge))}
+            ${graph.map(edge => renderEdgeV2(animate ? edge : { ...edge, active: true }, animate))}
         </g>
     `;
 }

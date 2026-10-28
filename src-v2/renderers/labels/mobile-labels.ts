@@ -46,6 +46,7 @@ export const MOBILE_LABELS: LabelDefinition[] = [
     },
     {
         id: "spa",
+        deviceIndex: 1,
         title: "SPA",
         icon: "spa",
         x: 18,
@@ -57,6 +58,7 @@ export const MOBILE_LABELS: LabelDefinition[] = [
     },
     {
         id: "heatpump",
+        deviceIndex: 2,
         title: "HEATPUMP",
         icon: "heatpump",
         x: 18,
@@ -68,6 +70,7 @@ export const MOBILE_LABELS: LabelDefinition[] = [
     },
     {
         id: "appliance",
+        deviceIndex: 3,
         title: "APPLIANCE",
         icon: "appliance",
         x: 293,
@@ -79,6 +82,7 @@ export const MOBILE_LABELS: LabelDefinition[] = [
     },
     {
         id: "car",
+        deviceIndex: 0,
         title: "CAR",
         icon: "car",
         x: 296,
@@ -88,4 +92,8 @@ export const MOBILE_LABELS: LabelDefinition[] = [
         anchorBounds: { x: 296, y: 380, width: 118, height: 76 },
         accentColor: "#81D4FA",
     },
+    { id: "consumer-5", deviceIndex: 4, title: "CONSUMER 4", icon: "appliance", x: 156, y: 550, width: 118, height: 76, anchorBounds: { x: 156, y: 550, width: 118, height: 76 }, accentColor: "#FFFFFF" },
+    { id: "consumer-6", deviceIndex: 5, title: "CONSUMER 5", icon: "appliance", x: 18, y: 640, width: 118, height: 76, anchorBounds: { x: 18, y: 640, width: 118, height: 76 }, accentColor: "#FFFFFF" },
+    { id: "consumer-7", deviceIndex: 6, title: "CONSUMER 6", icon: "appliance", x: 293, y: 640, width: 118, height: 76, anchorBounds: { x: 293, y: 640, width: 118, height: 76 }, accentColor: "#FFFFFF" },
+    { id: "car-2", deviceIndex: 7, title: "CAR 2", icon: "car", x: 296, y: 550, width: 118, height: 76, anchorBounds: { x: 296, y: 550, width: 118, height: 76 }, accentColor: "#81D4FA" },
 ];

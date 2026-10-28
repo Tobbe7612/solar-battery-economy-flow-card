@@ -231,12 +231,19 @@ These values are used to calculate the displayed:
 
 The main flow sensors are therefore **not user-configurable**.
 
-# 🚗🧖 Device 1--4
+# 🚗🧖 Devices — six consumers and two vehicles
 
-Version 2 provides **four configurable device slots**.
+Version 2 provides **eight fixed device slots**: six ordinary SBE consumers
+and two vehicle/charger positions. The first four indexes retain their
+existing meanings, so older four-slot card configurations continue working
+without reconfiguration.
 
-The slots represent fixed positions in the visual layout. They are not
-dynamically added, removed, reordered or resized.
+Slots 1–4 preserve their existing car, spa, heat-pump and appliance mappings.
+Slots 5–7 add ordinary consumers, and slot 8 is the second vehicle position.
+The editor groups the two vehicle slots separately from the six consumers.
+Desktop consumer view places the six consumers in a three-by-two group to
+the left of the vertically stacked vehicle positions. Disabled empty slots
+remain hidden until configured.
 
 Each slot can be independently enabled and configured.
 
@@ -262,6 +269,19 @@ devices:
     title: Dishwasher
     consumerId: <stable SBE consumer ID>
     icon: appliance
+
+  - enabled: false
+    icon: appliance
+
+  - enabled: false
+    icon: appliance
+
+  - enabled: false
+    icon: appliance
+
+  - enabled: false
+    icon: car
+    # Slot 8 is reserved for the second vehicle; no SBE ID is preselected.
 ```
 
 ------------------------------------------------------------------------
@@ -426,6 +446,24 @@ energy-system sensors.
 Configure consumer sensors, status sources and thresholds in SBE, then
 select the relevant consumer ID in each enabled Flow Card slot. The card
 retains only slot and presentation settings.
+
+In **Energi idag**, values are accumulated kWh from SBE. Connector lines are
+omitted because daily energy does not encode instantaneous flow direction or
+intensity. The detail view's phase meter uses the phase
+percentage reported by SBE, calculated against the main fuse configured in
+the integration; it does not impose a card-local fuse threshold.
+
+The card's overview/consumer and live/today-energy controls are local view
+state. The overview power subtotal includes enabled ordinary consumer slots,
+counts each stable SBE consumer ID once, and excludes both vehicle slots,
+which are shown separately in the consumer view. The original first vehicle
+slot remains the only car box in overview; the second reserved vehicle box
+appears with the consumer group when configured.
+Missing live readings are excluded and marked as
+an incomplete subtotal. Today's energy is read from SBE's dashboard contract;
+values without an explicit coverage flag are marked as partial. The phase and
+grid detail view shows current SBE live values only; it does not request
+history. **Grid info** remains the More Info click target.
 
 ------------------------------------------------------------------------
 

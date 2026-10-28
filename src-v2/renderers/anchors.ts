@@ -36,7 +36,39 @@ export function createAnchors(
         anchorLabel("appliance");
     const carLabel =
         anchorLabel("car");
+    const secondCarLabel = labels.find((label) => label.deviceIndex === 7);
+    const mobileConsumers = houseLabel.width < 155;
+    const houseCenterX = houseLabel.x + houseLabel.width / 2;
+    const secondCarIsLeft = secondCarLabel !== undefined
+        && secondCarLabel.x + secondCarLabel.width / 2 < houseCenterX;
   return {
+    consumerHouseBranches: {
+        1: { x: houseLabel.x + houseLabel.width * 0.2, y: houseLabel.y },
+        2: { x: houseLabel.x + houseLabel.width * 0.5, y: houseLabel.y },
+        3: { x: houseLabel.x + houseLabel.width * 0.8, y: houseLabel.y },
+        4: { x: houseLabel.x + houseLabel.width * 0.2, y: houseLabel.y + houseLabel.height },
+        5: { x: houseLabel.x + houseLabel.width * 0.5, y: houseLabel.y + houseLabel.height },
+        6: { x: houseLabel.x + houseLabel.width * 0.8, y: houseLabel.y + houseLabel.height },
+        0: {
+            x: houseLabel.x + houseLabel.width,
+            y: houseLabel.y + houseLabel.height * (mobileConsumers ? 0.5 : 0.35),
+        },
+        7: {
+            x: secondCarIsLeft ? houseLabel.x : houseLabel.x + houseLabel.width,
+            y: houseLabel.y + houseLabel.height * (mobileConsumers ? 0.5 : 0.8),
+        },
+    },
+    deviceSlotAnchors: Object.fromEntries(labels
+        .filter((label) => label.deviceIndex !== undefined)
+        .map((label) => {
+            const bounds = { ...label, ...(label.anchorBounds ?? {}) };
+            return [label.deviceIndex!, {
+                left: { x: bounds.x, y: bounds.y + bounds.height / 2 },
+                right: { x: bounds.x + bounds.width, y: bounds.y + bounds.height / 2 },
+                top: { x: bounds.x + bounds.width / 2, y: bounds.y },
+                bottom: { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height },
+            }];
+        })),
 
     // House
     houseAnchorLeft: {

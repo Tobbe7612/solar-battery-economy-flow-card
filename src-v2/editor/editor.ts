@@ -5,6 +5,7 @@ import { FlowCardConfig } from "../config/config";
 import { DEFAULT_CONFIG } from "../config/defaults";
 import { mergeConfig } from "../config/merge-config";
 import { detectSolarBatteryEconomy } from "../config/autodiscovery";
+import { isVehicleSlot } from "../core/device-slots";
 
 /**
  * ============================================================
@@ -162,7 +163,7 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
      *
      * All device icons use the built-in SVG icon set.
      */
-    private getDeviceSchema(device: FlowCardConfig["devices"][number]) {
+    private getDeviceSchema(device: FlowCardConfig["devices"][number], index?: number) {
         const schema: any[] = [
             {
                 name: "enabled",
@@ -207,7 +208,13 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
                                 value: "temperature",
                                 label: "Temperature",
                             },
-                        ],
+                        ].filter((option) => {
+                            if (index === undefined) return true;
+                            const allowed = isVehicleSlot(index)
+                                ? ["car"]
+                                : ["spa", "heatpump", "appliance"];
+                            return allowed.includes(option.value) || option.value === device.icon;
+                        }),
                     },
                 },
             },
@@ -382,6 +389,20 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
         return !!this.hass && detectSolarBatteryEconomy(this.hass);
     }
 
+    private _renderDeviceEditor(index: number, title: string): TemplateResult {
+        const device = this._config.devices[index];
+        return html`<section class="device-editor-item">
+            <h4>${title}</h4>
+            <ha-form
+                .hass=${this.hass}
+                .data=${this._getDeviceFormData(index, device)}
+                .schema=${this.getDeviceSchema(device, index)}
+                .computeLabel=${(schema: any) => schema.label}
+                @value-changed=${(event: CustomEvent) => this._deviceValueChanged(index, event)}
+            ></ha-form>
+        </section>`;
+    }
+
     protected render(): TemplateResult {
         const integrationDetected =
             this._isSolarBatteryEconomyDetected();
@@ -431,70 +452,17 @@ export class SolarBatteryEconomyFlowCardEditor extends LitElement {
             </details>
 
             <details class="editor-section">
-                <summary>Device 1</summary>
-
+                <summary>Vehicles and chargers</summary>
                 <div class="editor-content">
-                    <ha-form
-                        .hass=${this.hass}
-                        .data=${this._getDeviceFormData(
-                            0,
-                            this._config.devices[0],
-                        )}
-                        .schema=${this.getDeviceSchema(this._config.devices[0])}
-                        .computeLabel=${(schema: any) => schema.label}
-                        @value-changed=${this._device1ValueChanged}
-                    ></ha-form>
+                    ${this._renderDeviceEditor(0, "HALO 1")}
+                    ${this._renderDeviceEditor(7, "HALO 2 · reserved")}
                 </div>
             </details>
 
             <details class="editor-section">
-                <summary>Device 2</summary>
-
+                <summary>Ordinary consumers</summary>
                 <div class="editor-content">
-                    <ha-form
-                        .hass=${this.hass}
-                        .data=${this._getDeviceFormData(
-                            1,
-                            this._config.devices[1],
-                        )}
-                        .schema=${this.getDeviceSchema(this._config.devices[1])}
-                        .computeLabel=${(schema: any) => schema.label}
-                        @value-changed=${this._device2ValueChanged}
-                    ></ha-form>
-                </div>
-            </details>
-
-            <details class="editor-section">
-                <summary>Device 3</summary>
-
-                <div class="editor-content">
-                    <ha-form
-                        .hass=${this.hass}
-                        .data=${this._getDeviceFormData(
-                            2,
-                            this._config.devices[2],
-                        )}
-                        .schema=${this.getDeviceSchema(this._config.devices[2])}
-                        .computeLabel=${(schema: any) => schema.label}
-                        @value-changed=${this._device3ValueChanged}
-                    ></ha-form>
-                </div>
-            </details>
-
-            <details class="editor-section">
-                <summary>Device 4</summary>
-
-                <div class="editor-content">
-                    <ha-form
-                        .hass=${this.hass}
-                        .data=${this._getDeviceFormData(
-                            3,
-                            this._config.devices[3],
-                        )}
-                        .schema=${this.getDeviceSchema(this._config.devices[3])}
-                        .computeLabel=${(schema: any) => schema.label}
-                        @value-changed=${this._device4ValueChanged}
-                    ></ha-form>
+                    ${[1, 2, 3, 4, 5, 6].map((index) => this._renderDeviceEditor(index, `Consumer ${index}`))}
                 </div>
             </details>
         `;
